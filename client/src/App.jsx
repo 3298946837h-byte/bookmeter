@@ -8,6 +8,7 @@ import ComparisonView from './components/ComparisonView';
 import LeaderboardsView from './components/LeaderboardsView';
 import AnalyticsView from './components/AnalyticsView';
 import ScheduleModal from './components/ScheduleModal';
+import MobileBottomNav from './components/MobileBottomNav';
 import fallbackBooks from './data/staticBooks.json';
 import { Search, BookOpen, AlertTriangle, Sparkles, RefreshCw, Flame, ArrowLeft, CheckCircle2 } from 'lucide-react';
 
@@ -173,7 +174,7 @@ export default function App() {
       />
 
       {/* Main Content Area */}
-      <main className="flex-1 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 w-full">
+      <main className="flex-1 max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 pt-4 sm:pt-8 pb-24 md:pb-8 w-full">
         
         {/* Global Search Banner when user searched */}
         {activeSearchTerm && (
@@ -295,21 +296,24 @@ export default function App() {
       </main>
 
       {/* Footer */}
-      <footer className="bg-white border-t border-slate-200 py-8 text-xs text-slate-500 mt-12">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <div className="flex items-center gap-2">
+      <footer className="bg-white border-t border-slate-200 py-6 sm:py-8 text-xs text-slate-500 mt-8 sm:mt-12 pb-24 md:pb-8">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-3 sm:gap-4 text-center sm:text-left">
+          <div className="flex flex-col sm:flex-row items-center gap-1 sm:gap-2">
             <span className="font-bold text-slate-800">BookMeter · 全网书评权威聚合</span>
-            <span>-</span>
-            <span>对冲多平台评价偏见，呈现真实读者口碑</span>
+            <span className="hidden sm:inline">-</span>
+            <span className="text-[11px] sm:text-xs">对冲多平台评价偏见，呈现真实读者口碑</span>
           </div>
 
-          <div className="flex items-center gap-4 text-slate-400">
-            <span>数据源: 豆瓣读书 / Goodreads / Amazon / Open Library / DeepSeek AI</span>
+          <div className="flex flex-wrap justify-center items-center gap-2 sm:gap-4 text-[10px] sm:text-xs text-slate-400">
+            <span>数据源: 豆瓣 / Goodreads / Amazon / Google Books</span>
             <span>·</span>
             <span>已支持全网实时检索</span>
           </div>
         </div>
       </footer>
+
+      {/* Mobile Sticky Bottom Navigation Bar */}
+      <MobileBottomNav activeTab={activeTab} setActiveTab={setActiveTab} />
 
       {/* Detailed Book Modal */}
       {selectedBook && (
