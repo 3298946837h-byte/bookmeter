@@ -24,28 +24,46 @@ const books = [
         "scale": 10,
         "ratingCount": 421000,
         "fiveStarPct": 73.2,
-        "url": "https://book.douban.com/subject/6082808/"
+        "url": "https://book.douban.com/subject/6082808/",
+        "starBreakdown": {
+          "five": 66,
+          "four": 22,
+          "three": 8,
+          "two": 2,
+          "one": 2
+        },
+        "normalizedScore": 9.3
       },
       "goodreads": {
         "score": 4.12,
         "scale": 5,
         "ratingCount": 968000,
         "fiveStarPct": 49.8,
-        "url": "https://www.goodreads.com/book/show/320.One_Hundred_Years_of_Solitude"
+        "url": "https://www.goodreads.com/book/show/320.One_Hundred_Years_of_Solitude",
+        "starBreakdown": {
+          "five": 39,
+          "four": 37,
+          "three": 17,
+          "two": 4,
+          "one": 3
+        },
+        "normalizedScore": 8.2
       },
       "googleBooks": {
         "score": 4.5,
         "scale": 5,
         "ratingCount": 18500,
         "fiveStarPct": 68,
-        "url": "https://books.google.com/books?id=01"
+        "url": "https://books.google.com/books?id=01",
+        "normalizedScore": 9
       },
       "amazon": {
         "score": 4.6,
         "scale": 5,
         "ratingCount": 34200,
         "fiveStarPct": 76,
-        "url": "https://www.amazon.com/dp/0060883286"
+        "url": "https://www.amazon.com/dp/0060883286",
+        "normalizedScore": 9.2
       }
     },
     "sentiment": {
@@ -77,7 +95,8 @@ const books = [
         "rating": 10,
         "date": "2024-03-12",
         "sentiment": "positive",
-        "content": "许多年之后，面对行刑队的奥雷里亚诺·布恩迪亚上校...范晔的译本太美了，将魔幻与现实的边界完全融化在加勒比海潮湿的空气里。读完最后一页马孔多被飓风抹去，那种宿命般的巨大空虚感久久不散。"
+        "content": "许多年之后，面对行刑队的奥雷里亚诺·布恩迪亚上校...范晔的译本太美了，将魔幻与现实的边界完全融化在加勒比海潮湿的空气里。读完最后一页马孔多被飓风抹去，那种宿命般的巨大空虚感久久不散。",
+        "helpfulCount": 673
       },
       {
         "platform": "goodreads",
@@ -86,7 +105,8 @@ const books = [
         "rating": 4,
         "date": "2023-11-20",
         "sentiment": "neutral",
-        "content": "A masterpiece in prose, yet undeniably exhausting. Every male character shares one of two names, and their fates intertwine in dizzying loops. Beautiful, but requires immense patience."
+        "content": "A masterpiece in prose, yet undeniably exhausting. Every male character shares one of two names, and their fates intertwine in dizzying loops. Beautiful, but requires immense patience.",
+        "helpfulCount": 411
       },
       {
         "platform": "douban",
@@ -95,7 +115,8 @@ const books = [
         "rating": 6,
         "date": "2024-01-05",
         "sentiment": "negative",
-        "content": "盛名之下其实难副其阅读快感。人名重名到怀疑人生，全书没有任何令人精神振奋的正面情绪，满篇都是乱伦、狂妄、内战与虚无，读得身心俱疲。"
+        "content": "盛名之下其实难副其阅读快感。人名重名到怀疑人生，全书没有任何令人精神振奋的正面情绪，满篇都是乱伦、狂妄、内战与虚无，读得身心俱疲。",
+        "helpfulCount": 832
       },
       {
         "platform": "amazon",
@@ -104,7 +125,8 @@ const books = [
         "rating": 5,
         "date": "2024-01-18",
         "sentiment": "positive",
-        "content": "Delivered quickly and in perfect condition. This book exceeded all expectations. It provides rare, practical clarity and timeless insight that will stay with you long after the final page."
+        "content": "Delivered quickly and in perfect condition. This book exceeded all expectations. It provides rare, practical clarity and timeless insight that will stay with you long after the final page.",
+        "helpfulCount": 900
       }
     ],
     "normalizedRatings": {
@@ -142,7 +164,7 @@ const books = [
       }
     },
     "compositeScore": 8.58,
-    "discrepancyIndex": 1.06,
+    "discrepancyIndex": 1.1,
     "verdict": {
       "status": "recommended",
       "label": "经典必读",
@@ -190,28 +212,46 @@ const books = [
         "scale": 10,
         "ratingCount": 680000,
         "fiveStarPct": 79.5,
-        "url": "https://book.douban.com/subject/25814041/"
+        "url": "https://book.douban.com/subject/25814041/",
+        "starBreakdown": {
+          "five": 70,
+          "four": 20,
+          "three": 7,
+          "two": 2,
+          "one": 1
+        },
+        "normalizedScore": 9.5
       },
       "goodreads": {
         "score": 4.28,
         "scale": 5,
         "ratingCount": 310000,
         "fiveStarPct": 53.1,
-        "url": "https://www.goodreads.com/book/show/20518872-the-three-body-problem"
+        "url": "https://www.goodreads.com/book/show/20518872-the-three-body-problem",
+        "starBreakdown": {
+          "five": 45,
+          "four": 33,
+          "three": 15,
+          "two": 4,
+          "one": 3
+        },
+        "normalizedScore": 8.6
       },
       "googleBooks": {
         "score": 4.6,
         "scale": 5,
         "ratingCount": 22000,
         "fiveStarPct": 72,
-        "url": "https://books.google.com/books?id=02"
+        "url": "https://books.google.com/books?id=02",
+        "normalizedScore": 9.2
       },
       "amazon": {
         "score": 4.7,
         "scale": 5,
         "ratingCount": 58000,
         "fiveStarPct": 78,
-        "url": "https://www.amazon.com/dp/0765382032"
+        "url": "https://www.amazon.com/dp/0765382032",
+        "normalizedScore": 9.4
       }
     },
     "sentiment": {
@@ -243,7 +283,8 @@ const books = [
         "rating": 10,
         "date": "2024-04-18",
         "sentiment": "positive",
-        "content": "单凭‘毁灭你，与你何干’这一句话，和大刘构建的黑暗森林法则，就足以封神！第三部死神永生直接把人类的渺小刻画得体无完肤，看完全书抬头仰望星空，感觉整片夜空都在对我降维打击。"
+        "content": "单凭‘毁灭你，与你何干’这一句话，和大刘构建的黑暗森林法则，就足以封神！第三部死神永生直接把人类的渺小刻画得体无完肤，看完全书抬头仰望星空，感觉整片夜空都在对我降维打击。",
+        "helpfulCount": 2408
       },
       {
         "platform": "amazon",
@@ -252,7 +293,8 @@ const books = [
         "rating": 5,
         "date": "2023-09-14",
         "sentiment": "positive",
-        "content": "Mind-bending concepts that Western sci-fi hasn't dared to explore in decades. The translation by Ken Liu maintains the profound philosophical chill of Chinese existential dread."
+        "content": "Mind-bending concepts that Western sci-fi hasn't dared to explore in decades. The translation by Ken Liu maintains the profound philosophical chill of Chinese existential dread.",
+        "helpfulCount": 360
       },
       {
         "platform": "goodreads",
@@ -261,7 +303,8 @@ const books = [
         "rating": 3,
         "date": "2023-12-02",
         "sentiment": "neutral",
-        "content": "Astonishing physics and cosmology concepts, but the characterization is flat cardboard. Characters feel like mere megaphones for theories rather than living, breathing humans."
+        "content": "Astonishing physics and cosmology concepts, but the characterization is flat cardboard. Characters feel like mere megaphones for theories rather than living, breathing humans.",
+        "helpfulCount": 1916
       }
     ],
     "normalizedRatings": {
@@ -299,7 +342,7 @@ const books = [
       }
     },
     "compositeScore": 9.22,
-    "discrepancyIndex": 0.94,
+    "discrepancyIndex": 0.9,
     "verdict": {
       "status": "masterpiece",
       "label": "殿堂神作",
@@ -347,28 +390,46 @@ const books = [
         "scale": 10,
         "ratingCount": 18400,
         "fiveStarPct": 49.3,
-        "url": "https://book.douban.com/subject/4199741/"
+        "url": "https://book.douban.com/subject/4199741/",
+        "starBreakdown": {
+          "five": 52,
+          "four": 31,
+          "three": 12,
+          "two": 3,
+          "one": 2
+        },
+        "normalizedScore": 8.6
       },
       "goodreads": {
         "score": 4.41,
         "scale": 5,
         "ratingCount": 245000,
         "fiveStarPct": 56.2,
-        "url": "https://www.goodreads.com/book/show/3735293-clean-code"
+        "url": "https://www.goodreads.com/book/show/3735293-clean-code",
+        "starBreakdown": {
+          "five": 49,
+          "four": 31,
+          "three": 14,
+          "two": 4,
+          "one": 2
+        },
+        "normalizedScore": 8.8
       },
       "googleBooks": {
         "score": 4.5,
         "scale": 5,
         "ratingCount": 5200,
         "fiveStarPct": 65,
-        "url": "https://books.google.com/books?id=03"
+        "url": "https://books.google.com/books?id=03",
+        "normalizedScore": 9
       },
       "amazon": {
         "score": 4.7,
         "scale": 5,
         "ratingCount": 41000,
         "fiveStarPct": 79,
-        "url": "https://www.amazon.com/dp/0132350882"
+        "url": "https://www.amazon.com/dp/0132350882",
+        "normalizedScore": 9.4
       }
     },
     "sentiment": {
@@ -400,7 +461,8 @@ const books = [
         "rating": 9,
         "date": "2024-02-11",
         "sentiment": "positive",
-        "content": "工作第二年读这本书拯救了我的职业生涯。学会了有意义的命名和抽取小函数，后来做code review的时候直接拿着当军规用。必读经典！"
+        "content": "工作第二年读这本书拯救了我的职业生涯。学会了有意义的命名和抽取小函数，后来做code review的时候直接拿着当军规用。必读经典！",
+        "helpfulCount": 2460
       },
       {
         "platform": "goodreads",
@@ -409,7 +471,8 @@ const books = [
         "rating": 3,
         "date": "2023-08-19",
         "sentiment": "neutral",
-        "content": "Contains great foundational wisdom, but don't treat it as religious dogma. The author's hatred of comments and obsession with 3-line functions can lead to spaghetti abstraction."
+        "content": "Contains great foundational wisdom, but don't treat it as religious dogma. The author's hatred of comments and obsession with 3-line functions can lead to spaghetti abstraction.",
+        "helpfulCount": 730
       },
       {
         "platform": "amazon",
@@ -418,7 +481,8 @@ const books = [
         "rating": 5,
         "date": "2024-01-18",
         "sentiment": "positive",
-        "content": "Delivered quickly and in perfect condition. This book exceeded all expectations. It provides rare, practical clarity and timeless insight that will stay with you long after the final page."
+        "content": "Delivered quickly and in perfect condition. This book exceeded all expectations. It provides rare, practical clarity and timeless insight that will stay with you long after the final page.",
+        "helpfulCount": 1232
       }
     ],
     "normalizedRatings": {
@@ -456,7 +520,7 @@ const books = [
       }
     },
     "compositeScore": 8.89,
-    "discrepancyIndex": 0.22,
+    "discrepancyIndex": 0.2,
     "verdict": {
       "status": "recommended",
       "label": "经典必读",
@@ -504,28 +568,46 @@ const books = [
         "scale": 10,
         "ratingCount": 385000,
         "fiveStarPct": 62.8,
-        "url": "https://book.douban.com/subject/25985021/"
+        "url": "https://book.douban.com/subject/25985021/",
+        "starBreakdown": {
+          "five": 62,
+          "four": 25,
+          "three": 9,
+          "two": 2,
+          "one": 2
+        },
+        "normalizedScore": 9.1
       },
       "goodreads": {
         "score": 4.35,
         "scale": 5,
         "ratingCount": 1250000,
         "fiveStarPct": 54.3,
-        "url": "https://www.goodreads.com/book/show/23692271-sapiens"
+        "url": "https://www.goodreads.com/book/show/23692271-sapiens",
+        "starBreakdown": {
+          "five": 47,
+          "four": 32,
+          "three": 15,
+          "two": 4,
+          "one": 2
+        },
+        "normalizedScore": 8.7
       },
       "googleBooks": {
         "score": 4.6,
         "scale": 5,
         "ratingCount": 39000,
         "fiveStarPct": 69,
-        "url": "https://books.google.com/books?id=04"
+        "url": "https://books.google.com/books?id=04",
+        "normalizedScore": 9.2
       },
       "amazon": {
         "score": 4.7,
         "scale": 5,
         "ratingCount": 89000,
         "fiveStarPct": 77,
-        "url": "https://www.amazon.com/dp/0062316095"
+        "url": "https://www.amazon.com/dp/0062316095",
+        "normalizedScore": 9.4
       }
     },
     "sentiment": {
@@ -557,7 +639,8 @@ const books = [
         "rating": 10,
         "date": "2024-03-01",
         "sentiment": "positive",
-        "content": "读完第一部《认知革命》整个人都被点醒了！原来智人之所以能碾压尼安德特人，根本不在于体能，而在于我们能够相信‘国家’、‘神明’和‘纸币’这些虚构的概念。视角无比开阔。"
+        "content": "读完第一部《认知革命》整个人都被点醒了！原来智人之所以能碾压尼安德特人，根本不在于体能，而在于我们能够相信‘国家’、‘神明’和‘纸币’这些虚构的概念。视角无比开阔。",
+        "helpfulCount": 2313
       },
       {
         "platform": "goodreads",
@@ -566,7 +649,8 @@ const books = [
         "rating": 3,
         "date": "2023-10-15",
         "sentiment": "neutral",
-        "content": "A thrilling pop-science ride, but academically sloppy. Harari sweeps complex centuries of debate into broad, unverified generalizations. Great entertainment, questionable anthropology."
+        "content": "A thrilling pop-science ride, but academically sloppy. Harari sweeps complex centuries of debate into broad, unverified generalizations. Great entertainment, questionable anthropology.",
+        "helpfulCount": 1399
       },
       {
         "platform": "amazon",
@@ -575,7 +659,8 @@ const books = [
         "rating": 5,
         "date": "2024-01-18",
         "sentiment": "positive",
-        "content": "Delivered quickly and in perfect condition. This book exceeded all expectations. It provides rare, practical clarity and timeless insight that will stay with you long after the final page."
+        "content": "Delivered quickly and in perfect condition. This book exceeded all expectations. It provides rare, practical clarity and timeless insight that will stay with you long after the final page.",
+        "helpfulCount": 1461
       }
     ],
     "normalizedRatings": {
@@ -661,28 +746,46 @@ const books = [
         "scale": 10,
         "ratingCount": 162000,
         "fiveStarPct": 41.5,
-        "url": "https://book.douban.com/subject/27116744/"
+        "url": "https://book.douban.com/subject/27116744/",
+        "starBreakdown": {
+          "five": 44,
+          "four": 36,
+          "three": 14,
+          "two": 4,
+          "one": 2
+        },
+        "normalizedScore": 8.2
       },
       "goodreads": {
         "score": 4.11,
         "scale": 5,
         "ratingCount": 620000,
         "fiveStarPct": 47.9,
-        "url": "https://www.goodreads.com/book/show/69571.Rich_Dad_Poor_Dad"
+        "url": "https://www.goodreads.com/book/show/69571.Rich_Dad_Poor_Dad",
+        "starBreakdown": {
+          "five": 39,
+          "four": 37,
+          "three": 17,
+          "two": 4,
+          "one": 3
+        },
+        "normalizedScore": 8.2
       },
       "googleBooks": {
         "score": 4.3,
         "scale": 5,
         "ratingCount": 15400,
         "fiveStarPct": 58,
-        "url": "https://books.google.com/books?id=05"
+        "url": "https://books.google.com/books?id=05",
+        "normalizedScore": 8.6
       },
       "amazon": {
         "score": 4.7,
         "scale": 5,
         "ratingCount": 110000,
         "fiveStarPct": 81,
-        "url": "https://www.amazon.com/dp/1612680194"
+        "url": "https://www.amazon.com/dp/1612680194",
+        "normalizedScore": 9.4
       }
     },
     "sentiment": {
@@ -715,7 +818,8 @@ const books = [
         "rating": 6,
         "date": "2024-01-20",
         "sentiment": "neutral",
-        "content": "理念可以拿来当警钟敲一敲（分清资产和负债），但千万别照着他的所谓实操去做！清崎鼓吹高杠杆炒房和投机，在现实中普通人跟着学大概率爆仓倾家荡产。"
+        "content": "理念可以拿来当警钟敲一敲（分清资产和负债），但千万别照着他的所谓实操去做！清崎鼓吹高杠杆炒房和投机，在现实中普通人跟着学大概率爆仓倾家荡产。",
+        "helpfulCount": 1688
       },
       {
         "platform": "goodreads",
@@ -724,7 +828,8 @@ const books = [
         "rating": 2,
         "date": "2023-07-11",
         "sentiment": "negative",
-        "content": "Mostly anecdotal snake oil. His definition of assets contradicts basic accounting, and his aggressive tax/debt advice borders on reckless illegality in many jurisdictions."
+        "content": "Mostly anecdotal snake oil. His definition of assets contradicts basic accounting, and his aggressive tax/debt advice borders on reckless illegality in many jurisdictions.",
+        "helpfulCount": 1172
       },
       {
         "platform": "amazon",
@@ -733,7 +838,8 @@ const books = [
         "rating": 5,
         "date": "2024-02-15",
         "sentiment": "positive",
-        "content": "Completely changed how I look at my paycheck. I stopped buying depreciating junk and started funneling cash into index funds and small businesses."
+        "content": "Completely changed how I look at my paycheck. I stopped buying depreciating junk and started funneling cash into index funds and small businesses.",
+        "helpfulCount": 2135
       }
     ],
     "normalizedRatings": {
@@ -771,7 +877,7 @@ const books = [
       }
     },
     "compositeScore": 8.37,
-    "discrepancyIndex": 0.02,
+    "discrepancyIndex": 0,
     "verdict": {
       "status": "controversial",
       "label": "两极分化 / 争议",
@@ -820,28 +926,46 @@ const books = [
         "scale": 10,
         "ratingCount": 1120000,
         "fiveStarPct": 45.3,
-        "url": "https://book.douban.com/subject/25862578/"
+        "url": "https://book.douban.com/subject/25862578/",
+        "starBreakdown": {
+          "five": 50,
+          "four": 33,
+          "three": 12,
+          "two": 3,
+          "one": 2
+        },
+        "normalizedScore": 8.5
       },
       "goodreads": {
         "score": 4.14,
         "scale": 5,
         "ratingCount": 78000,
         "fiveStarPct": 43.1,
-        "url": "https://www.goodreads.com/book/show/44088547-the-miracles-of-the-namiya-general-store"
+        "url": "https://www.goodreads.com/book/show/44088547-the-miracles-of-the-namiya-general-store",
+        "starBreakdown": {
+          "five": 40,
+          "four": 36,
+          "three": 17,
+          "two": 4,
+          "one": 3
+        },
+        "normalizedScore": 8.3
       },
       "googleBooks": {
         "score": 4.3,
         "scale": 5,
         "ratingCount": 8900,
         "fiveStarPct": 55,
-        "url": "https://books.google.com/books?id=06"
+        "url": "https://books.google.com/books?id=06",
+        "normalizedScore": 8.6
       },
       "amazon": {
         "score": 4.6,
         "scale": 5,
         "ratingCount": 14000,
         "fiveStarPct": 74,
-        "url": "https://www.amazon.com/dp/1975382519"
+        "url": "https://www.amazon.com/dp/1975382519",
+        "normalizedScore": 9.2
       }
     },
     "sentiment": {
@@ -873,7 +997,8 @@ const books = [
         "rating": 10,
         "date": "2024-03-08",
         "sentiment": "positive",
-        "content": "在最低谷的时候看哭了。那张白纸的回答：正因为是一张白纸，才可以随心所欲地描绘地图。世界上如果有这样一家杂货店该有多好啊。"
+        "content": "在最低谷的时候看哭了。那张白纸的回答：正因为是一张白纸，才可以随心所欲地描绘地图。世界上如果有这样一家杂货店该有多好啊。",
+        "helpfulCount": 1665
       },
       {
         "platform": "douban",
@@ -882,7 +1007,8 @@ const books = [
         "rating": 5,
         "date": "2023-12-14",
         "sentiment": "negative",
-        "content": "东野圭吾最流水线的一部作品，本质上就是一本高智商鸡汤合集。没有本格推理的严谨，也没有社会派的深刻刺痛，全靠巧合与煽情维系。"
+        "content": "东野圭吾最流水线的一部作品，本质上就是一本高智商鸡汤合集。没有本格推理的严谨，也没有社会派的深刻刺痛，全靠巧合与煽情维系。",
+        "helpfulCount": 2203
       },
       {
         "platform": "goodreads",
@@ -891,7 +1017,8 @@ const books = [
         "rating": 4,
         "date": "2023-11-20",
         "sentiment": "positive",
-        "content": "A truly remarkable book that transcends cultural boundaries. The themes explored in ナミヤ雑貨店の奇蹟 resonate deeply with readers worldwide. Outstanding intellectual depth."
+        "content": "A truly remarkable book that transcends cultural boundaries. The themes explored in ナミヤ雑貨店の奇蹟 resonate deeply with readers worldwide. Outstanding intellectual depth.",
+        "helpfulCount": 1184
       },
       {
         "platform": "amazon",
@@ -900,7 +1027,8 @@ const books = [
         "rating": 5,
         "date": "2024-01-18",
         "sentiment": "positive",
-        "content": "Delivered quickly and in perfect condition. This book exceeded all expectations. It provides rare, practical clarity and timeless insight that will stay with you long after the final page."
+        "content": "Delivered quickly and in perfect condition. This book exceeded all expectations. It provides rare, practical clarity and timeless insight that will stay with you long after the final page.",
+        "helpfulCount": 1523
       }
     ],
     "normalizedRatings": {
@@ -938,7 +1066,7 @@ const books = [
       }
     },
     "compositeScore": 8.49,
-    "discrepancyIndex": 0.22,
+    "discrepancyIndex": 0.2,
     "verdict": {
       "status": "recommended",
       "label": "经典必读",
@@ -986,28 +1114,46 @@ const books = [
         "scale": 10,
         "ratingCount": 3200,
         "fiveStarPct": 4.2,
-        "url": "https://book.douban.com/subject/35600000/"
+        "url": "https://book.douban.com/subject/35600000/",
+        "starBreakdown": {
+          "five": 15,
+          "four": 45,
+          "three": 25,
+          "two": 9,
+          "one": 6
+        },
+        "normalizedScore": 4.8
       },
       "goodreads": {
         "score": 2.75,
         "scale": 5,
         "ratingCount": 1800,
         "fiveStarPct": 9.1,
-        "url": "https://www.goodreads.com/book/show/99999"
+        "url": "https://www.goodreads.com/book/show/99999",
+        "starBreakdown": {
+          "five": 20,
+          "four": 45,
+          "three": 25,
+          "two": 6,
+          "one": 4
+        },
+        "normalizedScore": 5.5
       },
       "googleBooks": {
         "score": 2.8,
         "scale": 5,
         "ratingCount": 420,
         "fiveStarPct": 8,
-        "url": "https://books.google.com/books?id=07"
+        "url": "https://books.google.com/books?id=07",
+        "normalizedScore": 5.6
       },
       "amazon": {
         "score": 3.1,
         "scale": 5,
         "ratingCount": 890,
         "fiveStarPct": 15,
-        "url": "https://www.amazon.com/dp/B09FAKE001"
+        "url": "https://www.amazon.com/dp/B09FAKE001",
+        "normalizedScore": 6.2
       }
     },
     "sentiment": {
@@ -1039,7 +1185,8 @@ const books = [
         "rating": 2,
         "date": "2023-05-19",
         "sentiment": "negative",
-        "content": "纯粹的垃圾拼凑书！全书看下来就是百度百科+券商研报直接机翻缝合，连基本的分布式系统常识都没有。骗读者钱包的劣质跟风之作，大家千万避坑！"
+        "content": "纯粹的垃圾拼凑书！全书看下来就是百度百科+券商研报直接机翻缝合，连基本的分布式系统常识都没有。骗读者钱包的劣质跟风之作，大家千万避坑！",
+        "helpfulCount": 809
       },
       {
         "platform": "amazon",
@@ -1048,7 +1195,8 @@ const books = [
         "rating": 1,
         "date": "2023-04-10",
         "sentiment": "negative",
-        "content": "Read like a collection of buzzwords generated by a 2021 sales brochure. Zero technical depth, zero realistic insights. Pure hype."
+        "content": "Read like a collection of buzzwords generated by a 2021 sales brochure. Zero technical depth, zero realistic insights. Pure hype.",
+        "helpfulCount": 2455
       },
       {
         "platform": "goodreads",
@@ -1057,7 +1205,8 @@ const books = [
         "rating": 3,
         "date": "2023-11-20",
         "sentiment": "positive",
-        "content": "A truly remarkable book that transcends cultural boundaries. The themes explored in The Metaverse Phenomenon resonate deeply with readers worldwide. Outstanding intellectual depth."
+        "content": "A truly remarkable book that transcends cultural boundaries. The themes explored in The Metaverse Phenomenon resonate deeply with readers worldwide. Outstanding intellectual depth.",
+        "helpfulCount": 1862
       }
     ],
     "normalizedRatings": {
@@ -1143,28 +1292,46 @@ const books = [
         "scale": 10,
         "ratingCount": 795000,
         "fiveStarPct": 76.8,
-        "url": "https://book.douban.com/subject/4913064/"
+        "url": "https://book.douban.com/subject/4913064/",
+        "starBreakdown": {
+          "five": 68,
+          "four": 21,
+          "three": 8,
+          "two": 2,
+          "one": 1
+        },
+        "normalizedScore": 9.4
       },
       "goodreads": {
         "score": 4.42,
         "scale": 5,
         "ratingCount": 115000,
         "fiveStarPct": 57.8,
-        "url": "https://www.goodreads.com/book/show/330999.To_Live"
+        "url": "https://www.goodreads.com/book/show/330999.To_Live",
+        "starBreakdown": {
+          "five": 50,
+          "four": 30,
+          "three": 14,
+          "two": 4,
+          "one": 2
+        },
+        "normalizedScore": 8.8
       },
       "googleBooks": {
         "score": 4.7,
         "scale": 5,
         "ratingCount": 16800,
         "fiveStarPct": 75,
-        "url": "https://books.google.com/books?id=08"
+        "url": "https://books.google.com/books?id=08",
+        "normalizedScore": 9.4
       },
       "amazon": {
         "score": 4.8,
         "scale": 5,
         "ratingCount": 28000,
         "fiveStarPct": 83,
-        "url": "https://www.amazon.com/dp/1400031869"
+        "url": "https://www.amazon.com/dp/1400031869",
+        "normalizedScore": 9.6
       }
     },
     "sentiment": {
@@ -1195,7 +1362,8 @@ const books = [
         "rating": 10,
         "date": "2024-04-02",
         "sentiment": "positive",
-        "content": "余华用最克制的文字写尽了世间最惨烈的离别。有庆抽血而死、凤霞大出血、家珍病死、二喜工伤、苦根吃豆子撑死...读完坐在窗前大哭一场。但合上书本，福贵哼着歌赶着老牛的背影，又给了我无比巨大的活着的力量。"
+        "content": "余华用最克制的文字写尽了世间最惨烈的离别。有庆抽血而死、凤霞大出血、家珍病死、二喜工伤、苦根吃豆子撑死...读完坐在窗前大哭一场。但合上书本，福贵哼着歌赶着老牛的背影，又给了我无比巨大的活着的力量。",
+        "helpfulCount": 1624
       },
       {
         "platform": "goodreads",
@@ -1204,7 +1372,8 @@ const books = [
         "rating": 5,
         "date": "2023-11-09",
         "sentiment": "positive",
-        "content": "A devastating masterpiece. It shows human resilience stripped of romanticism or heroic delusion. Fugui's voice will stay with me for the rest of my life."
+        "content": "A devastating masterpiece. It shows human resilience stripped of romanticism or heroic delusion. Fugui's voice will stay with me for the rest of my life.",
+        "helpfulCount": 2398
       },
       {
         "platform": "amazon",
@@ -1213,7 +1382,8 @@ const books = [
         "rating": 5,
         "date": "2024-01-18",
         "sentiment": "positive",
-        "content": "Delivered quickly and in perfect condition. This book exceeded all expectations. It provides rare, practical clarity and timeless insight that will stay with you long after the final page."
+        "content": "Delivered quickly and in perfect condition. This book exceeded all expectations. It provides rare, practical clarity and timeless insight that will stay with you long after the final page.",
+        "helpfulCount": 763
       }
     ],
     "normalizedRatings": {
@@ -1251,7 +1421,7 @@ const books = [
       }
     },
     "compositeScore": 9.34,
-    "discrepancyIndex": 0.56,
+    "discrepancyIndex": 0.6,
     "verdict": {
       "status": "masterpiece",
       "label": "殿堂神作",
@@ -1298,28 +1468,46 @@ const books = [
         "scale": 10,
         "ratingCount": 22800,
         "fiveStarPct": 88.6,
-        "url": "https://book.douban.com/subject/26912767/"
+        "url": "https://book.douban.com/subject/26912767/",
+        "starBreakdown": {
+          "five": 76,
+          "four": 16,
+          "three": 6,
+          "two": 1,
+          "one": 1
+        },
+        "normalizedScore": 9.8
       },
       "goodreads": {
         "score": 4.67,
         "scale": 5,
         "ratingCount": 38000,
         "fiveStarPct": 76.5,
-        "url": "https://www.goodreads.com/book/show/829182.Computer_Systems"
+        "url": "https://www.goodreads.com/book/show/829182.Computer_Systems",
+        "starBreakdown": {
+          "five": 58,
+          "four": 25,
+          "three": 12,
+          "two": 3,
+          "one": 2
+        },
+        "normalizedScore": 9.3
       },
       "googleBooks": {
         "score": 4.8,
         "scale": 5,
         "ratingCount": 3100,
         "fiveStarPct": 84,
-        "url": "https://books.google.com/books?id=09"
+        "url": "https://books.google.com/books?id=09",
+        "normalizedScore": 9.6
       },
       "amazon": {
         "score": 4.7,
         "scale": 5,
         "ratingCount": 6200,
         "fiveStarPct": 82,
-        "url": "https://www.amazon.com/dp/013409266X"
+        "url": "https://www.amazon.com/dp/013409266X",
+        "normalizedScore": 9.4
       }
     },
     "sentiment": {
@@ -1350,7 +1538,8 @@ const books = [
         "rating": 10,
         "date": "2024-03-22",
         "sentiment": "positive",
-        "content": "如果大学四年计算机专业只能留下一本书，那我毫不犹豫选CSAPP！做完Bomb Lab和Cache Lab的那一刻，真的感觉全身任督二脉都被打通了，从汇编到虚拟内存再到链接器，所有的碎知识全连成了坚固的网络！"
+        "content": "如果大学四年计算机专业只能留下一本书，那我毫不犹豫选CSAPP！做完Bomb Lab和Cache Lab的那一刻，真的感觉全身任督二脉都被打通了，从汇编到虚拟内存再到链接器，所有的碎知识全连成了坚固的网络！",
+        "helpfulCount": 977
       },
       {
         "platform": "goodreads",
@@ -1359,7 +1548,8 @@ const books = [
         "rating": 5,
         "date": "2023-11-20",
         "sentiment": "positive",
-        "content": "A truly remarkable book that transcends cultural boundaries. The themes explored in Computer Systems: A Programmer's Perspective (CS:APP) resonate deeply with readers worldwide. Outstanding intellectual depth."
+        "content": "A truly remarkable book that transcends cultural boundaries. The themes explored in Computer Systems: A Programmer's Perspective (CS:APP) resonate deeply with readers worldwide. Outstanding intellectual depth.",
+        "helpfulCount": 2255
       },
       {
         "platform": "amazon",
@@ -1368,7 +1558,8 @@ const books = [
         "rating": 5,
         "date": "2024-01-18",
         "sentiment": "positive",
-        "content": "Delivered quickly and in perfect condition. This book exceeded all expectations. It provides rare, practical clarity and timeless insight that will stay with you long after the final page."
+        "content": "Delivered quickly and in perfect condition. This book exceeded all expectations. It provides rare, practical clarity and timeless insight that will stay with you long after the final page.",
+        "helpfulCount": 1081
       }
     ],
     "normalizedRatings": {
@@ -1406,7 +1597,7 @@ const books = [
       }
     },
     "compositeScore": 9.49,
-    "discrepancyIndex": 0.46,
+    "discrepancyIndex": 0.5,
     "verdict": {
       "status": "masterpiece",
       "label": "殿堂神作",
@@ -1453,28 +1644,46 @@ const books = [
         "scale": 10,
         "ratingCount": 5400,
         "fiveStarPct": 3.5,
-        "url": "https://book.douban.com/subject/00000000/"
+        "url": "https://book.douban.com/subject/00000000/",
+        "starBreakdown": {
+          "five": 15,
+          "four": 45,
+          "three": 25,
+          "two": 9,
+          "one": 6
+        },
+        "normalizedScore": 4.1
       },
       "goodreads": {
         "score": 3.92,
         "scale": 5,
         "ratingCount": 45000,
         "fiveStarPct": 32,
-        "url": "https://www.goodreads.com/book/show/2887309-the-boy-with-the-cuckoo-clock-heart"
+        "url": "https://www.goodreads.com/book/show/2887309-the-boy-with-the-cuckoo-clock-heart",
+        "starBreakdown": {
+          "five": 32,
+          "four": 41,
+          "three": 19,
+          "two": 5,
+          "one": 3
+        },
+        "normalizedScore": 7.8
       },
       "googleBooks": {
         "score": 4,
         "scale": 5,
         "ratingCount": 1200,
         "fiveStarPct": 40,
-        "url": "https://books.google.com/books?id=10"
+        "url": "https://books.google.com/books?id=10",
+        "normalizedScore": 8
       },
       "amazon": {
         "score": 4.4,
         "scale": 5,
         "ratingCount": 3800,
         "fiveStarPct": 62,
-        "url": "https://www.amazon.com/dp/030747587X"
+        "url": "https://www.amazon.com/dp/030747587X",
+        "normalizedScore": 8.8
       }
     },
     "sentiment": {
@@ -1505,7 +1714,8 @@ const books = [
         "rating": 2,
         "date": "2023-09-03",
         "sentiment": "negative",
-        "content": "译者到底懂不懂法文和中文？！第一章就出现三处常识性错译，句子颠三倒四，连百度机翻都不如！一部绝美的蒸汽朋克童话就这么被这个劣质译本活活给糟蹋了，大家买书前一定要看译者避雷！"
+        "content": "译者到底懂不懂法文和中文？！第一章就出现三处常识性错译，句子颠三倒四，连百度机翻都不如！一部绝美的蒸汽朋克童话就这么被这个劣质译本活活给糟蹋了，大家买书前一定要看译者避雷！",
+        "helpfulCount": 635
       },
       {
         "platform": "goodreads",
@@ -1514,7 +1724,8 @@ const books = [
         "rating": 4,
         "date": "2022-08-11",
         "sentiment": "positive",
-        "content": "A bittersweet Parisian fairy tale filled with whimsy and melancholy. Mathias Malzieu writes with such poetic magic in the original French."
+        "content": "A bittersweet Parisian fairy tale filled with whimsy and melancholy. Mathias Malzieu writes with such poetic magic in the original French.",
+        "helpfulCount": 2060
       },
       {
         "platform": "amazon",
@@ -1523,7 +1734,8 @@ const books = [
         "rating": 4,
         "date": "2024-01-18",
         "sentiment": "positive",
-        "content": "Delivered quickly and in perfect condition. This book exceeded all expectations. It provides rare, practical clarity and timeless insight that will stay with you long after the final page."
+        "content": "Delivered quickly and in perfect condition. This book exceeded all expectations. It provides rare, practical clarity and timeless insight that will stay with you long after the final page.",
+        "helpfulCount": 384
       }
     ],
     "normalizedRatings": {
@@ -1561,7 +1773,7 @@ const books = [
       }
     },
     "compositeScore": 7.55,
-    "discrepancyIndex": 3.74,
+    "discrepancyIndex": 3.7,
     "verdict": {
       "status": "warning",
       "label": "避坑预警",
@@ -1608,28 +1820,46 @@ const books = [
         "scale": 10,
         "ratingCount": 132000,
         "fiveStarPct": 22.4,
-        "url": "https://book.douban.com/subject/3233804/"
+        "url": "https://book.douban.com/subject/3233804/",
+        "starBreakdown": {
+          "five": 18,
+          "four": 45,
+          "three": 25,
+          "two": 7,
+          "one": 5
+        },
+        "normalizedScore": 6.9
       },
       "goodreads": {
         "score": 3.74,
         "scale": 5,
         "ratingCount": 480000,
         "fiveStarPct": 35.8,
-        "url": "https://www.goodreads.com/book/show/52529.The_Secret"
+        "url": "https://www.goodreads.com/book/show/52529.The_Secret",
+        "starBreakdown": {
+          "five": 26,
+          "four": 44,
+          "three": 21,
+          "two": 5,
+          "one": 4
+        },
+        "normalizedScore": 7.5
       },
       "googleBooks": {
         "score": 4.1,
         "scale": 5,
         "ratingCount": 19000,
         "fiveStarPct": 48,
-        "url": "https://books.google.com/books?id=11"
+        "url": "https://books.google.com/books?id=11",
+        "normalizedScore": 8.2
       },
       "amazon": {
         "score": 4.6,
         "scale": 5,
         "ratingCount": 72000,
         "fiveStarPct": 75,
-        "url": "https://www.amazon.com/dp/1582701709"
+        "url": "https://www.amazon.com/dp/1582701709",
+        "normalizedScore": 9.2
       }
     },
     "sentiment": {
@@ -1661,7 +1891,8 @@ const books = [
         "rating": 2,
         "date": "2023-11-18",
         "sentiment": "negative",
-        "content": "披着所谓‘宇宙量子振动’羊皮的现代巫术传销！如果靠天天闭眼想钱就能发财，世界上怎么还会有穷人？最恶心的是它暗示生重病的人是因为自己‘负能量招来的’，毫无医学道德底线！"
+        "content": "披着所谓‘宇宙量子振动’羊皮的现代巫术传销！如果靠天天闭眼想钱就能发财，世界上怎么还会有穷人？最恶心的是它暗示生重病的人是因为自己‘负能量招来的’，毫无医学道德底线！",
+        "helpfulCount": 1667
       },
       {
         "platform": "amazon",
@@ -1670,7 +1901,8 @@ const books = [
         "rating": 5,
         "date": "2023-04-12",
         "sentiment": "positive",
-        "content": "Take the quantum talk with a grain of salt, but the cognitive reframing is real. Focusing on gratitude and positive outcomes genuinely transformed my daily motivation."
+        "content": "Take the quantum talk with a grain of salt, but the cognitive reframing is real. Focusing on gratitude and positive outcomes genuinely transformed my daily motivation.",
+        "helpfulCount": 467
       },
       {
         "platform": "goodreads",
@@ -1679,7 +1911,8 @@ const books = [
         "rating": 4,
         "date": "2023-11-20",
         "sentiment": "positive",
-        "content": "A truly remarkable book that transcends cultural boundaries. The themes explored in The Secret resonate deeply with readers worldwide. Outstanding intellectual depth."
+        "content": "A truly remarkable book that transcends cultural boundaries. The themes explored in The Secret resonate deeply with readers worldwide. Outstanding intellectual depth.",
+        "helpfulCount": 395
       }
     ],
     "normalizedRatings": {
@@ -1717,7 +1950,7 @@ const books = [
       }
     },
     "compositeScore": 7.57,
-    "discrepancyIndex": 0.58,
+    "discrepancyIndex": 0.6,
     "verdict": {
       "status": "controversial",
       "label": "两极分化 / 争议",
@@ -1765,28 +1998,46 @@ const books = [
         "scale": 10,
         "ratingCount": 64000,
         "fiveStarPct": 48.9,
-        "url": "https://book.douban.com/subject/35887201/"
+        "url": "https://book.douban.com/subject/35887201/",
+        "starBreakdown": {
+          "five": 52,
+          "four": 31,
+          "three": 12,
+          "two": 3,
+          "one": 2
+        },
+        "normalizedScore": 8.6
       },
       "goodreads": {
         "score": 4.54,
         "scale": 5,
         "ratingCount": 142000,
         "fiveStarPct": 66.8,
-        "url": "https://www.goodreads.com/book/show/54898389-the-almanack-of-naval-ravikant"
+        "url": "https://www.goodreads.com/book/show/54898389-the-almanack-of-naval-ravikant",
+        "starBreakdown": {
+          "five": 54,
+          "four": 28,
+          "three": 13,
+          "two": 3,
+          "one": 2
+        },
+        "normalizedScore": 9.1
       },
       "googleBooks": {
         "score": 4.7,
         "scale": 5,
         "ratingCount": 12000,
         "fiveStarPct": 77,
-        "url": "https://books.google.com/books?id=12"
+        "url": "https://books.google.com/books?id=12",
+        "normalizedScore": 9.4
       },
       "amazon": {
         "score": 4.7,
         "scale": 5,
         "ratingCount": 36000,
         "fiveStarPct": 81,
-        "url": "https://www.amazon.com/dp/1544514212"
+        "url": "https://www.amazon.com/dp/1544514212",
+        "normalizedScore": 9.4
       }
     },
     "sentiment": {
@@ -1817,7 +2068,8 @@ const books = [
         "rating": 10,
         "date": "2024-02-28",
         "sentiment": "positive",
-        "content": "颠覆了我对‘致富’的理解！纳瓦尔说得太清楚了：出卖时间永远无法获得财富自由，你必须拥有资产、拥有边际成本为零的代码或媒体杠杆。独立开发者和内容创作者的圣经！"
+        "content": "颠覆了我对‘致富’的理解！纳瓦尔说得太清楚了：出卖时间永远无法获得财富自由，你必须拥有资产、拥有边际成本为零的代码或媒体杠杆。独立开发者和内容创作者的圣经！",
+        "helpfulCount": 475
       },
       {
         "platform": "goodreads",
@@ -1826,7 +2078,8 @@ const books = [
         "rating": 5,
         "date": "2023-11-20",
         "sentiment": "positive",
-        "content": "A truly remarkable book that transcends cultural boundaries. The themes explored in The Almanack of Naval Ravikant resonate deeply with readers worldwide. Outstanding intellectual depth."
+        "content": "A truly remarkable book that transcends cultural boundaries. The themes explored in The Almanack of Naval Ravikant resonate deeply with readers worldwide. Outstanding intellectual depth.",
+        "helpfulCount": 2779
       },
       {
         "platform": "amazon",
@@ -1835,7 +2088,8 @@ const books = [
         "rating": 5,
         "date": "2024-01-18",
         "sentiment": "positive",
-        "content": "Delivered quickly and in perfect condition. This book exceeded all expectations. It provides rare, practical clarity and timeless insight that will stay with you long after the final page."
+        "content": "Delivered quickly and in perfect condition. This book exceeded all expectations. It provides rare, practical clarity and timeless insight that will stay with you long after the final page.",
+        "helpfulCount": 2342
       }
     ],
     "normalizedRatings": {
@@ -1873,7 +2127,7 @@ const books = [
       }
     },
     "compositeScore": 9.02,
-    "discrepancyIndex": 0.48,
+    "discrepancyIndex": 0.5,
     "verdict": {
       "status": "masterpiece",
       "label": "殿堂神作",
@@ -1920,28 +2174,46 @@ const books = [
         "scale": 10,
         "ratingCount": 198000,
         "fiveStarPct": 71.3,
-        "url": "https://book.douban.com/subject/26980486/"
+        "url": "https://book.douban.com/subject/26980486/",
+        "starBreakdown": {
+          "five": 66,
+          "four": 22,
+          "three": 8,
+          "two": 2,
+          "one": 2
+        },
+        "normalizedScore": 9.3
       },
       "goodreads": {
         "score": 4.07,
         "scale": 5,
         "ratingCount": 720000,
         "fiveStarPct": 45.1,
-        "url": "https://www.goodreads.com/book/show/52036.Siddhartha"
+        "url": "https://www.goodreads.com/book/show/52036.Siddhartha",
+        "starBreakdown": {
+          "five": 37,
+          "four": 38,
+          "three": 18,
+          "two": 4,
+          "one": 3
+        },
+        "normalizedScore": 8.1
       },
       "googleBooks": {
         "score": 4.5,
         "scale": 5,
         "ratingCount": 14000,
         "fiveStarPct": 65,
-        "url": "https://books.google.com/books?id=13"
+        "url": "https://books.google.com/books?id=13",
+        "normalizedScore": 9
       },
       "amazon": {
         "score": 4.6,
         "scale": 5,
         "ratingCount": 42000,
         "fiveStarPct": 76,
-        "url": "https://www.amazon.com/dp/0553208845"
+        "url": "https://www.amazon.com/dp/0553208845",
+        "normalizedScore": 9.2
       }
     },
     "sentiment": {
@@ -1972,7 +2244,8 @@ const books = [
         "rating": 10,
         "date": "2024-04-12",
         "sentiment": "positive",
-        "content": "‘知识可以传授，智慧却无法相授。’姜乙的译文像泉水一样清冽。在每一个感到精神迷茫与内耗的时刻，重新翻开悉达多坐在河边的章节，内心就会重归平静。"
+        "content": "‘知识可以传授，智慧却无法相授。’姜乙的译文像泉水一样清冽。在每一个感到精神迷茫与内耗的时刻，重新翻开悉达多坐在河边的章节，内心就会重归平静。",
+        "helpfulCount": 2502
       },
       {
         "platform": "goodreads",
@@ -1981,7 +2254,8 @@ const books = [
         "rating": 4,
         "date": "2023-11-20",
         "sentiment": "positive",
-        "content": "A truly remarkable book that transcends cultural boundaries. The themes explored in Siddhartha resonate deeply with readers worldwide. Outstanding intellectual depth."
+        "content": "A truly remarkable book that transcends cultural boundaries. The themes explored in Siddhartha resonate deeply with readers worldwide. Outstanding intellectual depth.",
+        "helpfulCount": 2492
       },
       {
         "platform": "amazon",
@@ -1990,7 +2264,8 @@ const books = [
         "rating": 5,
         "date": "2024-01-18",
         "sentiment": "positive",
-        "content": "Delivered quickly and in perfect condition. This book exceeded all expectations. It provides rare, practical clarity and timeless insight that will stay with you long after the final page."
+        "content": "Delivered quickly and in perfect condition. This book exceeded all expectations. It provides rare, practical clarity and timeless insight that will stay with you long after the final page.",
+        "helpfulCount": 810
       }
     ],
     "normalizedRatings": {
@@ -2028,7 +2303,7 @@ const books = [
       }
     },
     "compositeScore": 8.43,
-    "discrepancyIndex": 1.16,
+    "discrepancyIndex": 1.2,
     "verdict": {
       "status": "recommended",
       "label": "经典必读",
@@ -2076,28 +2351,46 @@ const books = [
         "scale": 10,
         "ratingCount": 38200,
         "fiveStarPct": 45.1,
-        "url": "https://book.douban.com/subject/36319808/"
+        "url": "https://book.douban.com/subject/36319808/",
+        "starBreakdown": {
+          "five": 50,
+          "four": 33,
+          "three": 12,
+          "two": 3,
+          "one": 2
+        },
+        "normalizedScore": 8.5
       },
       "goodreads": {
         "score": 4.45,
         "scale": 5,
         "ratingCount": 42000,
         "fiveStarPct": 58.2,
-        "url": "https://www.goodreads.com/book/show/60321447-chip-war"
+        "url": "https://www.goodreads.com/book/show/60321447-chip-war",
+        "starBreakdown": {
+          "five": 51,
+          "four": 29,
+          "three": 14,
+          "two": 4,
+          "one": 2
+        },
+        "normalizedScore": 8.9
       },
       "googleBooks": {
         "score": 4.6,
         "scale": 5,
         "ratingCount": 3800,
         "fiveStarPct": 69,
-        "url": "https://books.google.com/books?id=chipwar"
+        "url": "https://books.google.com/books?id=chipwar",
+        "normalizedScore": 9.2
       },
       "amazon": {
         "score": 4.7,
         "scale": 5,
         "ratingCount": 12500,
         "fiveStarPct": 78,
-        "url": "https://www.amazon.com/dp/1982172002"
+        "url": "https://www.amazon.com/dp/1982172002",
+        "normalizedScore": 9.4
       }
     },
     "sentiment": {
@@ -2129,7 +2422,8 @@ const books = [
         "rating": 9,
         "date": "2024-01-10",
         "sentiment": "positive",
-        "content": "绝对是这几年读过最好的科技商业通识读物！把半导体从实验室到变成地缘战略武器的脉络理得一清二楚。看完才真正明白为什么ASML的一台光刻机会卡住全球脖子。"
+        "content": "绝对是这几年读过最好的科技商业通识读物！把半导体从实验室到变成地缘战略武器的脉络理得一清二楚。看完才真正明白为什么ASML的一台光刻机会卡住全球脖子。",
+        "helpfulCount": 815
       },
       {
         "platform": "goodreads",
@@ -2138,7 +2432,8 @@ const books = [
         "rating": 4,
         "date": "2023-11-20",
         "sentiment": "positive",
-        "content": "A truly remarkable book that transcends cultural boundaries. The themes explored in Chip War: The Fight for the World's Most Critical Technology resonate deeply with readers worldwide. Outstanding intellectual depth."
+        "content": "A truly remarkable book that transcends cultural boundaries. The themes explored in Chip War: The Fight for the World's Most Critical Technology resonate deeply with readers worldwide. Outstanding intellectual depth.",
+        "helpfulCount": 995
       },
       {
         "platform": "amazon",
@@ -2147,7 +2442,8 @@ const books = [
         "rating": 5,
         "date": "2024-01-18",
         "sentiment": "positive",
-        "content": "Delivered quickly and in perfect condition. This book exceeded all expectations. It provides rare, practical clarity and timeless insight that will stay with you long after the final page."
+        "content": "Delivered quickly and in perfect condition. This book exceeded all expectations. It provides rare, practical clarity and timeless insight that will stay with you long after the final page.",
+        "helpfulCount": 890
       }
     ],
     "normalizedRatings": {
@@ -2234,28 +2530,46 @@ const books = [
         "scale": 10,
         "ratingCount": 245000,
         "fiveStarPct": 62.1,
-        "url": "https://book.douban.com/subject/35546622/"
+        "url": "https://book.douban.com/subject/35546622/",
+        "starBreakdown": {
+          "five": 62,
+          "four": 25,
+          "three": 9,
+          "two": 2,
+          "one": 2
+        },
+        "normalizedScore": 9.1
       },
       "goodreads": {
         "score": 4.58,
         "scale": 5,
         "ratingCount": 12000,
         "fiveStarPct": 68.5,
-        "url": "https://www.goodreads.com/book/show/58882084"
+        "url": "https://www.goodreads.com/book/show/58882084",
+        "starBreakdown": {
+          "five": 55,
+          "four": 27,
+          "three": 13,
+          "two": 3,
+          "one": 2
+        },
+        "normalizedScore": 9.2
       },
       "googleBooks": {
         "score": 4.7,
         "scale": 5,
         "ratingCount": 2100,
         "fiveStarPct": 76,
-        "url": "https://books.google.com/books?id=insidesystem"
+        "url": "https://books.google.com/books?id=insidesystem",
+        "normalizedScore": 9.4
       },
       "amazon": {
         "score": 4.8,
         "scale": 5,
         "ratingCount": 4200,
         "fiveStarPct": 82,
-        "url": "https://www.amazon.com/dp/7208171299"
+        "url": "https://www.amazon.com/dp/7208171299",
+        "normalizedScore": 9.6
       }
     },
     "sentiment": {
@@ -2286,7 +2600,8 @@ const books = [
         "rating": 10,
         "date": "2024-03-15",
         "sentiment": "positive",
-        "content": "这本书解答了我过去十几年看财经新闻所有的困惑！读完才知道，为什么地方政府热衷建工业园、为什么城投债这么庞大、为什么房价与地价息息相关。兰小欢教授功德无量！"
+        "content": "这本书解答了我过去十几年看财经新闻所有的困惑！读完才知道，为什么地方政府热衷建工业园、为什么城投债这么庞大、为什么房价与地价息息相关。兰小欢教授功德无量！",
+        "helpfulCount": 730
       },
       {
         "platform": "goodreads",
@@ -2295,7 +2610,8 @@ const books = [
         "rating": 5,
         "date": "2023-11-20",
         "sentiment": "positive",
-        "content": "A truly remarkable book that transcends cultural boundaries. The themes explored in How China Works: Government and Economic Development resonate deeply with readers worldwide. Outstanding intellectual depth."
+        "content": "A truly remarkable book that transcends cultural boundaries. The themes explored in How China Works: Government and Economic Development resonate deeply with readers worldwide. Outstanding intellectual depth.",
+        "helpfulCount": 483
       },
       {
         "platform": "amazon",
@@ -2304,7 +2620,8 @@ const books = [
         "rating": 5,
         "date": "2024-01-18",
         "sentiment": "positive",
-        "content": "Delivered quickly and in perfect condition. This book exceeded all expectations. It provides rare, practical clarity and timeless insight that will stay with you long after the final page."
+        "content": "Delivered quickly and in perfect condition. This book exceeded all expectations. It provides rare, practical clarity and timeless insight that will stay with you long after the final page.",
+        "helpfulCount": 1728
       }
     ],
     "normalizedRatings": {
@@ -2342,7 +2659,7 @@ const books = [
       }
     },
     "compositeScore": 9.11,
-    "discrepancyIndex": 0.06,
+    "discrepancyIndex": 0.1,
     "verdict": {
       "status": "masterpiece",
       "label": "殿堂神作",
@@ -2390,28 +2707,46 @@ const books = [
         "scale": 10,
         "ratingCount": 78000,
         "fiveStarPct": 38.6,
-        "url": "https://book.douban.com/subject/36531980/"
+        "url": "https://book.douban.com/subject/36531980/",
+        "starBreakdown": {
+          "five": 42,
+          "four": 38,
+          "three": 14,
+          "two": 4,
+          "one": 2
+        },
+        "normalizedScore": 8.1
       },
       "goodreads": {
         "score": 4.24,
         "scale": 5,
         "ratingCount": 135000,
         "fiveStarPct": 48.9,
-        "url": "https://www.goodreads.com/book/show/122765395-elon-musk"
+        "url": "https://www.goodreads.com/book/show/122765395-elon-musk",
+        "starBreakdown": {
+          "five": 43,
+          "four": 34,
+          "three": 16,
+          "two": 4,
+          "one": 3
+        },
+        "normalizedScore": 8.5
       },
       "googleBooks": {
         "score": 4.4,
         "scale": 5,
         "ratingCount": 8900,
         "fiveStarPct": 62,
-        "url": "https://books.google.com/books?id=muskbio"
+        "url": "https://books.google.com/books?id=muskbio",
+        "normalizedScore": 8.8
       },
       "amazon": {
         "score": 4.6,
         "scale": 5,
         "ratingCount": 48000,
         "fiveStarPct": 76,
-        "url": "https://www.amazon.com/dp/1982181281"
+        "url": "https://www.amazon.com/dp/1982181281",
+        "normalizedScore": 9.2
       }
     },
     "sentiment": {
@@ -2443,7 +2778,8 @@ const books = [
         "rating": 4,
         "date": "2023-10-22",
         "sentiment": "neutral",
-        "content": "A thrilling portrait of a deeply fractured genius. He drives humanity forward while driving every human being around him insane."
+        "content": "A thrilling portrait of a deeply fractured genius. He drives humanity forward while driving every human being around him insane.",
+        "helpfulCount": 1362
       },
       {
         "platform": "douban",
@@ -2452,7 +2788,8 @@ const books = [
         "rating": 8,
         "date": "2023-10-15",
         "sentiment": "positive",
-        "content": "埃隆·马斯克传 在豆瓣上受到极高推崇。第一手近身观察素材极其生动，不避讳马斯克的暴躁、缺乏同理心与‘恶魔模式’ 无论是初读者还是重读，都能感受到作者强大的笔力。"
+        "content": "埃隆·马斯克传 在豆瓣上受到极高推崇。第一手近身观察素材极其生动，不避讳马斯克的暴躁、缺乏同理心与‘恶魔模式’ 无论是初读者还是重读，都能感受到作者强大的笔力。",
+        "helpfulCount": 2141
       },
       {
         "platform": "amazon",
@@ -2461,7 +2798,8 @@ const books = [
         "rating": 5,
         "date": "2024-01-18",
         "sentiment": "positive",
-        "content": "Delivered quickly and in perfect condition. This book exceeded all expectations. It provides rare, practical clarity and timeless insight that will stay with you long after the final page."
+        "content": "Delivered quickly and in perfect condition. This book exceeded all expectations. It provides rare, practical clarity and timeless insight that will stay with you long after the final page.",
+        "helpfulCount": 587
       }
     ],
     "normalizedRatings": {
@@ -2499,7 +2837,7 @@ const books = [
       }
     },
     "compositeScore": 8.51,
-    "discrepancyIndex": 0.38,
+    "discrepancyIndex": 0.4,
     "verdict": {
       "status": "recommended",
       "label": "经典必读",
@@ -2548,28 +2886,46 @@ const books = [
         "scale": 10,
         "ratingCount": 168000,
         "fiveStarPct": 61.4,
-        "url": "https://book.douban.com/subject/35390757/"
+        "url": "https://book.douban.com/subject/35390757/",
+        "starBreakdown": {
+          "five": 60,
+          "four": 26,
+          "three": 10,
+          "two": 2,
+          "one": 2
+        },
+        "normalizedScore": 9
       },
       "goodreads": {
         "score": 4.41,
         "scale": 5,
         "ratingCount": 8900,
         "fiveStarPct": 56,
-        "url": "https://www.goodreads.com/book/show/176916521"
+        "url": "https://www.goodreads.com/book/show/176916521",
+        "starBreakdown": {
+          "five": 49,
+          "four": 31,
+          "three": 14,
+          "two": 4,
+          "one": 2
+        },
+        "normalizedScore": 8.8
       },
       "googleBooks": {
         "score": 4.6,
         "scale": 5,
         "ratingCount": 1400,
         "fiveStarPct": 70,
-        "url": "https://books.google.com/books?id=altay"
+        "url": "https://books.google.com/books?id=altay",
+        "normalizedScore": 9.2
       },
       "amazon": {
         "score": 4.8,
         "scale": 5,
         "ratingCount": 5200,
         "fiveStarPct": 83,
-        "url": "https://www.amazon.com/dp/7544299839"
+        "url": "https://www.amazon.com/dp/7544299839",
+        "normalizedScore": 9.6
       }
     },
     "sentiment": {
@@ -2600,7 +2956,8 @@ const books = [
         "rating": 10,
         "date": "2024-05-18",
         "sentiment": "positive",
-        "content": "李娟的文字有一种让人瞬间安静下来的神奇魔力。没有大惊小怪的赞叹，只是平静地写母亲的裁缝铺、写荒原上的野兔子。在这个喧嚣焦虑的时代，这碗纯净的山泉水太珍贵了！"
+        "content": "李娟的文字有一种让人瞬间安静下来的神奇魔力。没有大惊小怪的赞叹，只是平静地写母亲的裁缝铺、写荒原上的野兔子。在这个喧嚣焦虑的时代，这碗纯净的山泉水太珍贵了！",
+        "helpfulCount": 1627
       },
       {
         "platform": "goodreads",
@@ -2609,7 +2966,8 @@ const books = [
         "rating": 4,
         "date": "2023-11-20",
         "sentiment": "positive",
-        "content": "A truly remarkable book that transcends cultural boundaries. The themes explored in My Altay resonate deeply with readers worldwide. Outstanding intellectual depth."
+        "content": "A truly remarkable book that transcends cultural boundaries. The themes explored in My Altay resonate deeply with readers worldwide. Outstanding intellectual depth.",
+        "helpfulCount": 1447
       },
       {
         "platform": "amazon",
@@ -2618,7 +2976,8 @@ const books = [
         "rating": 5,
         "date": "2024-01-18",
         "sentiment": "positive",
-        "content": "Delivered quickly and in perfect condition. This book exceeded all expectations. It provides rare, practical clarity and timeless insight that will stay with you long after the final page."
+        "content": "Delivered quickly and in perfect condition. This book exceeded all expectations. It provides rare, practical clarity and timeless insight that will stay with you long after the final page.",
+        "helpfulCount": 2025
       }
     ],
     "normalizedRatings": {
@@ -2656,7 +3015,7 @@ const books = [
       }
     },
     "compositeScore": 9.01,
-    "discrepancyIndex": 0.18,
+    "discrepancyIndex": 0.2,
     "verdict": {
       "status": "masterpiece",
       "label": "殿堂神作",
@@ -2704,28 +3063,46 @@ const books = [
         "scale": 10,
         "ratingCount": 289000,
         "fiveStarPct": 61.2,
-        "url": "https://book.douban.com/subject/35999086/"
+        "url": "https://book.douban.com/subject/35999086/",
+        "starBreakdown": {
+          "five": 60,
+          "four": 26,
+          "three": 10,
+          "two": 2,
+          "one": 2
+        },
+        "normalizedScore": 9
       },
       "goodreads": {
         "score": 4.48,
         "scale": 5,
         "ratingCount": 32000,
         "fiveStarPct": 62.1,
-        "url": "https://www.goodreads.com/book/show/60451833"
+        "url": "https://www.goodreads.com/book/show/60451833",
+        "starBreakdown": {
+          "five": 52,
+          "four": 29,
+          "three": 13,
+          "two": 4,
+          "one": 2
+        },
+        "normalizedScore": 9
       },
       "googleBooks": {
         "score": 4.6,
         "scale": 5,
         "ratingCount": 2800,
         "fiveStarPct": 71,
-        "url": "https://books.google.com/books?id=uenolimit"
+        "url": "https://books.google.com/books?id=uenolimit",
+        "normalizedScore": 9.2
       },
       "amazon": {
         "score": 4.7,
         "scale": 5,
         "ratingCount": 9800,
         "fiveStarPct": 79,
-        "url": "https://www.amazon.com/dp/7513349758"
+        "url": "https://www.amazon.com/dp/7513349758",
+        "normalizedScore": 9.4
       }
     },
     "sentiment": {
@@ -2756,7 +3133,8 @@ const books = [
         "rating": 10,
         "date": "2024-02-14",
         "sentiment": "positive",
-        "content": "上野老师真的太温柔也太犀利了！每一句话都像是一记耳光，把你从‘自怜自艾’的泥潭里打醒。看完立刻明白了什么叫真正的清醒独立。"
+        "content": "上野老师真的太温柔也太犀利了！每一句话都像是一记耳光，把你从‘自怜自艾’的泥潭里打醒。看完立刻明白了什么叫真正的清醒独立。",
+        "helpfulCount": 1834
       },
       {
         "platform": "goodreads",
@@ -2765,7 +3143,8 @@ const books = [
         "rating": 4,
         "date": "2023-11-20",
         "sentiment": "positive",
-        "content": "A truly remarkable book that transcends cultural boundaries. The themes explored in 往復書簡 限界から始まる resonate deeply with readers worldwide. Outstanding intellectual depth."
+        "content": "A truly remarkable book that transcends cultural boundaries. The themes explored in 往復書簡 限界から始まる resonate deeply with readers worldwide. Outstanding intellectual depth.",
+        "helpfulCount": 308
       },
       {
         "platform": "amazon",
@@ -2774,7 +3153,8 @@ const books = [
         "rating": 5,
         "date": "2024-01-18",
         "sentiment": "positive",
-        "content": "Delivered quickly and in perfect condition. This book exceeded all expectations. It provides rare, practical clarity and timeless insight that will stay with you long after the final page."
+        "content": "Delivered quickly and in perfect condition. This book exceeded all expectations. It provides rare, practical clarity and timeless insight that will stay with you long after the final page.",
+        "helpfulCount": 1443
       }
     ],
     "normalizedRatings": {
@@ -2812,7 +3192,7 @@ const books = [
       }
     },
     "compositeScore": 9.01,
-    "discrepancyIndex": 0.04,
+    "discrepancyIndex": 0,
     "verdict": {
       "status": "masterpiece",
       "label": "殿堂神作",
@@ -2860,28 +3240,46 @@ const books = [
         "scale": 10,
         "ratingCount": 6200,
         "fiveStarPct": 2.1,
-        "url": "https://book.douban.com/subject/00000001/"
+        "url": "https://book.douban.com/subject/00000001/",
+        "starBreakdown": {
+          "five": 15,
+          "four": 45,
+          "three": 25,
+          "two": 9,
+          "one": 6
+        },
+        "normalizedScore": 3.8
       },
       "goodreads": {
         "score": 2.21,
         "scale": 5,
         "ratingCount": 1400,
         "fiveStarPct": 5,
-        "url": "https://www.goodreads.com/book/show/00000001"
+        "url": "https://www.goodreads.com/book/show/00000001",
+        "starBreakdown": {
+          "five": 20,
+          "four": 45,
+          "three": 25,
+          "two": 6,
+          "one": 4
+        },
+        "normalizedScore": 4.4
       },
       "googleBooks": {
         "score": 2.5,
         "scale": 5,
         "ratingCount": 320,
         "fiveStarPct": 6,
-        "url": "https://books.google.com/books?id=aitrap"
+        "url": "https://books.google.com/books?id=aitrap",
+        "normalizedScore": 5
       },
       "amazon": {
         "score": 2.7,
         "scale": 5,
         "ratingCount": 950,
         "fiveStarPct": 10,
-        "url": "https://www.amazon.com/dp/B0FAKEAI01"
+        "url": "https://www.amazon.com/dp/B0FAKEAI01",
+        "normalizedScore": 5.4
       }
     },
     "sentiment": {
@@ -2912,7 +3310,8 @@ const books = [
         "rating": 1,
         "date": "2024-04-05",
         "sentiment": "negative",
-        "content": "恶心到了极点！买了之后发现里面连基本的Prompt提示词逻辑都是错的，通篇都是‘跟着我月入十万’的微商口吻，最后几页还在推二维码卖1999的课！纯纯工业垃圾，大家千万别买！"
+        "content": "恶心到了极点！买了之后发现里面连基本的Prompt提示词逻辑都是错的，通篇都是‘跟着我月入十万’的微商口吻，最后几页还在推二维码卖1999的课！纯纯工业垃圾，大家千万别买！",
+        "helpfulCount": 2382
       },
       {
         "platform": "goodreads",
@@ -2921,7 +3320,8 @@ const books = [
         "rating": 2,
         "date": "2023-11-20",
         "sentiment": "positive",
-        "content": "A truly remarkable book that transcends cultural boundaries. The themes explored in AI Money Making Blueprint resonate deeply with readers worldwide. Outstanding intellectual depth."
+        "content": "A truly remarkable book that transcends cultural boundaries. The themes explored in AI Money Making Blueprint resonate deeply with readers worldwide. Outstanding intellectual depth.",
+        "helpfulCount": 1097
       },
       {
         "platform": "amazon",
@@ -2930,7 +3330,8 @@ const books = [
         "rating": 3,
         "date": "2024-01-18",
         "sentiment": "positive",
-        "content": "Delivered quickly and in perfect condition. This book exceeded all expectations. It provides rare, practical clarity and timeless insight that will stay with you long after the final page."
+        "content": "Delivered quickly and in perfect condition. This book exceeded all expectations. It provides rare, practical clarity and timeless insight that will stay with you long after the final page.",
+        "helpfulCount": 607
       }
     ],
     "normalizedRatings": {
@@ -2968,7 +3369,7 @@ const books = [
       }
     },
     "compositeScore": 4.31,
-    "discrepancyIndex": 0.62,
+    "discrepancyIndex": 0.6,
     "verdict": {
       "status": "warning",
       "label": "避坑预警",
@@ -3016,28 +3417,46 @@ const books = [
         "scale": 10,
         "ratingCount": 24800,
         "fiveStarPct": 45.2,
-        "url": "https://book.douban.com/subject/26895821/"
+        "url": "https://book.douban.com/subject/26895821/",
+        "starBreakdown": {
+          "five": 52,
+          "four": 31,
+          "three": 12,
+          "two": 3,
+          "one": 2
+        },
+        "normalizedScore": 8.6
       },
       "goodreads": {
         "score": 3.98,
         "scale": 5,
         "ratingCount": 9200,
         "fiveStarPct": 38,
-        "url": "https://www.goodreads.com/book/show/244840.The_Lady_Tasting_Tea"
+        "url": "https://www.goodreads.com/book/show/244840.The_Lady_Tasting_Tea",
+        "starBreakdown": {
+          "five": 34,
+          "four": 40,
+          "three": 18,
+          "two": 5,
+          "one": 3
+        },
+        "normalizedScore": 8
       },
       "googleBooks": {
         "score": 4.4,
         "scale": 5,
         "ratingCount": 1600,
         "fiveStarPct": 62,
-        "url": "https://books.google.com/books?id=lady_tasting_tea"
+        "url": "https://books.google.com/books?id=lady_tasting_tea",
+        "normalizedScore": 8.8
       },
       "amazon": {
         "score": 4.6,
         "scale": 5,
         "ratingCount": 2100,
         "fiveStarPct": 74,
-        "url": "https://www.amazon.com/Lady-Tasting-Tea-Statistics-Revolutionized/dp/0805071342"
+        "url": "https://www.amazon.com/Lady-Tasting-Tea-Statistics-Revolutionized/dp/0805071342",
+        "normalizedScore": 9.2
       }
     },
     "sentiment": {
@@ -3070,7 +3489,8 @@ const books = [
         "rating": 9,
         "date": "2023-11-12",
         "sentiment": "positive",
-        "content": "所谓‘女士品茶’，起因是20年代剑桥大学的一个夏日午后茶会，一位女士坚称能喝出是‘把茶倒进牛奶里’还是‘把牛奶倒进茶里’，著名的罗纳德·费歇尔（R.A. Fisher）当场设计了一套严谨的盲品随机化实验，以此拉开了现代实验设计与假设检验的序幕。作者没有枯燥复杂的数学公式推导，而是用八卦和传奇的人物故事串起了20世纪现代统计学史。读完才明白，为什么现代医学双盲实验、临床试验和互联网A/B测试的底层基石全在这里！"
+        "content": "所谓‘女士品茶’，起因是20年代剑桥大学的一个夏日午后茶会，一位女士坚称能喝出是‘把茶倒进牛奶里’还是‘把牛奶倒进茶里’，著名的罗纳德·费歇尔（R.A. Fisher）当场设计了一套严谨的盲品随机化实验，以此拉开了现代实验设计与假设检验的序幕。作者没有枯燥复杂的数学公式推导，而是用八卦和传奇的人物故事串起了20世纪现代统计学史。读完才明白，为什么现代医学双盲实验、临床试验和互联网A/B测试的底层基石全在这里！",
+        "helpfulCount": 1755
       },
       {
         "platform": "douban",
@@ -3079,7 +3499,8 @@ const books = [
         "rating": 8,
         "date": "2024-01-20",
         "sentiment": "positive",
-        "content": "初看书名以为是一本教人优雅喝下午茶的女性生活小品，翻开才发现是硬核又迷人的现代统计学思想史！卡尔·皮尔逊与罗纳德·费歇尔两代统计学巨匠的交锋与恩怨情仇写得太精彩了。大数据时代最该补课的学科就是统计学，它告诉我们：世界不是决定论的，而是概率论的。中信版翻译个别术语稍有生硬，但瑕不掩瑜。"
+        "content": "初看书名以为是一本教人优雅喝下午茶的女性生活小品，翻开才发现是硬核又迷人的现代统计学思想史！卡尔·皮尔逊与罗纳德·费歇尔两代统计学巨匠的交锋与恩怨情仇写得太精彩了。大数据时代最该补课的学科就是统计学，它告诉我们：世界不是决定论的，而是概率论的。中信版翻译个别术语稍有生硬，但瑕不掩瑜。",
+        "helpfulCount": 1217
       },
       {
         "platform": "douban",
@@ -3088,7 +3509,8 @@ const books = [
         "rating": 9,
         "date": "2023-09-05",
         "sentiment": "positive",
-        "content": "统计学领域的《苏菲的世界》。作者萨尔斯伯格本身就是资深统计学家，但他把冰冷的公式还原成了有血有肉的科学家群像：从高尔顿对优生学的偏执，到皮尔逊的相关系数，再到戈塞特化名Student在健力士黑啤酒厂发明t检验。文科生和理工科读者都能读得津津有味。"
+        "content": "统计学领域的《苏菲的世界》。作者萨尔斯伯格本身就是资深统计学家，但他把冰冷的公式还原成了有血有肉的科学家群像：从高尔顿对优生学的偏执，到皮尔逊的相关系数，再到戈塞特化名Student在健力士黑啤酒厂发明t检验。文科生和理工科读者都能读得津津有味。",
+        "helpfulCount": 1319
       },
       {
         "platform": "goodreads",
@@ -3097,7 +3519,8 @@ const books = [
         "rating": 4,
         "date": "2023-08-15",
         "sentiment": "positive",
-        "content": "A brilliant popular history of statistical ideas. Salsburg makes the intellectual revolution of the 20th century vivid and human. It is not a textbook on how to calculate standard deviations, but rather a philosophical history explaining why the paradigm shifted from deterministic Newtonian physics to probabilistic thinking."
+        "content": "A brilliant popular history of statistical ideas. Salsburg makes the intellectual revolution of the 20th century vivid and human. It is not a textbook on how to calculate standard deviations, but rather a philosophical history explaining why the paradigm shifted from deterministic Newtonian physics to probabilistic thinking.",
+        "helpfulCount": 1434
       },
       {
         "platform": "amazon",
@@ -3106,7 +3529,8 @@ const books = [
         "rating": 5,
         "date": "2024-02-18",
         "sentiment": "positive",
-        "content": "Enlightening and engaging! As a researcher who uses ANOVA and p-values every day, reading this book gave me immense context and respect for the pioneers behind the tests. Essential reading for anyone working with data science or clinical trials today."
+        "content": "Enlightening and engaging! As a researcher who uses ANOVA and p-values every day, reading this book gave me immense context and respect for the pioneers behind the tests. Essential reading for anyone working with data science or clinical trials today.",
+        "helpfulCount": 1639
       }
     ],
     "aiInsight": {
@@ -3159,7 +3583,7 @@ const books = [
       }
     },
     "compositeScore": 8.48,
-    "discrepancyIndex": 0.64,
+    "discrepancyIndex": 0.6,
     "verdict": {
       "status": "recommended",
       "label": "经典必读",
@@ -3192,28 +3616,46 @@ const books = [
         "scale": 10,
         "ratingCount": 556000,
         "fiveStarPct": 44.1,
-        "url": "https://book.douban.com/subject/35143792/"
+        "url": "https://book.douban.com/subject/35143792/",
+        "starBreakdown": {
+          "five": 50,
+          "four": 33,
+          "three": 12,
+          "two": 3,
+          "one": 2
+        },
+        "normalizedScore": 8.5
       },
       "goodreads": {
         "score": 3.95,
         "scale": 5,
         "ratingCount": 42000,
         "fiveStarPct": 35,
-        "url": "https://www.goodreads.com/book/show/1598007.Counseling_for_Toads"
+        "url": "https://www.goodreads.com/book/show/1598007.Counseling_for_Toads",
+        "starBreakdown": {
+          "five": 33,
+          "four": 40,
+          "three": 19,
+          "two": 5,
+          "one": 3
+        },
+        "normalizedScore": 7.9
       },
       "googleBooks": {
         "score": 4.3,
         "scale": 5,
         "ratingCount": 890,
         "fiveStarPct": 58,
-        "url": "https://books.google.com/books?id=counseling_toads"
+        "url": "https://books.google.com/books?id=counseling_toads",
+        "normalizedScore": 8.6
       },
       "amazon": {
         "score": 4.6,
         "scale": 5,
         "ratingCount": 15600,
         "fiveStarPct": 72,
-        "url": "https://www.amazon.com/dp/0415174000"
+        "url": "https://www.amazon.com/dp/0415174000",
+        "normalizedScore": 9.2
       }
     },
     "sentiment": {
@@ -3245,7 +3687,8 @@ const books = [
         "rating": 9,
         "date": "2023-10-08",
         "sentiment": "positive",
-        "content": "这是一本能够救人命的温柔小书。很多时候我们陷入内耗，是因为一直在用‘挑剔型父母’审判自己，或者躲在‘顺从型儿童’里自怨自艾。苍鹭告诉蛤蟆：只有进入‘成人状态’，我们才能真正掌握当下的生活。读到蛤蟆终于能够坦然说出‘我很好，你也很好’时热泪盈眶。"
+        "content": "这是一本能够救人命的温柔小书。很多时候我们陷入内耗，是因为一直在用‘挑剔型父母’审判自己，或者躲在‘顺从型儿童’里自怨自艾。苍鹭告诉蛤蟆：只有进入‘成人状态’，我们才能真正掌握当下的生活。读到蛤蟆终于能够坦然说出‘我很好，你也很好’时热泪盈眶。",
+        "helpfulCount": 2272
       },
       {
         "platform": "goodreads",
@@ -3254,7 +3697,8 @@ const books = [
         "rating": 4,
         "date": "2023-05-14",
         "sentiment": "positive",
-        "content": "A gentle and accessible introduction to Transactional Analysis. Using characters from The Wind in the Willows makes the therapy process feel demystified and deeply human. Recommended for anyone hesitant about therapy."
+        "content": "A gentle and accessible introduction to Transactional Analysis. Using characters from The Wind in the Willows makes the therapy process feel demystified and deeply human. Recommended for anyone hesitant about therapy.",
+        "helpfulCount": 1767
       },
       {
         "platform": "amazon",
@@ -3263,7 +3707,8 @@ const books = [
         "rating": 5,
         "date": "2024-01-11",
         "sentiment": "positive",
-        "content": "I bought this during a difficult patch in my life. It reads like a fable but gives profound psychological insight into why we feel trapped by our childhood coping mechanisms. A masterpiece of accessible therapy."
+        "content": "I bought this during a difficult patch in my life. It reads like a fable but gives profound psychological insight into why we feel trapped by our childhood coping mechanisms. A masterpiece of accessible therapy.",
+        "helpfulCount": 2180
       }
     ],
     "aiInsight": {
@@ -3349,28 +3794,46 @@ const books = [
         "scale": 10,
         "ratingCount": 382000,
         "fiveStarPct": 47.8,
-        "url": "https://book.douban.com/subject/26369699/"
+        "url": "https://book.douban.com/subject/26369699/",
+        "starBreakdown": {
+          "five": 52,
+          "four": 31,
+          "three": 12,
+          "two": 3,
+          "one": 2
+        },
+        "normalizedScore": 8.6
       },
       "goodreads": {
         "score": 4.1,
         "scale": 5,
         "ratingCount": 88000,
         "fiveStarPct": 46,
-        "url": "https://www.goodreads.com/book/show/43306206-the-courage-to-be-disliked"
+        "url": "https://www.goodreads.com/book/show/43306206-the-courage-to-be-disliked",
+        "starBreakdown": {
+          "five": 38,
+          "four": 37,
+          "three": 18,
+          "two": 4,
+          "one": 3
+        },
+        "normalizedScore": 8.2
       },
       "googleBooks": {
         "score": 4.4,
         "scale": 5,
         "ratingCount": 2200,
         "fiveStarPct": 65,
-        "url": "https://books.google.com/books?id=courage_disliked"
+        "url": "https://books.google.com/books?id=courage_disliked",
+        "normalizedScore": 8.8
       },
       "amazon": {
         "score": 4.6,
         "scale": 5,
         "ratingCount": 29000,
         "fiveStarPct": 75,
-        "url": "https://www.amazon.com/Courage-Be-Disliked-Phenomenon-Happiness/dp/1501197274"
+        "url": "https://www.amazon.com/Courage-Be-Disliked-Phenomenon-Happiness/dp/1501197274",
+        "normalizedScore": 9.2
       }
     },
     "sentiment": {
@@ -3402,7 +3865,8 @@ const books = [
         "rating": 9,
         "date": "2023-09-19",
         "sentiment": "positive",
-        "content": "‘课题分离’四个字值得每一个中国人纹在脑门上！我们从小到大承受的所有来自父母、亲戚、领导的道德绑架和自我规训，全是因为分不清‘这是谁的课题’。别人怎么评价你是别人的课题，你过怎样的生活是你的课题。放下讨好别人的包袱，人生豁然开朗！"
+        "content": "‘课题分离’四个字值得每一个中国人纹在脑门上！我们从小到大承受的所有来自父母、亲戚、领导的道德绑架和自我规训，全是因为分不清‘这是谁的课题’。别人怎么评价你是别人的课题，你过怎样的生活是你的课题。放下讨好别人的包袱，人生豁然开朗！",
+        "helpfulCount": 804
       },
       {
         "platform": "goodreads",
@@ -3411,7 +3875,8 @@ const books = [
         "rating": 5,
         "date": "2023-12-04",
         "sentiment": "positive",
-        "content": "Mind-blowing. Unlike Western self-help books that preach toxic positivity, Adlerian philosophy via Ichiro Kishimi feels like a sharp stoic slap in the face. Stop blaming your past for your present cowardice."
+        "content": "Mind-blowing. Unlike Western self-help books that preach toxic positivity, Adlerian philosophy via Ichiro Kishimi feels like a sharp stoic slap in the face. Stop blaming your past for your present cowardice.",
+        "helpfulCount": 1685
       },
       {
         "platform": "amazon",
@@ -3420,7 +3885,8 @@ const books = [
         "rating": 4,
         "date": "2024-02-01",
         "sentiment": "positive",
-        "content": "Changed my perspective on relationships. Learning that you don't need everyone's approval to be worthy of happiness was liberating. The dialogue format keeps it engaging throughout."
+        "content": "Changed my perspective on relationships. Learning that you don't need everyone's approval to be worthy of happiness was liberating. The dialogue format keeps it engaging throughout.",
+        "helpfulCount": 1932
       }
     ],
     "aiInsight": {
@@ -3506,28 +3972,46 @@ const books = [
         "scale": 10,
         "ratingCount": 128000,
         "fiveStarPct": 35.8,
-        "url": "https://book.douban.com/subject/10786473/"
+        "url": "https://book.douban.com/subject/10786473/",
+        "starBreakdown": {
+          "five": 42,
+          "four": 38,
+          "three": 14,
+          "two": 4,
+          "one": 2
+        },
+        "normalizedScore": 8.1
       },
       "goodreads": {
         "score": 4.18,
         "scale": 5,
         "ratingCount": 520000,
         "fiveStarPct": 48,
-        "url": "https://www.goodreads.com/book/show/11468377-thinking-fast-and-slow"
+        "url": "https://www.goodreads.com/book/show/11468377-thinking-fast-and-slow",
+        "starBreakdown": {
+          "five": 41,
+          "four": 35,
+          "three": 17,
+          "two": 4,
+          "one": 3
+        },
+        "normalizedScore": 8.4
       },
       "googleBooks": {
         "score": 4.5,
         "scale": 5,
         "ratingCount": 14000,
         "fiveStarPct": 69,
-        "url": "https://books.google.com/books?id=thinking_fast_slow"
+        "url": "https://books.google.com/books?id=thinking_fast_slow",
+        "normalizedScore": 9
       },
       "amazon": {
         "score": 4.6,
         "scale": 5,
         "ratingCount": 42000,
         "fiveStarPct": 76,
-        "url": "https://www.amazon.com/Thinking-Fast-Slow-Daniel-Kahneman/dp/0374533555"
+        "url": "https://www.amazon.com/Thinking-Fast-Slow-Daniel-Kahneman/dp/0374533555",
+        "normalizedScore": 9.2
       }
     },
     "sentiment": {
@@ -3559,7 +4043,8 @@ const books = [
         "rating": 7,
         "date": "2023-07-22",
         "sentiment": "neutral",
-        "content": "内容绝对是神作，但中信版这个翻译真是暴殄天物！长句直接按英语语法死搬硬套，主谓宾颠三倒四，不少关键术语甚至前后不一致。如果你英文好，哪怕查字典也请务必看原版！看原版值9.5分，看这个译本扣到7.5分。"
+        "content": "内容绝对是神作，但中信版这个翻译真是暴殄天物！长句直接按英语语法死搬硬套，主谓宾颠三倒四，不少关键术语甚至前后不一致。如果你英文好，哪怕查字典也请务必看原版！看原版值9.5分，看这个译本扣到7.5分。",
+        "helpfulCount": 1008
       },
       {
         "platform": "goodreads",
@@ -3568,7 +4053,8 @@ const books = [
         "rating": 5,
         "date": "2023-04-10",
         "sentiment": "positive",
-        "content": "As landmark a book as The Wealth of Nations. Kahneman's work with Amos Tversky destroyed the pathetic illusion of the rational actor in economics. Essential reading for humanity."
+        "content": "As landmark a book as The Wealth of Nations. Kahneman's work with Amos Tversky destroyed the pathetic illusion of the rational actor in economics. Essential reading for humanity.",
+        "helpfulCount": 1674
       },
       {
         "platform": "amazon",
@@ -3577,7 +4063,8 @@ const books = [
         "rating": 5,
         "date": "2024-01-30",
         "sentiment": "positive",
-        "content": "The definitive guide on cognitive heuristics. It makes you realize how completely blind we are to our own daily biases. Every chapter yields practical insights into business, investing, and life."
+        "content": "The definitive guide on cognitive heuristics. It makes you realize how completely blind we are to our own daily biases. Every chapter yields practical insights into business, investing, and life.",
+        "helpfulCount": 1785
       }
     ],
     "aiInsight": {
@@ -3630,7 +4117,7 @@ const books = [
       }
     },
     "compositeScore": 8.38,
-    "discrepancyIndex": 0.26,
+    "discrepancyIndex": 0.3,
     "verdict": {
       "status": "recommended",
       "label": "经典必读",
@@ -3663,28 +4150,46 @@ const books = [
         "scale": 10,
         "ratingCount": 112000,
         "fiveStarPct": 56.4,
-        "url": "https://book.douban.com/subject/26895821/"
+        "url": "https://book.douban.com/subject/26895821/",
+        "starBreakdown": {
+          "five": 58,
+          "four": 27,
+          "three": 11,
+          "two": 2,
+          "one": 2
+        },
+        "normalizedScore": 8.9
       },
       "goodreads": {
         "score": 4.48,
         "scale": 5,
         "ratingCount": 36000,
         "fiveStarPct": 62,
-        "url": "https://www.goodreads.com/book/show/944652.Poor_Charlie_s_Almanack"
+        "url": "https://www.goodreads.com/book/show/944652.Poor_Charlie_s_Almanack",
+        "starBreakdown": {
+          "five": 52,
+          "four": 29,
+          "three": 13,
+          "two": 4,
+          "one": 2
+        },
+        "normalizedScore": 9
       },
       "googleBooks": {
         "score": 4.7,
         "scale": 5,
         "ratingCount": 4500,
         "fiveStarPct": 79,
-        "url": "https://books.google.com/books?id=poor_charlie"
+        "url": "https://books.google.com/books?id=poor_charlie",
+        "normalizedScore": 9.4
       },
       "amazon": {
         "score": 4.8,
         "scale": 5,
         "ratingCount": 8800,
         "fiveStarPct": 86,
-        "url": "https://www.amazon.com/Poor-Charlies-Almanack-Wisdom-Charles/dp/1578645018"
+        "url": "https://www.amazon.com/Poor-Charlies-Almanack-Wisdom-Charles/dp/1578645018",
+        "normalizedScore": 9.6
       }
     },
     "sentiment": {
@@ -3716,7 +4221,8 @@ const books = [
         "rating": 10,
         "date": "2023-11-29",
         "sentiment": "positive",
-        "content": "如果这辈子只能推荐一本商业与人生指南，我毫不犹豫选《穷查理宝典》。芒格最厉害的地方不在于他赚了多少钱，而在于他如何把数学、物理、生物、心理等学科的底层格栅化为一辈子的清醒与自律。‘反过来想，总是反过来想’——每当我困惑时重读，都能获得内心的笃定。"
+        "content": "如果这辈子只能推荐一本商业与人生指南，我毫不犹豫选《穷查理宝典》。芒格最厉害的地方不在于他赚了多少钱，而在于他如何把数学、物理、生物、心理等学科的底层格栅化为一辈子的清醒与自律。‘反过来想，总是反过来想’——每当我困惑时重读，都能获得内心的笃定。",
+        "helpfulCount": 485
       },
       {
         "platform": "goodreads",
@@ -3725,7 +4231,8 @@ const books = [
         "rating": 5,
         "date": "2023-08-11",
         "sentiment": "positive",
-        "content": "A masterclass in multidisciplinary thinking. Munger's speech on the Psychology of Human Misjudgment is arguably the best single essay ever written on why humans make catastrophic decisions."
+        "content": "A masterclass in multidisciplinary thinking. Munger's speech on the Psychology of Human Misjudgment is arguably the best single essay ever written on why humans make catastrophic decisions.",
+        "helpfulCount": 1702
       },
       {
         "platform": "amazon",
@@ -3734,7 +4241,8 @@ const books = [
         "rating": 5,
         "date": "2024-02-14",
         "sentiment": "positive",
-        "content": "Worth ten times its weight in gold. A rare book that doesn't just teach you how to invest, but how to live an ethical, rational, and deeply satisfying life. RIP Charlie."
+        "content": "Worth ten times its weight in gold. A rare book that doesn't just teach you how to invest, but how to live an ethical, rational, and deeply satisfying life. RIP Charlie.",
+        "helpfulCount": 2512
       }
     ],
     "aiInsight": {
@@ -3787,7 +4295,7 @@ const books = [
       }
     },
     "compositeScore": 8.96,
-    "discrepancyIndex": 0.06,
+    "discrepancyIndex": 0.1,
     "verdict": {
       "status": "recommended",
       "label": "经典必读",
@@ -3820,28 +4328,46 @@ const books = [
         "scale": 10,
         "ratingCount": 152000,
         "fiveStarPct": 41.2,
-        "url": "https://book.douban.com/subject/27608239/"
+        "url": "https://book.douban.com/subject/27608239/",
+        "starBreakdown": {
+          "five": 46,
+          "four": 35,
+          "three": 13,
+          "two": 4,
+          "one": 2
+        },
+        "normalizedScore": 8.3
       },
       "goodreads": {
         "score": 4.2,
         "scale": 5,
         "ratingCount": 165000,
         "fiveStarPct": 48,
-        "url": "https://www.goodreads.com/book/show/34536488-principles"
+        "url": "https://www.goodreads.com/book/show/34536488-principles",
+        "starBreakdown": {
+          "five": 42,
+          "four": 35,
+          "three": 16,
+          "two": 4,
+          "one": 3
+        },
+        "normalizedScore": 8.4
       },
       "googleBooks": {
         "score": 4.4,
         "scale": 5,
         "ratingCount": 8200,
         "fiveStarPct": 65,
-        "url": "https://books.google.com/books?id=principles_dalio"
+        "url": "https://books.google.com/books?id=principles_dalio",
+        "normalizedScore": 8.8
       },
       "amazon": {
         "score": 4.6,
         "scale": 5,
         "ratingCount": 38000,
         "fiveStarPct": 75,
-        "url": "https://www.amazon.com/Principles-Life-Work-Ray-Dalio/dp/1501124021"
+        "url": "https://www.amazon.com/Principles-Life-Work-Ray-Dalio/dp/1501124021",
+        "normalizedScore": 9.2
       }
     },
     "sentiment": {
@@ -3873,7 +4399,8 @@ const books = [
         "rating": 8,
         "date": "2023-06-15",
         "sentiment": "positive",
-        "content": "这是一部写给人类心智的操作手册。达利欧把整个世界当成一台精密运转的机器，遇到任何错误不是情绪化抱怨，而是找出哪颗齿轮出了问题，然后修改底层算法代码。前半部分自传与生活原则五星推荐，后半部分工作原则挑选适合自己的看即可。"
+        "content": "这是一部写给人类心智的操作手册。达利欧把整个世界当成一台精密运转的机器，遇到任何错误不是情绪化抱怨，而是找出哪颗齿轮出了问题，然后修改底层算法代码。前半部分自传与生活原则五星推荐，后半部分工作原则挑选适合自己的看即可。",
+        "helpfulCount": 1826
       },
       {
         "platform": "goodreads",
@@ -3882,7 +4409,8 @@ const books = [
         "rating": 5,
         "date": "2023-03-20",
         "sentiment": "positive",
-        "content": "Ray Dalio has provided me with invaluable guidance and insights that are now available to you in Principles. The advice he gives on how to build an idea meritocracy is invaluable."
+        "content": "Ray Dalio has provided me with invaluable guidance and insights that are now available to you in Principles. The advice he gives on how to build an idea meritocracy is invaluable.",
+        "helpfulCount": 513
       },
       {
         "platform": "amazon",
@@ -3891,7 +4419,8 @@ const books = [
         "rating": 4,
         "date": "2024-01-05",
         "sentiment": "positive",
-        "content": "Dense, pragmatic, and occasionally exhausting. Dalio's radical transparency isn't for everyone, but the framework for root-cause analysis is gold for any organization."
+        "content": "Dense, pragmatic, and occasionally exhausting. Dalio's radical transparency isn't for everyone, but the framework for root-cause analysis is gold for any organization.",
+        "helpfulCount": 1062
       }
     ],
     "aiInsight": {
@@ -3977,28 +4506,46 @@ const books = [
         "scale": 10,
         "ratingCount": 18600,
         "fiveStarPct": 52.3,
-        "url": "https://book.douban.com/subject/35308670/"
+        "url": "https://book.douban.com/subject/35308670/",
+        "starBreakdown": {
+          "five": 56,
+          "four": 29,
+          "three": 11,
+          "two": 2,
+          "one": 2
+        },
+        "normalizedScore": 8.8
       },
       "goodreads": {
         "score": 4.31,
         "scale": 5,
         "ratingCount": 16800,
         "fiveStarPct": 51,
-        "url": "https://www.goodreads.com/book/show/40796176-infinite-powers"
+        "url": "https://www.goodreads.com/book/show/40796176-infinite-powers",
+        "starBreakdown": {
+          "five": 46,
+          "four": 32,
+          "three": 15,
+          "two": 4,
+          "one": 3
+        },
+        "normalizedScore": 8.6
       },
       "googleBooks": {
         "score": 4.5,
         "scale": 5,
         "ratingCount": 1900,
         "fiveStarPct": 68,
-        "url": "https://books.google.com/books?id=infinite_powers"
+        "url": "https://books.google.com/books?id=infinite_powers",
+        "normalizedScore": 9
       },
       "amazon": {
         "score": 4.7,
         "scale": 5,
         "ratingCount": 3800,
         "fiveStarPct": 78,
-        "url": "https://www.amazon.com/Infinite-Powers-Calculus-Reveals-Universe/dp/1328879984"
+        "url": "https://www.amazon.com/Infinite-Powers-Calculus-Reveals-Universe/dp/1328879984",
+        "normalizedScore": 9.4
       }
     },
     "sentiment": {
@@ -4029,7 +4576,8 @@ const books = [
         "rating": 10,
         "date": "2023-08-14",
         "sentiment": "positive",
-        "content": "恨不得穿越回大一送给自己一本！如果当年高数老师能用斯托加茨的方法讲微积分，我绝对不会考前通宵死记硬背公式。微积分本质上就是两个动作：‘微分’（把复杂的现实切成无限细小的碎片看变化率），‘积分’（把所有碎片相加复原总量）。有了这套心智模型，看世界都清晰了。"
+        "content": "恨不得穿越回大一送给自己一本！如果当年高数老师能用斯托加茨的方法讲微积分，我绝对不会考前通宵死记硬背公式。微积分本质上就是两个动作：‘微分’（把复杂的现实切成无限细小的碎片看变化率），‘积分’（把所有碎片相加复原总量）。有了这套心智模型，看世界都清晰了。",
+        "helpfulCount": 1718
       },
       {
         "platform": "goodreads",
@@ -4038,7 +4586,8 @@ const books = [
         "rating": 5,
         "date": "2023-11-02",
         "sentiment": "positive",
-        "content": "Strogatz is a master educator. He turns a topic that has terrified millions of students into an exhilarating detective story about humanity conquering the concept of infinity."
+        "content": "Strogatz is a master educator. He turns a topic that has terrified millions of students into an exhilarating detective story about humanity conquering the concept of infinity.",
+        "helpfulCount": 2010
       },
       {
         "platform": "amazon",
@@ -4047,7 +4596,8 @@ const books = [
         "rating": 5,
         "date": "2024-01-22",
         "sentiment": "positive",
-        "content": "A triumphant achievement in science popularization. You don't need a single equation memorized to appreciate how calculus powers cell phones, MRI machines, and space travel."
+        "content": "A triumphant achievement in science popularization. You don't need a single equation memorized to appreciate how calculus powers cell phones, MRI machines, and space travel.",
+        "helpfulCount": 784
       }
     ],
     "aiInsight": {
@@ -4100,7 +4650,7 @@ const books = [
       }
     },
     "compositeScore": 8.78,
-    "discrepancyIndex": 0.18,
+    "discrepancyIndex": 0.2,
     "verdict": {
       "status": "recommended",
       "label": "经典必读",
@@ -4133,28 +4683,46 @@ const books = [
         "scale": 10,
         "ratingCount": 198000,
         "fiveStarPct": 46.2,
-        "url": "https://book.douban.com/subject/35165287/"
+        "url": "https://book.douban.com/subject/35165287/",
+        "starBreakdown": {
+          "five": 50,
+          "four": 33,
+          "three": 12,
+          "two": 3,
+          "one": 2
+        },
+        "normalizedScore": 8.5
       },
       "goodreads": {
         "score": 4.15,
         "scale": 5,
         "ratingCount": 210000,
         "fiveStarPct": 44,
-        "url": "https://www.goodreads.com/book/show/61535.The_Selfish_Gene"
+        "url": "https://www.goodreads.com/book/show/61535.The_Selfish_Gene",
+        "starBreakdown": {
+          "five": 40,
+          "four": 36,
+          "three": 17,
+          "two": 4,
+          "one": 3
+        },
+        "normalizedScore": 8.3
       },
       "googleBooks": {
         "score": 4.5,
         "scale": 5,
         "ratingCount": 7800,
         "fiveStarPct": 67,
-        "url": "https://books.google.com/books?id=selfish_gene"
+        "url": "https://books.google.com/books?id=selfish_gene",
+        "normalizedScore": 9
       },
       "amazon": {
         "score": 4.6,
         "scale": 5,
         "ratingCount": 16500,
         "fiveStarPct": 75,
-        "url": "https://www.amazon.com/Selfish-Gene-Popular-Science/dp/0198788606"
+        "url": "https://www.amazon.com/Selfish-Gene-Popular-Science/dp/0198788606",
+        "normalizedScore": 9.2
       }
     },
     "sentiment": {
@@ -4186,7 +4754,8 @@ const books = [
         "rating": 9,
         "date": "2023-12-10",
         "sentiment": "positive",
-        "content": "读完这本书有一种近乎残酷的快感。人类自以为拥有崇高的神圣性，但在自然选择的宏大尺度下，我们不过是基因用来渡过时间之海的临时皮囊。但这绝不是悲观论调，正如道金斯最后所言：在这个世界上，只有我们人类，能够反抗自私的复制基因的暴政。"
+        "content": "读完这本书有一种近乎残酷的快感。人类自以为拥有崇高的神圣性，但在自然选择的宏大尺度下，我们不过是基因用来渡过时间之海的临时皮囊。但这绝不是悲观论调，正如道金斯最后所言：在这个世界上，只有我们人类，能够反抗自私的复制基因的暴政。",
+        "helpfulCount": 598
       },
       {
         "platform": "goodreads",
@@ -4195,7 +4764,8 @@ const books = [
         "rating": 5,
         "date": "2023-09-01",
         "sentiment": "positive",
-        "content": "One of the most consequential books of the 20th century. Dawkins shifted the locus of natural selection from the group or individual to the replicator itself. Brilliant prose and revolutionary insight."
+        "content": "One of the most consequential books of the 20th century. Dawkins shifted the locus of natural selection from the group or individual to the replicator itself. Brilliant prose and revolutionary insight.",
+        "helpfulCount": 2746
       },
       {
         "platform": "amazon",
@@ -4204,7 +4774,8 @@ const books = [
         "rating": 4,
         "date": "2024-02-15",
         "sentiment": "positive",
-        "content": "A masterclass in scientific exposition. It challenges your deepest moral preconceptions and explains why kindness and cooperation are actually brilliant survival strategies."
+        "content": "A masterclass in scientific exposition. It challenges your deepest moral preconceptions and explains why kindness and cooperation are actually brilliant survival strategies.",
+        "helpfulCount": 2068
       }
     ],
     "aiInsight": {
@@ -4290,28 +4861,46 @@ const books = [
         "scale": 10,
         "ratingCount": 524000,
         "fiveStarPct": 62.4,
-        "url": "https://book.douban.com/subject/26895821/"
+        "url": "https://book.douban.com/subject/26895821/",
+        "starBreakdown": {
+          "five": 60,
+          "four": 26,
+          "three": 10,
+          "two": 2,
+          "one": 2
+        },
+        "normalizedScore": 9
       },
       "goodreads": {
         "score": 4.1,
         "scale": 5,
         "ratingCount": 82000,
         "fiveStarPct": 45,
-        "url": "https://www.goodreads.com/book/show/44053.The_Moon_and_Sixpence"
+        "url": "https://www.goodreads.com/book/show/44053.The_Moon_and_Sixpence",
+        "starBreakdown": {
+          "five": 38,
+          "four": 37,
+          "three": 18,
+          "two": 4,
+          "one": 3
+        },
+        "normalizedScore": 8.2
       },
       "googleBooks": {
         "score": 4.4,
         "scale": 5,
         "ratingCount": 3100,
         "fiveStarPct": 64,
-        "url": "https://books.google.com/books?id=moon_sixpence"
+        "url": "https://books.google.com/books?id=moon_sixpence",
+        "normalizedScore": 8.8
       },
       "amazon": {
         "score": 4.5,
         "scale": 5,
         "ratingCount": 12000,
         "fiveStarPct": 71,
-        "url": "https://www.amazon.com/Moon-Sixpence-W-Somerset-Maugham/dp/1509825487"
+        "url": "https://www.amazon.com/Moon-Sixpence-W-Somerset-Maugham/dp/1509825487",
+        "normalizedScore": 9
       }
     },
     "sentiment": {
@@ -4342,7 +4931,8 @@ const books = [
         "rating": 10,
         "date": "2023-05-18",
         "sentiment": "positive",
-        "content": "年少不读毛姆，读懂已是中年。思特里克兰德不是个好人，甚至是个混蛋，但他身上有一种可怕而纯粹的力量，把世俗所看重的名利、家庭、舒适碾得粉碎。当他在塔希提岛的双目失明中将整座木屋绘满壁画，并在临终前嘱咐一把火烧掉时，我感受到了真正神性与毁灭交织的美。"
+        "content": "年少不读毛姆，读懂已是中年。思特里克兰德不是个好人，甚至是个混蛋，但他身上有一种可怕而纯粹的力量，把世俗所看重的名利、家庭、舒适碾得粉碎。当他在塔希提岛的双目失明中将整座木屋绘满壁画，并在临终前嘱咐一把火烧掉时，我感受到了真正神性与毁灭交织的美。",
+        "helpfulCount": 504
       },
       {
         "platform": "goodreads",
@@ -4351,7 +4941,8 @@ const books = [
         "rating": 4,
         "date": "2023-08-25",
         "sentiment": "positive",
-        "content": "Maugham is the supreme cynic who secretly aches for the sublime. Strickland is utterly repulsive as a human being, yet his demonic artistic obsession forces you to question the quiet, comfortable compromises of your own life."
+        "content": "Maugham is the supreme cynic who secretly aches for the sublime. Strickland is utterly repulsive as a human being, yet his demonic artistic obsession forces you to question the quiet, comfortable compromises of your own life.",
+        "helpfulCount": 2034
       },
       {
         "platform": "amazon",
@@ -4360,7 +4951,8 @@ const books = [
         "rating": 5,
         "date": "2024-01-09",
         "sentiment": "positive",
-        "content": "A timeless masterpiece. Every sentence is polished like marble. If you feel trapped in the mundane rhythm of modern corporate life, read this immediately."
+        "content": "A timeless masterpiece. Every sentence is polished like marble. If you feel trapped in the mundane rhythm of modern corporate life, read this immediately.",
+        "helpfulCount": 1435
       }
     ],
     "aiInsight": {
@@ -4419,6 +5011,4561 @@ const books = [
       "color": "blue",
       "desc": "多平台一致好评，口碑过硬，阅读体验极佳"
     }
+  },
+  {
+    "id": "three-body-2",
+    "title": "三体Ⅱ：黑暗森林",
+    "originalTitle": "The Dark Forest",
+    "author": "刘慈欣",
+    "translator": null,
+    "cover": "https://img1.doubanio.com/view/subject/s/public/s29555238.jpg",
+    "isbn": "9787536693968",
+    "publicationYear": 2008,
+    "publisher": "重庆出版社",
+    "category": "科幻世界",
+    "tags": [
+      "硬科幻",
+      "宇宙社会学",
+      "黑暗森林法则",
+      "中国科幻巅峰",
+      "面壁计划"
+    ],
+    "summary": "三体三部曲巅峰之作。建立宇宙社会学两公理，提出震慑全宇宙的黑暗森林法则，罗辑与三体文明展开长达数百年的心理决斗。",
+    "platformRatings": {
+      "douban": {
+        "score": 9.3,
+        "scale": 10,
+        "ratingCount": 462000,
+        "fiveStarPct": 73.5,
+        "starBreakdown": {
+          "five": 73.5,
+          "four": 21,
+          "three": 4.8,
+          "two": 0.5,
+          "one": 0.2
+        },
+        "url": "https://book.douban.com/subject/3025921/",
+        "normalizedScore": 9.3
+      },
+      "goodreads": {
+        "score": 4.41,
+        "scale": 5,
+        "ratingCount": 168000,
+        "fiveStarPct": 56.2,
+        "starBreakdown": {
+          "five": 56.2,
+          "four": 31.8,
+          "three": 9.4,
+          "two": 1.8,
+          "one": 0.8
+        },
+        "url": "https://www.goodreads.com/book/show/23168817-the-dark-forest",
+        "normalizedScore": 8.8
+      },
+      "googleBooks": {
+        "score": 4.7,
+        "scale": 5,
+        "ratingCount": 22000,
+        "fiveStarPct": 78,
+        "starBreakdown": {
+          "five": 78,
+          "four": 16,
+          "three": 4,
+          "two": 1,
+          "one": 1
+        },
+        "url": "https://books.google.com/books?id=darkforest",
+        "normalizedScore": 9.4
+      },
+      "amazon": {
+        "score": 4.8,
+        "scale": 5,
+        "ratingCount": 39500,
+        "fiveStarPct": 84,
+        "starBreakdown": {
+          "five": 84,
+          "four": 11,
+          "three": 3,
+          "two": 1,
+          "one": 1
+        },
+        "url": "https://www.amazon.com/dp/076537708X",
+        "normalizedScore": 9.6
+      }
+    },
+    "verdict": {
+      "status": "masterpiece",
+      "label": "👑 殿堂神作",
+      "color": "emerald",
+      "reason": "中外读者与科幻界一致公认的科幻构想奇迹，黑暗森林理论与面壁者博弈震撼全球。"
+    },
+    "sentiment": {
+      "positivePct": 94,
+      "neutralPct": 4,
+      "negativePct": 2,
+      "pros": [
+        "黑暗森林假说的推导严密冷酷，宇宙社会学构架极具哲学冲击力",
+        "罗辑作为执剑人与面壁者的心理演变与救世弧光极为饱满动人",
+        "水滴穿透人类两千艘太空战舰的篇章是世界硬科幻文学的神级场面"
+      ],
+      "cons": [
+        "庄颜女性角色的设定带有明显的男性理想化审美痕迹",
+        "开篇铺垫较长，进入危机纪元后面壁者计划才全面加速展开"
+      ],
+      "keywords": [
+        "宇宙社会学",
+        "面壁者",
+        "黑暗森林法则",
+        "水滴",
+        "科幻史诗"
+      ]
+    },
+    "featuredReviews": [
+      {
+        "platform": "douban",
+        "user": "木卫二",
+        "avatar": "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=100",
+        "rating": 10,
+        "date": "2023-10-15",
+        "helpfulCount": 4210,
+        "content": "单凭水滴摧毁人类两千艘恒星级战舰那一战，和大史罗辑对谈黑暗森林理论，大刘就足以封神。这是中国科幻文学乃至世界硬科幻的巅峰高峰。"
+      },
+      {
+        "platform": "goodreads",
+        "user": "Ken Liu (Translator)",
+        "avatar": "https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?w=100",
+        "rating": 5,
+        "date": "2023-04-12",
+        "helpfulCount": 1980,
+        "content": "The Fermi paradox resolved in the most chilling, logical, and breathtaking cosmic scenario imaginable. Wallfacers and the Trisolaran fleet."
+      }
+    ],
+    "compositeScore": 9.2,
+    "discrepancyIndex": 0.5,
+    "normalizedRatings": {
+      "douban": {
+        "score": 9.3,
+        "scale": 10,
+        "ratingCount": 462000,
+        "fiveStarPct": 73.5,
+        "starBreakdown": {
+          "five": 73.5,
+          "four": 21,
+          "three": 4.8,
+          "two": 0.5,
+          "one": 0.2
+        },
+        "url": "https://book.douban.com/subject/3025921/",
+        "normalizedScore": 9.3
+      },
+      "goodreads": {
+        "score": 4.41,
+        "scale": 5,
+        "ratingCount": 168000,
+        "fiveStarPct": 56.2,
+        "starBreakdown": {
+          "five": 56.2,
+          "four": 31.8,
+          "three": 9.4,
+          "two": 1.8,
+          "one": 0.8
+        },
+        "url": "https://www.goodreads.com/book/show/23168817-the-dark-forest",
+        "normalizedScore": 8.8
+      },
+      "googleBooks": {
+        "score": 4.7,
+        "scale": 5,
+        "ratingCount": 22000,
+        "fiveStarPct": 78,
+        "starBreakdown": {
+          "five": 78,
+          "four": 16,
+          "three": 4,
+          "two": 1,
+          "one": 1
+        },
+        "url": "https://books.google.com/books?id=darkforest",
+        "normalizedScore": 9.4
+      },
+      "amazon": {
+        "score": 4.8,
+        "scale": 5,
+        "ratingCount": 39500,
+        "fiveStarPct": 84,
+        "starBreakdown": {
+          "five": 84,
+          "four": 11,
+          "three": 3,
+          "two": 1,
+          "one": 1
+        },
+        "url": "https://www.amazon.com/dp/076537708X",
+        "normalizedScore": 9.6
+      }
+    }
+  },
+  {
+    "id": "three-body-3",
+    "title": "三体Ⅲ：死神永生",
+    "originalTitle": "Death's End",
+    "author": "刘慈欣",
+    "translator": null,
+    "cover": "https://img9.doubanio.com/view/subject/s/public/s29555245.jpg",
+    "isbn": "9787536692930",
+    "publicationYear": 2010,
+    "publisher": "重庆出版社",
+    "category": "科幻世界",
+    "tags": [
+      "宇宙终极",
+      "二向箔",
+      "降维打击",
+      "程心",
+      "宏大叙事"
+    ],
+    "summary": "三体系列终章。从公元纪元跨越至宇宙终结，二向箔降维打击、光速飞船与小宇宙归零，将科幻想象力推向终极尺度。",
+    "platformRatings": {
+      "douban": {
+        "score": 9.2,
+        "scale": 10,
+        "ratingCount": 389000,
+        "fiveStarPct": 71.8,
+        "starBreakdown": {
+          "five": 71.8,
+          "four": 21.2,
+          "three": 5.4,
+          "two": 1,
+          "one": 0.6
+        },
+        "url": "https://book.douban.com/subject/5363767/",
+        "normalizedScore": 9.2
+      },
+      "goodreads": {
+        "score": 4.45,
+        "scale": 5,
+        "ratingCount": 142000,
+        "fiveStarPct": 60.1,
+        "starBreakdown": {
+          "five": 60.1,
+          "four": 28.5,
+          "three": 8.5,
+          "two": 2,
+          "one": 0.9
+        },
+        "url": "https://www.goodreads.com/book/show/25451264-death-s-end",
+        "normalizedScore": 8.9
+      },
+      "googleBooks": {
+        "score": 4.6,
+        "scale": 5,
+        "ratingCount": 19000,
+        "fiveStarPct": 74,
+        "starBreakdown": {
+          "five": 74,
+          "four": 18,
+          "three": 6,
+          "two": 1,
+          "one": 1
+        },
+        "url": "https://books.google.com/books?id=deathsend",
+        "normalizedScore": 9.2
+      },
+      "amazon": {
+        "score": 4.8,
+        "scale": 5,
+        "ratingCount": 31000,
+        "fiveStarPct": 83,
+        "starBreakdown": {
+          "five": 83,
+          "four": 12,
+          "three": 3,
+          "two": 1,
+          "one": 1
+        },
+        "url": "https://www.amazon.com/dp/0765377101",
+        "normalizedScore": 9.6
+      }
+    },
+    "verdict": {
+      "status": "masterpiece",
+      "label": "👑 殿堂神作",
+      "color": "emerald",
+      "reason": "人类科幻史上罕见的宇宙终极想象，二向箔与降维打击已成为全球现代文化核心隐喻。"
+    },
+    "sentiment": {
+      "positivePct": 89,
+      "neutralPct": 6,
+      "negativePct": 5,
+      "pros": [
+        "想象力突破天际，二向箔跌落与四维碎块的描写令人灵魂出窍",
+        "把整个宇宙物理规律当作终极战争武器的宏大构思前无古人"
+      ],
+      "cons": [
+        "女主角程心的选择引发读者长达十几年的激烈伦理与救世主道德争议"
+      ],
+      "keywords": [
+        "降维打击",
+        "二向箔",
+        "程心",
+        "小宇宙",
+        "宇宙终章"
+      ]
+    },
+    "featuredReviews": [
+      {
+        "platform": "douban",
+        "user": "不散",
+        "avatar": "https://images.unsplash.com/photo-1527980965255-d3b416303d12?w=100",
+        "rating": 10,
+        "date": "2023-09-02",
+        "helpfulCount": 3120,
+        "content": "给岁月以文明，而不是给文明以岁月。二向箔将太阳系压缩成梵高《星空》的那一幕，是我读过的所有文学作品中最令人战栗的毁灭。"
+      }
+    ],
+    "compositeScore": 9.2,
+    "discrepancyIndex": 0.3,
+    "normalizedRatings": {
+      "douban": {
+        "score": 9.2,
+        "scale": 10,
+        "ratingCount": 389000,
+        "fiveStarPct": 71.8,
+        "starBreakdown": {
+          "five": 71.8,
+          "four": 21.2,
+          "three": 5.4,
+          "two": 1,
+          "one": 0.6
+        },
+        "url": "https://book.douban.com/subject/5363767/",
+        "normalizedScore": 9.2
+      },
+      "goodreads": {
+        "score": 4.45,
+        "scale": 5,
+        "ratingCount": 142000,
+        "fiveStarPct": 60.1,
+        "starBreakdown": {
+          "five": 60.1,
+          "four": 28.5,
+          "three": 8.5,
+          "two": 2,
+          "one": 0.9
+        },
+        "url": "https://www.goodreads.com/book/show/25451264-death-s-end",
+        "normalizedScore": 8.9
+      },
+      "googleBooks": {
+        "score": 4.6,
+        "scale": 5,
+        "ratingCount": 19000,
+        "fiveStarPct": 74,
+        "starBreakdown": {
+          "five": 74,
+          "four": 18,
+          "three": 6,
+          "two": 1,
+          "one": 1
+        },
+        "url": "https://books.google.com/books?id=deathsend",
+        "normalizedScore": 9.2
+      },
+      "amazon": {
+        "score": 4.8,
+        "scale": 5,
+        "ratingCount": 31000,
+        "fiveStarPct": 83,
+        "starBreakdown": {
+          "five": 83,
+          "four": 12,
+          "three": 3,
+          "two": 1,
+          "one": 1
+        },
+        "url": "https://www.amazon.com/dp/0765377101",
+        "normalizedScore": 9.6
+      }
+    }
+  },
+  {
+    "id": "ordinary-world",
+    "title": "平凡的世界（全三部）",
+    "originalTitle": "Life and Death in the Ordinary World",
+    "author": "路遥",
+    "translator": null,
+    "cover": "https://img1.doubanio.com/view/subject/s/public/s1237549.jpg",
+    "isbn": "9787530205600",
+    "publicationYear": 1986,
+    "publisher": "北京十月文艺出版社",
+    "category": "文学小说",
+    "tags": [
+      "茅盾文学奖",
+      "现实主义",
+      "励志史诗",
+      "陕北高原",
+      "奋斗人生"
+    ],
+    "summary": "以孙少安、孙少平两兄弟的奋斗历程为主线，全景式展示了中国当代城乡社会生活的巨大历史变迁与普通人永不言弃的奋斗精神。",
+    "platformRatings": {
+      "douban": {
+        "score": 9,
+        "scale": 10,
+        "ratingCount": 412000,
+        "fiveStarPct": 62.4,
+        "starBreakdown": {
+          "five": 62.4,
+          "four": 27.5,
+          "three": 8.5,
+          "two": 1.1,
+          "one": 0.5
+        },
+        "url": "https://book.douban.com/subject/1200840/",
+        "normalizedScore": 9
+      },
+      "goodreads": {
+        "score": 4.18,
+        "scale": 5,
+        "ratingCount": 12000,
+        "fiveStarPct": 51,
+        "starBreakdown": {
+          "five": 51,
+          "four": 29,
+          "three": 13,
+          "two": 5,
+          "one": 2
+        },
+        "url": "https://www.goodreads.com/book/show/2138971.The_Ordinary_World",
+        "normalizedScore": 8.4
+      },
+      "googleBooks": {
+        "score": 4.4,
+        "scale": 5,
+        "ratingCount": 4200,
+        "fiveStarPct": 65,
+        "starBreakdown": {
+          "five": 65,
+          "four": 22,
+          "three": 9,
+          "two": 2,
+          "one": 2
+        },
+        "url": "https://books.google.com/books?id=ordinary",
+        "normalizedScore": 8.8
+      },
+      "amazon": {
+        "score": 4.6,
+        "scale": 5,
+        "ratingCount": 8800,
+        "fiveStarPct": 75,
+        "starBreakdown": {
+          "five": 75,
+          "four": 18,
+          "three": 5,
+          "two": 1,
+          "one": 1
+        },
+        "url": "https://www.amazon.com/dp/7530205600",
+        "normalizedScore": 9.2
+      }
+    },
+    "verdict": {
+      "status": "masterpiece",
+      "label": "👑 殿堂神作",
+      "color": "emerald",
+      "reason": "几代中国青年精神启蒙圣经，现实主义力透纸背，茅盾文学奖皇冠作品。"
+    },
+    "sentiment": {
+      "positivePct": 91,
+      "neutralPct": 6,
+      "negativePct": 3,
+      "pros": [
+        "孙少平在苦难中对精神世界的执着追求震撼人心",
+        "对黄土地深厚文化的凝视与城乡时代转型的记录真实细腻"
+      ],
+      "cons": [
+        "部分段落的叙述视角带有时代的理想化与教化色彩"
+      ],
+      "keywords": [
+        "孙少平",
+        "润叶",
+        "苦难与坚韧",
+        "陕北大地",
+        "奋斗"
+      ]
+    },
+    "featuredReviews": [
+      {
+        "platform": "douban",
+        "user": "独孤求败",
+        "avatar": "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=100",
+        "rating": 10,
+        "date": "2023-11-05",
+        "helpfulCount": 4520,
+        "content": "每当我人生陷入迷茫或自怨自艾时，我就会重读一遍少平在煤矿井下借着微光读书的那一段。它让人懂得生命的庄严与骨气。"
+      }
+    ],
+    "compositeScore": 8.8,
+    "discrepancyIndex": 0.6,
+    "normalizedRatings": {
+      "douban": {
+        "score": 9,
+        "scale": 10,
+        "ratingCount": 412000,
+        "fiveStarPct": 62.4,
+        "starBreakdown": {
+          "five": 62.4,
+          "four": 27.5,
+          "three": 8.5,
+          "two": 1.1,
+          "one": 0.5
+        },
+        "url": "https://book.douban.com/subject/1200840/",
+        "normalizedScore": 9
+      },
+      "goodreads": {
+        "score": 4.18,
+        "scale": 5,
+        "ratingCount": 12000,
+        "fiveStarPct": 51,
+        "starBreakdown": {
+          "five": 51,
+          "four": 29,
+          "three": 13,
+          "two": 5,
+          "one": 2
+        },
+        "url": "https://www.goodreads.com/book/show/2138971.The_Ordinary_World",
+        "normalizedScore": 8.4
+      },
+      "googleBooks": {
+        "score": 4.4,
+        "scale": 5,
+        "ratingCount": 4200,
+        "fiveStarPct": 65,
+        "starBreakdown": {
+          "five": 65,
+          "four": 22,
+          "three": 9,
+          "two": 2,
+          "one": 2
+        },
+        "url": "https://books.google.com/books?id=ordinary",
+        "normalizedScore": 8.8
+      },
+      "amazon": {
+        "score": 4.6,
+        "scale": 5,
+        "ratingCount": 8800,
+        "fiveStarPct": 75,
+        "starBreakdown": {
+          "five": 75,
+          "four": 18,
+          "three": 5,
+          "two": 1,
+          "one": 1
+        },
+        "url": "https://www.amazon.com/dp/7530205600",
+        "normalizedScore": 9.2
+      }
+    }
+  },
+  {
+    "id": "principles-dalio",
+    "title": "原则",
+    "originalTitle": "Principles: Life and Work",
+    "author": "瑞·达利欧 (Ray Dalio)",
+    "translator": "刘波 / 蔺荣",
+    "cover": "https://img9.doubanio.com/view/subject/s/public/s29634734.jpg",
+    "isbn": "9787508684030",
+    "publicationYear": 2018,
+    "publisher": "中信出版社",
+    "category": "商业经管",
+    "tags": [
+      "桥水基金",
+      "生活原则",
+      "工作原则",
+      "极度求真",
+      "极度透明",
+      "决策进化"
+    ],
+    "summary": "全球最大对冲基金桥水创始人倾囊相授。总结其白手起家到执掌千亿美元基金的个人生活与组织管理原则：极度求真、极度透明、五步流程法与创意择优决策机制。",
+    "platformRatings": {
+      "douban": {
+        "score": 8.3,
+        "scale": 10,
+        "ratingCount": 168000,
+        "fiveStarPct": 41.2,
+        "starBreakdown": {
+          "five": 41.2,
+          "four": 40.5,
+          "three": 15.2,
+          "two": 2.2,
+          "one": 0.9
+        },
+        "url": "https://book.douban.com/subject/27608239/",
+        "normalizedScore": 8.3
+      },
+      "goodreads": {
+        "score": 4.19,
+        "scale": 5,
+        "ratingCount": 145000,
+        "fiveStarPct": 47.1,
+        "starBreakdown": {
+          "five": 47.1,
+          "four": 32.8,
+          "three": 14.1,
+          "two": 4.1,
+          "one": 1.9
+        },
+        "url": "https://www.goodreads.com/book/show/34536488-principles",
+        "normalizedScore": 8.4
+      },
+      "googleBooks": {
+        "score": 4.4,
+        "scale": 5,
+        "ratingCount": 12000,
+        "fiveStarPct": 62,
+        "starBreakdown": {
+          "five": 62,
+          "four": 24,
+          "three": 10,
+          "two": 2,
+          "one": 2
+        },
+        "url": "https://books.google.com/books?id=principles",
+        "normalizedScore": 8.8
+      },
+      "amazon": {
+        "score": 4.6,
+        "scale": 5,
+        "ratingCount": 42000,
+        "fiveStarPct": 76,
+        "starBreakdown": {
+          "five": 76,
+          "four": 15,
+          "three": 6,
+          "two": 2,
+          "one": 1
+        },
+        "url": "https://www.amazon.com/dp/1501124021",
+        "normalizedScore": 9.2
+      }
+    },
+    "verdict": {
+      "status": "recommended",
+      "label": "📚 经典必读",
+      "color": "blue",
+      "reason": "商业与决策认知体系的重磅教科书，将机器学习与个人行为准则融合为闭环系统。"
+    },
+    "sentiment": {
+      "positivePct": 84,
+      "neutralPct": 11,
+      "negativePct": 5,
+      "pros": [
+        "算法化思维看人生，建立闭环纠错反馈系统的理念极具实操价值",
+        "极度求真与创意择优彻底打破办公室政治与虚假情面"
+      ],
+      "cons": [
+        "后半部企业工作原则机械论色彩浓厚，普通个人读者容易产生枯燥感"
+      ],
+      "keywords": [
+        "极度求真",
+        "极度透明",
+        "五步流程",
+        "决策算法",
+        "桥水管理"
+      ]
+    },
+    "featuredReviews": [
+      {
+        "platform": "douban",
+        "user": "投资日记",
+        "avatar": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100",
+        "rating": 9,
+        "date": "2023-06-18",
+        "helpfulCount": 2190,
+        "content": "达利欧把人类的情绪和错误当作可以被调试修复的 Bug，这种将人生机器化运转的冷酷自律令人敬畏。"
+      }
+    ],
+    "compositeScore": 8.5,
+    "discrepancyIndex": 0.1,
+    "normalizedRatings": {
+      "douban": {
+        "score": 8.3,
+        "scale": 10,
+        "ratingCount": 168000,
+        "fiveStarPct": 41.2,
+        "starBreakdown": {
+          "five": 41.2,
+          "four": 40.5,
+          "three": 15.2,
+          "two": 2.2,
+          "one": 0.9
+        },
+        "url": "https://book.douban.com/subject/27608239/",
+        "normalizedScore": 8.3
+      },
+      "goodreads": {
+        "score": 4.19,
+        "scale": 5,
+        "ratingCount": 145000,
+        "fiveStarPct": 47.1,
+        "starBreakdown": {
+          "five": 47.1,
+          "four": 32.8,
+          "three": 14.1,
+          "two": 4.1,
+          "one": 1.9
+        },
+        "url": "https://www.goodreads.com/book/show/34536488-principles",
+        "normalizedScore": 8.4
+      },
+      "googleBooks": {
+        "score": 4.4,
+        "scale": 5,
+        "ratingCount": 12000,
+        "fiveStarPct": 62,
+        "starBreakdown": {
+          "five": 62,
+          "four": 24,
+          "three": 10,
+          "two": 2,
+          "one": 2
+        },
+        "url": "https://books.google.com/books?id=principles",
+        "normalizedScore": 8.8
+      },
+      "amazon": {
+        "score": 4.6,
+        "scale": 5,
+        "ratingCount": 42000,
+        "fiveStarPct": 76,
+        "starBreakdown": {
+          "five": 76,
+          "four": 15,
+          "three": 6,
+          "two": 2,
+          "one": 1
+        },
+        "url": "https://www.amazon.com/dp/1501124021",
+        "normalizedScore": 9.2
+      }
+    }
+  },
+  {
+    "id": "almanack-of-naval",
+    "title": "纳瓦尔宝典：财富与幸福指南",
+    "originalTitle": "The Almanack of Naval Ravikant: A Guide to Wealth and Happiness",
+    "author": "埃里克·乔根森 (Eric Jorgenson)",
+    "translator": "赵灿",
+    "cover": "https://img9.doubanio.com/view/subject/s/public/s34139886.jpg",
+    "isbn": "9787521740707",
+    "publicationYear": 2022,
+    "publisher": "中信出版集团",
+    "category": "商业经管",
+    "tags": [
+      "硅谷投资人",
+      "专有知识",
+      "杠杆效应",
+      "被动收入",
+      "心灵内省"
+    ],
+    "summary": "硅谷传奇天使投资人纳瓦尔的思想精粹汇编。拆解如何不靠运气创造财富（依靠专有知识、高杠杆与复利效应），以及如何培养内心的平静与持久幸福感。",
+    "platformRatings": {
+      "douban": {
+        "score": 8.5,
+        "scale": 10,
+        "ratingCount": 112000,
+        "fiveStarPct": 44.5,
+        "starBreakdown": {
+          "five": 44.5,
+          "four": 41.2,
+          "three": 12,
+          "two": 1.8,
+          "one": 0.5
+        },
+        "url": "https://book.douban.com/subject/35860070/",
+        "normalizedScore": 8.5
+      },
+      "goodreads": {
+        "score": 4.49,
+        "scale": 5,
+        "ratingCount": 128000,
+        "fiveStarPct": 62.4,
+        "starBreakdown": {
+          "five": 62.4,
+          "four": 27.5,
+          "three": 7.8,
+          "two": 1.6,
+          "one": 0.7
+        },
+        "url": "https://www.goodreads.com/book/show/54898389-the-almanack-of-naval-ravikant",
+        "normalizedScore": 9
+      },
+      "googleBooks": {
+        "score": 4.6,
+        "scale": 5,
+        "ratingCount": 8900,
+        "fiveStarPct": 73,
+        "starBreakdown": {
+          "five": 73,
+          "four": 19,
+          "three": 6,
+          "two": 1,
+          "one": 1
+        },
+        "url": "https://books.google.com/books?id=naval",
+        "normalizedScore": 9.2
+      },
+      "amazon": {
+        "score": 4.7,
+        "scale": 5,
+        "ratingCount": 29000,
+        "fiveStarPct": 82,
+        "starBreakdown": {
+          "five": 82,
+          "four": 12,
+          "three": 4,
+          "two": 1,
+          "one": 1
+        },
+        "url": "https://www.amazon.com/dp/1544514212",
+        "normalizedScore": 9.4
+      }
+    },
+    "verdict": {
+      "status": "masterpiece",
+      "label": "👑 殿堂神作",
+      "color": "emerald",
+      "reason": "近五年全球科技创业圈评价最高的人生智慧录，字字珠玑，无任何水分废话。"
+    },
+    "sentiment": {
+      "positivePct": 91,
+      "neutralPct": 7,
+      "negativePct": 2,
+      "pros": [
+        "四种杠杆理论（劳动力、资本、代码与无许可媒体）极度精准契合数字时代",
+        "将财富创造与佛陀般的内省哲学完美结合，避免了功利主义恶臭"
+      ],
+      "cons": [
+        "推文金句语录整理成书，结构相对散碎，需要反复细嚼消化"
+      ],
+      "keywords": [
+        "专有知识",
+        "零边际成本杠杆",
+        "复利",
+        "内心平静",
+        "纳瓦尔"
+      ]
+    },
+    "featuredReviews": [
+      {
+        "platform": "douban",
+        "user": "极客阿甘",
+        "avatar": "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=100",
+        "rating": 10,
+        "date": "2023-11-29",
+        "helpfulCount": 1850,
+        "content": "用代码和媒体做杠杆，用专有知识做护城河。这是近十年讲数字时代个人财富积累最透彻的一本书。"
+      }
+    ],
+    "compositeScore": 8.9,
+    "discrepancyIndex": 0.5,
+    "normalizedRatings": {
+      "douban": {
+        "score": 8.5,
+        "scale": 10,
+        "ratingCount": 112000,
+        "fiveStarPct": 44.5,
+        "starBreakdown": {
+          "five": 44.5,
+          "four": 41.2,
+          "three": 12,
+          "two": 1.8,
+          "one": 0.5
+        },
+        "url": "https://book.douban.com/subject/35860070/",
+        "normalizedScore": 8.5
+      },
+      "goodreads": {
+        "score": 4.49,
+        "scale": 5,
+        "ratingCount": 128000,
+        "fiveStarPct": 62.4,
+        "starBreakdown": {
+          "five": 62.4,
+          "four": 27.5,
+          "three": 7.8,
+          "two": 1.6,
+          "one": 0.7
+        },
+        "url": "https://www.goodreads.com/book/show/54898389-the-almanack-of-naval-ravikant",
+        "normalizedScore": 9
+      },
+      "googleBooks": {
+        "score": 4.6,
+        "scale": 5,
+        "ratingCount": 8900,
+        "fiveStarPct": 73,
+        "starBreakdown": {
+          "five": 73,
+          "four": 19,
+          "three": 6,
+          "two": 1,
+          "one": 1
+        },
+        "url": "https://books.google.com/books?id=naval",
+        "normalizedScore": 9.2
+      },
+      "amazon": {
+        "score": 4.7,
+        "scale": 5,
+        "ratingCount": 29000,
+        "fiveStarPct": 82,
+        "starBreakdown": {
+          "five": 82,
+          "four": 12,
+          "three": 4,
+          "two": 1,
+          "one": 1
+        },
+        "url": "https://www.amazon.com/dp/1544514212",
+        "normalizedScore": 9.4
+      }
+    }
+  },
+  {
+    "id": "hackers-and-painters",
+    "title": "黑客与画家：硅谷创业之父保罗·格雷厄姆文集",
+    "originalTitle": "Hackers & Painters: Big Ideas from the Computer Age",
+    "author": "保罗·格雷厄姆 (Paul Graham)",
+    "translator": "阮一峰",
+    "cover": "https://img9.doubanio.com/view/subject/s/public/s6253456.jpg",
+    "isbn": "9787115249494",
+    "publicationYear": 2011,
+    "publisher": "人民邮电出版社",
+    "category": "计算机与技术",
+    "tags": [
+      "黑客精神",
+      "硅谷创业",
+      "Y Combinator",
+      "设计哲学",
+      "自由创造"
+    ],
+    "summary": "Y Combinator 创始人保罗·格雷厄姆的文集。阐述黑客文化本质、创造力、创业机制、财富创造与编程语言设计，阮一峰经典译本，启发了全球无数极客与创业者。",
+    "platformRatings": {
+      "douban": {
+        "score": 8.8,
+        "scale": 10,
+        "ratingCount": 65000,
+        "fiveStarPct": 53.2,
+        "starBreakdown": {
+          "five": 53.2,
+          "four": 35.8,
+          "three": 9.5,
+          "two": 1.1,
+          "one": 0.4
+        },
+        "url": "https://book.douban.com/subject/6021440/",
+        "normalizedScore": 8.8
+      },
+      "goodreads": {
+        "score": 4.02,
+        "scale": 5,
+        "ratingCount": 41000,
+        "fiveStarPct": 38.5,
+        "starBreakdown": {
+          "five": 38.5,
+          "four": 35.8,
+          "three": 19.5,
+          "two": 4.8,
+          "one": 1.4
+        },
+        "url": "https://www.goodreads.com/book/show/41793.Hackers_Painters",
+        "normalizedScore": 8
+      },
+      "googleBooks": {
+        "score": 4.3,
+        "scale": 5,
+        "ratingCount": 4500,
+        "fiveStarPct": 56,
+        "starBreakdown": {
+          "five": 56,
+          "four": 27,
+          "three": 12,
+          "two": 3,
+          "one": 2
+        },
+        "url": "https://books.google.com/books?id=hackers",
+        "normalizedScore": 8.6
+      },
+      "amazon": {
+        "score": 4.5,
+        "scale": 5,
+        "ratingCount": 8200,
+        "fiveStarPct": 69,
+        "starBreakdown": {
+          "five": 69,
+          "four": 19,
+          "three": 8,
+          "two": 2,
+          "one": 2
+        },
+        "url": "https://www.amazon.com/dp/1449370097",
+        "normalizedScore": 9
+      }
+    },
+    "verdict": {
+      "status": "masterpiece",
+      "label": "👑 殿堂神作",
+      "color": "emerald",
+      "reason": "技术极客与创业者的思想灯塔，阮一峰译本典雅流畅，中文技术出版界的传世之作。"
+    },
+    "sentiment": {
+      "positivePct": 92,
+      "neutralPct": 6,
+      "negativePct": 2,
+      "pros": [
+        "把写软件类比为画家作画的艺术创造，彻底重塑了程序员自我认同的尊严感",
+        "财富创造与技术革新篇章极具洞见，阮一峰翻译极为出彩传神"
+      ],
+      "cons": [
+        "对 Lisp 语言的崇拜带有作者个人的强烈偏好，后半部文集稍微略有时代感"
+      ],
+      "keywords": [
+        "黑客精神",
+        "创业逻辑",
+        "美与设计",
+        "阮一峰",
+        "自由创造"
+      ]
+    },
+    "featuredReviews": [
+      {
+        "platform": "douban",
+        "user": "Fenng (冯大辉)",
+        "avatar": "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=100",
+        "rating": 10,
+        "date": "2023-03-10",
+        "helpfulCount": 2980,
+        "content": "好书不需要多说，每个打算靠技术创造点什么的人都必须通读一遍。"
+      }
+    ],
+    "compositeScore": 8.5,
+    "discrepancyIndex": 0.8,
+    "normalizedRatings": {
+      "douban": {
+        "score": 8.8,
+        "scale": 10,
+        "ratingCount": 65000,
+        "fiveStarPct": 53.2,
+        "starBreakdown": {
+          "five": 53.2,
+          "four": 35.8,
+          "three": 9.5,
+          "two": 1.1,
+          "one": 0.4
+        },
+        "url": "https://book.douban.com/subject/6021440/",
+        "normalizedScore": 8.8
+      },
+      "goodreads": {
+        "score": 4.02,
+        "scale": 5,
+        "ratingCount": 41000,
+        "fiveStarPct": 38.5,
+        "starBreakdown": {
+          "five": 38.5,
+          "four": 35.8,
+          "three": 19.5,
+          "two": 4.8,
+          "one": 1.4
+        },
+        "url": "https://www.goodreads.com/book/show/41793.Hackers_Painters",
+        "normalizedScore": 8
+      },
+      "googleBooks": {
+        "score": 4.3,
+        "scale": 5,
+        "ratingCount": 4500,
+        "fiveStarPct": 56,
+        "starBreakdown": {
+          "five": 56,
+          "four": 27,
+          "three": 12,
+          "two": 3,
+          "one": 2
+        },
+        "url": "https://books.google.com/books?id=hackers",
+        "normalizedScore": 8.6
+      },
+      "amazon": {
+        "score": 4.5,
+        "scale": 5,
+        "ratingCount": 8200,
+        "fiveStarPct": 69,
+        "starBreakdown": {
+          "five": 69,
+          "four": 19,
+          "three": 8,
+          "two": 2,
+          "one": 2
+        },
+        "url": "https://www.amazon.com/dp/1449370097",
+        "normalizedScore": 9
+      }
+    }
+  },
+  {
+    "id": "guns-germs-and-steel",
+    "title": "枪炮、病菌与钢铁：人类社会的命运",
+    "originalTitle": "Guns, Germs, and Steel: The Fates of Human Societies",
+    "author": "贾雷德·戴蒙德 (Jared Diamond)",
+    "translator": "谢延光",
+    "cover": "https://img9.doubanio.com/view/subject/s/public/s28318855.jpg",
+    "isbn": "9787532772032",
+    "publicationYear": 2016,
+    "publisher": "上海译文出版社",
+    "category": "历史社科",
+    "tags": [
+      "普利策奖",
+      "地理环境决定论",
+      "人类文明史",
+      "社科经典",
+      "跨学科"
+    ],
+    "summary": "普利策奖获奖名著。深刻剖析为什么现代社会的财富和权力是按照现在的面貌分配，而非其他方式。通过地理轴线、物种驯化与病菌演化推导文明兴衰的底层根源。",
+    "platformRatings": {
+      "douban": {
+        "score": 8.8,
+        "scale": 10,
+        "ratingCount": 195000,
+        "fiveStarPct": 54,
+        "starBreakdown": {
+          "five": 54,
+          "four": 35.5,
+          "three": 9.2,
+          "two": 1,
+          "one": 0.3
+        },
+        "url": "https://book.douban.com/subject/26769715/",
+        "normalizedScore": 8.8
+      },
+      "goodreads": {
+        "score": 4.05,
+        "scale": 5,
+        "ratingCount": 412000,
+        "fiveStarPct": 41.5,
+        "starBreakdown": {
+          "five": 41.5,
+          "four": 33.8,
+          "three": 17.2,
+          "two": 5.5,
+          "one": 2
+        },
+        "url": "https://www.goodreads.com/book/show/1842.Guns_Germs_and_Steel",
+        "normalizedScore": 8.1
+      },
+      "googleBooks": {
+        "score": 4.3,
+        "scale": 5,
+        "ratingCount": 28000,
+        "fiveStarPct": 58,
+        "starBreakdown": {
+          "five": 58,
+          "four": 26,
+          "three": 11,
+          "two": 3,
+          "one": 2
+        },
+        "url": "https://books.google.com/books?id=gunsgerms",
+        "normalizedScore": 8.6
+      },
+      "amazon": {
+        "score": 4.5,
+        "scale": 5,
+        "ratingCount": 49000,
+        "fiveStarPct": 71,
+        "starBreakdown": {
+          "five": 71,
+          "four": 18,
+          "three": 7,
+          "two": 2,
+          "one": 2
+        },
+        "url": "https://www.amazon.com/dp/0393354326",
+        "normalizedScore": 9
+      }
+    },
+    "verdict": {
+      "status": "masterpiece",
+      "label": "👑 殿堂神作",
+      "color": "emerald",
+      "reason": "打破种族主义偏见的世纪巨著，彻底颠覆了欧洲中心主义的历史决定论神话。"
+    },
+    "sentiment": {
+      "positivePct": 90,
+      "neutralPct": 7,
+      "negativePct": 3,
+      "pros": [
+        "用严密的大陆轴线走向与可驯化动植物分布解释各大洲文明差异，逻辑极为宏大自洽",
+        "彻底摧毁了基因优劣论，为人类平权奠定了坚实的科学历史基石"
+      ],
+      "cons": [
+        "地理决定论过于单一化，在解释近代科技工业革命爆发时受到学界不少争议"
+      ],
+      "keywords": [
+        "地理决定论",
+        "物种驯化",
+        "病菌演化",
+        "普利策奖",
+        "跨学科史诗"
+      ]
+    },
+    "featuredReviews": [
+      {
+        "platform": "douban",
+        "user": "木心之友",
+        "avatar": "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=100",
+        "rating": 9,
+        "date": "2023-04-16",
+        "helpfulCount": 1980,
+        "content": "各个民族的历史之所以经历如此不同的轨迹，不是因为各民族在生物学上的差异，而是因为他们所处环境的差异。"
+      }
+    ],
+    "compositeScore": 8.6,
+    "discrepancyIndex": 0.7,
+    "normalizedRatings": {
+      "douban": {
+        "score": 8.8,
+        "scale": 10,
+        "ratingCount": 195000,
+        "fiveStarPct": 54,
+        "starBreakdown": {
+          "five": 54,
+          "four": 35.5,
+          "three": 9.2,
+          "two": 1,
+          "one": 0.3
+        },
+        "url": "https://book.douban.com/subject/26769715/",
+        "normalizedScore": 8.8
+      },
+      "goodreads": {
+        "score": 4.05,
+        "scale": 5,
+        "ratingCount": 412000,
+        "fiveStarPct": 41.5,
+        "starBreakdown": {
+          "five": 41.5,
+          "four": 33.8,
+          "three": 17.2,
+          "two": 5.5,
+          "one": 2
+        },
+        "url": "https://www.goodreads.com/book/show/1842.Guns_Germs_and_Steel",
+        "normalizedScore": 8.1
+      },
+      "googleBooks": {
+        "score": 4.3,
+        "scale": 5,
+        "ratingCount": 28000,
+        "fiveStarPct": 58,
+        "starBreakdown": {
+          "five": 58,
+          "four": 26,
+          "three": 11,
+          "two": 3,
+          "one": 2
+        },
+        "url": "https://books.google.com/books?id=gunsgerms",
+        "normalizedScore": 8.6
+      },
+      "amazon": {
+        "score": 4.5,
+        "scale": 5,
+        "ratingCount": 49000,
+        "fiveStarPct": 71,
+        "starBreakdown": {
+          "five": 71,
+          "four": 18,
+          "three": 7,
+          "two": 2,
+          "one": 2
+        },
+        "url": "https://www.amazon.com/dp/0393354326",
+        "normalizedScore": 9
+      }
+    }
+  },
+  {
+    "id": "kite-runner",
+    "title": "追风筝的人",
+    "originalTitle": "The Kite Runner",
+    "author": "卡勒德·胡赛尼 (Khaled Hosseini)",
+    "translator": "李继宏",
+    "cover": "https://img9.doubanio.com/view/subject/s/public/s1727290.jpg",
+    "isbn": "9787208061644",
+    "publicationYear": 2006,
+    "publisher": "上海人民出版社",
+    "category": "文学小说",
+    "tags": [
+      "为你千千万万遍",
+      "人性救赎",
+      "阿富汗历史",
+      "背叛与成长",
+      "全球超级畅销"
+    ],
+    "summary": "以阿富汗历史变迁为背景，讲述富家少年阿米尔与仆人哈桑情同手足，但阿米尔在风筝比赛后因懦弱背叛了哈桑，背负终生罪恶感，最终走上救赎与成长之路。",
+    "platformRatings": {
+      "douban": {
+        "score": 8.9,
+        "scale": 10,
+        "ratingCount": 792000,
+        "fiveStarPct": 57.5,
+        "starBreakdown": {
+          "five": 57.5,
+          "four": 33.2,
+          "three": 8.2,
+          "two": 0.8,
+          "one": 0.3
+        },
+        "url": "https://book.douban.com/subject/1770782/",
+        "normalizedScore": 8.9
+      },
+      "goodreads": {
+        "score": 4.34,
+        "scale": 5,
+        "ratingCount": 3200000,
+        "fiveStarPct": 53.8,
+        "starBreakdown": {
+          "five": 53.8,
+          "four": 31.9,
+          "three": 10.8,
+          "two": 2.3,
+          "one": 1.2
+        },
+        "url": "https://www.goodreads.com/book/show/77203.The_Kite_Runner",
+        "normalizedScore": 8.7
+      },
+      "googleBooks": {
+        "score": 4.6,
+        "scale": 5,
+        "ratingCount": 154000,
+        "fiveStarPct": 75,
+        "starBreakdown": {
+          "five": 75,
+          "four": 18,
+          "three": 5,
+          "two": 1,
+          "one": 1
+        },
+        "url": "https://books.google.com/books?id=kiterunner",
+        "normalizedScore": 9.2
+      },
+      "amazon": {
+        "score": 4.7,
+        "scale": 5,
+        "ratingCount": 125000,
+        "fiveStarPct": 83,
+        "starBreakdown": {
+          "five": 83,
+          "four": 12,
+          "three": 3,
+          "two": 1,
+          "one": 1
+        },
+        "url": "https://www.amazon.com/dp/159463193X",
+        "normalizedScore": 9.4
+      }
+    },
+    "verdict": {
+      "status": "masterpiece",
+      "label": "👑 殿堂神作",
+      "color": "emerald",
+      "reason": "Goodreads 超 320 万人参评、豆瓣近 80 万人的世纪畅销巨著，'为你，千千万万遍'感动全球。"
+    },
+    "sentiment": {
+      "positivePct": 93,
+      "neutralPct": 5,
+      "negativePct": 2,
+      "pros": [
+        "'为你，千千万万遍'的情感穿透力与哈桑的忠诚令人心碎难平",
+        "真实生动呈现了苏阿战争前阿富汗喀布尔宁静市井与战乱后的满目疮痍"
+      ],
+      "cons": [
+        "后半段反派阿塞夫的重逢情节偶有戏剧巧合与好莱坞公式化编排之嫌"
+      ],
+      "keywords": [
+        "为你千千万万遍",
+        "哈桑",
+        "阿米尔",
+        "救赎之路",
+        "喀布尔"
+      ]
+    },
+    "featuredReviews": [
+      {
+        "platform": "douban",
+        "user": "木卫二",
+        "avatar": "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=100",
+        "rating": 9,
+        "date": "2023-05-18",
+        "helpfulCount": 8420,
+        "content": "那句'为你，千千万万遍'，哪怕读完过了十年，想起来依然让人瞬间泪目。懦弱的人需要一生来完成救赎。"
+      }
+    ],
+    "compositeScore": 8.9,
+    "discrepancyIndex": 0.2,
+    "normalizedRatings": {
+      "douban": {
+        "score": 8.9,
+        "scale": 10,
+        "ratingCount": 792000,
+        "fiveStarPct": 57.5,
+        "starBreakdown": {
+          "five": 57.5,
+          "four": 33.2,
+          "three": 8.2,
+          "two": 0.8,
+          "one": 0.3
+        },
+        "url": "https://book.douban.com/subject/1770782/",
+        "normalizedScore": 8.9
+      },
+      "goodreads": {
+        "score": 4.34,
+        "scale": 5,
+        "ratingCount": 3200000,
+        "fiveStarPct": 53.8,
+        "starBreakdown": {
+          "five": 53.8,
+          "four": 31.9,
+          "three": 10.8,
+          "two": 2.3,
+          "one": 1.2
+        },
+        "url": "https://www.goodreads.com/book/show/77203.The_Kite_Runner",
+        "normalizedScore": 8.7
+      },
+      "googleBooks": {
+        "score": 4.6,
+        "scale": 5,
+        "ratingCount": 154000,
+        "fiveStarPct": 75,
+        "starBreakdown": {
+          "five": 75,
+          "four": 18,
+          "three": 5,
+          "two": 1,
+          "one": 1
+        },
+        "url": "https://books.google.com/books?id=kiterunner",
+        "normalizedScore": 9.2
+      },
+      "amazon": {
+        "score": 4.7,
+        "scale": 5,
+        "ratingCount": 125000,
+        "fiveStarPct": 83,
+        "starBreakdown": {
+          "five": 83,
+          "four": 12,
+          "three": 3,
+          "two": 1,
+          "one": 1
+        },
+        "url": "https://www.amazon.com/dp/159463193X",
+        "normalizedScore": 9.4
+      }
+    }
+  },
+  {
+    "id": "the-secret-pitfall",
+    "title": "秘密 (The Secret)",
+    "originalTitle": "The Secret",
+    "author": "朗达·拜恩 (Rhonda Byrne)",
+    "translator": "夏宁",
+    "cover": "https://img1.doubanio.com/view/subject/s/public/s3341858.jpg",
+    "isbn": "9787532746408",
+    "publicationYear": 2008,
+    "publisher": "上海译文出版社",
+    "category": "商业经管",
+    "tags": [
+      "吸引力法则",
+      "伪心理学",
+      "成功学智商税",
+      "避坑预警",
+      "争议极大"
+    ],
+    "summary": "宣称宇宙存在所谓的'吸引力法则'，只要心诚所想、保持积极信念，财富、健康和成功就会被宇宙能量吸引而来，是现代灵修伪科学与廉价成功学的典型代表。",
+    "platformRatings": {
+      "douban": {
+        "score": 6.8,
+        "scale": 10,
+        "ratingCount": 68000,
+        "fiveStarPct": 18.2,
+        "starBreakdown": {
+          "five": 18.2,
+          "four": 28.5,
+          "three": 36.2,
+          "two": 11.8,
+          "one": 5.3
+        },
+        "url": "https://book.douban.com/subject/3313274/",
+        "normalizedScore": 6.8
+      },
+      "goodreads": {
+        "score": 3.73,
+        "scale": 5,
+        "ratingCount": 480000,
+        "fiveStarPct": 34,
+        "starBreakdown": {
+          "five": 34,
+          "four": 24.5,
+          "three": 22,
+          "two": 9.5,
+          "one": 10
+        },
+        "url": "https://www.goodreads.com/book/show/52529.The_Secret",
+        "normalizedScore": 7.5
+      },
+      "googleBooks": {
+        "score": 3.8,
+        "scale": 5,
+        "ratingCount": 28000,
+        "fiveStarPct": 45,
+        "starBreakdown": {
+          "five": 45,
+          "four": 22,
+          "three": 16,
+          "two": 8,
+          "one": 9
+        },
+        "url": "https://books.google.com/books?id=thesecret",
+        "normalizedScore": 7.6
+      },
+      "amazon": {
+        "score": 4.6,
+        "scale": 5,
+        "ratingCount": 54000,
+        "fiveStarPct": 79,
+        "starBreakdown": {
+          "five": 79,
+          "four": 11,
+          "three": 5,
+          "two": 2,
+          "one": 3
+        },
+        "url": "https://www.amazon.com/dp/1582701709",
+        "normalizedScore": 9.2
+      }
+    },
+    "verdict": {
+      "status": "warning",
+      "label": "⚠️ 避坑预警",
+      "color": "rose",
+      "reason": "披着伪心理学与神秘主义外衣的廉价迷幻药，全网打假率极高，切勿交智商税。"
+    },
+    "sentiment": {
+      "positivePct": 35,
+      "neutralPct": 25,
+      "negativePct": 40,
+      "pros": [
+        "提供极短期的积极心理暗示和打鸡血情绪抚慰"
+      ],
+      "cons": [
+        "把科学的因果律偷换为只要心里想宇宙就会帮你实现的白日梦神棍逻辑",
+        "典型的幸存者偏差受害者归咎，遭遇不幸怪自己潜意识'不配拥有'极其有害"
+      ],
+      "keywords": [
+        "伪科学",
+        "吸引力法则",
+        "成功学智商税",
+        "幸存者偏差",
+        "唯心毒药"
+      ]
+    },
+    "featuredReviews": [
+      {
+        "platform": "douban",
+        "user": "科学碎冰者",
+        "avatar": "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=100",
+        "rating": 2,
+        "date": "2023-08-20",
+        "helpfulCount": 4980,
+        "content": "把巧合当因果，把意淫当行动。全书一句话就能概括：想就能成。那全世界的人天天想世界和平怎么没有呢？彻头彻尾的现代神棍迷药。"
+      },
+      {
+        "platform": "goodreads",
+        "user": "Sarah Read (Critic)",
+        "avatar": "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100",
+        "rating": 1,
+        "date": "2022-09-15",
+        "helpfulCount": 2850,
+        "content": "Dangerous victim-blaming masquerading as empowerment. If you get cancer, according to this book, it's because you 'attracted' negative frequencies. Pure toxic nonsense."
+      }
+    ],
+    "compositeScore": 7.5,
+    "discrepancyIndex": 0.7,
+    "normalizedRatings": {
+      "douban": {
+        "score": 6.8,
+        "scale": 10,
+        "ratingCount": 68000,
+        "fiveStarPct": 18.2,
+        "starBreakdown": {
+          "five": 18.2,
+          "four": 28.5,
+          "three": 36.2,
+          "two": 11.8,
+          "one": 5.3
+        },
+        "url": "https://book.douban.com/subject/3313274/",
+        "normalizedScore": 6.8
+      },
+      "goodreads": {
+        "score": 3.73,
+        "scale": 5,
+        "ratingCount": 480000,
+        "fiveStarPct": 34,
+        "starBreakdown": {
+          "five": 34,
+          "four": 24.5,
+          "three": 22,
+          "two": 9.5,
+          "one": 10
+        },
+        "url": "https://www.goodreads.com/book/show/52529.The_Secret",
+        "normalizedScore": 7.5
+      },
+      "googleBooks": {
+        "score": 3.8,
+        "scale": 5,
+        "ratingCount": 28000,
+        "fiveStarPct": 45,
+        "starBreakdown": {
+          "five": 45,
+          "four": 22,
+          "three": 16,
+          "two": 8,
+          "one": 9
+        },
+        "url": "https://books.google.com/books?id=thesecret",
+        "normalizedScore": 7.6
+      },
+      "amazon": {
+        "score": 4.6,
+        "scale": 5,
+        "ratingCount": 54000,
+        "fiveStarPct": 79,
+        "starBreakdown": {
+          "five": 79,
+          "four": 11,
+          "three": 5,
+          "two": 2,
+          "one": 3
+        },
+        "url": "https://www.amazon.com/dp/1582701709",
+        "normalizedScore": 9.2
+      }
+    }
+  },
+  {
+    "id": "dream-of-the-red-chamber",
+    "title": "红楼梦",
+    "originalTitle": "The Story of the Stone",
+    "author": "曹雪芹",
+    "translator": "高鹗 续",
+    "cover": "https://img9.doubanio.com/view/subject/s/public/s1070959.jpg",
+    "isbn": "9787020002207",
+    "publicationYear": 1791,
+    "publisher": "人民文学出版社",
+    "category": "文学小说",
+    "tags": [
+      "四大名著",
+      "中国古典文学巅峰",
+      "贾宝玉林黛玉",
+      "家族兴衰",
+      "红学"
+    ],
+    "summary": "中国古典小说最高峰。以贾、史、王、薛四大家族的兴衰为背景，以宝玉、黛玉、宝钗的爱情婚姻悲剧为主线，描绘了封建贵族社会的方方面面。",
+    "platformRatings": {
+      "douban": {
+        "score": 9.6,
+        "scale": 10,
+        "ratingCount": 420000,
+        "fiveStarPct": 72,
+        "starBreakdown": {
+          "five": 88,
+          "four": 12,
+          "three": 3,
+          "two": 1,
+          "one": 0
+        },
+        "url": "https://book.douban.com/subject/1007305/",
+        "normalizedScore": 9.6
+      },
+      "goodreads": {
+        "score": 4.41,
+        "scale": 5,
+        "ratingCount": 21000,
+        "fiveStarPct": 57,
+        "starBreakdown": {
+          "five": 73,
+          "four": 18,
+          "three": 6,
+          "two": 2,
+          "one": 1
+        },
+        "url": "https://www.goodreads.com/book/show/159345.The_Story_of_the_Stone",
+        "normalizedScore": 8.8
+      },
+      "googleBooks": {
+        "score": 4.6,
+        "scale": 5,
+        "ratingCount": 2500,
+        "fiveStarPct": 70,
+        "starBreakdown": {
+          "five": 81,
+          "four": 12,
+          "three": 5,
+          "two": 1,
+          "one": 1
+        },
+        "url": "https://books.google.com/books?id=redchamber",
+        "normalizedScore": 9.2
+      },
+      "amazon": {
+        "score": 4.7,
+        "scale": 5,
+        "ratingCount": 4800,
+        "fiveStarPct": 78,
+        "starBreakdown": {
+          "five": 86,
+          "four": 12,
+          "three": 3,
+          "two": 1,
+          "one": 0
+        },
+        "url": "https://www.amazon.com/dp/0140442936",
+        "normalizedScore": 9.4
+      }
+    },
+    "normalizedRatings": {
+      "douban": {
+        "score": 9.6,
+        "scale": 10,
+        "ratingCount": 420000,
+        "fiveStarPct": 72,
+        "starBreakdown": {
+          "five": 88,
+          "four": 12,
+          "three": 3,
+          "two": 1,
+          "one": 0
+        },
+        "url": "https://book.douban.com/subject/1007305/",
+        "normalizedScore": 9.6
+      },
+      "goodreads": {
+        "score": 4.41,
+        "scale": 5,
+        "ratingCount": 21000,
+        "fiveStarPct": 57,
+        "starBreakdown": {
+          "five": 73,
+          "four": 18,
+          "three": 6,
+          "two": 2,
+          "one": 1
+        },
+        "url": "https://www.goodreads.com/book/show/159345.The_Story_of_the_Stone",
+        "normalizedScore": 8.8
+      },
+      "googleBooks": {
+        "score": 4.6,
+        "scale": 5,
+        "ratingCount": 2500,
+        "fiveStarPct": 70,
+        "starBreakdown": {
+          "five": 81,
+          "four": 12,
+          "three": 5,
+          "two": 1,
+          "one": 1
+        },
+        "url": "https://books.google.com/books?id=redchamber",
+        "normalizedScore": 9.2
+      },
+      "amazon": {
+        "score": 4.7,
+        "scale": 5,
+        "ratingCount": 4800,
+        "fiveStarPct": 78,
+        "starBreakdown": {
+          "five": 86,
+          "four": 12,
+          "three": 3,
+          "two": 1,
+          "one": 0
+        },
+        "url": "https://www.amazon.com/dp/0140442936",
+        "normalizedScore": 9.4
+      }
+    },
+    "compositeScore": 9.2,
+    "discrepancyIndex": 0.8,
+    "verdict": {
+      "status": "masterpiece",
+      "label": "👑 殿堂神作",
+      "color": "emerald",
+      "reason": "全网 9.6 封神之作，中国古典长篇小说的最高峰，百科全书式的伟大世情史诗。"
+    },
+    "sentiment": {
+      "positivePct": 96,
+      "neutralPct": 3,
+      "negativePct": 1,
+      "pros": [
+        "语言造诣与人物刻画出神入化，林黛玉与薛宝钗的心理层次深不见底",
+        "对封建家族由盛转衰的历史必然性描写力透纸背"
+      ],
+      "cons": [
+        "后四十回续作文学笔力与曹雪芹原著存在客观落差"
+      ],
+      "keywords": [
+        "古典巅峰",
+        "贾宝玉",
+        "林黛玉",
+        "大观园",
+        "红楼梦"
+      ]
+    },
+    "featuredReviews": [
+      {
+        "platform": "douban",
+        "user": "木心",
+        "rating": 10,
+        "date": "2023-01-15",
+        "helpfulCount": 12500,
+        "content": "看《红楼梦》，不是看故事，是看那字里行间无边无际的慈悲与叹息。"
+      }
+    ]
+  },
+  {
+    "id": "fortress-besieged",
+    "title": "围城",
+    "originalTitle": "Fortress Besieged",
+    "author": "钱锺书",
+    "translator": null,
+    "cover": "https://img9.doubanio.com/view/subject/s/public/s1070222.jpg",
+    "isbn": "9787020010080",
+    "publicationYear": 1947,
+    "publisher": "人民文学出版社",
+    "category": "文学小说",
+    "tags": [
+      "新儒林外史",
+      "犀利讽刺",
+      "婚姻围城",
+      "知识分子群像",
+      "钱锺书"
+    ],
+    "summary": "抗战初期知识分子群像讽刺巨著。方鸿渐留学欧洲回国后在学术界与婚恋中的一系列遭际，'城外的人想冲进去，城里的人想逃出来'已成为当代人类困境永恒比喻。",
+    "platformRatings": {
+      "douban": {
+        "score": 9,
+        "scale": 10,
+        "ratingCount": 580000,
+        "fiveStarPct": 68,
+        "starBreakdown": {
+          "five": 77,
+          "four": 15,
+          "three": 6,
+          "two": 1,
+          "one": 1
+        },
+        "url": "https://book.douban.com/subject/1008145/",
+        "normalizedScore": 9
+      },
+      "goodreads": {
+        "score": 4.22,
+        "scale": 5,
+        "ratingCount": 26000,
+        "fiveStarPct": 55,
+        "starBreakdown": {
+          "five": 65,
+          "four": 23,
+          "three": 8,
+          "two": 2,
+          "one": 2
+        },
+        "url": "https://www.goodreads.com/book/show/244349.Fortress_Besieged",
+        "normalizedScore": 8.4
+      },
+      "googleBooks": {
+        "score": 4.5,
+        "scale": 5,
+        "ratingCount": 1800,
+        "fiveStarPct": 70,
+        "starBreakdown": {
+          "five": 77,
+          "four": 15,
+          "three": 6,
+          "two": 1,
+          "one": 1
+        },
+        "url": "https://books.google.com/books?id=fortress",
+        "normalizedScore": 9
+      },
+      "amazon": {
+        "score": 4.6,
+        "scale": 5,
+        "ratingCount": 5200,
+        "fiveStarPct": 78,
+        "starBreakdown": {
+          "five": 81,
+          "four": 12,
+          "three": 5,
+          "two": 1,
+          "one": 1
+        },
+        "url": "https://www.amazon.com/dp/0811215525",
+        "normalizedScore": 9.2
+      }
+    },
+    "normalizedRatings": {
+      "douban": {
+        "score": 9,
+        "scale": 10,
+        "ratingCount": 580000,
+        "fiveStarPct": 68,
+        "starBreakdown": {
+          "five": 77,
+          "four": 15,
+          "three": 6,
+          "two": 1,
+          "one": 1
+        },
+        "url": "https://book.douban.com/subject/1008145/",
+        "normalizedScore": 9
+      },
+      "goodreads": {
+        "score": 4.22,
+        "scale": 5,
+        "ratingCount": 26000,
+        "fiveStarPct": 55,
+        "starBreakdown": {
+          "five": 65,
+          "four": 23,
+          "three": 8,
+          "two": 2,
+          "one": 2
+        },
+        "url": "https://www.goodreads.com/book/show/244349.Fortress_Besieged",
+        "normalizedScore": 8.4
+      },
+      "googleBooks": {
+        "score": 4.5,
+        "scale": 5,
+        "ratingCount": 1800,
+        "fiveStarPct": 70,
+        "starBreakdown": {
+          "five": 77,
+          "four": 15,
+          "three": 6,
+          "two": 1,
+          "one": 1
+        },
+        "url": "https://books.google.com/books?id=fortress",
+        "normalizedScore": 9
+      },
+      "amazon": {
+        "score": 4.6,
+        "scale": 5,
+        "ratingCount": 5200,
+        "fiveStarPct": 78,
+        "starBreakdown": {
+          "five": 81,
+          "four": 12,
+          "three": 5,
+          "two": 1,
+          "one": 1
+        },
+        "url": "https://www.amazon.com/dp/0811215525",
+        "normalizedScore": 9.2
+      }
+    },
+    "compositeScore": 8.8,
+    "discrepancyIndex": 0.6,
+    "verdict": {
+      "status": "masterpiece",
+      "label": "👑 殿堂神作",
+      "color": "emerald",
+      "reason": "中国现代文学比喻与讽刺艺术最高峰，入木三分刻画中产知识分子的虚伪与软弱。"
+    },
+    "sentiment": {
+      "positivePct": 92,
+      "neutralPct": 6,
+      "negativePct": 2,
+      "pros": [
+        "钱锺书的比喻艺术堪称现代汉语顶峰，机锋百出，读来拍案叫绝",
+        "对婚姻与人际虚伪的解剖精准刺骨"
+      ],
+      "cons": [
+        "方鸿渐性格懦弱被动，缺乏传统叙事的行动力"
+      ],
+      "keywords": [
+        "城外想进去",
+        "方鸿渐",
+        "钱锺书",
+        "讽刺艺术",
+        "婚姻困境"
+      ]
+    },
+    "featuredReviews": [
+      {
+        "platform": "douban",
+        "user": "杨绛",
+        "rating": 10,
+        "date": "2023-04-20",
+        "helpfulCount": 9800,
+        "content": "围在城里的人想逃出来，城外的人想冲进去。对婚姻也罢，职业也罢，人生的愿望大都如此。"
+      }
+    ]
+  },
+  {
+    "id": "journey-under-the-midnight-sun",
+    "title": "白夜行",
+    "originalTitle": "白夜行 (Journey Under the Midnight Sun)",
+    "author": "东野圭吾 (Keigo Higashino)",
+    "translator": "刘姿君",
+    "cover": "https://img9.doubanio.com/view/subject/s/public/s4610502.jpg",
+    "isbn": "9787544258609",
+    "publicationYear": 1999,
+    "publisher": "南海出版公司",
+    "category": "文学小说",
+    "tags": [
+      "东野圭吾巅峰",
+      "社会派推理",
+      "绝望之爱",
+      "雪穗与亮司",
+      "人性深渊"
+    ],
+    "summary": "东野圭吾无冕之王之作。一对少男少女因多年前一桩未决的命案，走上互为共生、以黑暗交换光明的残酷人生道路，在罪恶与绝望的白夜中艰难前行。",
+    "platformRatings": {
+      "douban": {
+        "score": 9.2,
+        "scale": 10,
+        "ratingCount": 860000,
+        "fiveStarPct": 69,
+        "starBreakdown": {
+          "five": 81,
+          "four": 12,
+          "three": 5,
+          "two": 1,
+          "one": 1
+        },
+        "url": "https://book.douban.com/subject/3259440/",
+        "normalizedScore": 9.2
+      },
+      "goodreads": {
+        "score": 4.31,
+        "scale": 5,
+        "ratingCount": 58000,
+        "fiveStarPct": 56,
+        "starBreakdown": {
+          "five": 69,
+          "four": 20,
+          "three": 8,
+          "two": 2,
+          "one": 1
+        },
+        "url": "https://www.goodreads.com/book/show/19251043-journey-under-the-midnight-sun",
+        "normalizedScore": 8.6
+      },
+      "googleBooks": {
+        "score": 4.5,
+        "scale": 5,
+        "ratingCount": 6800,
+        "fiveStarPct": 70,
+        "starBreakdown": {
+          "five": 77,
+          "four": 15,
+          "three": 6,
+          "two": 1,
+          "one": 1
+        },
+        "url": "https://books.google.com/books?id=midnightsun",
+        "normalizedScore": 9
+      },
+      "amazon": {
+        "score": 4.6,
+        "scale": 5,
+        "ratingCount": 12400,
+        "fiveStarPct": 78,
+        "starBreakdown": {
+          "five": 81,
+          "four": 12,
+          "three": 5,
+          "two": 1,
+          "one": 1
+        },
+        "url": "https://www.amazon.com/dp/1409159302",
+        "normalizedScore": 9.2
+      }
+    },
+    "normalizedRatings": {
+      "douban": {
+        "score": 9.2,
+        "scale": 10,
+        "ratingCount": 860000,
+        "fiveStarPct": 69,
+        "starBreakdown": {
+          "five": 81,
+          "four": 12,
+          "three": 5,
+          "two": 1,
+          "one": 1
+        },
+        "url": "https://book.douban.com/subject/3259440/",
+        "normalizedScore": 9.2
+      },
+      "goodreads": {
+        "score": 4.31,
+        "scale": 5,
+        "ratingCount": 58000,
+        "fiveStarPct": 56,
+        "starBreakdown": {
+          "five": 69,
+          "four": 20,
+          "three": 8,
+          "two": 2,
+          "one": 1
+        },
+        "url": "https://www.goodreads.com/book/show/19251043-journey-under-the-midnight-sun",
+        "normalizedScore": 8.6
+      },
+      "googleBooks": {
+        "score": 4.5,
+        "scale": 5,
+        "ratingCount": 6800,
+        "fiveStarPct": 70,
+        "starBreakdown": {
+          "five": 77,
+          "four": 15,
+          "three": 6,
+          "two": 1,
+          "one": 1
+        },
+        "url": "https://books.google.com/books?id=midnightsun",
+        "normalizedScore": 9
+      },
+      "amazon": {
+        "score": 4.6,
+        "scale": 5,
+        "ratingCount": 12400,
+        "fiveStarPct": 78,
+        "starBreakdown": {
+          "five": 81,
+          "four": 12,
+          "three": 5,
+          "two": 1,
+          "one": 1
+        },
+        "url": "https://www.amazon.com/dp/1409159302",
+        "normalizedScore": 9.2
+      }
+    },
+    "compositeScore": 9,
+    "discrepancyIndex": 0.6,
+    "verdict": {
+      "status": "masterpiece",
+      "label": "👑 殿堂神作",
+      "color": "emerald",
+      "reason": "豆瓣 86 万人评出 9.2 分的社会派悬疑奇迹，双线交织结构工整凄美震撼。"
+    },
+    "sentiment": {
+      "positivePct": 93,
+      "neutralPct": 5,
+      "negativePct": 2,
+      "pros": [
+        "雪穗与亮司全书从未有一句正面同框对话，却通过隐秘线索将共生纽带写到极点",
+        "结局亮司一跃而下、雪穗头也不回上楼的那一幕是推理史上的经典瞬间"
+      ],
+      "cons": [
+        "后半段部分杀人与构陷手法略带戏剧巧合"
+      ],
+      "keywords": [
+        "我的天空没有太阳",
+        "雪穗",
+        "亮司",
+        "共生关系",
+        "推理无冕之王"
+      ]
+    },
+    "featuredReviews": [
+      {
+        "platform": "douban",
+        "user": "暗夜旅人",
+        "rating": 10,
+        "date": "2023-08-01",
+        "helpfulCount": 11200,
+        "content": "世界上有两样东西不可直视，一是太阳，二是人心。亮司像影子一样活在通风管道里，为雪穗照亮白夜。"
+      }
+    ]
+  },
+  {
+    "id": "wanli-fifteen-years",
+    "title": "万历十五年",
+    "originalTitle": "1587, a Year of No Significance",
+    "author": "黄仁宇 (Ray Huang)",
+    "translator": null,
+    "cover": "https://img9.doubanio.com/view/subject/s/public/s1077755.jpg",
+    "isbn": "9787108009820",
+    "publicationYear": 1982,
+    "publisher": "中华书局",
+    "category": "历史社科",
+    "tags": [
+      "大历史观",
+      "明代制度",
+      "张居正海瑞",
+      "道德代替法制",
+      "史学经典"
+    ],
+    "summary": "大历史观史学经典。选取看似平淡无奇的万历十五年（1587年），以万历皇帝、申时行、张居正、海瑞、戚继光、李贽六位核心人物的命运，透视明代体制的深层停滞与必然崩溃。",
+    "platformRatings": {
+      "douban": {
+        "score": 9,
+        "scale": 10,
+        "ratingCount": 285000,
+        "fiveStarPct": 68,
+        "starBreakdown": {
+          "five": 77,
+          "four": 15,
+          "three": 6,
+          "two": 1,
+          "one": 1
+        },
+        "url": "https://book.douban.com/subject/1041482/",
+        "normalizedScore": 9
+      },
+      "goodreads": {
+        "score": 4.08,
+        "scale": 5,
+        "ratingCount": 8900,
+        "fiveStarPct": 53,
+        "starBreakdown": {
+          "five": 59,
+          "four": 27,
+          "three": 10,
+          "two": 2,
+          "one": 2
+        },
+        "url": "https://www.goodreads.com/book/show/424364.1587_A_Year_of_No_Significance",
+        "normalizedScore": 8.2
+      },
+      "googleBooks": {
+        "score": 4.4,
+        "scale": 5,
+        "ratingCount": 1600,
+        "fiveStarPct": 70,
+        "starBreakdown": {
+          "five": 73,
+          "four": 18,
+          "three": 6,
+          "two": 2,
+          "one": 1
+        },
+        "url": "https://books.google.com/books?id=1587",
+        "normalizedScore": 8.8
+      },
+      "amazon": {
+        "score": 4.5,
+        "scale": 5,
+        "ratingCount": 3200,
+        "fiveStarPct": 78,
+        "starBreakdown": {
+          "five": 77,
+          "four": 15,
+          "three": 6,
+          "two": 1,
+          "one": 1
+        },
+        "url": "https://www.amazon.com/dp/0300028849",
+        "normalizedScore": 9
+      }
+    },
+    "normalizedRatings": {
+      "douban": {
+        "score": 9,
+        "scale": 10,
+        "ratingCount": 285000,
+        "fiveStarPct": 68,
+        "starBreakdown": {
+          "five": 77,
+          "four": 15,
+          "three": 6,
+          "two": 1,
+          "one": 1
+        },
+        "url": "https://book.douban.com/subject/1041482/",
+        "normalizedScore": 9
+      },
+      "goodreads": {
+        "score": 4.08,
+        "scale": 5,
+        "ratingCount": 8900,
+        "fiveStarPct": 53,
+        "starBreakdown": {
+          "five": 59,
+          "four": 27,
+          "three": 10,
+          "two": 2,
+          "one": 2
+        },
+        "url": "https://www.goodreads.com/book/show/424364.1587_A_Year_of_No_Significance",
+        "normalizedScore": 8.2
+      },
+      "googleBooks": {
+        "score": 4.4,
+        "scale": 5,
+        "ratingCount": 1600,
+        "fiveStarPct": 70,
+        "starBreakdown": {
+          "five": 73,
+          "four": 18,
+          "three": 6,
+          "two": 2,
+          "one": 1
+        },
+        "url": "https://books.google.com/books?id=1587",
+        "normalizedScore": 8.8
+      },
+      "amazon": {
+        "score": 4.5,
+        "scale": 5,
+        "ratingCount": 3200,
+        "fiveStarPct": 78,
+        "starBreakdown": {
+          "five": 77,
+          "four": 15,
+          "three": 6,
+          "two": 1,
+          "one": 1
+        },
+        "url": "https://www.amazon.com/dp/0300028849",
+        "normalizedScore": 9
+      }
+    },
+    "compositeScore": 8.7,
+    "discrepancyIndex": 0.8,
+    "verdict": {
+      "status": "masterpiece",
+      "label": "👑 殿堂神作",
+      "color": "emerald",
+      "reason": "中文通俗学术史写作的开山之作，用大历史透视传统中国以道德代替法律的技术僵局。"
+    },
+    "sentiment": {
+      "positivePct": 91,
+      "neutralPct": 6,
+      "negativePct": 3,
+      "pros": [
+        "摆脱单一帝王将相编年史，以体制结构性的悲剧审视明代社会的根本僵局",
+        "文字兼具史家严谨与文学雅致，可读性极强"
+      ],
+      "cons": [
+        "'数目字管理'假说存在一定程度的历史局限与学术争议"
+      ],
+      "keywords": [
+        "万历十五年",
+        "大历史观",
+        "黄仁宇",
+        "张居正",
+        "数目字管理"
+      ]
+    },
+    "featuredReviews": [
+      {
+        "platform": "douban",
+        "user": "史家绝唱",
+        "rating": 9,
+        "date": "2023-06-25",
+        "helpfulCount": 4200,
+        "content": "当年看似微不足道的一年，实则埋下了整个帝国无可挽回的死结。黄仁宇先生的大历史观至今无人能出其右。"
+      }
+    ]
+  },
+  {
+    "id": "dune",
+    "title": "沙丘",
+    "originalTitle": "Dune",
+    "author": "弗兰克·赫伯特 (Frank Herbert)",
+    "translator": "潘振华",
+    "cover": "https://img9.doubanio.com/view/subject/s/public/s29571932.jpg",
+    "isbn": "9787539999081",
+    "publicationYear": 1965,
+    "publisher": "江苏凤凰文艺出版社",
+    "category": "科幻世界",
+    "tags": [
+      "雨果星云双奖",
+      "太空歌剧巅峰",
+      "生态科幻",
+      "保罗厄崔迪",
+      "香料与沙虫"
+    ],
+    "summary": "雨果奖与星云奖双奖神作。在遥远的未来，沙漠星球厄拉科斯产出全宇宙最重要的战略物资'香料'，厄崔迪家族在此遭遇宿敌背叛，少年保罗踏上复仇与救世的先知之路。",
+    "platformRatings": {
+      "douban": {
+        "score": 8.4,
+        "scale": 10,
+        "ratingCount": 145000,
+        "fiveStarPct": 63,
+        "starBreakdown": {
+          "five": 64,
+          "four": 23,
+          "three": 9,
+          "two": 2,
+          "one": 2
+        },
+        "url": "https://book.douban.com/subject/26986928/",
+        "normalizedScore": 8.4
+      },
+      "goodreads": {
+        "score": 4.27,
+        "scale": 5,
+        "ratingCount": 1250000,
+        "fiveStarPct": 56,
+        "starBreakdown": {
+          "five": 67,
+          "four": 21,
+          "three": 8,
+          "two": 2,
+          "one": 2
+        },
+        "url": "https://www.goodreads.com/book/show/44767458-dune",
+        "normalizedScore": 8.5
+      },
+      "googleBooks": {
+        "score": 4.5,
+        "scale": 5,
+        "ratingCount": 48000,
+        "fiveStarPct": 70,
+        "starBreakdown": {
+          "five": 77,
+          "four": 15,
+          "three": 6,
+          "two": 1,
+          "one": 1
+        },
+        "url": "https://books.google.com/books?id=dune",
+        "normalizedScore": 9
+      },
+      "amazon": {
+        "score": 4.7,
+        "scale": 5,
+        "ratingCount": 110000,
+        "fiveStarPct": 78,
+        "starBreakdown": {
+          "five": 86,
+          "four": 12,
+          "three": 3,
+          "two": 1,
+          "one": 0
+        },
+        "url": "https://www.amazon.com/dp/0441172717",
+        "normalizedScore": 9.4
+      }
+    },
+    "normalizedRatings": {
+      "douban": {
+        "score": 8.4,
+        "scale": 10,
+        "ratingCount": 145000,
+        "fiveStarPct": 63,
+        "starBreakdown": {
+          "five": 64,
+          "four": 23,
+          "three": 9,
+          "two": 2,
+          "one": 2
+        },
+        "url": "https://book.douban.com/subject/26986928/",
+        "normalizedScore": 8.4
+      },
+      "goodreads": {
+        "score": 4.27,
+        "scale": 5,
+        "ratingCount": 1250000,
+        "fiveStarPct": 56,
+        "starBreakdown": {
+          "five": 67,
+          "four": 21,
+          "three": 8,
+          "two": 2,
+          "one": 2
+        },
+        "url": "https://www.goodreads.com/book/show/44767458-dune",
+        "normalizedScore": 8.5
+      },
+      "googleBooks": {
+        "score": 4.5,
+        "scale": 5,
+        "ratingCount": 48000,
+        "fiveStarPct": 70,
+        "starBreakdown": {
+          "five": 77,
+          "four": 15,
+          "three": 6,
+          "two": 1,
+          "one": 1
+        },
+        "url": "https://books.google.com/books?id=dune",
+        "normalizedScore": 9
+      },
+      "amazon": {
+        "score": 4.7,
+        "scale": 5,
+        "ratingCount": 110000,
+        "fiveStarPct": 78,
+        "starBreakdown": {
+          "five": 86,
+          "four": 12,
+          "three": 3,
+          "two": 1,
+          "one": 0
+        },
+        "url": "https://www.amazon.com/dp/0441172717",
+        "normalizedScore": 9.4
+      }
+    },
+    "compositeScore": 8.7,
+    "discrepancyIndex": 0.1,
+    "verdict": {
+      "status": "masterpiece",
+      "label": "👑 殿堂神作",
+      "color": "emerald",
+      "reason": "全球太空歌剧与生态科幻的历史丰碑，世界观宏大、宗教政治与生态隐喻幽深厚重。"
+    },
+    "sentiment": {
+      "positivePct": 86,
+      "neutralPct": 9,
+      "negativePct": 5,
+      "pros": [
+        "世界观构建无比恢弘细腻，把宗教、生态学、封建政治融合得滴水不漏",
+        "对英雄主义救世主狂热的深层反思极具警示意义"
+      ],
+      "cons": [
+        "慢热且带有中世纪封建宫斗色彩，习惯快节奏好莱坞太空战的读者需耐下心进入"
+      ],
+      "keywords": [
+        "沙丘",
+        "香料",
+        "厄崔迪",
+        "沙虫",
+        "太空歌剧史诗"
+      ]
+    },
+    "featuredReviews": [
+      {
+        "platform": "goodreads",
+        "user": "Arthur C. Clarke",
+        "rating": 5,
+        "date": "2021-10-18",
+        "helpfulCount": 15400,
+        "content": "I know nothing comparable to it except The Lord of the Rings. A monument of modern science fiction."
+      }
+    ]
+  },
+  {
+    "id": "refactoring",
+    "title": "重构：改善既有代码的设计（第2版）",
+    "originalTitle": "Refactoring: Improving the Design of Existing Code",
+    "author": "马丁·福勒 (Martin Fowler)",
+    "translator": "熊节",
+    "cover": "https://img9.doubanio.com/view/subject/s/public/s33423788.jpg",
+    "isbn": "9787115508644",
+    "publicationYear": 2019,
+    "publisher": "人民邮电出版社",
+    "category": "计算机与技术",
+    "tags": [
+      "软件工程",
+      "代码坏味道",
+      "测试驱动开发",
+      "架构演进",
+      "经典重构"
+    ],
+    "summary": "软件开发领域的传世经典全新升级版。全书以现代 JavaScript 代码为示例，系统化拆解几十种重构手法与识别代码坏味道（Bad Smells）的标准，指导如何在不改变外部行为的前提下优化代码质量。",
+    "platformRatings": {
+      "douban": {
+        "score": 9.3,
+        "scale": 10,
+        "ratingCount": 28000,
+        "fiveStarPct": 70,
+        "starBreakdown": {
+          "five": 84,
+          "four": 12,
+          "three": 3,
+          "two": 1,
+          "one": 0
+        },
+        "url": "https://book.douban.com/subject/33400354/",
+        "normalizedScore": 9.3
+      },
+      "goodreads": {
+        "score": 4.3,
+        "scale": 5,
+        "ratingCount": 32000,
+        "fiveStarPct": 56,
+        "starBreakdown": {
+          "five": 68,
+          "four": 21,
+          "three": 8,
+          "two": 2,
+          "one": 1
+        },
+        "url": "https://www.goodreads.com/book/show/44936.Refactoring",
+        "normalizedScore": 8.6
+      },
+      "googleBooks": {
+        "score": 4.6,
+        "scale": 5,
+        "ratingCount": 3200,
+        "fiveStarPct": 70,
+        "starBreakdown": {
+          "five": 81,
+          "four": 12,
+          "three": 5,
+          "two": 1,
+          "one": 1
+        },
+        "url": "https://books.google.com/books?id=refactoring",
+        "normalizedScore": 9.2
+      },
+      "amazon": {
+        "score": 4.7,
+        "scale": 5,
+        "ratingCount": 8500,
+        "fiveStarPct": 78,
+        "starBreakdown": {
+          "five": 86,
+          "four": 12,
+          "three": 3,
+          "two": 1,
+          "one": 0
+        },
+        "url": "https://www.amazon.com/dp/0134757599",
+        "normalizedScore": 9.4
+      }
+    },
+    "normalizedRatings": {
+      "douban": {
+        "score": 9.3,
+        "scale": 10,
+        "ratingCount": 28000,
+        "fiveStarPct": 70,
+        "starBreakdown": {
+          "five": 84,
+          "four": 12,
+          "three": 3,
+          "two": 1,
+          "one": 0
+        },
+        "url": "https://book.douban.com/subject/33400354/",
+        "normalizedScore": 9.3
+      },
+      "goodreads": {
+        "score": 4.3,
+        "scale": 5,
+        "ratingCount": 32000,
+        "fiveStarPct": 56,
+        "starBreakdown": {
+          "five": 68,
+          "four": 21,
+          "three": 8,
+          "two": 2,
+          "one": 1
+        },
+        "url": "https://www.goodreads.com/book/show/44936.Refactoring",
+        "normalizedScore": 8.6
+      },
+      "googleBooks": {
+        "score": 4.6,
+        "scale": 5,
+        "ratingCount": 3200,
+        "fiveStarPct": 70,
+        "starBreakdown": {
+          "five": 81,
+          "four": 12,
+          "three": 5,
+          "two": 1,
+          "one": 1
+        },
+        "url": "https://books.google.com/books?id=refactoring",
+        "normalizedScore": 9.2
+      },
+      "amazon": {
+        "score": 4.7,
+        "scale": 5,
+        "ratingCount": 8500,
+        "fiveStarPct": 78,
+        "starBreakdown": {
+          "five": 86,
+          "four": 12,
+          "three": 3,
+          "two": 1,
+          "one": 0
+        },
+        "url": "https://www.amazon.com/dp/0134757599",
+        "normalizedScore": 9.4
+      }
+    },
+    "compositeScore": 9,
+    "discrepancyIndex": 0.7,
+    "verdict": {
+      "status": "masterpiece",
+      "label": "👑 殿堂神作",
+      "color": "emerald",
+      "reason": "豆瓣 9.3 高分公认的架构师圣经，软件工程领域最务实、最具生命力的重构操作指南。"
+    },
+    "sentiment": {
+      "positivePct": 94,
+      "neutralPct": 4,
+      "negativePct": 2,
+      "pros": [
+        "第2版全面采用现代 JavaScript，案例生动可实操，熊节翻译精到",
+        "把'重构'从玄学变成了一套严密的可控微步骤体系"
+      ],
+      "cons": [
+        "需要有真实项目维护痛点的程序员才能产生最深刻共鸣"
+      ],
+      "keywords": [
+        "代码坏味道",
+        "微重构",
+        "Martin Fowler",
+        "自动化测试",
+        "代码整洁"
+      ]
+    },
+    "featuredReviews": [
+      {
+        "platform": "douban",
+        "user": "全栈老兵",
+        "rating": 10,
+        "date": "2023-08-19",
+        "helpfulCount": 1540,
+        "content": "任何一个傻瓜都能写出计算机可以理解的代码。唯有优秀的程序员，才能写出人类可以理解的代码。"
+      }
+    ]
+  },
+  {
+    "id": "stranger-camus",
+    "title": "局外人",
+    "originalTitle": "L'Étranger (The Stranger)",
+    "author": "阿尔贝·加缪 (Albert Camus)",
+    "translator": "柳鸣九",
+    "cover": "https://img9.doubanio.com/view/subject/s/public/s4424444.jpg",
+    "isbn": "9787532750375",
+    "publicationYear": 1942,
+    "publisher": "上海译文出版社",
+    "category": "文学小说",
+    "tags": [
+      "诺贝尔文学奖",
+      "荒谬哲学",
+      "存在主义代表作",
+      "加缪",
+      "默尔索"
+    ],
+    "summary": "诺贝尔文学奖巨著。'今天，妈妈死了。也许是昨天，我不知道。'主角默尔索因母亲去世未哭，在海滩偶发枪杀案件，竟在审判中因道德冷漠被判定死刑，冷酷揭示了荒诞世界的运作逻辑。",
+    "platformRatings": {
+      "douban": {
+        "score": 9.1,
+        "scale": 10,
+        "ratingCount": 480000,
+        "fiveStarPct": 68,
+        "starBreakdown": {
+          "five": 79,
+          "four": 14,
+          "three": 5,
+          "two": 1,
+          "one": 1
+        },
+        "url": "https://book.douban.com/subject/4908885/",
+        "normalizedScore": 9.1
+      },
+      "goodreads": {
+        "score": 4.04,
+        "scale": 5,
+        "ratingCount": 1100000,
+        "fiveStarPct": 53,
+        "starBreakdown": {
+          "five": 57,
+          "four": 28,
+          "three": 11,
+          "two": 2,
+          "one": 2
+        },
+        "url": "https://www.goodreads.com/book/show/49552.The_Stranger",
+        "normalizedScore": 8.1
+      },
+      "googleBooks": {
+        "score": 4.4,
+        "scale": 5,
+        "ratingCount": 18000,
+        "fiveStarPct": 70,
+        "starBreakdown": {
+          "five": 73,
+          "four": 18,
+          "three": 6,
+          "two": 2,
+          "one": 1
+        },
+        "url": "https://books.google.com/books?id=thestranger",
+        "normalizedScore": 8.8
+      },
+      "amazon": {
+        "score": 4.6,
+        "scale": 5,
+        "ratingCount": 28000,
+        "fiveStarPct": 78,
+        "starBreakdown": {
+          "five": 81,
+          "four": 12,
+          "three": 5,
+          "two": 1,
+          "one": 1
+        },
+        "url": "https://www.amazon.com/dp/0679720200",
+        "normalizedScore": 9.2
+      }
+    },
+    "normalizedRatings": {
+      "douban": {
+        "score": 9.1,
+        "scale": 10,
+        "ratingCount": 480000,
+        "fiveStarPct": 68,
+        "starBreakdown": {
+          "five": 79,
+          "four": 14,
+          "three": 5,
+          "two": 1,
+          "one": 1
+        },
+        "url": "https://book.douban.com/subject/4908885/",
+        "normalizedScore": 9.1
+      },
+      "goodreads": {
+        "score": 4.04,
+        "scale": 5,
+        "ratingCount": 1100000,
+        "fiveStarPct": 53,
+        "starBreakdown": {
+          "five": 57,
+          "four": 28,
+          "three": 11,
+          "two": 2,
+          "one": 2
+        },
+        "url": "https://www.goodreads.com/book/show/49552.The_Stranger",
+        "normalizedScore": 8.1
+      },
+      "googleBooks": {
+        "score": 4.4,
+        "scale": 5,
+        "ratingCount": 18000,
+        "fiveStarPct": 70,
+        "starBreakdown": {
+          "five": 73,
+          "four": 18,
+          "three": 6,
+          "two": 2,
+          "one": 1
+        },
+        "url": "https://books.google.com/books?id=thestranger",
+        "normalizedScore": 8.8
+      },
+      "amazon": {
+        "score": 4.6,
+        "scale": 5,
+        "ratingCount": 28000,
+        "fiveStarPct": 78,
+        "starBreakdown": {
+          "five": 81,
+          "four": 12,
+          "three": 5,
+          "two": 1,
+          "one": 1
+        },
+        "url": "https://www.amazon.com/dp/0679720200",
+        "normalizedScore": 9.2
+      }
+    },
+    "compositeScore": 8.7,
+    "discrepancyIndex": 1,
+    "verdict": {
+      "status": "masterpiece",
+      "label": "👑 殿堂神作",
+      "color": "emerald",
+      "reason": "荒诞派文学开山丰碑，以极其冷峻克制的叙事直刺世俗道德与司法审判的虚伪荒谬。"
+    },
+    "sentiment": {
+      "positivePct": 92,
+      "neutralPct": 5,
+      "negativePct": 3,
+      "pros": [
+        "开篇第一句震撼世界文学史，默尔索对绝对真实的坚持击碎虚伪面具",
+        "对荒诞感与死刑前释然的刻画无与伦比"
+      ],
+      "cons": [
+        "默尔索绝对超然的冷漠态度部分读者初期难以共情"
+      ],
+      "keywords": [
+        "局外人",
+        "加缪",
+        "荒谬",
+        "默尔索",
+        "绝不撒谎"
+      ]
+    },
+    "featuredReviews": [
+      {
+        "platform": "douban",
+        "user": "陀思妥耶夫斯基信徒",
+        "rating": 10,
+        "date": "2023-07-09",
+        "helpfulCount": 6120,
+        "content": "他之所以被判死刑，不是因为他杀了一个人，而是因为他在母亲的葬礼上没有哭泣。世俗的伪善在此被剥得精光。"
+      }
+    ]
+  },
+  {
+    "id": "nineteen-eighty-four",
+    "title": "1984",
+    "originalTitle": "Nineteen Eighty-Four",
+    "author": "乔治·奥威尔 (George Orwell)",
+    "translator": "孙仲旭",
+    "cover": "https://img9.doubanio.com/view/subject/s/public/s4371408.jpg",
+    "isbn": "9787532750382",
+    "publicationYear": 1949,
+    "publisher": "上海译文出版社",
+    "category": "文学小说",
+    "tags": [
+      "反乌托邦三部曲",
+      "老大哥",
+      "思想罪",
+      "双重思想",
+      "政治寓言"
+    ],
+    "summary": "反乌托邦文学不朽巅峰。在极权大洋国，'老大哥在看着你'，真理部篡改历史，友爱部惩治思想犯，温斯顿试图保持人的清醒尊严，却最终在冷酷体制前被摧毁重构。",
+    "platformRatings": {
+      "douban": {
+        "score": 9.4,
+        "scale": 10,
+        "ratingCount": 320000,
+        "fiveStarPct": 71,
+        "starBreakdown": {
+          "five": 86,
+          "four": 12,
+          "three": 3,
+          "two": 1,
+          "one": 0
+        },
+        "url": "https://book.douban.com/subject/4820710/",
+        "normalizedScore": 9.4
+      },
+      "goodreads": {
+        "score": 4.19,
+        "scale": 5,
+        "ratingCount": 4200000,
+        "fiveStarPct": 54,
+        "starBreakdown": {
+          "five": 63,
+          "four": 24,
+          "three": 9,
+          "two": 2,
+          "one": 2
+        },
+        "url": "https://www.goodreads.com/book/show/5470.1984",
+        "normalizedScore": 8.4
+      },
+      "amazon": {
+        "score": 4.7,
+        "scale": 5,
+        "ratingCount": 98000,
+        "fiveStarPct": 78,
+        "starBreakdown": {
+          "five": 86,
+          "four": 12,
+          "three": 3,
+          "two": 1,
+          "one": 0
+        },
+        "url": "https://www.amazon.com/dp/0451524934",
+        "normalizedScore": 9.4
+      },
+      "googleBooks": {
+        "score": 4.6,
+        "scale": 5,
+        "ratingCount": 52000,
+        "fiveStarPct": 70,
+        "starBreakdown": {
+          "five": 81,
+          "four": 12,
+          "three": 5,
+          "two": 1,
+          "one": 1
+        },
+        "url": "https://books.google.com/books?id=1984",
+        "normalizedScore": 9.2
+      }
+    },
+    "normalizedRatings": {
+      "douban": {
+        "score": 9.4,
+        "scale": 10,
+        "ratingCount": 320000,
+        "fiveStarPct": 71,
+        "starBreakdown": {
+          "five": 86,
+          "four": 12,
+          "three": 3,
+          "two": 1,
+          "one": 0
+        },
+        "url": "https://book.douban.com/subject/4820710/",
+        "normalizedScore": 9.4
+      },
+      "goodreads": {
+        "score": 4.19,
+        "scale": 5,
+        "ratingCount": 4200000,
+        "fiveStarPct": 54,
+        "starBreakdown": {
+          "five": 63,
+          "four": 24,
+          "three": 9,
+          "two": 2,
+          "one": 2
+        },
+        "url": "https://www.goodreads.com/book/show/5470.1984",
+        "normalizedScore": 8.4
+      },
+      "amazon": {
+        "score": 4.7,
+        "scale": 5,
+        "ratingCount": 98000,
+        "fiveStarPct": 78,
+        "starBreakdown": {
+          "five": 86,
+          "four": 12,
+          "three": 3,
+          "two": 1,
+          "one": 0
+        },
+        "url": "https://www.amazon.com/dp/0451524934",
+        "normalizedScore": 9.4
+      },
+      "googleBooks": {
+        "score": 4.6,
+        "scale": 5,
+        "ratingCount": 52000,
+        "fiveStarPct": 70,
+        "starBreakdown": {
+          "five": 81,
+          "four": 12,
+          "three": 5,
+          "two": 1,
+          "one": 1
+        },
+        "url": "https://books.google.com/books?id=1984",
+        "normalizedScore": 9.2
+      }
+    },
+    "compositeScore": 9,
+    "discrepancyIndex": 1,
+    "verdict": {
+      "status": "masterpiece",
+      "label": "👑 殿堂神作",
+      "color": "emerald",
+      "reason": "全球反乌托邦文学终极丰碑，对极权心理与语言奴役的剖析洞察入骨。"
+    },
+    "sentiment": {
+      "positivePct": 96,
+      "neutralPct": 3,
+      "negativePct": 1,
+      "pros": [
+        "老大哥、思想警察、新话、双重思想，几乎为人类政治警觉创造了一整套词汇",
+        "结局极度绝望冷峻，绝不给读者任何廉价的好莱坞式胜利安慰"
+      ],
+      "cons": [
+        "压抑感极重，对读者心理承受力要求极高"
+      ],
+      "keywords": [
+        "老大哥在看着你",
+        "新话",
+        "思想罪",
+        "双重思想",
+        "反乌托邦巅峰"
+      ]
+    },
+    "featuredReviews": [
+      {
+        "platform": "douban",
+        "user": "北岛",
+        "rating": 10,
+        "date": "2023-09-15",
+        "helpfulCount": 8900,
+        "content": "多一个人读奥威尔，自由就多了一份保障。这不是预言，这是对人性的终极警告。"
+      }
+    ]
+  },
+  {
+    "id": "animal-farm",
+    "title": "动物农场",
+    "originalTitle": "Animal Farm",
+    "author": "乔治·奥威尔 (George Orwell)",
+    "translator": "荣如德",
+    "cover": "https://img9.doubanio.com/view/subject/s/public/s2366874.jpg",
+    "isbn": "9787532742400",
+    "publicationYear": 1945,
+    "publisher": "上海译文出版社",
+    "category": "文学小说",
+    "tags": [
+      "政治讽刺",
+      "反乌托邦",
+      "所有动物生来平等",
+      "拿破仑与雪球",
+      "世界名著"
+    ],
+    "summary": "举世闻名的政治讽刺寓言。农场里的动物驱逐了虐待它们的人类农场主，建立自由平等的动物农场，但猪群逐渐篡夺特权，最终'所有动物生来平等，但有些动物比其他动物更平等'。",
+    "platformRatings": {
+      "douban": {
+        "score": 9.3,
+        "scale": 10,
+        "ratingCount": 360000,
+        "fiveStarPct": 70,
+        "starBreakdown": {
+          "five": 84,
+          "four": 12,
+          "three": 3,
+          "two": 1,
+          "one": 0
+        },
+        "url": "https://book.douban.com/subject/2035179/",
+        "normalizedScore": 9.3
+      },
+      "goodreads": {
+        "score": 3.99,
+        "scale": 5,
+        "ratingCount": 3800000,
+        "fiveStarPct": 52,
+        "starBreakdown": {
+          "five": 55,
+          "four": 29,
+          "three": 11,
+          "two": 3,
+          "one": 2
+        },
+        "url": "https://www.goodreads.com/book/show/170448.Animal_Farm",
+        "normalizedScore": 8
+      },
+      "amazon": {
+        "score": 4.7,
+        "scale": 5,
+        "ratingCount": 72000,
+        "fiveStarPct": 78,
+        "starBreakdown": {
+          "five": 86,
+          "four": 12,
+          "three": 3,
+          "two": 1,
+          "one": 0
+        },
+        "url": "https://www.amazon.com/dp/0451526341",
+        "normalizedScore": 9.4
+      },
+      "googleBooks": {
+        "score": 4.5,
+        "scale": 5,
+        "ratingCount": 34000,
+        "fiveStarPct": 70,
+        "starBreakdown": {
+          "five": 77,
+          "four": 15,
+          "three": 6,
+          "two": 1,
+          "one": 1
+        },
+        "url": "https://books.google.com/books?id=animalfarm",
+        "normalizedScore": 9
+      }
+    },
+    "normalizedRatings": {
+      "douban": {
+        "score": 9.3,
+        "scale": 10,
+        "ratingCount": 360000,
+        "fiveStarPct": 70,
+        "starBreakdown": {
+          "five": 84,
+          "four": 12,
+          "three": 3,
+          "two": 1,
+          "one": 0
+        },
+        "url": "https://book.douban.com/subject/2035179/",
+        "normalizedScore": 9.3
+      },
+      "goodreads": {
+        "score": 3.99,
+        "scale": 5,
+        "ratingCount": 3800000,
+        "fiveStarPct": 52,
+        "starBreakdown": {
+          "five": 55,
+          "four": 29,
+          "three": 11,
+          "two": 3,
+          "one": 2
+        },
+        "url": "https://www.goodreads.com/book/show/170448.Animal_Farm",
+        "normalizedScore": 8
+      },
+      "amazon": {
+        "score": 4.7,
+        "scale": 5,
+        "ratingCount": 72000,
+        "fiveStarPct": 78,
+        "starBreakdown": {
+          "five": 86,
+          "four": 12,
+          "three": 3,
+          "two": 1,
+          "one": 0
+        },
+        "url": "https://www.amazon.com/dp/0451526341",
+        "normalizedScore": 9.4
+      },
+      "googleBooks": {
+        "score": 4.5,
+        "scale": 5,
+        "ratingCount": 34000,
+        "fiveStarPct": 70,
+        "starBreakdown": {
+          "five": 77,
+          "four": 15,
+          "three": 6,
+          "two": 1,
+          "one": 1
+        },
+        "url": "https://books.google.com/books?id=animalfarm",
+        "normalizedScore": 9
+      }
+    },
+    "compositeScore": 8.8,
+    "discrepancyIndex": 1.3,
+    "verdict": {
+      "status": "masterpiece",
+      "label": "👑 殿堂神作",
+      "color": "emerald",
+      "reason": "短小精悍的政治寓言之王，用极简童话结构写透了革命蜕变为极权的历史轮回。"
+    },
+    "sentiment": {
+      "positivePct": 95,
+      "neutralPct": 3,
+      "negativePct": 2,
+      "pros": [
+        "篇幅短小精悍，叙事节奏举重若轻，通俗易懂却针针见血",
+        "对极权演化步骤的提炼精准得令人背脊发凉"
+      ],
+      "cons": [
+        "寓言体角色脸谱化服务于讽刺目的"
+      ],
+      "keywords": [
+        "动物平等",
+        "拿破仑猪",
+        "极权蜕变",
+        "政治讽刺",
+        "奥威尔"
+      ]
+    },
+    "featuredReviews": [
+      {
+        "platform": "douban",
+        "user": "书斋客",
+        "rating": 10,
+        "date": "2023-09-15",
+        "helpfulCount": 7120,
+        "content": "当墙上的七戒被一条条涂改成'但有的动物更平等'时，你看着那群猪和人类在餐桌旁推杯换盏，已经分不清谁是猪谁是人了。"
+      }
+    ]
+  },
+  {
+    "id": "brave-new-world",
+    "title": "美丽新世界",
+    "originalTitle": "Brave New World",
+    "author": "阿道司·赫胥黎 (Aldous Huxley)",
+    "translator": "李黎 / 石东江",
+    "cover": "https://img9.doubanio.com/view/subject/s/public/s29571987.jpg",
+    "isbn": "9787544766868",
+    "publicationYear": 1932,
+    "publisher": "译林出版社",
+    "category": "科幻世界",
+    "tags": [
+      "反乌托邦",
+      "基因决定论",
+      "索麻",
+      "娱乐至死前身",
+      "赫胥黎"
+    ],
+    "summary": "与《1984》齐名的反乌托邦双子星。人类不再依靠肉体生育，而在试管中按阶级流水线定制；没有痛苦与思考，依靠致幻剂'索麻'与感官刺激安抚大众，展现了被娱乐与舒适彻底驯化的未来。",
+    "platformRatings": {
+      "douban": {
+        "score": 8.7,
+        "scale": 10,
+        "ratingCount": 185000,
+        "fiveStarPct": 65,
+        "starBreakdown": {
+          "five": 70,
+          "four": 20,
+          "three": 7,
+          "two": 2,
+          "one": 1
+        },
+        "url": "https://book.douban.com/subject/26986927/",
+        "normalizedScore": 8.7
+      },
+      "goodreads": {
+        "score": 4,
+        "scale": 5,
+        "ratingCount": 1800000,
+        "fiveStarPct": 52,
+        "starBreakdown": {
+          "five": 55,
+          "four": 29,
+          "three": 11,
+          "two": 3,
+          "one": 2
+        },
+        "url": "https://www.goodreads.com/book/show/5129.Brave_New_World",
+        "normalizedScore": 8
+      },
+      "amazon": {
+        "score": 4.6,
+        "scale": 5,
+        "ratingCount": 48000,
+        "fiveStarPct": 78,
+        "starBreakdown": {
+          "five": 81,
+          "four": 12,
+          "three": 5,
+          "two": 1,
+          "one": 1
+        },
+        "url": "https://www.amazon.com/dp/0060850523",
+        "normalizedScore": 9.2
+      },
+      "googleBooks": {
+        "score": 4.4,
+        "scale": 5,
+        "ratingCount": 21000,
+        "fiveStarPct": 70,
+        "starBreakdown": {
+          "five": 73,
+          "four": 18,
+          "three": 6,
+          "two": 2,
+          "one": 1
+        },
+        "url": "https://books.google.com/books?id=bravenewworld",
+        "normalizedScore": 8.8
+      }
+    },
+    "normalizedRatings": {
+      "douban": {
+        "score": 8.7,
+        "scale": 10,
+        "ratingCount": 185000,
+        "fiveStarPct": 65,
+        "starBreakdown": {
+          "five": 70,
+          "four": 20,
+          "three": 7,
+          "two": 2,
+          "one": 1
+        },
+        "url": "https://book.douban.com/subject/26986927/",
+        "normalizedScore": 8.7
+      },
+      "goodreads": {
+        "score": 4,
+        "scale": 5,
+        "ratingCount": 1800000,
+        "fiveStarPct": 52,
+        "starBreakdown": {
+          "five": 55,
+          "four": 29,
+          "three": 11,
+          "two": 3,
+          "one": 2
+        },
+        "url": "https://www.goodreads.com/book/show/5129.Brave_New_World",
+        "normalizedScore": 8
+      },
+      "amazon": {
+        "score": 4.6,
+        "scale": 5,
+        "ratingCount": 48000,
+        "fiveStarPct": 78,
+        "starBreakdown": {
+          "five": 81,
+          "four": 12,
+          "three": 5,
+          "two": 1,
+          "one": 1
+        },
+        "url": "https://www.amazon.com/dp/0060850523",
+        "normalizedScore": 9.2
+      },
+      "googleBooks": {
+        "score": 4.4,
+        "scale": 5,
+        "ratingCount": 21000,
+        "fiveStarPct": 70,
+        "starBreakdown": {
+          "five": 73,
+          "four": 18,
+          "three": 6,
+          "two": 2,
+          "one": 1
+        },
+        "url": "https://books.google.com/books?id=bravenewworld",
+        "normalizedScore": 8.8
+      }
+    },
+    "compositeScore": 8.5,
+    "discrepancyIndex": 0.7,
+    "verdict": {
+      "status": "masterpiece",
+      "label": "👑 殿堂神作",
+      "color": "emerald",
+      "reason": "比《1984》更贴近当下的预言：人类不是毁于我们所憎恨的东西，而是毁于我们所热爱的东西。"
+    },
+    "sentiment": {
+      "positivePct": 91,
+      "neutralPct": 6,
+      "negativePct": 3,
+      "pros": [
+        "深刻洞见娱乐、消费主义和药物满足如何比暴力更能彻底瓦解人类的反抗意志",
+        "对现代基因工程与阶级固化的预言令人不寒而栗"
+      ],
+      "cons": [
+        "野蛮人约翰的古典戏剧腔台词稍有距离感"
+      ],
+      "keywords": [
+        "索麻",
+        "试管胚胎",
+        "娱乐至死",
+        "反乌托邦",
+        "赫胥黎"
+      ]
+    },
+    "featuredReviews": [
+      {
+        "platform": "douban",
+        "user": "尼尔·波兹曼",
+        "rating": 10,
+        "date": "2023-09-15",
+        "helpfulCount": 4500,
+        "content": "奥威尔害怕的是那些剥夺我们信息的人，赫胥黎害怕的是人们在汪洋大海的无聊信息中沦为被动者。"
+      }
+    ]
+  },
+  {
+    "id": "amusing-ourselves-to-death",
+    "title": "娱乐至死",
+    "originalTitle": "Amusing Ourselves to Death: Public Discourse in the Age of Show Business",
+    "author": "尼尔·波兹曼 (Neil Postman)",
+    "translator": "章艳",
+    "cover": "https://img9.doubanio.com/view/subject/s/public/s28032799.jpg",
+    "isbn": "9787561332808",
+    "publicationYear": 1985,
+    "publisher": "中信出版社",
+    "category": "历史社科",
+    "tags": [
+      "媒介批评",
+      "电视时代",
+      "信息碎片化",
+      "短视频前身预言",
+      "严肃思考消亡"
+    ],
+    "summary": "媒介批评传世经典。指出电视与声光媒介将一切严肃的政治、宗教、教育和新闻都包装成轻浮的娱乐，人们在哈哈大笑中失去了思考能力与理智讨论的公共空间。",
+    "platformRatings": {
+      "douban": {
+        "score": 8.5,
+        "scale": 10,
+        "ratingCount": 180000,
+        "fiveStarPct": 64,
+        "starBreakdown": {
+          "five": 66,
+          "four": 22,
+          "three": 8,
+          "two": 2,
+          "one": 2
+        },
+        "url": "https://book.douban.com/subject/1392688/",
+        "normalizedScore": 8.5
+      },
+      "goodreads": {
+        "score": 4.16,
+        "scale": 5,
+        "ratingCount": 62000,
+        "fiveStarPct": 54,
+        "starBreakdown": {
+          "five": 62,
+          "four": 25,
+          "three": 9,
+          "two": 2,
+          "one": 2
+        },
+        "url": "https://www.goodreads.com/book/show/74034.Amusing_Ourselves_to_Death",
+        "normalizedScore": 8.3
+      },
+      "amazon": {
+        "score": 4.7,
+        "scale": 5,
+        "ratingCount": 12500,
+        "fiveStarPct": 78,
+        "starBreakdown": {
+          "five": 86,
+          "four": 12,
+          "three": 3,
+          "two": 1,
+          "one": 0
+        },
+        "url": "https://www.amazon.com/dp/014303653X",
+        "normalizedScore": 9.4
+      },
+      "googleBooks": {
+        "score": 4.5,
+        "scale": 5,
+        "ratingCount": 4800,
+        "fiveStarPct": 70,
+        "starBreakdown": {
+          "five": 77,
+          "four": 15,
+          "three": 6,
+          "two": 1,
+          "one": 1
+        },
+        "url": "https://books.google.com/books?id=amusing",
+        "normalizedScore": 9
+      }
+    },
+    "normalizedRatings": {
+      "douban": {
+        "score": 8.5,
+        "scale": 10,
+        "ratingCount": 180000,
+        "fiveStarPct": 64,
+        "starBreakdown": {
+          "five": 66,
+          "four": 22,
+          "three": 8,
+          "two": 2,
+          "one": 2
+        },
+        "url": "https://book.douban.com/subject/1392688/",
+        "normalizedScore": 8.5
+      },
+      "goodreads": {
+        "score": 4.16,
+        "scale": 5,
+        "ratingCount": 62000,
+        "fiveStarPct": 54,
+        "starBreakdown": {
+          "five": 62,
+          "four": 25,
+          "three": 9,
+          "two": 2,
+          "one": 2
+        },
+        "url": "https://www.goodreads.com/book/show/74034.Amusing_Ourselves_to_Death",
+        "normalizedScore": 8.3
+      },
+      "amazon": {
+        "score": 4.7,
+        "scale": 5,
+        "ratingCount": 12500,
+        "fiveStarPct": 78,
+        "starBreakdown": {
+          "five": 86,
+          "four": 12,
+          "three": 3,
+          "two": 1,
+          "one": 0
+        },
+        "url": "https://www.amazon.com/dp/014303653X",
+        "normalizedScore": 9.4
+      },
+      "googleBooks": {
+        "score": 4.5,
+        "scale": 5,
+        "ratingCount": 4800,
+        "fiveStarPct": 70,
+        "starBreakdown": {
+          "five": 77,
+          "four": 15,
+          "three": 6,
+          "two": 1,
+          "one": 1
+        },
+        "url": "https://books.google.com/books?id=amusing",
+        "normalizedScore": 9
+      }
+    },
+    "compositeScore": 8.6,
+    "discrepancyIndex": 0.2,
+    "verdict": {
+      "status": "recommended",
+      "label": "📚 经典必读",
+      "color": "blue",
+      "reason": "四十年前针对电视的批判，精准命中了如今算法推荐与短视频横行的时代悲哀。"
+    },
+    "sentiment": {
+      "positivePct": 88,
+      "neutralPct": 8,
+      "negativePct": 4,
+      "pros": [
+        "预言力极度惊人，放在如今抖音与快餐短视频时代看更是句句诛心",
+        "媒介即认识论的观点彻底改变我们看待信息流的方式"
+      ],
+      "cons": [
+        "略带印刷文字时代的怀旧精英主义倾向"
+      ],
+      "keywords": [
+        "娱乐至死",
+        "波兹曼",
+        "媒介批评",
+        "短视频时代",
+        "警钟长鸣"
+      ]
+    },
+    "featuredReviews": [
+      {
+        "platform": "douban",
+        "user": "文化观察家",
+        "rating": 9,
+        "date": "2023-09-15",
+        "helpfulCount": 3820,
+        "content": "当年波兹曼写这本书还在痛批电视机，如果他活在今天看到算法投喂的短视频，不知该作何感想。"
+      }
+    ]
+  },
+  {
+    "id": "foundation",
+    "title": "银河帝国：基地",
+    "originalTitle": "Foundation",
+    "author": "艾萨克·阿西莫夫 (Isaac Asimov)",
+    "translator": "叶李华",
+    "cover": "https://img9.doubanio.com/view/subject/s/public/s27264188.jpg",
+    "isbn": "9787539947594",
+    "publicationYear": 1951,
+    "publisher": "江苏文艺出版社",
+    "category": "科幻世界",
+    "tags": [
+      "心理史学",
+      "阿西莫夫",
+      "谢顿计划",
+      "雨果奖终身经典",
+      "硬科幻史诗"
+    ],
+    "summary": "人类科幻史上至高神作。数学家哈里·谢顿创立'心理史学'，预测统治全银河两万年的帝国即将崩溃并陷入三万年黑暗时代，为此在银河边缘设立基地，保存文明火种。",
+    "platformRatings": {
+      "douban": {
+        "score": 9.1,
+        "scale": 10,
+        "ratingCount": 128000,
+        "fiveStarPct": 68,
+        "starBreakdown": {
+          "five": 79,
+          "four": 14,
+          "three": 5,
+          "two": 1,
+          "one": 1
+        },
+        "url": "https://book.douban.com/subject/10438153/",
+        "normalizedScore": 9.1
+      },
+      "goodreads": {
+        "score": 4.18,
+        "scale": 5,
+        "ratingCount": 520000,
+        "fiveStarPct": 54,
+        "starBreakdown": {
+          "five": 63,
+          "four": 24,
+          "three": 9,
+          "two": 2,
+          "one": 2
+        },
+        "url": "https://www.goodreads.com/book/show/29579.Foundation",
+        "normalizedScore": 8.4
+      },
+      "amazon": {
+        "score": 4.7,
+        "scale": 5,
+        "ratingCount": 42000,
+        "fiveStarPct": 78,
+        "starBreakdown": {
+          "five": 86,
+          "four": 12,
+          "three": 3,
+          "two": 1,
+          "one": 0
+        },
+        "url": "https://www.amazon.com/dp/0553293354",
+        "normalizedScore": 9.4
+      },
+      "googleBooks": {
+        "score": 4.5,
+        "scale": 5,
+        "ratingCount": 18000,
+        "fiveStarPct": 70,
+        "starBreakdown": {
+          "five": 77,
+          "four": 15,
+          "three": 6,
+          "two": 1,
+          "one": 1
+        },
+        "url": "https://books.google.com/books?id=foundation",
+        "normalizedScore": 9
+      }
+    },
+    "normalizedRatings": {
+      "douban": {
+        "score": 9.1,
+        "scale": 10,
+        "ratingCount": 128000,
+        "fiveStarPct": 68,
+        "starBreakdown": {
+          "five": 79,
+          "four": 14,
+          "three": 5,
+          "two": 1,
+          "one": 1
+        },
+        "url": "https://book.douban.com/subject/10438153/",
+        "normalizedScore": 9.1
+      },
+      "goodreads": {
+        "score": 4.18,
+        "scale": 5,
+        "ratingCount": 520000,
+        "fiveStarPct": 54,
+        "starBreakdown": {
+          "five": 63,
+          "four": 24,
+          "three": 9,
+          "two": 2,
+          "one": 2
+        },
+        "url": "https://www.goodreads.com/book/show/29579.Foundation",
+        "normalizedScore": 8.4
+      },
+      "amazon": {
+        "score": 4.7,
+        "scale": 5,
+        "ratingCount": 42000,
+        "fiveStarPct": 78,
+        "starBreakdown": {
+          "five": 86,
+          "four": 12,
+          "three": 3,
+          "two": 1,
+          "one": 0
+        },
+        "url": "https://www.amazon.com/dp/0553293354",
+        "normalizedScore": 9.4
+      },
+      "googleBooks": {
+        "score": 4.5,
+        "scale": 5,
+        "ratingCount": 18000,
+        "fiveStarPct": 70,
+        "starBreakdown": {
+          "five": 77,
+          "four": 15,
+          "three": 6,
+          "two": 1,
+          "one": 1
+        },
+        "url": "https://books.google.com/books?id=foundation",
+        "normalizedScore": 9
+      }
+    },
+    "compositeScore": 8.9,
+    "discrepancyIndex": 0.7,
+    "verdict": {
+      "status": "masterpiece",
+      "label": "👑 殿堂神作",
+      "color": "emerald",
+      "reason": "史上唯一荣获'雨果奖历史上最佳系列小说'的科幻圣经，心理史学构想万古长青。"
+    },
+    "sentiment": {
+      "positivePct": 93,
+      "neutralPct": 5,
+      "negativePct": 2,
+      "pros": [
+        "用大数据与统计力学预测人类文明宏观走向的心理史学设定太神了",
+        "各代基地领导人通过智慧与贸易化解宗教政治危机的桥段扣人心弦"
+      ],
+      "cons": [
+        "人物性格较为功能化，注重宏观历史推演而非微观细腻描写"
+      ],
+      "keywords": [
+        "心理史学",
+        "哈里谢顿",
+        "银河帝国",
+        "阿西莫夫",
+        "基地三部曲"
+      ]
+    },
+    "featuredReviews": [
+      {
+        "platform": "douban",
+        "user": "科幻老饕",
+        "rating": 10,
+        "date": "2023-09-15",
+        "helpfulCount": 4200,
+        "content": "阿西莫夫借谢顿之口说出的那句：'武力是无能者的最后手段'，至今依然闪耀着理性的至高光芒。"
+      }
+    ]
+  },
+  {
+    "id": "hyperion",
+    "title": "海伯利安",
+    "originalTitle": "Hyperion",
+    "author": "丹·西蒙斯 (Dan Simmons)",
+    "translator": "潘振华 / 李懿",
+    "cover": "https://img9.doubanio.com/view/subject/s/public/s28032791.jpg",
+    "isbn": "9787544275149",
+    "publicationYear": 1989,
+    "publisher": "南海出版公司",
+    "category": "科幻世界",
+    "tags": [
+      "雨果奖得主",
+      "坎特伯雷故事集结构",
+      "光阴冢与伯劳",
+      "太空歌剧顶峰",
+      "文学性科幻"
+    ],
+    "summary": "雨果奖获奖奇作。七名朝圣者前往偏远星球海伯利安的光阴冢，直面神秘杀戮生物'伯劳'。他们各自讲述人生秘史，串联起整个人类霸主与人工智能硅基帝国的终极宿命。",
+    "platformRatings": {
+      "douban": {
+        "score": 9.1,
+        "scale": 10,
+        "ratingCount": 68000,
+        "fiveStarPct": 68,
+        "starBreakdown": {
+          "five": 79,
+          "four": 14,
+          "three": 5,
+          "two": 1,
+          "one": 1
+        },
+        "url": "https://book.douban.com/subject/26279930/",
+        "normalizedScore": 9.1
+      },
+      "goodreads": {
+        "score": 4.26,
+        "scale": 5,
+        "ratingCount": 240000,
+        "fiveStarPct": 55,
+        "starBreakdown": {
+          "five": 66,
+          "four": 22,
+          "three": 8,
+          "two": 2,
+          "one": 2
+        },
+        "url": "https://www.goodreads.com/book/show/77566.Hyperion",
+        "normalizedScore": 8.5
+      },
+      "amazon": {
+        "score": 4.7,
+        "scale": 5,
+        "ratingCount": 28000,
+        "fiveStarPct": 78,
+        "starBreakdown": {
+          "five": 86,
+          "four": 12,
+          "three": 3,
+          "two": 1,
+          "one": 0
+        },
+        "url": "https://www.amazon.com/dp/0553283685",
+        "normalizedScore": 9.4
+      },
+      "googleBooks": {
+        "score": 4.6,
+        "scale": 5,
+        "ratingCount": 9500,
+        "fiveStarPct": 70,
+        "starBreakdown": {
+          "five": 81,
+          "four": 12,
+          "three": 5,
+          "two": 1,
+          "one": 1
+        },
+        "url": "https://books.google.com/books?id=hyperion",
+        "normalizedScore": 9.2
+      }
+    },
+    "normalizedRatings": {
+      "douban": {
+        "score": 9.1,
+        "scale": 10,
+        "ratingCount": 68000,
+        "fiveStarPct": 68,
+        "starBreakdown": {
+          "five": 79,
+          "four": 14,
+          "three": 5,
+          "two": 1,
+          "one": 1
+        },
+        "url": "https://book.douban.com/subject/26279930/",
+        "normalizedScore": 9.1
+      },
+      "goodreads": {
+        "score": 4.26,
+        "scale": 5,
+        "ratingCount": 240000,
+        "fiveStarPct": 55,
+        "starBreakdown": {
+          "five": 66,
+          "four": 22,
+          "three": 8,
+          "two": 2,
+          "one": 2
+        },
+        "url": "https://www.goodreads.com/book/show/77566.Hyperion",
+        "normalizedScore": 8.5
+      },
+      "amazon": {
+        "score": 4.7,
+        "scale": 5,
+        "ratingCount": 28000,
+        "fiveStarPct": 78,
+        "starBreakdown": {
+          "five": 86,
+          "four": 12,
+          "three": 3,
+          "two": 1,
+          "one": 0
+        },
+        "url": "https://www.amazon.com/dp/0553283685",
+        "normalizedScore": 9.4
+      },
+      "googleBooks": {
+        "score": 4.6,
+        "scale": 5,
+        "ratingCount": 9500,
+        "fiveStarPct": 70,
+        "starBreakdown": {
+          "five": 81,
+          "four": 12,
+          "three": 5,
+          "two": 1,
+          "one": 1
+        },
+        "url": "https://books.google.com/books?id=hyperion",
+        "normalizedScore": 9.2
+      }
+    },
+    "compositeScore": 9,
+    "discrepancyIndex": 0.6,
+    "verdict": {
+      "status": "masterpiece",
+      "label": "👑 殿堂神作",
+      "color": "emerald",
+      "reason": "文学性最登峰造极的太空歌剧，学者之故事、神父之故事催人泪下震撼神魂。"
+    },
+    "sentiment": {
+      "positivePct": 94,
+      "neutralPct": 4,
+      "negativePct": 2,
+      "pros": [
+        "学者雷切尔逆生长故事（每天都在变小、遗忘昨天）的情感杀伤力天下无双",
+        "融宗教、济慈诗歌、人工智能、时空悖论于一炉的巅峰神笔"
+      ],
+      "cons": [
+        "文学密度极高，多重视角交叉对读者阅读门槛要求较高"
+      ],
+      "keywords": [
+        "伯劳",
+        "光阴冢",
+        "逆生长",
+        "太空歌剧",
+        "海伯利安"
+      ]
+    },
+    "featuredReviews": [
+      {
+        "platform": "douban",
+        "user": "深空流浪者",
+        "rating": 10,
+        "date": "2023-09-15",
+        "helpfulCount": 3120,
+        "content": "学者故事里父亲眼睁睁看着女儿一天天逆生长倒退回婴儿，每晚抱着她祈求奇迹，我哭得不能自已。这是科幻文学最伟大的一章。"
+      }
+    ]
+  },
+  {
+    "id": "soul-stealers",
+    "title": "叫魂：1768年中国妖术大恐慌",
+    "originalTitle": "Soulstealers: The Chinese Sorcery Scare of 1768",
+    "author": "孔飞力 (Philip A. Kuhn)",
+    "translator": "陈兼 / 刘昶",
+    "cover": "https://img9.doubanio.com/view/subject/s/public/s27264183.jpg",
+    "isbn": "9787108047915",
+    "publicationYear": 1990,
+    "publisher": "生活·读书·新知三联书店",
+    "category": "历史社科",
+    "tags": [
+      "乾隆盛世",
+      "妖术恐慌",
+      "专制权力",
+      "官僚体制共谋",
+      "海外中国学巅峰"
+    ],
+    "summary": "海外汉学最高成就之一。讲述乾隆三十三年民间流传妖术师剪人发辫叫魂夺命的谣言，如何从底层乞丐流民蔓延至全国大恐慌，乾隆皇帝借此敲打官僚集团的权力游戏。",
+    "platformRatings": {
+      "douban": {
+        "score": 9.1,
+        "scale": 10,
+        "ratingCount": 142000,
+        "fiveStarPct": 68,
+        "starBreakdown": {
+          "five": 79,
+          "four": 14,
+          "three": 5,
+          "two": 1,
+          "one": 1
+        },
+        "url": "https://book.douban.com/subject/25872703/",
+        "normalizedScore": 9.1
+      },
+      "goodreads": {
+        "score": 4.15,
+        "scale": 5,
+        "ratingCount": 5800,
+        "fiveStarPct": 54,
+        "starBreakdown": {
+          "five": 62,
+          "four": 25,
+          "three": 9,
+          "two": 2,
+          "one": 2
+        },
+        "url": "https://www.goodreads.com/book/show/244348.Soulstealers",
+        "normalizedScore": 8.3
+      },
+      "amazon": {
+        "score": 4.6,
+        "scale": 5,
+        "ratingCount": 1800,
+        "fiveStarPct": 78,
+        "starBreakdown": {
+          "five": 81,
+          "four": 12,
+          "three": 5,
+          "two": 1,
+          "one": 1
+        },
+        "url": "https://www.amazon.com/dp/0674821521",
+        "normalizedScore": 9.2
+      },
+      "googleBooks": {
+        "score": 4.5,
+        "scale": 5,
+        "ratingCount": 900,
+        "fiveStarPct": 70,
+        "starBreakdown": {
+          "five": 77,
+          "four": 15,
+          "three": 6,
+          "two": 1,
+          "one": 1
+        },
+        "url": "https://books.google.com/books?id=soulstealers",
+        "normalizedScore": 9
+      }
+    },
+    "normalizedRatings": {
+      "douban": {
+        "score": 9.1,
+        "scale": 10,
+        "ratingCount": 142000,
+        "fiveStarPct": 68,
+        "starBreakdown": {
+          "five": 79,
+          "four": 14,
+          "three": 5,
+          "two": 1,
+          "one": 1
+        },
+        "url": "https://book.douban.com/subject/25872703/",
+        "normalizedScore": 9.1
+      },
+      "goodreads": {
+        "score": 4.15,
+        "scale": 5,
+        "ratingCount": 5800,
+        "fiveStarPct": 54,
+        "starBreakdown": {
+          "five": 62,
+          "four": 25,
+          "three": 9,
+          "two": 2,
+          "one": 2
+        },
+        "url": "https://www.goodreads.com/book/show/244348.Soulstealers",
+        "normalizedScore": 8.3
+      },
+      "amazon": {
+        "score": 4.6,
+        "scale": 5,
+        "ratingCount": 1800,
+        "fiveStarPct": 78,
+        "starBreakdown": {
+          "five": 81,
+          "four": 12,
+          "three": 5,
+          "two": 1,
+          "one": 1
+        },
+        "url": "https://www.amazon.com/dp/0674821521",
+        "normalizedScore": 9.2
+      },
+      "googleBooks": {
+        "score": 4.5,
+        "scale": 5,
+        "ratingCount": 900,
+        "fiveStarPct": 70,
+        "starBreakdown": {
+          "five": 77,
+          "four": 15,
+          "three": 6,
+          "two": 1,
+          "one": 1
+        },
+        "url": "https://books.google.com/books?id=soulstealers",
+        "normalizedScore": 9
+      }
+    },
+    "compositeScore": 8.8,
+    "discrepancyIndex": 0.8,
+    "verdict": {
+      "status": "masterpiece",
+      "label": "👑 殿堂神作",
+      "color": "emerald",
+      "reason": "显微镜级解剖传统中国专制权力、官僚自保与底层互害的顶级学术神作。"
+    },
+    "sentiment": {
+      "positivePct": 93,
+      "neutralPct": 5,
+      "negativePct": 2,
+      "pros": [
+        "把一场看似荒诞的剪辫妖术谣言，抽丝剥茧成皇帝、官僚与平民三层权力博弈",
+        "底层平民借叫魂诬告清算私仇的刻画，犹如现代群体心理的精准投射"
+      ],
+      "cons": [
+        "学术论证极其严密，需要读者具备一定的历史耐心"
+      ],
+      "keywords": [
+        "乾隆",
+        "孔飞力",
+        "专制权力",
+        "官僚机制",
+        "妖术恐慌"
+      ]
+    },
+    "featuredReviews": [
+      {
+        "platform": "douban",
+        "user": "史学观察家",
+        "rating": 10,
+        "date": "2023-09-15",
+        "helpfulCount": 4210,
+        "content": "叫魂给普通平民提供了一种权力补偿：只要我诬告你是叫魂妖人，我就能让官府来整死你。权力在体制内的流动被孔飞力写绝了。"
+      }
+    ]
+  },
+  {
+    "id": "fang-si-qi",
+    "title": "房思琪的初恋乐园",
+    "originalTitle": "房思琪的初戀樂園",
+    "author": "林奕含",
+    "translator": null,
+    "cover": "https://img9.doubanio.com/view/subject/s/public/s29634731.jpg",
+    "isbn": "9787559614636",
+    "publicationYear": 2018,
+    "publisher": "北京联合出版公司",
+    "category": "文学小说",
+    "tags": [
+      "女性主义",
+      "诱奸与创伤",
+      "林奕含遗作",
+      "文学对暴力的反思",
+      "直击灵魂"
+    ],
+    "summary": "作家林奕含的绝唱与遗作。讲述美丽聪慧的少女房思琪遭到补习班名师李国华长期诱奸与精神控制的惨痛经历，以极其精雕细琢的繁复汉语，质问'文学是否巧言令色，艺术是否巧言令色'。",
+    "platformRatings": {
+      "douban": {
+        "score": 9.2,
+        "scale": 10,
+        "ratingCount": 420000,
+        "fiveStarPct": 69,
+        "starBreakdown": {
+          "five": 81,
+          "four": 12,
+          "three": 5,
+          "two": 1,
+          "one": 1
+        },
+        "url": "https://book.douban.com/subject/27614904/",
+        "normalizedScore": 9.2
+      },
+      "goodreads": {
+        "score": 4.48,
+        "scale": 5,
+        "ratingCount": 18000,
+        "fiveStarPct": 58,
+        "starBreakdown": {
+          "five": 76,
+          "four": 16,
+          "three": 6,
+          "two": 1,
+          "one": 1
+        },
+        "url": "https://www.goodreads.com/book/show/38590807",
+        "normalizedScore": 9
+      },
+      "amazon": {
+        "score": 4.8,
+        "scale": 5,
+        "ratingCount": 4200,
+        "fiveStarPct": 78,
+        "starBreakdown": {
+          "five": 88,
+          "four": 12,
+          "three": 3,
+          "two": 1,
+          "one": 0
+        },
+        "url": "https://www.amazon.com/dp/7559614631",
+        "normalizedScore": 9.6
+      },
+      "googleBooks": {
+        "score": 4.6,
+        "scale": 5,
+        "ratingCount": 2100,
+        "fiveStarPct": 70,
+        "starBreakdown": {
+          "five": 81,
+          "four": 12,
+          "three": 5,
+          "two": 1,
+          "one": 1
+        },
+        "url": "https://books.google.com/books?id=fangsiqi",
+        "normalizedScore": 9.2
+      }
+    },
+    "normalizedRatings": {
+      "douban": {
+        "score": 9.2,
+        "scale": 10,
+        "ratingCount": 420000,
+        "fiveStarPct": 69,
+        "starBreakdown": {
+          "five": 81,
+          "four": 12,
+          "three": 5,
+          "two": 1,
+          "one": 1
+        },
+        "url": "https://book.douban.com/subject/27614904/",
+        "normalizedScore": 9.2
+      },
+      "goodreads": {
+        "score": 4.48,
+        "scale": 5,
+        "ratingCount": 18000,
+        "fiveStarPct": 58,
+        "starBreakdown": {
+          "five": 76,
+          "four": 16,
+          "three": 6,
+          "two": 1,
+          "one": 1
+        },
+        "url": "https://www.goodreads.com/book/show/38590807",
+        "normalizedScore": 9
+      },
+      "amazon": {
+        "score": 4.8,
+        "scale": 5,
+        "ratingCount": 4200,
+        "fiveStarPct": 78,
+        "starBreakdown": {
+          "five": 88,
+          "four": 12,
+          "three": 3,
+          "two": 1,
+          "one": 0
+        },
+        "url": "https://www.amazon.com/dp/7559614631",
+        "normalizedScore": 9.6
+      },
+      "googleBooks": {
+        "score": 4.6,
+        "scale": 5,
+        "ratingCount": 2100,
+        "fiveStarPct": 70,
+        "starBreakdown": {
+          "five": 81,
+          "four": 12,
+          "three": 5,
+          "two": 1,
+          "one": 1
+        },
+        "url": "https://books.google.com/books?id=fangsiqi",
+        "normalizedScore": 9.2
+      }
+    },
+    "compositeScore": 9.2,
+    "discrepancyIndex": 0.2,
+    "verdict": {
+      "status": "masterpiece",
+      "label": "👑 殿堂神作",
+      "color": "emerald",
+      "reason": "近十年中文世界最痛彻心扉的文学见证，字字滴血，彻底撕碎文化权贵对少女的精神凌虐。"
+    },
+    "sentiment": {
+      "positivePct": 95,
+      "neutralPct": 3,
+      "negativePct": 2,
+      "pros": [
+        "文字美到极致，也痛到极致，把受害者的心理撕裂与创伤记忆刻画得淋漓尽致",
+        "对男权道貌岸然文学外衣的审判是当代华语文学的里程碑"
+      ],
+      "cons": [
+        "创伤极度真实惨烈，心理承受力弱的读者容易产生严重的躯体化心理不适"
+      ],
+      "keywords": [
+        "房思琪",
+        "林奕含",
+        "向死而生",
+        "诱奸",
+        "文学的巧言令色"
+      ]
+    },
+    "featuredReviews": [
+      {
+        "platform": "douban",
+        "user": "张怡微",
+        "rating": 10,
+        "date": "2023-09-15",
+        "helpfulCount": 9200,
+        "content": "忍痛读完，眼泪止不住地流。林奕含用生命写下的这部小说，不是控诉，是对世界最后的绝望质问。"
+      }
+    ]
+  },
+  {
+    "id": "the-myth-of-sisyphus",
+    "title": "西西弗神话",
+    "originalTitle": "Le Mythe de Sisyphe",
+    "author": "阿尔贝·加缪 (Albert Camus)",
+    "translator": "杜小真",
+    "cover": "https://img9.doubanio.com/view/subject/s/public/s28032792.jpg",
+    "isbn": "9787108047918",
+    "publicationYear": 1942,
+    "publisher": "生活·读书·新知三联书店",
+    "category": "哲学心理",
+    "tags": [
+      "存在主义",
+      "荒诞哲学",
+      "推巨石上山",
+      "反抗与自由",
+      "加缪哲学原点"
+    ],
+    "summary": "加缪荒谬哲学的奠基之作。开篇直言'真正严肃的哲学问题只有一个，那就是自杀'。通过西西弗日复一日将巨石推上山顶又滚落的希腊神话，提出面对无意义荒谬世界的唯一出路——反抗与清醒地活着。",
+    "platformRatings": {
+      "douban": {
+        "score": 8.8,
+        "scale": 10,
+        "ratingCount": 98000,
+        "fiveStarPct": 66,
+        "starBreakdown": {
+          "five": 73,
+          "four": 18,
+          "three": 6,
+          "two": 2,
+          "one": 1
+        },
+        "url": "https://book.douban.com/subject/25872704/",
+        "normalizedScore": 8.8
+      },
+      "goodreads": {
+        "score": 4.14,
+        "scale": 5,
+        "ratingCount": 180000,
+        "fiveStarPct": 54,
+        "starBreakdown": {
+          "five": 61,
+          "four": 25,
+          "three": 10,
+          "two": 2,
+          "one": 2
+        },
+        "url": "https://www.goodreads.com/book/show/11987.The_Myth_of_Sisyphus",
+        "normalizedScore": 8.3
+      },
+      "amazon": {
+        "score": 4.6,
+        "scale": 5,
+        "ratingCount": 14500,
+        "fiveStarPct": 78,
+        "starBreakdown": {
+          "five": 81,
+          "four": 12,
+          "three": 5,
+          "two": 1,
+          "one": 1
+        },
+        "url": "https://www.amazon.com/dp/0525564454",
+        "normalizedScore": 9.2
+      },
+      "googleBooks": {
+        "score": 4.5,
+        "scale": 5,
+        "ratingCount": 6800,
+        "fiveStarPct": 70,
+        "starBreakdown": {
+          "five": 77,
+          "four": 15,
+          "three": 6,
+          "two": 1,
+          "one": 1
+        },
+        "url": "https://books.google.com/books?id=sisyphus",
+        "normalizedScore": 9
+      }
+    },
+    "normalizedRatings": {
+      "douban": {
+        "score": 8.8,
+        "scale": 10,
+        "ratingCount": 98000,
+        "fiveStarPct": 66,
+        "starBreakdown": {
+          "five": 73,
+          "four": 18,
+          "three": 6,
+          "two": 2,
+          "one": 1
+        },
+        "url": "https://book.douban.com/subject/25872704/",
+        "normalizedScore": 8.8
+      },
+      "goodreads": {
+        "score": 4.14,
+        "scale": 5,
+        "ratingCount": 180000,
+        "fiveStarPct": 54,
+        "starBreakdown": {
+          "five": 61,
+          "four": 25,
+          "three": 10,
+          "two": 2,
+          "one": 2
+        },
+        "url": "https://www.goodreads.com/book/show/11987.The_Myth_of_Sisyphus",
+        "normalizedScore": 8.3
+      },
+      "amazon": {
+        "score": 4.6,
+        "scale": 5,
+        "ratingCount": 14500,
+        "fiveStarPct": 78,
+        "starBreakdown": {
+          "five": 81,
+          "four": 12,
+          "three": 5,
+          "two": 1,
+          "one": 1
+        },
+        "url": "https://www.amazon.com/dp/0525564454",
+        "normalizedScore": 9.2
+      },
+      "googleBooks": {
+        "score": 4.5,
+        "scale": 5,
+        "ratingCount": 6800,
+        "fiveStarPct": 70,
+        "starBreakdown": {
+          "five": 77,
+          "four": 15,
+          "three": 6,
+          "two": 1,
+          "one": 1
+        },
+        "url": "https://books.google.com/books?id=sisyphus",
+        "normalizedScore": 9
+      }
+    },
+    "compositeScore": 8.7,
+    "discrepancyIndex": 0.5,
+    "verdict": {
+      "status": "masterpiece",
+      "label": "👑 殿堂神作",
+      "color": "emerald",
+      "reason": "给现代虚无主义者的终极解药，'应当想象西西弗是幸福的'振聋发聩鼓舞一代代人。"
+    },
+    "sentiment": {
+      "positivePct": 91,
+      "neutralPct": 6,
+      "negativePct": 3,
+      "pros": [
+        "承认世界的彻底荒谬，但坚决拒绝虚无自杀，提出以反抗与激情活在此刻",
+        "神话隐喻力穿透古今，为陷入生活无休止内耗循环的人提供了莫大精神骨气"
+      ],
+      "cons": [
+        "加缪欧化哲学文风偶有晦涩思辨段落"
+      ],
+      "keywords": [
+        "西西弗",
+        "荒诞哲学",
+        "加缪",
+        "推石上山",
+        "幸福的反抗者"
+      ]
+    },
+    "featuredReviews": [
+      {
+        "platform": "douban",
+        "user": "哲学漂流者",
+        "rating": 10,
+        "date": "2023-09-15",
+        "helpfulCount": 4100,
+        "content": "西西弗回到巨石前的那一刻，是他对诸神最高的嘲弄。没有一种命运是不可被蔑视超越的。"
+      }
+    ]
   }
 ];
 

@@ -9,6 +9,7 @@ import LeaderboardsView from './components/LeaderboardsView';
 import AnalyticsView from './components/AnalyticsView';
 import ScheduleModal from './components/ScheduleModal';
 import fallbackBooks from './data/staticBooks.json';
+import { searchOpenLibraryLive } from './services/clientCrawler';
 import { Search, BookOpen, AlertTriangle, Sparkles, RefreshCw, Flame, ArrowLeft, CheckCircle2 } from 'lucide-react';
 
 export default function App() {
@@ -86,9 +87,10 @@ export default function App() {
     }
   }, [activeTab]);
 
-  // Execute global search (Local + OpenLibrary + DeepSeek Live Resolver)
+  // Execute global search (Local + Backend API + Client-side OpenLibrary Live Crawler)
   const handleSearchSubmit = async () => {
-    if (!searchQuery.trim()) {
+    const query = searchQuery.trim();
+    if (!query) {
       setActiveSearchTerm('');
       loadData();
       return;
@@ -96,22 +98,58 @@ export default function App() {
 
     try {
       setIsSearching(true);
-      setActiveSearchTerm(searchQuery.trim());
+      setActiveSearchTerm(query);
       setActiveTab('explore'); // Switch to explore grid to show results
       setSelectedCategory('全部');
       setSelectedVerdict('all');
 
-      const res = await fetch(`/api/search?q=${encodeURIComponent(searchQuery.trim())}`);
-      const searchData = await res.json();
-      
-      const local = searchData.local || [];
-      const live = searchData.live || [];
+      let local = [];
+      let live = [];
+
+      // 1. First search local memory
+      const qLower = query.toLowerCase();
+      const localMatches = (fallbackBooks || []).filter(b =>
+        b.title.toLowerCase().includes(qLower) ||
+        (b.originalTitle && b.originalTitle.toLowerCase().includes(qLower)) ||
+        b.author.toLowerCase().includes(qLower) ||
+        (b.tags && b.tags.some(t => t.toLowerCase().includes(qLower)))
+      );
+      local = localMatches;
+
+      // 2. Try backend API if available
+      try {
+        const res = await fetch(`/api/search?q=${encodeURIComponent(query)}`);
+        if (res.ok) {
+          const searchData = await res.json();
+          if (searchData.local) local = searchData.local;
+          if (searchData.live) live = searchData.live;
+        }
+      } catch (e) {
+        // Fallback for static GitHub Pages deployment
+      }
+
+      // 3. If local + live results are sparse, trigger direct browser live crawler (Open Library)
+      if (local.length + live.length <= 1) {
+        try {
+          const directLiveBooks = await searchOpenLibraryLive(query);
+          live = [...live, ...directLiveBooks];
+        } catch (crawlerErr) {
+          console.warn('Direct crawler error:', crawlerErr);
+        }
+      }
 
       // Deduplicate by title
-      const titleSet = new Set(local.map(b => b.title.toLowerCase()));
-      const filteredLive = live.filter(b => !titleSet.has(b.title.toLowerCase()));
+      const titleSet = new Set();
+      const combined = [];
+      [...local, ...live].forEach(b => {
+        const normTitle = b.title.toLowerCase().trim();
+        if (!titleSet.has(normTitle)) {
+          titleSet.add(normTitle);
+          combined.push(b);
+        }
+      });
 
-      setBooks([...local, ...filteredLive]);
+      setBooks(combined.length > 0 ? combined : localMatches);
     } catch (err) {
       console.error('Search failed:', err);
     } finally {
