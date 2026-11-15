@@ -17,7 +17,10 @@ export async function fetchInfiniteBooks(category = '全部', offset = 0, limit 
   const url = `https://openlibrary.org/subjects/${subjectKey}.json?limit=${limit}&offset=${offset}`;
 
   try {
-    const res = await fetch(url);
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 5000);
+    const res = await fetch(url, { signal: controller.signal });
+    clearTimeout(timeoutId);
     if (!res.ok) return [];
 
     const data = await res.json();
@@ -152,7 +155,12 @@ export async function searchOpenLibraryLive(query) {
 
   try {
     const q = encodeURIComponent(query.trim());
-    const res = await fetch(`https://openlibrary.org/search.json?q=${q}&limit=12`);
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 4500);
+    const res = await fetch(`https://openlibrary.org/search.json?q=${q}&limit=12`, {
+      signal: controller.signal
+    });
+    clearTimeout(timeoutId);
     if (!res.ok) return [];
 
     const data = await res.json();

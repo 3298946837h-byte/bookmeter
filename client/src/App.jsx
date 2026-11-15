@@ -145,11 +145,16 @@ export default function App() {
   // Execute global search (Local + Backend API + Client-side OpenLibrary Live Crawler)
   const handleSearchSubmit = async (overrideQuery) => {
     const rawQuery = typeof overrideQuery === 'string' ? overrideQuery : searchQuery;
-    const query = rawQuery.trim();
+    const query = (rawQuery || '').trim();
     if (!query) {
       setActiveSearchTerm('');
       loadData();
       return;
+    }
+
+    // Dismiss mobile keyboard so user can immediately view results
+    if (typeof document !== 'undefined' && document.activeElement) {
+      document.activeElement.blur();
     }
 
     try {
@@ -162,14 +167,26 @@ export default function App() {
       let local = [];
       let live = [];
 
-      // 1. First search local memory
+      // Clean query: strip punctuation like 《》, "", '', brackets
+      const cleanQ = query.replace(/[《》""''“”‘’「」『』\s]/g, '').toLowerCase();
       const qLower = query.toLowerCase();
-      const localMatches = (fallbackBooks || []).filter(b =>
-        b.title.toLowerCase().includes(qLower) ||
-        (b.originalTitle && b.originalTitle.toLowerCase().includes(qLower)) ||
-        b.author.toLowerCase().includes(qLower) ||
-        (b.tags && b.tags.some(t => t.toLowerCase().includes(qLower)))
-      );
+
+      // 1. First search local memory
+      const localMatches = (fallbackBooks || []).filter(b => {
+        const cleanTitle = (b.title || '').replace(/[《》""''“”‘’「」『』\s]/g, '').toLowerCase();
+        const cleanAuthor = (b.author || '').toLowerCase();
+        const cleanOriginal = (b.originalTitle || '').toLowerCase();
+        const category = (b.category || '').toLowerCase();
+        const tags = (b.tags || []).map(t => t.toLowerCase());
+
+        return (
+          cleanTitle.includes(cleanQ) ||
+          cleanAuthor.includes(cleanQ) ||
+          cleanOriginal.includes(qLower) ||
+          category.includes(cleanQ) ||
+          tags.some(t => t.includes(cleanQ))
+        );
+      });
       local = localMatches;
 
       // 2. Try backend API if available
@@ -184,10 +201,10 @@ export default function App() {
         // Fallback for static GitHub Pages deployment
       }
 
-      // 3. If local + live results are sparse, trigger direct browser live crawler (Open Library)
-      if (local.length + live.length <= 1) {
+      // 3. If local matches are sparse (<= 1), trigger direct browser live crawler (Open Library)
+      if (local.length <= 1) {
         try {
-          const directLiveBooks = await searchOpenLibraryLive(query);
+          const directLiveBooks = await searchOpenLibraryLive(cleanQ || query);
           live = [...live, ...directLiveBooks];
         } catch (crawlerErr) {
           console.warn('Direct crawler error:', crawlerErr);
@@ -206,6 +223,14 @@ export default function App() {
       });
 
       setBooks(combined.length > 0 ? combined : localMatches);
+
+      // Auto-scroll to results on mobile so user doesn't wonder what happened
+      setTimeout(() => {
+        const target = document.getElementById('books-grid-start');
+        if (target) {
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      }, 120);
     } catch (err) {
       console.error('Search failed:', err);
     } finally {
@@ -267,11 +292,11 @@ export default function App() {
       />
 
       {/* Main Content Area */}
-      <main className="flex-1 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 w-full">
+      <main className="flex-1 max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 py-4 sm:py-8 w-full">
         
         {/* Global Search Banner when user searched */}
         {activeSearchTerm && (
-          <div className="mb-6 p-4 rounded-2xl bg-sky-50 border border-sky-200 flex items-center justify-between gap-4 animate-in fade-in">
+          <div id="books-grid-start" className="mb-6 p-3 sm:p-4 rounded-2xl bg-sky-50 border border-sky-200 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 animate-in fade-in">
             <div className="flex items-center gap-2.5 text-xs sm:text-sm text-sky-950 font-medium">
               <CheckCircle2 className="w-4 h-4 text-sky-600 shrink-0" />
               <span>
@@ -280,7 +305,7 @@ export default function App() {
             </div>
             <button
               onClick={handleClearSearch}
-              className="px-3 py-1 bg-white hover:bg-sky-100 text-sky-700 text-xs font-bold rounded-lg border border-sky-300 transition-all shrink-0 flex items-center gap-1"
+              className="px-3 py-1.5 bg-white hover:bg-sky-100 text-sky-700 text-xs font-bold rounded-lg border border-sky-300 transition-all shrink-0 flex items-center gap-1 active:scale-95"
             >
               <ArrowLeft className="w-3.5 h-3.5" />
               <span>返回全部书库</span>
@@ -326,13 +351,13 @@ export default function App() {
 
         {/* Masterpiece Spotlight Hero Card */}
         {!activeSearchTerm && activeTab === 'explore' && selectedCategory === '全部' && selectedVerdict === 'all' && (
-          <div className="mb-8 rounded-3xl bg-gradient-to-r from-slate-900 via-indigo-950 to-slate-900 text-white p-6 sm:p-8 shadow-xl border border-indigo-800/60 relative overflow-hidden">
+          <div className="mb-6 sm:mb-8 rounded-2xl sm:rounded-3xl bg-gradient-to-r from-slate-900 via-indigo-950 to-slate-900 text-white p-4 sm:p-8 shadow-xl border border-indigo-800/60 relative overflow-hidden">
             <div className="absolute top-0 right-0 w-96 h-96 bg-indigo-500/10 rounded-full blur-3xl pointer-events-none -mr-20 -mt-20"></div>
-            <div className="relative z-10 grid grid-cols-1 md:grid-cols-12 gap-6 items-center">
+            <div className="relative z-10 grid grid-cols-1 md:grid-cols-12 gap-5 sm:gap-6 items-center">
               
               {/* Book Cover */}
               <div className="md:col-span-3 flex justify-center md:justify-start">
-                <div className="w-36 h-48 sm:w-44 sm:h-60 rounded-2xl overflow-hidden shadow-2xl border-2 border-white/20 shrink-0 transform hover:scale-105 transition-all">
+                <div className="w-28 h-38 sm:w-44 sm:h-60 rounded-xl sm:rounded-2xl overflow-hidden shadow-2xl border-2 border-white/20 shrink-0 transform hover:scale-105 transition-all">
                   <img
                     src="./covers/to-live.jpg"
                     alt="活着 - 余华"
@@ -345,64 +370,64 @@ export default function App() {
               </div>
 
               {/* Book Spotlight Info */}
-              <div className="md:col-span-9 space-y-3">
-                <div className="flex flex-wrap items-center gap-2">
-                  <span className="px-3 py-1 rounded-full bg-emerald-500/20 text-emerald-300 text-xs font-bold border border-emerald-500/30 flex items-center gap-1.5">
+              <div className="md:col-span-9 space-y-2.5 sm:space-y-3">
+                <div className="flex flex-wrap items-center gap-1.5 sm:gap-2">
+                  <span className="px-2.5 py-0.5 sm:px-3 sm:py-1 rounded-full bg-emerald-500/20 text-emerald-300 text-[10px] sm:text-xs font-bold border border-emerald-500/30 flex items-center gap-1.5">
                     <Award className="w-3.5 h-3.5 text-emerald-400" />
-                    <span>殿堂级标杆图书 · 全网公认第一名作</span>
+                    <span>殿堂标杆 · 全网第一作</span>
                   </span>
-                  <span className="px-2.5 py-1 rounded-full bg-indigo-500/20 text-indigo-200 text-xs font-semibold">
+                  <span className="px-2 py-0.5 sm:px-2.5 sm:py-1 rounded-full bg-indigo-500/20 text-indigo-200 text-[10px] sm:text-xs font-semibold">
                     文学小说 · 1993
                   </span>
-                  <span className="text-xs text-slate-400">
+                  <span className="text-[11px] sm:text-xs text-slate-400">
                     余华 著 · 作家出版社
                   </span>
                 </div>
 
-                <div className="flex items-baseline gap-3">
-                  <h2 className="text-2xl sm:text-3xl font-black text-white">
+                <div className="flex items-baseline gap-2 sm:gap-3">
+                  <h2 className="text-xl sm:text-3xl font-black text-white">
                     《活着》
                   </h2>
                   <div className="flex items-baseline gap-1 text-emerald-400">
-                    <span className="text-3xl font-black">9.34</span>
-                    <span className="text-sm font-bold text-slate-400">/ 10</span>
+                    <span className="text-2xl sm:text-3xl font-black">9.34</span>
+                    <span className="text-xs sm:text-sm font-bold text-slate-400">/ 10</span>
                   </div>
-                  <span className="text-xs font-bold px-2 py-0.5 rounded bg-emerald-500 text-white">
-                    贝叶斯权威加权
+                  <span className="text-[10px] sm:text-xs font-bold px-1.5 py-0.5 rounded bg-emerald-500 text-white">
+                    贝叶斯加权
                   </span>
                 </div>
 
-                <p className="text-xs sm:text-sm text-slate-300 leading-relaxed max-w-2xl">
+                <p className="text-xs sm:text-sm text-slate-300 leading-relaxed max-w-2xl line-clamp-3 sm:line-clamp-none">
                   “人是为了活着本身而活着，而不是为了活着之外的任何事物所活着。” 全网累积 90万+ 读者参评，跨越中西方文化隔阂，以极致克制的笔触写就生命最磅礴的韧性。
                 </p>
 
                 {/* Platform breakdown badges */}
                 <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 pt-1">
-                  <div className="p-2.5 rounded-xl bg-white/5 border border-white/10">
+                  <div className="p-2 sm:p-2.5 rounded-xl bg-white/5 border border-white/10">
                     <div className="text-[11px] text-emerald-300 font-bold flex items-center justify-between">
                       <span>豆瓣读书</span>
                       <span className="text-emerald-400 font-extrabold">9.4</span>
                     </div>
-                    <div className="text-[10px] text-slate-400 mt-0.5">79.5 万人参评 (5星 76.8%)</div>
+                    <div className="text-[10px] text-slate-400 mt-0.5">79.5 万评 (5星 76.8%)</div>
                   </div>
 
-                  <div className="p-2.5 rounded-xl bg-white/5 border border-white/10">
+                  <div className="p-2 sm:p-2.5 rounded-xl bg-white/5 border border-white/10">
                     <div className="text-[11px] text-amber-300 font-bold flex items-center justify-between">
                       <span>Goodreads</span>
                       <span className="text-amber-400 font-extrabold">4.42 ★</span>
                     </div>
-                    <div className="text-[10px] text-slate-400 mt-0.5">11.5 万人参评 (折合 8.8)</div>
+                    <div className="text-[10px] text-slate-400 mt-0.5">11.5 万评 (折合 8.8)</div>
                   </div>
 
-                  <div className="p-2.5 rounded-xl bg-white/5 border border-white/10">
+                  <div className="p-2 sm:p-2.5 rounded-xl bg-white/5 border border-white/10">
                     <div className="text-[11px] text-orange-300 font-bold flex items-center justify-between">
-                      <span>Amazon 评分</span>
+                      <span>Amazon</span>
                       <span className="text-orange-400 font-extrabold">4.8 ★</span>
                     </div>
-                    <div className="text-[10px] text-slate-400 mt-0.5">2.8 万真实购书者 (好评 96%)</div>
+                    <div className="text-[10px] text-slate-400 mt-0.5">2.8 万购书评 (好评 96%)</div>
                   </div>
 
-                  <div className="p-2.5 rounded-xl bg-white/5 border border-white/10">
+                  <div className="p-2 sm:p-2.5 rounded-xl bg-white/5 border border-white/10">
                     <div className="text-[11px] text-blue-300 font-bold flex items-center justify-between">
                       <span>Google Books</span>
                       <span className="text-blue-400 font-extrabold">4.7 ★</span>
@@ -412,20 +437,20 @@ export default function App() {
                 </div>
 
                 {/* CTA */}
-                <div className="pt-2 flex flex-wrap items-center gap-3">
+                <div className="pt-2 flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-3">
                   <button
                     onClick={() => {
                       const liveBook = books.find(b => b.id === 'to-live') || fallbackBooks.find(b => b.id === 'to-live');
                       if (liveBook) setSelectedBook(liveBook);
                     }}
-                    className="px-5 py-2.5 bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-400 hover:to-teal-400 text-slate-950 font-black text-xs rounded-xl shadow-lg hover:shadow-emerald-500/20 transition-all flex items-center gap-2 active:scale-95"
+                    className="w-full sm:w-auto px-4 py-2.5 bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-400 hover:to-teal-400 text-slate-950 font-black text-xs rounded-xl shadow-lg hover:shadow-emerald-500/20 transition-all flex items-center justify-center gap-2 active:scale-95 touch-manipulation"
                   >
                     <Sparkles className="w-4 h-4 text-slate-950" />
-                    <span>查看《活着》全网深度口碑研报 & 真实读者长评</span>
+                    <span>查看《活着》全网深度口碑研报 & 真实长评</span>
                     <ArrowRight className="w-3.5 h-3.5" />
                   </button>
-                  <span className="text-[11px] text-slate-400">
-                    分歧指数 0.6 · 全平台高度好评契合
+                  <span className="text-[10px] sm:text-[11px] text-slate-400 text-center sm:text-left">
+                    分歧指数 0.6 · 全平台高度契合
                   </span>
                 </div>
 

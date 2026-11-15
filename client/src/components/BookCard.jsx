@@ -63,9 +63,9 @@ export default function BookCard({ book, onOpenDetail }) {
       </div>
 
       {/* Main Content Info */}
-      <div className="p-5 flex gap-4">
+      <div className="p-3.5 sm:p-5 flex gap-3 sm:gap-4">
         {/* Book Cover */}
-        <div className="w-24 h-32 shrink-0 rounded-xl overflow-hidden shadow-md group-hover:scale-105 transition-transform bg-slate-100 border border-slate-200 relative">
+        <div className="w-20 h-28 sm:w-24 sm:h-32 shrink-0 rounded-xl overflow-hidden shadow-md group-hover:scale-105 transition-transform bg-slate-100 border border-slate-200 relative">
           <img
             src={book.cover}
             alt={book.title}
@@ -80,36 +80,36 @@ export default function BookCard({ book, onOpenDetail }) {
         {/* Title, Author, Master Score */}
         <div className="flex-1 flex flex-col justify-between">
           <div>
-            <div className="flex items-start justify-between gap-2">
-              <h3 className="font-bold text-base sm:text-lg text-slate-900 group-hover:text-sky-600 transition-colors line-clamp-1">
+            <div className="flex items-start justify-between gap-1.5">
+              <h3 className="font-bold text-sm sm:text-lg text-slate-900 group-hover:text-sky-600 transition-colors line-clamp-1">
                 {book.title}
               </h3>
               <ArrowUpRight className="w-4 h-4 text-slate-400 opacity-0 group-hover:opacity-100 transition-opacity shrink-0" />
             </div>
 
-            <p className="text-xs text-slate-500 line-clamp-1 mt-0.5">
+            <p className="text-[11px] sm:text-xs text-slate-500 line-clamp-1 mt-0.5">
               {book.author} {book.translator && `· 译: ${book.translator}`}
             </p>
 
-            <p className="text-[11px] text-slate-400 italic line-clamp-1 mt-0.5">
+            <p className="text-[10px] sm:text-[11px] text-slate-400 italic line-clamp-1 mt-0.5">
               {book.originalTitle}
             </p>
           </div>
 
           {/* Master Composite Score */}
-          <div className="mt-3 flex items-baseline gap-2">
-            <span className="text-xs text-slate-500 font-medium">综合权威分:</span>
+          <div className="mt-2 sm:mt-3 flex items-baseline gap-2">
+            <span className="text-[11px] sm:text-xs text-slate-500 font-medium">综合权威分:</span>
             <div className="flex items-baseline gap-1">
-              <span className={`text-2xl font-black ${
+              <span className={`text-xl sm:text-2xl font-black ${
                 book.compositeScore >= 9.0 ? 'text-emerald-600' :
                 book.compositeScore >= 8.2 ? 'text-blue-600' :
                 book.compositeScore < 6.0 ? 'text-rose-600' : 'text-slate-800'
               }`}>
                 {book.compositeScore}
               </span>
-              <span className="text-xs text-slate-400 font-bold">/10</span>
+              <span className="text-[10px] sm:text-xs text-slate-400 font-bold">/10</span>
             </div>
-            <span className="text-[11px] text-slate-400 ml-auto">
+            <span className="text-[10px] sm:text-[11px] text-slate-400 ml-auto hidden sm:inline">
               贝叶斯加权对冲
             </span>
           </div>
@@ -117,7 +117,7 @@ export default function BookCard({ book, onOpenDetail }) {
       </div>
 
       {/* 4 Major Platform Rating Grid */}
-      <div className="px-5 grid grid-cols-2 gap-2 pb-3">
+      <div className="px-3 sm:px-5 grid grid-cols-2 gap-1.5 sm:gap-2 pb-2.5 sm:pb-3">
         <PlatformRatingBadge platform="douban" data={book.platformRatings.douban} compact={true} />
         <PlatformRatingBadge platform="goodreads" data={book.platformRatings.goodreads} compact={true} />
         <PlatformRatingBadge platform="amazon" data={book.platformRatings.amazon} compact={true} />
@@ -125,23 +125,23 @@ export default function BookCard({ book, onOpenDetail }) {
       </div>
 
       {/* Sentiment Pros & Cons Highlights */}
-      <div className="px-5 py-3 bg-slate-50/70 border-t border-slate-100 text-xs space-y-1.5 flex-1">
+      <div className="px-3 sm:px-5 py-2 sm:py-3 bg-slate-50/70 border-t border-slate-100 text-xs space-y-1 sm:space-y-1.5 flex-1">
         {book.sentiment?.pros?.[0] && (
           <div className="flex items-start gap-1.5 text-emerald-800">
             <ThumbsUp className="w-3.5 h-3.5 text-emerald-600 shrink-0 mt-0.5" />
-            <span className="line-clamp-1 text-[11px] font-medium">{book.sentiment.pros[0]}</span>
+            <span className="line-clamp-1 text-[10px] sm:text-[11px] font-medium">{book.sentiment.pros[0]}</span>
           </div>
         )}
         {book.sentiment?.cons?.[0] && (
           <div className="flex items-start gap-1.5 text-rose-800">
             <ThumbsDown className="w-3.5 h-3.5 text-rose-500 shrink-0 mt-0.5" />
-            <span className="line-clamp-1 text-[11px] font-medium">{book.sentiment.cons[0]}</span>
+            <span className="line-clamp-1 text-[10px] sm:text-[11px] font-medium">{book.sentiment.cons[0]}</span>
           </div>
         )}
       </div>
 
       {/* Footer: Sentiment Ratio Bar & Review count */}
-      <div className="px-5 py-2.5 bg-white border-t border-slate-100 flex items-center justify-between text-xs">
+      <div className="px-3 sm:px-5 py-2 sm:py-2.5 bg-white border-t border-slate-100 flex items-center justify-between text-xs">
         <div className="flex items-center gap-2 flex-1 mr-4">
           <div className="flex-1 h-1.5 bg-slate-200 rounded-full overflow-hidden flex">
             <div

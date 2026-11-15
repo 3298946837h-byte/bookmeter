@@ -5,17 +5,17 @@ export default function StatsBanner({ stats, onSelectVerdict }) {
   if (!stats) return null;
 
   return (
-    <div className="bg-gradient-to-br from-slate-900 via-slate-800 to-indigo-950 text-white rounded-3xl p-6 sm:p-8 mb-8 shadow-xl shadow-slate-900/10 border border-slate-700/50">
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-center">
+    <div className="bg-gradient-to-br from-slate-900 via-slate-800 to-indigo-950 text-white rounded-2xl sm:rounded-3xl p-4 sm:p-8 mb-6 sm:mb-8 shadow-xl shadow-slate-900/10 border border-slate-700/50">
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 sm:gap-6 items-center">
         
         {/* Left Column: Mission statement */}
-        <div className="lg:col-span-7 space-y-3">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 text-sky-300 text-xs font-medium backdrop-blur">
-            <CheckCircle2 className="w-3.5 h-3.5 text-sky-400" />
+        <div className="lg:col-span-7 space-y-2.5 sm:space-y-3">
+          <div className="inline-flex items-center gap-2 px-2.5 py-1 rounded-full bg-white/10 text-sky-300 text-[11px] sm:text-xs font-medium backdrop-blur">
+            <CheckCircle2 className="w-3.5 h-3.5 text-sky-400 shrink-0" />
             <span>全网多源权威对冲算法 · 杜绝单一平台刷分与偏见</span>
           </div>
           
-          <h1 className="text-2xl sm:text-3xl font-black tracking-tight leading-snug">
+          <h1 className="text-xl sm:text-3xl font-black tracking-tight leading-snug">
             一眼看清 <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-teal-300">哪些书真正封神</span>，
             <br className="hidden sm:inline" />
             哪些是 <span className="text-transparent bg-clip-text bg-gradient-to-r from-rose-400 to-amber-300">营销噱头与翻车避坑</span>
@@ -27,62 +27,62 @@ export default function StatsBanner({ stats, onSelectVerdict }) {
           </p>
 
           {/* Quick Platform Badges */}
-          <div className="pt-2 flex flex-wrap items-center gap-2 text-[11px] text-slate-300">
+          <div className="pt-1 flex flex-wrap items-center gap-1.5 sm:gap-2 text-[10px] sm:text-[11px] text-slate-300">
             <span className="opacity-70">数据源:</span>
-            <span className="px-2 py-0.5 rounded bg-emerald-950/80 text-emerald-300 border border-emerald-800">豆瓣 10分制</span>
-            <span className="px-2 py-0.5 rounded bg-amber-950/80 text-amber-300 border border-amber-800">Goodreads 5星制</span>
-            <span className="px-2 py-0.5 rounded bg-orange-950/80 text-orange-300 border border-orange-800">Amazon 购买真评</span>
-            <span className="px-2 py-0.5 rounded bg-blue-950/80 text-blue-300 border border-blue-800">Google Books</span>
+            <span className="px-1.5 py-0.5 rounded bg-emerald-950/80 text-emerald-300 border border-emerald-800">豆瓣 10分制</span>
+            <span className="px-1.5 py-0.5 rounded bg-amber-950/80 text-amber-300 border border-amber-800">Goodreads 5星制</span>
+            <span className="px-1.5 py-0.5 rounded bg-orange-950/80 text-orange-300 border border-orange-800">Amazon 购买真评</span>
+            <span className="px-1.5 py-0.5 rounded bg-blue-950/80 text-blue-300 border border-blue-800">Google Books</span>
           </div>
         </div>
 
         {/* Right Column: Statistics Grid */}
-        <div className="lg:col-span-5 grid grid-cols-2 gap-3">
+        <div className="lg:col-span-5 grid grid-cols-2 gap-2 sm:gap-3">
           <div
             onClick={() => onSelectVerdict('masterpiece')}
-            className="p-4 rounded-2xl bg-white/5 hover:bg-white/10 border border-white/10 transition-all cursor-pointer group"
+            className="p-3 sm:p-4 rounded-xl sm:rounded-2xl bg-white/5 hover:bg-white/10 border border-white/10 transition-all cursor-pointer group active:scale-95"
           >
             <div className="flex items-center justify-between text-emerald-400 mb-1">
-              <Award className="w-5 h-5 group-hover:scale-110 transition-transform" />
-              <span className="text-xs font-semibold px-2 py-0.5 rounded bg-emerald-500/20">9.0+ 殿堂</span>
+              <Award className="w-4 h-4 sm:w-5 sm:h-5 group-hover:scale-110 transition-transform" />
+              <span className="text-[10px] sm:text-xs font-semibold px-1.5 sm:px-2 py-0.5 rounded bg-emerald-500/20">9.0+ 殿堂</span>
             </div>
-            <div className="text-2xl font-black text-white">{stats.verdictCounts?.masterpiece || 0} 本</div>
-            <div className="text-[11px] text-slate-400 mt-1">全网一致公认神作</div>
+            <div className="text-xl sm:text-2xl font-black text-white">{stats.verdictCounts?.masterpiece || 0} 本</div>
+            <div className="text-[10px] sm:text-[11px] text-slate-400 mt-0.5 sm:mt-1">全网公认神作</div>
           </div>
 
           <div
             onClick={() => onSelectVerdict('warning')}
-            className="p-4 rounded-2xl bg-rose-500/10 hover:bg-rose-500/20 border border-rose-500/20 transition-all cursor-pointer group"
+            className="p-3 sm:p-4 rounded-xl sm:rounded-2xl bg-rose-500/10 hover:bg-rose-500/20 border border-rose-500/20 transition-all cursor-pointer group active:scale-95"
           >
             <div className="flex items-center justify-between text-rose-400 mb-1">
-              <ShieldAlert className="w-5 h-5 group-hover:scale-110 transition-transform" />
-              <span className="text-xs font-semibold px-2 py-0.5 rounded bg-rose-500/20">避坑预警</span>
+              <ShieldAlert className="w-4 h-4 sm:w-5 sm:h-5 group-hover:scale-110 transition-transform" />
+              <span className="text-[10px] sm:text-xs font-semibold px-1.5 sm:px-2 py-0.5 rounded bg-rose-500/20">避坑预警</span>
             </div>
-            <div className="text-2xl font-black text-rose-300">{stats.verdictCounts?.warning || 0} 本</div>
-            <div className="text-[11px] text-rose-200/70 mt-1">差评率高 / 机翻翻车</div>
+            <div className="text-xl sm:text-2xl font-black text-rose-300">{stats.verdictCounts?.warning || 0} 本</div>
+            <div className="text-[10px] sm:text-[11px] text-rose-200/70 mt-0.5 sm:mt-1">差评率高/翻车</div>
           </div>
 
           <div
             onClick={() => onSelectVerdict('controversial')}
-            className="p-4 rounded-2xl bg-amber-500/10 hover:bg-amber-500/20 border border-amber-500/20 transition-all cursor-pointer group"
+            className="p-3 sm:p-4 rounded-xl sm:rounded-2xl bg-amber-500/10 hover:bg-amber-500/20 border border-amber-500/20 transition-all cursor-pointer group active:scale-95"
           >
             <div className="flex items-center justify-between text-amber-400 mb-1">
-              <AlertOctagon className="w-5 h-5 group-hover:scale-110 transition-transform" />
-              <span className="text-xs font-semibold px-2 py-0.5 rounded bg-amber-500/20">两极争议</span>
+              <AlertOctagon className="w-4 h-4 sm:w-5 sm:h-5 group-hover:scale-110 transition-transform" />
+              <span className="text-[10px] sm:text-xs font-semibold px-1.5 sm:px-2 py-0.5 rounded bg-amber-500/20">两极争议</span>
             </div>
-            <div className="text-2xl font-black text-amber-300">{stats.verdictCounts?.controversial || 0} 本</div>
-            <div className="text-[11px] text-amber-200/70 mt-1">中西审美/口碑撕裂</div>
+            <div className="text-xl sm:text-2xl font-black text-amber-300">{stats.verdictCounts?.controversial || 0} 本</div>
+            <div className="text-[10px] sm:text-[11px] text-amber-200/70 mt-0.5 sm:mt-1">中西口碑撕裂</div>
           </div>
 
-          <div className="p-4 rounded-2xl bg-white/5 border border-white/10">
+          <div className="p-3 sm:p-4 rounded-xl sm:rounded-2xl bg-white/5 border border-white/10">
             <div className="flex items-center justify-between text-sky-400 mb-1">
-              <TrendingUp className="w-5 h-5" />
-              <span className="text-xs font-semibold px-2 py-0.5 rounded bg-sky-500/20">全网累积</span>
+              <TrendingUp className="w-4 h-4 sm:w-5 sm:h-5" />
+              <span className="text-[10px] sm:text-xs font-semibold px-1.5 sm:px-2 py-0.5 rounded bg-sky-500/20">全网累积</span>
             </div>
-            <div className="text-2xl font-black text-white">
+            <div className="text-xl sm:text-2xl font-black text-white">
               {stats.totalReviewsAggregated ? (stats.totalReviewsAggregated / 10000).toFixed(0) : '0'}万+
             </div>
-            <div className="text-[11px] text-slate-400 mt-1">跨平台真实参评量</div>
+            <div className="text-[10px] sm:text-[11px] text-slate-400 mt-0.5 sm:mt-1">真实参评量</div>
           </div>
         </div>
 
