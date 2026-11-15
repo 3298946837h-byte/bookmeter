@@ -2,8 +2,8 @@
 // Works 100% in pure browser, 0 CORS blocks, 0 API key required, millions of real books
 
 const SUBJECT_MAP = {
-  '全部': 'bestsellers',
-  '文学小说': 'fiction',
+  '全部': 'fiction',
+  '文学小说': 'literature',
   '科幻世界': 'science_fiction',
   '计算机与技术': 'computer_science',
   '历史社科': 'history',
