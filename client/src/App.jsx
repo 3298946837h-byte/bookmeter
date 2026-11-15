@@ -48,9 +48,9 @@ export default function App() {
         setStreamOffset(nextOffset);
         setBooks(prev => {
           const existingIds = new Set(prev.map(b => b.id));
-          const existingTitles = new Set(prev.map(b => b.title.toLowerCase().trim()));
-          const filtered = newBooks.filter(b => !existingIds.has(b.id) && !existingTitles.has(b.title.toLowerCase().trim()));
-          return [...prev, ...filtered];
+          const existingTitles = new Set(prev.map(b => (b.title || '').toLowerCase().trim()));
+          const filtered = newBooks.filter(b => !existingIds.has(b.id) && !existingTitles.has((b.title || '').toLowerCase().trim()));
+          return [...prev, ...(filtered.length > 0 ? filtered : newBooks)];
         });
       }
     } catch (e) {
@@ -63,15 +63,24 @@ export default function App() {
   useEffect(() => {
     const handleScroll = () => {
       if (activeTab !== 'explore' || activeSearchTerm || isLoadingMore) return;
-      const scrollY = window.scrollY || window.pageYOffset;
-      const windowHeight = window.innerHeight;
-      const docHeight = document.documentElement.scrollHeight;
-      if (docHeight - (scrollY + windowHeight) < 600) {
+      const scrollY = window.scrollY || window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
+      const windowHeight = window.innerHeight || document.documentElement.clientHeight;
+      const docHeight = Math.max(
+        document.body.scrollHeight,
+        document.documentElement.scrollHeight,
+        document.body.offsetHeight,
+        document.documentElement.offsetHeight
+      );
+      if (docHeight - (scrollY + windowHeight) < 800) {
         loadMoreBooks();
       }
     };
     window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
+    window.addEventListener('touchmove', handleScroll, { passive: true });
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('touchmove', handleScroll);
+    };
   }, [activeTab, activeSearchTerm, isLoadingMore, streamOffset, selectedCategory]);
 
   useEffect(() => {
@@ -547,24 +556,24 @@ export default function App() {
 
                 {/* Infinite Stream Sentinel & Dynamic Loader ("滚不完的书单") */}
                 {activeTab === 'explore' && !activeSearchTerm && (
-                  <div className="py-12 flex flex-col items-center justify-center gap-3">
+                  <div className="py-10 flex flex-col items-center justify-center gap-3">
                     {isLoadingMore ? (
                       <div className="flex items-center gap-2.5 text-xs text-sky-800 font-bold bg-sky-50 px-6 py-3 rounded-full border border-sky-200 animate-pulse shadow-sm">
                         <RefreshCw className="w-4 h-4 animate-spin text-sky-600" />
-                        <span>正在从全球开放图书库动态载入下一批图书...</span>
+                        <span>正在为您自动续载下一批 16 本精选图书...</span>
                       </div>
                     ) : (
-                      <div className="flex flex-col sm:flex-row items-center gap-3">
+                      <div className="flex flex-col sm:flex-row items-center gap-3 w-full sm:w-auto px-4 sm:px-0">
                         <button
                           onClick={loadMoreBooks}
-                          className="flex items-center gap-2 px-5 py-2.5 bg-white hover:bg-slate-50 text-slate-700 hover:text-sky-600 font-bold text-xs rounded-xl border border-slate-200 shadow-sm hover:border-sky-300 transition-all active:scale-95"
+                          className="w-full sm:w-auto flex items-center justify-center gap-2 px-6 py-3.5 bg-white hover:bg-slate-50 active:bg-sky-50 text-slate-800 hover:text-sky-600 font-bold text-xs sm:text-sm rounded-xl border border-slate-200 shadow-sm hover:border-sky-300 transition-all active:scale-95 touch-manipulation"
                         >
                           <BookOpen className="w-4 h-4 text-sky-600" />
-                          <span>点击载入更多全球好书 (或继续向下滚动)</span>
+                          <span>立即载入下一批 16 本好书 (已展示 {displayBooks.length} 本)</span>
                         </button>
-                        <span className="text-[11px] text-slate-400 flex items-center gap-1">
+                        <span className="text-[11px] text-slate-400 flex items-center justify-center gap-1">
                           <Sparkles className="w-3.5 h-3.5 text-amber-500" />
-                          已接入全球开放图书库 · 无限流滚不完
+                          向下滑动自动流式加载 · 无限好书滚不完
                         </span>
                       </div>
                     )}
