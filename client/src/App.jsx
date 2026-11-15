@@ -10,7 +10,6 @@ import AnalyticsView from './components/AnalyticsView';
 import ScheduleModal from './components/ScheduleModal';
 import MobileBottomNav from './components/MobileBottomNav';
 import fallbackBooks from './data/staticBooks.json';
-import { searchInternetForBook, getPersistedLiveBooks, savePersistedLiveBook } from './services/liveBookCrawler';
 import { Search, BookOpen, AlertTriangle, Sparkles, RefreshCw, Flame, ArrowLeft, CheckCircle2 } from 'lucide-react';
 
 export default function App() {
@@ -39,56 +38,42 @@ export default function App() {
   const loadData = async () => {
     try {
       setIsLoading(true);
-      const persisted = getPersistedLiveBooks();
       const [booksRes, statsRes, catRes] = await Promise.all([
         fetch('/api/books').catch(() => null),
         fetch('/api/stats').catch(() => null),
         fetch('/api/categories').catch(() => null)
       ]);
 
-      let baseList = fallbackBooks;
       if (booksRes && booksRes.ok) {
         const booksData = await booksRes.json();
-        baseList = booksData.data || fallbackBooks;
-      }
+        const statsData = statsRes && statsRes.ok ? await statsRes.json() : null;
+        const catData = catRes && catRes.ok ? await catRes.json() : null;
 
-      // Merge persisted user/crawled books without duplication
-      const existingIds = new Set(baseList.map(b => b.id));
-      const mergedList = [...persisted.filter(b => !existingIds.has(b.id)), ...baseList];
-
-      setAllMasterBooks(mergedList);
-      setBooks(mergedList);
-
-      const statsData = statsRes && statsRes.ok ? await statsRes.json() : null;
-      const catData = catRes && catRes.ok ? await catRes.json() : null;
-
-      if (statsData) {
+        const loadedList = booksData.data || fallbackBooks;
+        setAllMasterBooks(loadedList);
+        setBooks(loadedList);
         setStats(statsData);
+        setCategories(catData || [{ name: '全部', count: loadedList.length }]);
       } else {
-        setStats({
-          totalBooks: mergedList.length,
-          totalReviewsAggregated: 11885880,
-          averageCompositeScore: 8.4,
-          verdictCounts: { masterpiece: 12, recommended: 12, controversial: 3, warning: 3, mediocre: 0 }
-        });
-      }
-
-      if (catData) {
-        setCategories(catData);
-      } else {
-        const categoriesMap = { '全部': mergedList.length };
-        mergedList.forEach(b => {
+        // Fallback for static hosting environments (e.g. GitHub Pages)
+        setAllMasterBooks(fallbackBooks);
+        setBooks(fallbackBooks);
+        const categoriesMap = { '全部': fallbackBooks.length };
+        fallbackBooks.forEach(b => {
           categoriesMap[b.category] = (categoriesMap[b.category] || 0) + 1;
         });
         setCategories(Object.entries(categoriesMap).map(([name, count]) => ({ name, count })));
+        setStats({
+          totalBooks: fallbackBooks.length,
+          totalReviewsAggregated: 11485880,
+          averageCompositeScore: 8.4,
+          verdictCounts: { masterpiece: 11, recommended: 11, controversial: 3, warning: 3, mediocre: 0 }
+        });
       }
     } catch (err) {
       console.warn('API error, using offline database:', err);
-      const persisted = getPersistedLiveBooks();
-      const existingIds = new Set(fallbackBooks.map(b => b.id));
-      const merged = [...persisted.filter(b => !existingIds.has(b.id)), ...fallbackBooks];
-      setAllMasterBooks(merged);
-      setBooks(merged);
+      setAllMasterBooks(fallbackBooks);
+      setBooks(fallbackBooks);
     } finally {
       setIsLoading(false);
     }
@@ -107,7 +92,7 @@ export default function App() {
     }
   }, [activeTab]);
 
-  // Execute global search (Local + OpenLibrary + Live Internet Crawler & Resolver)
+  // Execute global search (Local + OpenLibrary + DeepSeek Live Resolver)
   const handleSearchSubmit = async (overrideQuery) => {
     const query = (overrideQuery !== undefined ? overrideQuery : searchQuery).trim();
     if (!query) {
@@ -155,24 +140,6 @@ export default function App() {
         if (!seenIds.has(b.id)) {
           combined.push(b);
           seenIds.add(b.id);
-        }
-      }
-
-      // 3. If NOT found locally or on server: AUTOMATICALLY crawl the live internet!
-      if (combined.length === 0) {
-        console.log(`[Auto Live Crawler] Automatically searching the entire internet for: ${query}`);
-        const liveCrawled = await searchInternetForBook(query);
-        if (liveCrawled) {
-          savePersistedLiveBook(liveCrawled);
-          combined.push(liveCrawled);
-          setAllMasterBooks(prev => [liveCrawled, ...prev]);
-
-          // Also try saving to server if backend is alive
-          fetch('/api/books/auto-add', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(liveCrawled)
-          }).catch(() => {});
         }
       }
 
