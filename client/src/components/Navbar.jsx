@@ -1,5 +1,5 @@
 import React from 'react';
-import { Search, BookOpen, Clock, AlertTriangle, Sparkles, X, Flame, Award, BarChart3, Scale } from 'lucide-react';
+import { Search, BookOpen, Clock, AlertTriangle, Sparkles, X, Flame, Award, BarChart3, Scale, Download } from 'lucide-react';
 
 export default function Navbar({
   searchQuery,
@@ -8,7 +8,9 @@ export default function Navbar({
   isSearching,
   activeTab,
   setActiveTab,
-  onOpenScheduleModal
+  onOpenScheduleModal,
+  onOpenDownloadModal,
+  visibleBooksCount
 }) {
   const handleClear = () => {
     setSearchQuery('');
@@ -98,11 +100,25 @@ export default function Navbar({
           {/* Right Action Buttons */}
           <div className="flex items-center gap-1.5 sm:gap-2 shrink-0">
             <button
+              onClick={onOpenDownloadModal}
+              title="一键下载与数据导出中心（支持 CSV/Excel、JSON、Markdown/TXT）"
+              className="flex items-center gap-1.5 px-3 py-1.5 text-xs text-white bg-gradient-to-r from-sky-600 to-indigo-600 hover:from-sky-700 hover:to-indigo-700 active:scale-95 rounded-lg font-bold shadow-xs transition-all shrink-0 cursor-pointer"
+            >
+              <Download className="w-3.5 h-3.5" />
+              <span>一键下载</span>
+              {typeof visibleBooksCount === 'number' && visibleBooksCount > 0 && (
+                <span className="hidden sm:inline-block px-1.5 py-0.2 text-[10px] bg-white/25 rounded-full font-mono">
+                  {visibleBooksCount}
+                </span>
+              )}
+            </button>
+
+            <button
               onClick={onOpenScheduleModal}
               title="查看自动抓取与定期更新策略"
-              className="flex items-center gap-1 px-2.5 py-1.5 text-xs text-sky-700 bg-sky-50 hover:bg-sky-100 active:bg-sky-200 rounded-lg font-medium border border-sky-200 transition-all shrink-0"
+              className="flex items-center gap-1 px-2.5 py-1.5 text-xs text-slate-700 bg-slate-100 hover:bg-slate-200 active:bg-slate-300 rounded-lg font-medium border border-slate-200 transition-all shrink-0"
             >
-              <Clock className="w-3.5 h-3.5 text-sky-600" />
+              <Clock className="w-3.5 h-3.5 text-slate-500" />
               <span className="text-xs">排程同步</span>
             </button>
           </div>

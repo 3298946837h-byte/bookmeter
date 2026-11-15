@@ -105,6 +105,96 @@ app.get('/api/search', async (req, res) => {
   });
 });
 
+// 3.5. Full Dataset Export & Direct Download API (CSV with UTF-8 BOM, JSON)
+app.get('/api/export', (req, res) => {
+  const { format = 'csv', category, verdict } = req.query;
+
+  let targetBooks = [...books];
+  if (category && category !== '全部') {
+    targetBooks = targetBooks.filter(b => b.category === category);
+  }
+  if (verdict && verdict !== 'all') {
+    targetBooks = targetBooks.filter(b => b.verdict && b.verdict.status === verdict);
+  }
+
+  const d = new Date();
+  const pad = (n) => String(n).padStart(2, '0');
+  const timestamp = `${d.getFullYear()}${pad(d.getMonth() + 1)}${pad(d.getDate())}`;
+
+  if (format === 'json') {
+    const filename = `BookMeter_Dataset_${timestamp}.json`;
+    res.setHeader('Content-Type', 'application/json; charset=utf-8');
+    res.setHeader('Content-Disposition', `attachment; filename="${filename}"`);
+    return res.send(JSON.stringify({
+      exportedAt: new Date().toISOString(),
+      totalBooks: targetBooks.length,
+      data: targetBooks
+    }, null, 2));
+  }
+
+  // Default: CSV format with UTF-8 BOM
+  const headers = [
+    '书名',
+    '原著名',
+    '作者',
+    '译者',
+    '分类',
+    '综合贝叶斯权威分',
+    '口碑评级',
+    '跨平台分歧指数',
+    '豆瓣评分',
+    '豆瓣参评人数',
+    'Goodreads评分(5星制)',
+    'Goodreads参评人数',
+    'Amazon评分',
+    'GoogleBooks评分',
+    '核心好评亮点',
+    '差评槽点与劝退提示',
+    '读者代表性热评',
+    '出版社',
+    '出版年份',
+    'ISBN'
+  ];
+
+  const escapeCSV = (val) => {
+    if (val === undefined || val === null) return '""';
+    const str = String(val).replace(/"/g, '""');
+    return `"${str}"`;
+  };
+
+  const rows = targetBooks.map(b => {
+    const p = b.platformRatings || {};
+    return [
+      escapeCSV(b.title),
+      escapeCSV(b.originalTitle || ''),
+      escapeCSV(b.author),
+      escapeCSV(b.translator || ''),
+      escapeCSV(b.category),
+      escapeCSV(b.compositeScore),
+      escapeCSV(b.verdict?.label || ''),
+      escapeCSV(b.discrepancyIndex),
+      escapeCSV(p.douban?.score ?? ''),
+      escapeCSV(p.douban?.ratingCount ?? ''),
+      escapeCSV(p.goodreads?.score ?? ''),
+      escapeCSV(p.goodreads?.ratingCount ?? ''),
+      escapeCSV(p.amazon?.score ?? ''),
+      escapeCSV(p.googleBooks?.score ?? ''),
+      escapeCSV((b.pros || []).join('；')),
+      escapeCSV((b.cons || []).join('；')),
+      escapeCSV(b.representativeReview || ''),
+      escapeCSV(b.publisher || ''),
+      escapeCSV(b.publicationYear || ''),
+      escapeCSV(b.isbn || '')
+    ].join(',');
+  });
+
+  const csvContent = '\uFEFF' + [headers.join(','), ...rows].join('\r\n');
+  const filename = `BookMeter_Dataset_${timestamp}.csv`;
+  res.setHeader('Content-Type', 'text/csv; charset=utf-8');
+  res.setHeader('Content-Disposition', `attachment; filename="${filename}"`);
+  return res.send(csvContent);
+});
+
 // 4. Statistics endpoint
 app.get('/api/stats', (req, res) => {
   let totalReviews = 0;

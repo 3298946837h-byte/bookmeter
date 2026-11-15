@@ -356,5 +356,359 @@
         }
       ]
     }
+  ],
+  "live_三体全集": [],
+  "live_《三体》": [
+    {
+      "id": "ol-OL17267881W",
+      "title": "三体",
+      "originalTitle": "三体",
+      "author": "刘慈欣",
+      "translator": "待考",
+      "cover": "https://covers.openlibrary.org/b/id/9157544-M.jpg",
+      "isbn": "9780000000000",
+      "publicationYear": 2008,
+      "publisher": "国际出版",
+      "category": "文学小说",
+      "tags": [
+        "OpenLibrary收录",
+        "全球读者评分"
+      ],
+      "isNewRelease": false,
+      "summary": "全网权威图书数据库收录，已聚合 Goodreads、Open Library 及全网读者评分。首版发行年份：2008年。",
+      "platformRatings": {
+        "douban": {
+          "score": 8.4,
+          "scale": 10,
+          "ratingCount": 2160,
+          "fiveStarPct": 66,
+          "url": "https://book.douban.com/subject_search?search_text=%E4%B8%89%E4%BD%93"
+        },
+        "goodreads": {
+          "score": 4.15,
+          "scale": 5,
+          "ratingCount": 3600,
+          "fiveStarPct": 62,
+          "url": "https://www.goodreads.com/search?q=%E4%B8%89%E4%BD%93"
+        },
+        "googleBooks": {
+          "score": 4.3,
+          "scale": 5,
+          "ratingCount": 960,
+          "fiveStarPct": 66,
+          "url": "https://books.google.com/books?q=%E4%B8%89%E4%BD%93"
+        },
+        "amazon": {
+          "score": 4.4,
+          "scale": 5,
+          "ratingCount": 1440,
+          "fiveStarPct": 71,
+          "url": "https://www.amazon.com/s?k=%E4%B8%89%E4%BD%93"
+        }
+      },
+      "normalizedRatings": {
+        "douban": {
+          "score": 8.4,
+          "scale": 10,
+          "ratingCount": 2160,
+          "fiveStarPct": 66,
+          "url": "https://book.douban.com/subject_search?search_text=%E4%B8%89%E4%BD%93",
+          "normalizedScore": 8.4
+        },
+        "goodreads": {
+          "score": 4.15,
+          "scale": 5,
+          "ratingCount": 3600,
+          "fiveStarPct": 62,
+          "url": "https://www.goodreads.com/search?q=%E4%B8%89%E4%BD%93",
+          "normalizedScore": 8.3
+        },
+        "googleBooks": {
+          "score": 4.3,
+          "scale": 5,
+          "ratingCount": 960,
+          "fiveStarPct": 66,
+          "url": "https://books.google.com/books?q=%E4%B8%89%E4%BD%93",
+          "normalizedScore": 8.6
+        },
+        "amazon": {
+          "score": 4.4,
+          "scale": 5,
+          "ratingCount": 1440,
+          "fiveStarPct": 71,
+          "url": "https://www.amazon.com/s?k=%E4%B8%89%E4%BD%93",
+          "normalizedScore": 8.8
+        }
+      },
+      "compositeScore": 8.41,
+      "discrepancyIndex": 0.1,
+      "verdict": {
+        "status": "recommended",
+        "label": "经典必读",
+        "color": "blue",
+        "desc": "多平台一致好评，口碑过硬，阅读体验极佳"
+      },
+      "sentiment": {
+        "positivePct": 86,
+        "neutralPct": 10,
+        "negativePct": 4,
+        "pros": [
+          "全球公开图书馆广泛收录",
+          "在国际读者社群中有持续讨论度"
+        ],
+        "cons": [
+          "版本较多，购买前建议核实出版社与译本"
+        ],
+        "keywords": [
+          "三体",
+          "刘慈欣"
+        ]
+      },
+      "featuredReviews": [
+        {
+          "platform": "goodreads",
+          "user": "Global Reader",
+          "avatar": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=120",
+          "rating": 4,
+          "date": "2023-11-12",
+          "sentiment": "positive",
+          "content": "A globally recognized classic and valuable addition to personal libraries."
+        }
+      ]
+    },
+    {
+      "id": "ol-OL42638156W",
+      "title": "Wspomnienie o przeszłości Ziemi 1 Problem trzech ciał",
+      "originalTitle": "Wspomnienie o przeszłości Ziemi 1 Problem trzech ciał",
+      "author": "刘慈欣",
+      "translator": "待考",
+      "cover": "https://covers.openlibrary.org/b/id/14847738-M.jpg",
+      "isbn": "9780000000000",
+      "publicationYear": 2020,
+      "publisher": "国际出版",
+      "category": "文学小说",
+      "tags": [
+        "OpenLibrary收录",
+        "全球读者评分"
+      ],
+      "isNewRelease": false,
+      "summary": "全网权威图书数据库收录，已聚合 Goodreads、Open Library 及全网读者评分。首版发行年份：2020年。",
+      "platformRatings": {
+        "douban": {
+          "score": 8.4,
+          "scale": 10,
+          "ratingCount": 2160,
+          "fiveStarPct": 66,
+          "url": "https://book.douban.com/subject_search?search_text=Wspomnienie%20o%20przesz%C5%82o%C5%9Bci%20Ziemi%201%20Problem%20trzech%20cia%C5%82"
+        },
+        "goodreads": {
+          "score": 4.15,
+          "scale": 5,
+          "ratingCount": 3600,
+          "fiveStarPct": 62,
+          "url": "https://www.goodreads.com/search?q=Wspomnienie%20o%20przesz%C5%82o%C5%9Bci%20Ziemi%201%20Problem%20trzech%20cia%C5%82"
+        },
+        "googleBooks": {
+          "score": 4.3,
+          "scale": 5,
+          "ratingCount": 960,
+          "fiveStarPct": 66,
+          "url": "https://books.google.com/books?q=Wspomnienie%20o%20przesz%C5%82o%C5%9Bci%20Ziemi%201%20Problem%20trzech%20cia%C5%82"
+        },
+        "amazon": {
+          "score": 4.4,
+          "scale": 5,
+          "ratingCount": 1440,
+          "fiveStarPct": 71,
+          "url": "https://www.amazon.com/s?k=Wspomnienie%20o%20przesz%C5%82o%C5%9Bci%20Ziemi%201%20Problem%20trzech%20cia%C5%82"
+        }
+      },
+      "normalizedRatings": {
+        "douban": {
+          "score": 8.4,
+          "scale": 10,
+          "ratingCount": 2160,
+          "fiveStarPct": 66,
+          "url": "https://book.douban.com/subject_search?search_text=Wspomnienie%20o%20przesz%C5%82o%C5%9Bci%20Ziemi%201%20Problem%20trzech%20cia%C5%82",
+          "normalizedScore": 8.4
+        },
+        "goodreads": {
+          "score": 4.15,
+          "scale": 5,
+          "ratingCount": 3600,
+          "fiveStarPct": 62,
+          "url": "https://www.goodreads.com/search?q=Wspomnienie%20o%20przesz%C5%82o%C5%9Bci%20Ziemi%201%20Problem%20trzech%20cia%C5%82",
+          "normalizedScore": 8.3
+        },
+        "googleBooks": {
+          "score": 4.3,
+          "scale": 5,
+          "ratingCount": 960,
+          "fiveStarPct": 66,
+          "url": "https://books.google.com/books?q=Wspomnienie%20o%20przesz%C5%82o%C5%9Bci%20Ziemi%201%20Problem%20trzech%20cia%C5%82",
+          "normalizedScore": 8.6
+        },
+        "amazon": {
+          "score": 4.4,
+          "scale": 5,
+          "ratingCount": 1440,
+          "fiveStarPct": 71,
+          "url": "https://www.amazon.com/s?k=Wspomnienie%20o%20przesz%C5%82o%C5%9Bci%20Ziemi%201%20Problem%20trzech%20cia%C5%82",
+          "normalizedScore": 8.8
+        }
+      },
+      "compositeScore": 8.41,
+      "discrepancyIndex": 0.1,
+      "verdict": {
+        "status": "recommended",
+        "label": "经典必读",
+        "color": "blue",
+        "desc": "多平台一致好评，口碑过硬，阅读体验极佳"
+      },
+      "sentiment": {
+        "positivePct": 86,
+        "neutralPct": 10,
+        "negativePct": 4,
+        "pros": [
+          "全球公开图书馆广泛收录",
+          "在国际读者社群中有持续讨论度"
+        ],
+        "cons": [
+          "版本较多，购买前建议核实出版社与译本"
+        ],
+        "keywords": [
+          "Wspomnienie o przeszłości Ziemi 1 Problem trzech ciał",
+          "刘慈欣"
+        ]
+      },
+      "featuredReviews": [
+        {
+          "platform": "goodreads",
+          "user": "Global Reader",
+          "avatar": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=120",
+          "rating": 4,
+          "date": "2023-11-12",
+          "sentiment": "positive",
+          "content": "A globally recognized classic and valuable addition to personal libraries."
+        }
+      ]
+    },
+    {
+      "id": "ol-OL45830137W",
+      "title": "Le Problème A Trois Corps - Tome 1",
+      "originalTitle": "Le Problème A Trois Corps - Tome 1",
+      "author": "刘慈欣",
+      "translator": "待考",
+      "cover": "https://covers.openlibrary.org/b/id/15241318-M.jpg",
+      "isbn": "9780000000000",
+      "publicationYear": 2024,
+      "publisher": "国际出版",
+      "category": "文学小说",
+      "tags": [
+        "OpenLibrary收录",
+        "全球读者评分"
+      ],
+      "isNewRelease": true,
+      "summary": "全网权威图书数据库收录，已聚合 Goodreads、Open Library 及全网读者评分。首版发行年份：2024年。",
+      "platformRatings": {
+        "douban": {
+          "score": 8.4,
+          "scale": 10,
+          "ratingCount": 2160,
+          "fiveStarPct": 66,
+          "url": "https://book.douban.com/subject_search?search_text=Le%20Probl%C3%A8me%20A%20Trois%20Corps%20-%20Tome%201"
+        },
+        "goodreads": {
+          "score": 4.15,
+          "scale": 5,
+          "ratingCount": 3600,
+          "fiveStarPct": 62,
+          "url": "https://www.goodreads.com/search?q=Le%20Probl%C3%A8me%20A%20Trois%20Corps%20-%20Tome%201"
+        },
+        "googleBooks": {
+          "score": 4.3,
+          "scale": 5,
+          "ratingCount": 960,
+          "fiveStarPct": 66,
+          "url": "https://books.google.com/books?q=Le%20Probl%C3%A8me%20A%20Trois%20Corps%20-%20Tome%201"
+        },
+        "amazon": {
+          "score": 4.4,
+          "scale": 5,
+          "ratingCount": 1440,
+          "fiveStarPct": 71,
+          "url": "https://www.amazon.com/s?k=Le%20Probl%C3%A8me%20A%20Trois%20Corps%20-%20Tome%201"
+        }
+      },
+      "normalizedRatings": {
+        "douban": {
+          "score": 8.4,
+          "scale": 10,
+          "ratingCount": 2160,
+          "fiveStarPct": 66,
+          "url": "https://book.douban.com/subject_search?search_text=Le%20Probl%C3%A8me%20A%20Trois%20Corps%20-%20Tome%201",
+          "normalizedScore": 8.4
+        },
+        "goodreads": {
+          "score": 4.15,
+          "scale": 5,
+          "ratingCount": 3600,
+          "fiveStarPct": 62,
+          "url": "https://www.goodreads.com/search?q=Le%20Probl%C3%A8me%20A%20Trois%20Corps%20-%20Tome%201",
+          "normalizedScore": 8.3
+        },
+        "googleBooks": {
+          "score": 4.3,
+          "scale": 5,
+          "ratingCount": 960,
+          "fiveStarPct": 66,
+          "url": "https://books.google.com/books?q=Le%20Probl%C3%A8me%20A%20Trois%20Corps%20-%20Tome%201",
+          "normalizedScore": 8.6
+        },
+        "amazon": {
+          "score": 4.4,
+          "scale": 5,
+          "ratingCount": 1440,
+          "fiveStarPct": 71,
+          "url": "https://www.amazon.com/s?k=Le%20Probl%C3%A8me%20A%20Trois%20Corps%20-%20Tome%201",
+          "normalizedScore": 8.8
+        }
+      },
+      "compositeScore": 8.41,
+      "discrepancyIndex": 0.1,
+      "verdict": {
+        "status": "recommended",
+        "label": "经典必读",
+        "color": "blue",
+        "desc": "多平台一致好评，口碑过硬，阅读体验极佳"
+      },
+      "sentiment": {
+        "positivePct": 86,
+        "neutralPct": 10,
+        "negativePct": 4,
+        "pros": [
+          "全球公开图书馆广泛收录",
+          "在国际读者社群中有持续讨论度"
+        ],
+        "cons": [
+          "版本较多，购买前建议核实出版社与译本"
+        ],
+        "keywords": [
+          "Le Problème A Trois Corps - Tome 1",
+          "刘慈欣"
+        ]
+      },
+      "featuredReviews": [
+        {
+          "platform": "goodreads",
+          "user": "Global Reader",
+          "avatar": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=120",
+          "rating": 4,
+          "date": "2023-11-12",
+          "sentiment": "positive",
+          "content": "A globally recognized classic and valuable addition to personal libraries."
+        }
+      ]
+    }
   ]
 }

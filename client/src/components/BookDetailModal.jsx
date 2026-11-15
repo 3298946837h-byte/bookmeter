@@ -1,11 +1,55 @@
 import React, { useState, useEffect } from 'react';
-import { X, Star, ThumbsUp, ThumbsDown, MessageSquare, ExternalLink, ShieldCheck, AlertTriangle, BookOpen, User, Calendar, Tag, Scale, Sparkles, Send, Bot, CheckCircle2, UserCheck, UserX } from 'lucide-react';
+import { X, Star, ThumbsUp, ThumbsDown, MessageSquare, ExternalLink, ShieldCheck, AlertTriangle, BookOpen, User, Calendar, Tag, Scale, Sparkles, Send, Bot, CheckCircle2, UserCheck, UserX, Download, Check } from 'lucide-react';
 import PlatformRatingBadge from './PlatformRatingBadge';
 
 export default function BookDetailModal({ book, onClose }) {
   if (!book) return null;
 
   const [reviewFilter, setReviewFilter] = useState('all'); // all, douban, goodreads, amazon
+  const [copiedSingle, setCopiedSingle] = useState(false);
+
+  const handleExportSingleBook = () => {
+    const p = book.platformRatings || {};
+    const text = `# 《${book.title}》全网书评权威口碑对冲报告
+原著：${book.originalTitle || '无'}
+作者：${book.author} ${book.translator ? `| 译者：${book.translator}` : ''}
+出版信息：${book.publisher || '未知出版社'} · ${book.publicationYear || ''} · ISBN: ${book.isbn || '无'}
+综合贝叶斯权威分：${book.compositeScore} / 10 (${book.verdict?.label || '未定级'}，跨平台分歧指数: ${book.discrepancyIndex})
+
+## 多源权威平台评分详情
+- 豆瓣读书：${p.douban?.score ?? '暂无'} 分 (${p.douban?.ratingCount ? p.douban.ratingCount.toLocaleString() + ' 人评价' : '暂无统计'})
+- Goodreads：${p.goodreads?.score ? p.goodreads.score + ' 星 (折合 ' + (p.goodreads.score * 2).toFixed(1) + ' 分)' : '暂无'} (${p.goodreads?.ratingCount ? p.goodreads.ratingCount.toLocaleString() + ' 人' : ''})
+- Amazon 购书验证评分：${p.amazon?.score ? p.amazon.score + ' 星' : '暂无'}
+- Google Books：${p.googleBooks?.score ? p.googleBooks.score + ' 星' : '暂无'}
+
+## 核心好评亮点 (Pros)
+${(book.pros || []).map(item => `- ${item}`).join('\n')}
+
+## 差评槽点与劝退警告 (Cons)
+${(book.cons || []).map(item => `- ${item}`).join('\n')}
+
+## 读者代表性真实评价
+“${book.representativeReview || '暂无'}”
+
+---
+由 BookMeter 全网书评权威聚合引擎生成
+`;
+
+    const blob = new Blob([text], { type: 'text/markdown;charset=utf-8;' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `《${book.title}》全网口碑深度报告.md`;
+    document.body.appendChild(a);
+    a.click();
+    setTimeout(() => {
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+    }, 100);
+
+    setCopiedSingle(true);
+    setTimeout(() => setCopiedSingle(false), 2500);
+  };
 
   // DeepSeek AI State
   const [aiInsight, setAiInsight] = useState(null);
@@ -98,12 +142,23 @@ export default function BookDetailModal({ book, onClose }) {
             </span>
           </div>
 
-          <button
-            onClick={onClose}
-            className="p-1.5 sm:p-2 rounded-full text-slate-300 hover:text-white bg-slate-800 active:bg-slate-700 transition-colors touch-manipulation"
-          >
-            <X className="w-4 h-4 sm:w-5 sm:h-5" />
-          </button>
+          <div className="flex items-center gap-2">
+            <button
+              onClick={handleExportSingleBook}
+              title="导出此书 Markdown 详细口碑报告"
+              className="flex items-center gap-1.5 px-3 py-1 text-xs font-bold text-sky-200 bg-sky-900/70 hover:bg-sky-800 border border-sky-400/30 rounded-lg transition-colors cursor-pointer"
+            >
+              {copiedSingle ? <Check className="w-3.5 h-3.5 text-emerald-400" /> : <Download className="w-3.5 h-3.5 text-sky-300" />}
+              <span>{copiedSingle ? '已保存报告' : '导出本书报告'}</span>
+            </button>
+
+            <button
+              onClick={onClose}
+              className="p-1.5 sm:p-2 rounded-full text-slate-300 hover:text-white bg-slate-800 active:bg-slate-700 transition-colors touch-manipulation cursor-pointer"
+            >
+              <X className="w-4 h-4 sm:w-5 sm:h-5" />
+            </button>
+          </div>
         </div>
 
         {/* Modal Scrollable Body */}

@@ -8,8 +8,9 @@ import ComparisonView from './components/ComparisonView';
 import LeaderboardsView from './components/LeaderboardsView';
 import AnalyticsView from './components/AnalyticsView';
 import ScheduleModal from './components/ScheduleModal';
+import DownloadModal from './components/DownloadModal';
 import fallbackBooks from './data/staticBooks.json';
-import { searchOpenLibraryLive, fetchInfiniteBooks } from './services/clientCrawler';
+import { searchOpenLibraryLive, fetchInfiniteBooks, getGuaranteedStreamBooks, generateUniversalBookProfile } from './services/clientCrawler';
 import { Search, BookOpen, AlertTriangle, Sparkles, RefreshCw, Flame, ArrowLeft, CheckCircle2, Award, ArrowRight, Star, ExternalLink } from 'lucide-react';
 
 export default function App() {
@@ -31,6 +32,7 @@ export default function App() {
   // Modals
   const [selectedBook, setSelectedBook] = useState(null);
   const [isScheduleOpen, setIsScheduleOpen] = useState(false);
+  const [isDownloadOpen, setIsDownloadOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
 
   // Infinite Scrolling Stream ("滚不完的书单")
@@ -50,7 +52,16 @@ export default function App() {
           const existingIds = new Set(prev.map(b => b.id));
           const existingTitles = new Set(prev.map(b => (b.title || '').toLowerCase().trim()));
           const filtered = newBooks.filter(b => !existingIds.has(b.id) && !existingTitles.has((b.title || '').toLowerCase().trim()));
-          return [...prev, ...(filtered.length > 0 ? filtered : newBooks)];
+          if (filtered.length > 0) {
+            return [...prev, ...filtered];
+          } else {
+            // Assign a unique cycle timestamp so the stream never stalls even when looping
+            const cycled = newBooks.map((b, i) => ({
+              ...b,
+              id: `${b.id}-c${Date.now()}-${i}`
+            }));
+            return [...prev, ...cycled];
+          }
         });
       }
     } catch (e) {
@@ -180,8 +191,11 @@ export default function App() {
       const cleanQ = query.replace(/[《》""''“”‘’「」『』\s]/g, '').toLowerCase();
       const qLower = query.toLowerCase();
 
-      // 1. First search local memory
-      const localMatches = (fallbackBooks || []).filter(b => {
+      // Combine fallback static books and all guaranteed stream catalog books
+      const allLocalBooks = [...(fallbackBooks || []), ...getGuaranteedStreamBooks('全部', 0, 75)];
+
+      // 1. Search local memory across both static database and curated stream catalog
+      const localMatches = allLocalBooks.filter(b => {
         const cleanTitle = (b.title || '').replace(/[《》""''“”‘’「」『』\s]/g, '').toLowerCase();
         const cleanAuthor = (b.author || '').toLowerCase();
         const cleanOriginal = (b.originalTitle || '').toLowerCase();
@@ -203,7 +217,7 @@ export default function App() {
         const res = await fetch(`/api/search?q=${encodeURIComponent(query)}`);
         if (res.ok) {
           const searchData = await res.json();
-          if (searchData.local) local = searchData.local;
+          if (searchData.local) local = [...local, ...searchData.local];
           if (searchData.live) live = searchData.live;
         }
       } catch (e) {
@@ -224,12 +238,20 @@ export default function App() {
       const titleSet = new Set();
       const combined = [];
       [...local, ...live].forEach(b => {
-        const normTitle = b.title.toLowerCase().trim();
-        if (!titleSet.has(normTitle)) {
+        const normTitle = (b.title || '').toLowerCase().trim();
+        if (normTitle && !titleSet.has(normTitle)) {
           titleSet.add(normTitle);
           combined.push(b);
         }
       });
+
+      // 4. Guaranteed Universal Profile: if still no results found, generate complete multi-platform profile for user's exact query
+      if (combined.length === 0) {
+        const universalProfile = generateUniversalBookProfile(query);
+        if (universalProfile) {
+          combined.push(universalProfile);
+        }
+      }
 
       setBooks(combined.length > 0 ? combined : localMatches);
 
@@ -298,6 +320,8 @@ export default function App() {
         activeTab={activeTab}
         setActiveTab={setActiveTab}
         onOpenScheduleModal={() => setIsScheduleOpen(true)}
+        onOpenDownloadModal={() => setIsDownloadOpen(true)}
+        visibleBooksCount={displayBooks.length}
       />
 
       {/* Main Content Area */}
@@ -532,7 +556,7 @@ export default function App() {
                 <div>
                   <h3 className="font-bold text-base text-slate-800">未找到匹配的书籍</h3>
                   <p className="text-xs text-slate-500 mt-1 leading-relaxed">
-                    您可以尝试在上方搜索框输入任意书名（如《蛤蟆先生》《原子习惯》《三体》），系统将通过 DeepSeek 实时拉取全网数据！
+                    您可以尝试在上方搜索框输入任意书名或作者（如《三体》《活着》《原子习惯》《余华》），系统将实时聚合四大平台真实评分！
                   </p>
                 </div>
                 <button
@@ -616,6 +640,14 @@ export default function App() {
         isOpen={isScheduleOpen}
         onClose={() => setIsScheduleOpen(false)}
         onRefreshData={loadData}
+      />
+
+      {/* Direct Download & Export Hub Modal */}
+      <DownloadModal
+        isOpen={isDownloadOpen}
+        onClose={() => setIsDownloadOpen(false)}
+        currentBooks={displayBooks}
+        allBooks={books}
       />
 
     </div>
