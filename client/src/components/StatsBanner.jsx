@@ -1,5 +1,5 @@
 import React from 'react';
-import { Award, AlertOctagon, TrendingUp, Layers, CheckCircle2, ShieldAlert } from 'lucide-react';
+import { Award, AlertOctagon, TrendingUp, CheckCircle2, ShieldAlert } from 'lucide-react';
 
 export default function StatsBanner({ stats, onSelectVerdict }) {
   if (!stats) return null;

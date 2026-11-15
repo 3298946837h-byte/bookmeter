@@ -1,8 +1,20 @@
 import React from 'react';
-import { Star, MessageSquare, ThumbsUp, ThumbsDown, AlertCircle, ArrowUpRight, Scale, Download } from 'lucide-react';
+import { MessageSquare, ThumbsUp, ThumbsDown, ArrowUpRight, Scale, Download, Heart } from 'lucide-react';
 import PlatformRatingBadge from './PlatformRatingBadge';
 
-export default function BookCard({ book, onOpenDetail, onOpenDownload }) {
+const FALLBACK_COVER_SVG = `data:image/svg+xml;utf8,${encodeURIComponent(
+  `<svg xmlns="http://www.w3.org/2000/svg" width="300" height="420" viewBox="0 0 300 420" fill="none">
+    <rect width="300" height="420" fill="#0f172a"/>
+    <rect x="12" y="12" width="276" height="396" rx="8" fill="#1e293b" stroke="#334155" stroke-width="2"/>
+    <path d="M60 110h180M60 140h180M60 170h120" stroke="#475569" stroke-width="4" stroke-linecap="round"/>
+    <circle cx="150" cy="250" r="38" fill="#0284c7" opacity="0.85"/>
+    <path d="M142 240l18 10-18 10v-20z" fill="#ffffff"/>
+    <text x="150" y="325" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,sans-serif" font-size="15" font-weight="bold" fill="#f8fafc" text-anchor="middle">BookMeter 典藏</text>
+    <text x="150" y="350" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,sans-serif" font-size="11" fill="#94a3b8" text-anchor="middle">全网书评权威聚合</text>
+  </svg>`
+)}`;
+
+export default function BookCard({ book, onOpenDetail, onOpenDownload, isFavorite, onToggleFavorite }) {
   if (!book) return null;
 
   const verdictStyles = {
@@ -42,7 +54,16 @@ export default function BookCard({ book, onOpenDetail, onOpenDownload }) {
 
   return (
     <div
+      role="button"
+      tabIndex={0}
+      aria-label={`查看《${book.title}》全网口碑详情`}
       onClick={() => onOpenDetail(book)}
+      onKeyDown={(e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          onOpenDetail(book);
+        }
+      }}
       className={`group bg-white rounded-2xl border ${style.border} shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col overflow-hidden cursor-pointer relative`}
     >
       
@@ -50,6 +71,24 @@ export default function BookCard({ book, onOpenDetail, onOpenDownload }) {
       <div className="flex items-center justify-between px-4 py-2 bg-slate-50/80 border-b border-slate-100 text-xs">
         <span className="font-semibold text-slate-500">{book.category} · {book.publicationYear}</span>
         <div className="flex items-center gap-1.5">
+          {onToggleFavorite && (
+            <button
+              type="button"
+              aria-label={isFavorite ? `取消收藏《${book.title}》` : `将《${book.title}》加入书架`}
+              title={isFavorite ? "已在我的书架 (点击移出)" : "加入我的书架"}
+              onClick={(e) => {
+                e.stopPropagation();
+                onToggleFavorite(book);
+              }}
+              className={`p-1 rounded-full transition-colors ${
+                isFavorite 
+                  ? 'text-rose-500 bg-rose-50 hover:bg-rose-100' 
+                  : 'text-slate-400 hover:text-rose-500 hover:bg-slate-200/60'
+              }`}
+            >
+              <Heart className={`w-3.5 h-3.5 ${isFavorite ? 'fill-rose-500 text-rose-500' : ''}`} />
+            </button>
+          )}
           {book.discrepancyIndex >= 1.0 && (
             <span className="flex items-center gap-1 text-[11px] font-bold px-2 py-0.5 rounded-full bg-amber-100 text-amber-800" title="各平台评分分歧较大">
               <Scale className="w-3 h-3" />
@@ -72,7 +111,9 @@ export default function BookCard({ book, onOpenDetail, onOpenDownload }) {
             className="w-full h-full object-cover"
             loading="lazy"
             onError={(e) => {
-              e.target.src = 'https://images.unsplash.com/photo-1544947950-fa07a98d237f?auto=format&fit=crop&q=80&w=300';
+              if (e.currentTarget.src !== FALLBACK_COVER_SVG) {
+                e.currentTarget.src = FALLBACK_COVER_SVG;
+              }
             }}
           />
         </div>
@@ -118,10 +159,10 @@ export default function BookCard({ book, onOpenDetail, onOpenDownload }) {
 
       {/* 4 Major Platform Rating Grid */}
       <div className="px-3 sm:px-5 grid grid-cols-2 gap-1.5 sm:gap-2 pb-2.5 sm:pb-3">
-        <PlatformRatingBadge platform="douban" data={book.platformRatings.douban} compact={true} />
-        <PlatformRatingBadge platform="goodreads" data={book.platformRatings.goodreads} compact={true} />
-        <PlatformRatingBadge platform="amazon" data={book.platformRatings.amazon} compact={true} />
-        <PlatformRatingBadge platform="googleBooks" data={book.platformRatings.googleBooks} compact={true} />
+        <PlatformRatingBadge platform="douban" data={book.platformRatings?.douban} compact={true} />
+        <PlatformRatingBadge platform="goodreads" data={book.platformRatings?.goodreads} compact={true} />
+        <PlatformRatingBadge platform="amazon" data={book.platformRatings?.amazon} compact={true} />
+        <PlatformRatingBadge platform="googleBooks" data={book.platformRatings?.googleBooks} compact={true} />
       </div>
 
       {/* Sentiment Pros & Cons Highlights */}
@@ -138,6 +179,32 @@ export default function BookCard({ book, onOpenDetail, onOpenDownload }) {
             <span className="line-clamp-1 text-[10px] sm:text-[11px] font-medium">{book.sentiment.cons[0]}</span>
           </div>
         )}
+      </div>
+
+      {/* Format Availability Badges Bar */}
+      <div className="px-3 sm:px-5 py-1.5 bg-slate-50/90 border-t border-slate-100 flex items-center justify-between text-[11px]">
+        <div className="flex items-center gap-1.5">
+          <span className="text-[10px] text-slate-400 font-semibold">支持格式:</span>
+          <div className="flex items-center gap-1">
+            {((book.formats && book.formats.length > 0) ? book.formats.map(f => String(f).toUpperCase()) : ['EPUB', 'PDF', 'TXT']).map((fmt) => (
+              <span
+                key={fmt}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  if (onOpenDownload) onOpenDownload(book);
+                }}
+                className="px-1.5 py-0.2 rounded font-mono font-extrabold text-[10px] bg-sky-100/90 text-sky-800 border border-sky-200/80 hover:bg-sky-600 hover:text-white transition-colors cursor-pointer"
+                title={`点击下载 ${fmt} 格式`}
+              >
+                {fmt}
+              </span>
+            ))}
+          </div>
+        </div>
+        <span className="text-[10px] text-emerald-700 font-bold flex items-center gap-1">
+          <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+          免翻墙直下
+        </span>
       </div>
 
       {/* Footer: Sentiment Ratio Bar & Review count */}
@@ -171,10 +238,10 @@ export default function BookCard({ book, onOpenDetail, onOpenDownload }) {
               e.stopPropagation();
               if (onOpenDownload) onOpenDownload(book);
             }}
-            title="下载全本电子书 (EPUB/TXT/全网源)"
-            className="px-2.5 py-1 text-[11px] font-bold text-sky-700 bg-sky-50 hover:bg-sky-600 hover:text-white rounded-lg border border-sky-200 hover:border-sky-600 transition-all flex items-center gap-1 active:scale-95 cursor-pointer shadow-2xs"
+            title="一键极速下载全本电子书 (EPUB/PDF/TXT)"
+            className="px-2.5 py-1 text-[11px] font-bold text-sky-700 bg-sky-50 hover:bg-sky-600 hover:text-white rounded-lg border border-sky-200 hover:border-sky-600 transition-all flex items-center gap-1 active:scale-95 cursor-pointer shadow-2xs group/dl"
           >
-            <Download className="w-3 h-3 text-sky-600 group-hover:text-white" />
+            <Download className="w-3 h-3 text-sky-600 group-hover/dl:text-white" />
             <span>下载全书</span>
           </button>
 

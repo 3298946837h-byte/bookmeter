@@ -1,10 +1,22 @@
-import React, { useState } from 'react';
-import { X, Download, FileSpreadsheet, FileCode, FileText, Check, Copy, ExternalLink, Sparkles, BookOpen, Layers } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import { X, Download, FileSpreadsheet, FileCode, FileText, Check, Copy, Sparkles, BookOpen, Layers, Printer } from 'lucide-react';
 
 export default function DownloadModal({ isOpen, onClose, currentBooks = [], allBooks = [] }) {
   const [downloadScope, setDownloadScope] = useState('current'); // 'current' | 'all'
   const [copiedFormat, setCopiedFormat] = useState(null);
   const [downloadSuccess, setDownloadSuccess] = useState(null);
+
+  // Escape key handler for accessible dialog closing
+  useEffect(() => {
+    if (!isOpen) return;
+    const handleKeyDown = (e) => {
+      if (e.key === 'Escape' && onClose) {
+        onClose();
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [isOpen, onClose]);
 
   if (!isOpen) return null;
 
@@ -181,6 +193,89 @@ export default function DownloadModal({ isOpen, onClose, currentBooks = [], allB
     setTimeout(() => setDownloadSuccess(null), 3000);
   };
 
+  // 4. Print / PDF Styled Report
+  const handlePrintReport = () => {
+    const printWindow = window.open('', '_blank');
+    if (!printWindow) return;
+
+    const html = `<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <title>BookMeter 全网书评与口碑对冲研报</title>
+  <style>
+    body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; padding: 24px; color: #1e293b; line-height: 1.6; }
+    h1 { color: #0f172a; border-bottom: 2px solid #0284c7; padding-bottom: 8px; font-size: 22px; }
+    .meta { font-size: 13px; color: #64748b; margin-bottom: 20px; }
+    table { width: 100%; border-collapse: collapse; margin-top: 16px; font-size: 13px; }
+    th, td { border: 1px solid #cbd5e1; padding: 8px 10px; text-align: left; }
+    th { background: #f1f5f9; font-weight: bold; }
+    .score { font-weight: bold; color: #0284c7; text-align: center; }
+    .badge { display: inline-block; padding: 2px 8px; border-radius: 9999px; font-size: 11px; font-weight: bold; background: #e0f2fe; color: #0369a1; }
+    .card { page-break-inside: avoid; border: 1px solid #e2e8f0; border-radius: 12px; padding: 16px; margin-bottom: 16px; background: #ffffff; }
+    .pros { color: #15803d; font-size: 12px; margin: 4px 0; }
+    .cons { color: #b91c1c; font-size: 12px; margin: 4px 0; }
+    .review { font-style: italic; color: #475569; background: #f8fafc; padding: 8px 12px; border-radius: 6px; margin-top: 8px; font-size: 12px; }
+    @media print {
+      body { padding: 0; }
+      .no-print { display: none; }
+    }
+  </style>
+</head>
+<body>
+  <h1>📚 BookMeter · 全网书评与口碑对冲权威研报</h1>
+  <div class="meta">导出时间：${new Date().toLocaleString('zh-CN')} | 收录书籍：${targetBooks.length} 部 | 范围：${downloadScope === 'current' ? '当前筛选视图' : '全库收录'}</div>
+  
+  <table>
+    <thead>
+      <tr>
+        <th>书名</th>
+        <th>作者</th>
+        <th>分类</th>
+        <th>综合权威分</th>
+        <th>评级</th>
+        <th>豆瓣</th>
+        <th>Goodreads</th>
+        <th>分歧度</th>
+      </tr>
+    </thead>
+    <tbody>
+      ${targetBooks.map(b => `
+        <tr>
+          <td><strong>${b.title}</strong></td>
+          <td>${b.author}</td>
+          <td>${b.category}</td>
+          <td class="score">${b.compositeScore}</td>
+          <td><span class="badge">${b.verdict?.label || '推荐'}</span></td>
+          <td>${b.platformRatings?.douban?.score ?? '-'}</td>
+          <td>${b.platformRatings?.goodreads?.score ? b.platformRatings.goodreads.score + '★' : '-'}</td>
+          <td>${b.discrepancyIndex}</td>
+        </tr>
+      `).join('')}
+    </tbody>
+  </table>
+
+  <h2 style="margin-top: 32px; font-size: 18px; color: #0f172a;">📖 深度剖析与读者代表口碑</h2>
+  ${targetBooks.map((b, i) => `
+    <div class="card">
+      <h3 style="margin: 0 0 6px 0; font-size: 16px;">${i + 1}. 《${b.title}》 <span style="font-size: 12px; font-weight: normal; color: #64748b;">${b.author} · ${b.publicationYear || ''}</span></h3>
+      <div style="font-size: 13px; margin-bottom: 6px;">综合权威分：<strong>${b.compositeScore} / 10</strong> | 豆瓣：${b.platformRatings?.douban?.score ?? '无'} | Goodreads：${b.platformRatings?.goodreads?.score ?? '无'}★</div>
+      ${b.pros?.length ? `<div class="pros"><strong>亮点：</strong>${b.pros.join('；')}</div>` : ''}
+      ${b.cons?.length ? `<div class="cons"><strong>提醒：</strong>${b.cons.join('；')}</div>` : ''}
+      ${b.representativeReview ? `<div class="review">“${b.representativeReview}”</div>` : ''}
+    </div>
+  `).join('')}
+
+  <script>
+    window.onload = function() { window.print(); };
+  </script>
+</body>
+</html>`;
+
+    printWindow.document.write(html);
+    printWindow.document.close();
+  };
+
   // Copy backend direct shareable link for friends
   const handleCopyLink = (format) => {
     const origin = typeof window !== 'undefined' ? window.location.origin : 'http://localhost:5000';
@@ -192,9 +287,14 @@ export default function DownloadModal({ isOpen, onClose, currentBooks = [], allB
   };
 
   return (
-    <div className="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-xs flex items-center justify-center p-3 sm:p-4">
+    <div
+      role="dialog"
+      aria-modal="true"
+      aria-label="全内容一键直接下载中心"
+      className="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-xs flex items-center justify-center p-3 sm:p-4"
+    >
       <div
-        className="bg-white w-full max-w-2xl rounded-3xl shadow-2xl border border-slate-200 overflow-hidden flex flex-col max-h-[92vh] animate-in fade-in zoom-in-95 duration-200"
+        className="bg-white w-full max-w-4xl rounded-3xl shadow-2xl border border-slate-200 overflow-hidden flex flex-col max-h-[92vh] animate-in fade-in zoom-in-95 duration-200"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header */}
@@ -218,7 +318,8 @@ export default function DownloadModal({ isOpen, onClose, currentBooks = [], allB
 
           <button
             onClick={onClose}
-            className="p-1.5 rounded-full text-slate-400 hover:text-white bg-slate-800/80 active:bg-slate-700 transition-colors"
+            aria-label="关闭导出窗口"
+            className="p-1.5 rounded-full text-slate-400 hover:text-white bg-slate-800/80 active:bg-slate-700 transition-colors cursor-pointer"
           >
             <X className="w-5 h-5" />
           </button>
@@ -287,7 +388,7 @@ export default function DownloadModal({ isOpen, onClose, currentBooks = [], allB
               第二步：选择文件格式立即下载
             </label>
 
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
               
               {/* CSV / Excel Button */}
               <button
@@ -355,6 +456,29 @@ export default function DownloadModal({ isOpen, onClose, currentBooks = [], allB
                 <div className="mt-4 pt-3 border-t border-amber-100 flex items-center justify-between text-xs font-bold text-amber-700">
                   <span>{downloadSuccess === 'Markdown' ? '✓ 已保存到本地' : '点击立即下载'}</span>
                   <Download className="w-4 h-4" />
+                </div>
+              </button>
+
+              {/* Printable PDF / Print Report Button */}
+              <button
+                type="button"
+                onClick={handlePrintReport}
+                className="group relative p-4 rounded-2xl border border-sky-200 bg-gradient-to-b from-sky-50/80 to-white hover:from-sky-100 hover:to-sky-50 active:scale-98 transition-all text-left shadow-xs flex flex-col justify-between"
+              >
+                <div>
+                  <div className="w-10 h-10 rounded-xl bg-sky-600 text-white flex items-center justify-center mb-3 shadow-md shadow-sky-600/20 group-hover:scale-105 transition-transform">
+                    <Printer className="w-5 h-5" />
+                  </div>
+                  <div className="font-bold text-sm text-slate-900 group-hover:text-sky-800">
+                    打印 / 另存为 PDF
+                  </div>
+                  <p className="text-xs text-slate-500 mt-1 leading-relaxed">
+                    生成排版规范的高清口碑评测研报，支持一键调用系统打印或另存为 PDF。
+                  </p>
+                </div>
+                <div className="mt-4 pt-3 border-t border-sky-100 flex items-center justify-between text-xs font-bold text-sky-700">
+                  <span>调用系统打印 / PDF</span>
+                  <Printer className="w-4 h-4" />
                 </div>
               </button>
 

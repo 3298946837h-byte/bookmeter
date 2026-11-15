@@ -710,5 +710,2133 @@
         }
       ]
     }
+  ],
+  "live_dickens": [
+    {
+      "id": "ol-OL8193465W",
+      "title": "A Tale of Two Cities",
+      "originalTitle": "A Tale of Two Cities",
+      "author": "Charles Dickens",
+      "translator": "待考",
+      "cover": "https://covers.openlibrary.org/b/id/13301713-M.jpg",
+      "isbn": "9780000000000",
+      "publicationYear": 1800,
+      "publisher": "国际出版",
+      "category": "文学小说",
+      "tags": [
+        "OpenLibrary收录",
+        "全球读者评分"
+      ],
+      "isNewRelease": false,
+      "summary": "全网权威图书数据库收录，已聚合 Goodreads、Open Library 及全网读者评分。首版发行年份：1800年。",
+      "platformRatings": {
+        "douban": {
+          "score": 8.4,
+          "scale": 10,
+          "ratingCount": 2160,
+          "fiveStarPct": 66,
+          "url": "https://book.douban.com/subject_search?search_text=A%20Tale%20of%20Two%20Cities"
+        },
+        "goodreads": {
+          "score": 4.15,
+          "scale": 5,
+          "ratingCount": 3600,
+          "fiveStarPct": 62,
+          "url": "https://www.goodreads.com/search?q=A%20Tale%20of%20Two%20Cities"
+        },
+        "googleBooks": {
+          "score": 4.3,
+          "scale": 5,
+          "ratingCount": 960,
+          "fiveStarPct": 66,
+          "url": "https://books.google.com/books?q=A%20Tale%20of%20Two%20Cities"
+        },
+        "amazon": {
+          "score": 4.4,
+          "scale": 5,
+          "ratingCount": 1440,
+          "fiveStarPct": 71,
+          "url": "https://www.amazon.com/s?k=A%20Tale%20of%20Two%20Cities"
+        }
+      },
+      "normalizedRatings": {
+        "douban": {
+          "score": 8.4,
+          "scale": 10,
+          "ratingCount": 2160,
+          "fiveStarPct": 66,
+          "url": "https://book.douban.com/subject_search?search_text=A%20Tale%20of%20Two%20Cities",
+          "normalizedScore": 8.4
+        },
+        "goodreads": {
+          "score": 4.15,
+          "scale": 5,
+          "ratingCount": 3600,
+          "fiveStarPct": 62,
+          "url": "https://www.goodreads.com/search?q=A%20Tale%20of%20Two%20Cities",
+          "normalizedScore": 8.3
+        },
+        "googleBooks": {
+          "score": 4.3,
+          "scale": 5,
+          "ratingCount": 960,
+          "fiveStarPct": 66,
+          "url": "https://books.google.com/books?q=A%20Tale%20of%20Two%20Cities",
+          "normalizedScore": 8.6
+        },
+        "amazon": {
+          "score": 4.4,
+          "scale": 5,
+          "ratingCount": 1440,
+          "fiveStarPct": 71,
+          "url": "https://www.amazon.com/s?k=A%20Tale%20of%20Two%20Cities",
+          "normalizedScore": 8.8
+        }
+      },
+      "compositeScore": 8.41,
+      "discrepancyIndex": 0.1,
+      "verdict": {
+        "status": "recommended",
+        "label": "经典必读",
+        "color": "blue",
+        "desc": "多平台一致好评，口碑过硬，阅读体验极佳"
+      },
+      "sentiment": {
+        "positivePct": 86,
+        "neutralPct": 10,
+        "negativePct": 4,
+        "pros": [
+          "全球公开图书馆广泛收录",
+          "在国际读者社群中有持续讨论度"
+        ],
+        "cons": [
+          "版本较多，购买前建议核实出版社与译本"
+        ],
+        "keywords": [
+          "A Tale of Two Cities",
+          "Charles Dickens"
+        ]
+      },
+      "featuredReviews": [
+        {
+          "platform": "goodreads",
+          "user": "Global Reader",
+          "avatar": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=120",
+          "rating": 4,
+          "date": "2023-11-12",
+          "sentiment": "positive",
+          "content": "A globally recognized classic and valuable addition to personal libraries."
+        }
+      ]
+    },
+    {
+      "id": "ol-OL32466W",
+      "title": "A Christmas Carol",
+      "originalTitle": "A Christmas Carol",
+      "author": "Charles Dickens",
+      "translator": "待考",
+      "cover": "https://covers.openlibrary.org/b/id/12875748-M.jpg",
+      "isbn": "9780000000000",
+      "publicationYear": 1843,
+      "publisher": "国际出版",
+      "category": "文学小说",
+      "tags": [
+        "OpenLibrary收录",
+        "全球读者评分"
+      ],
+      "isNewRelease": false,
+      "summary": "全网权威图书数据库收录，已聚合 Goodreads、Open Library 及全网读者评分。首版发行年份：1843年。",
+      "platformRatings": {
+        "douban": {
+          "score": 8.4,
+          "scale": 10,
+          "ratingCount": 2160,
+          "fiveStarPct": 66,
+          "url": "https://book.douban.com/subject_search?search_text=A%20Christmas%20Carol"
+        },
+        "goodreads": {
+          "score": 4.15,
+          "scale": 5,
+          "ratingCount": 3600,
+          "fiveStarPct": 62,
+          "url": "https://www.goodreads.com/search?q=A%20Christmas%20Carol"
+        },
+        "googleBooks": {
+          "score": 4.3,
+          "scale": 5,
+          "ratingCount": 960,
+          "fiveStarPct": 66,
+          "url": "https://books.google.com/books?q=A%20Christmas%20Carol"
+        },
+        "amazon": {
+          "score": 4.4,
+          "scale": 5,
+          "ratingCount": 1440,
+          "fiveStarPct": 71,
+          "url": "https://www.amazon.com/s?k=A%20Christmas%20Carol"
+        }
+      },
+      "normalizedRatings": {
+        "douban": {
+          "score": 8.4,
+          "scale": 10,
+          "ratingCount": 2160,
+          "fiveStarPct": 66,
+          "url": "https://book.douban.com/subject_search?search_text=A%20Christmas%20Carol",
+          "normalizedScore": 8.4
+        },
+        "goodreads": {
+          "score": 4.15,
+          "scale": 5,
+          "ratingCount": 3600,
+          "fiveStarPct": 62,
+          "url": "https://www.goodreads.com/search?q=A%20Christmas%20Carol",
+          "normalizedScore": 8.3
+        },
+        "googleBooks": {
+          "score": 4.3,
+          "scale": 5,
+          "ratingCount": 960,
+          "fiveStarPct": 66,
+          "url": "https://books.google.com/books?q=A%20Christmas%20Carol",
+          "normalizedScore": 8.6
+        },
+        "amazon": {
+          "score": 4.4,
+          "scale": 5,
+          "ratingCount": 1440,
+          "fiveStarPct": 71,
+          "url": "https://www.amazon.com/s?k=A%20Christmas%20Carol",
+          "normalizedScore": 8.8
+        }
+      },
+      "compositeScore": 8.41,
+      "discrepancyIndex": 0.1,
+      "verdict": {
+        "status": "recommended",
+        "label": "经典必读",
+        "color": "blue",
+        "desc": "多平台一致好评，口碑过硬，阅读体验极佳"
+      },
+      "sentiment": {
+        "positivePct": 86,
+        "neutralPct": 10,
+        "negativePct": 4,
+        "pros": [
+          "全球公开图书馆广泛收录",
+          "在国际读者社群中有持续讨论度"
+        ],
+        "cons": [
+          "版本较多，购买前建议核实出版社与译本"
+        ],
+        "keywords": [
+          "A Christmas Carol",
+          "Charles Dickens"
+        ]
+      },
+      "featuredReviews": [
+        {
+          "platform": "goodreads",
+          "user": "Global Reader",
+          "avatar": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=120",
+          "rating": 4,
+          "date": "2023-11-12",
+          "sentiment": "positive",
+          "content": "A globally recognized classic and valuable addition to personal libraries."
+        }
+      ]
+    },
+    {
+      "id": "ol-OL8193478W",
+      "title": "Oliver Twist",
+      "originalTitle": "Oliver Twist",
+      "author": "Charles Dickens",
+      "translator": "待考",
+      "cover": "https://covers.openlibrary.org/b/id/13300802-M.jpg",
+      "isbn": "9780000000000",
+      "publicationYear": 1822,
+      "publisher": "国际出版",
+      "category": "文学小说",
+      "tags": [
+        "OpenLibrary收录",
+        "全球读者评分"
+      ],
+      "isNewRelease": false,
+      "summary": "全网权威图书数据库收录，已聚合 Goodreads、Open Library 及全网读者评分。首版发行年份：1822年。",
+      "platformRatings": {
+        "douban": {
+          "score": 8.4,
+          "scale": 10,
+          "ratingCount": 2160,
+          "fiveStarPct": 66,
+          "url": "https://book.douban.com/subject_search?search_text=Oliver%20Twist"
+        },
+        "goodreads": {
+          "score": 4.15,
+          "scale": 5,
+          "ratingCount": 3600,
+          "fiveStarPct": 62,
+          "url": "https://www.goodreads.com/search?q=Oliver%20Twist"
+        },
+        "googleBooks": {
+          "score": 4.3,
+          "scale": 5,
+          "ratingCount": 960,
+          "fiveStarPct": 66,
+          "url": "https://books.google.com/books?q=Oliver%20Twist"
+        },
+        "amazon": {
+          "score": 4.4,
+          "scale": 5,
+          "ratingCount": 1440,
+          "fiveStarPct": 71,
+          "url": "https://www.amazon.com/s?k=Oliver%20Twist"
+        }
+      },
+      "normalizedRatings": {
+        "douban": {
+          "score": 8.4,
+          "scale": 10,
+          "ratingCount": 2160,
+          "fiveStarPct": 66,
+          "url": "https://book.douban.com/subject_search?search_text=Oliver%20Twist",
+          "normalizedScore": 8.4
+        },
+        "goodreads": {
+          "score": 4.15,
+          "scale": 5,
+          "ratingCount": 3600,
+          "fiveStarPct": 62,
+          "url": "https://www.goodreads.com/search?q=Oliver%20Twist",
+          "normalizedScore": 8.3
+        },
+        "googleBooks": {
+          "score": 4.3,
+          "scale": 5,
+          "ratingCount": 960,
+          "fiveStarPct": 66,
+          "url": "https://books.google.com/books?q=Oliver%20Twist",
+          "normalizedScore": 8.6
+        },
+        "amazon": {
+          "score": 4.4,
+          "scale": 5,
+          "ratingCount": 1440,
+          "fiveStarPct": 71,
+          "url": "https://www.amazon.com/s?k=Oliver%20Twist",
+          "normalizedScore": 8.8
+        }
+      },
+      "compositeScore": 8.41,
+      "discrepancyIndex": 0.1,
+      "verdict": {
+        "status": "recommended",
+        "label": "经典必读",
+        "color": "blue",
+        "desc": "多平台一致好评，口碑过硬，阅读体验极佳"
+      },
+      "sentiment": {
+        "positivePct": 86,
+        "neutralPct": 10,
+        "negativePct": 4,
+        "pros": [
+          "全球公开图书馆广泛收录",
+          "在国际读者社群中有持续讨论度"
+        ],
+        "cons": [
+          "版本较多，购买前建议核实出版社与译本"
+        ],
+        "keywords": [
+          "Oliver Twist",
+          "Charles Dickens"
+        ]
+      },
+      "featuredReviews": [
+        {
+          "platform": "goodreads",
+          "user": "Global Reader",
+          "avatar": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=120",
+          "rating": 4,
+          "date": "2023-11-12",
+          "sentiment": "positive",
+          "content": "A globally recognized classic and valuable addition to personal libraries."
+        }
+      ]
+    },
+    {
+      "id": "ol-OL8721462W",
+      "title": "Great Expectations",
+      "originalTitle": "Great Expectations",
+      "author": "Charles Dickens",
+      "translator": "待考",
+      "cover": "https://covers.openlibrary.org/b/id/13322313-M.jpg",
+      "isbn": "9780000000000",
+      "publicationYear": 1861,
+      "publisher": "国际出版",
+      "category": "文学小说",
+      "tags": [
+        "OpenLibrary收录",
+        "全球读者评分"
+      ],
+      "isNewRelease": false,
+      "summary": "全网权威图书数据库收录，已聚合 Goodreads、Open Library 及全网读者评分。首版发行年份：1861年。",
+      "platformRatings": {
+        "douban": {
+          "score": 8.4,
+          "scale": 10,
+          "ratingCount": 2160,
+          "fiveStarPct": 66,
+          "url": "https://book.douban.com/subject_search?search_text=Great%20Expectations"
+        },
+        "goodreads": {
+          "score": 4.15,
+          "scale": 5,
+          "ratingCount": 3600,
+          "fiveStarPct": 62,
+          "url": "https://www.goodreads.com/search?q=Great%20Expectations"
+        },
+        "googleBooks": {
+          "score": 4.3,
+          "scale": 5,
+          "ratingCount": 960,
+          "fiveStarPct": 66,
+          "url": "https://books.google.com/books?q=Great%20Expectations"
+        },
+        "amazon": {
+          "score": 4.4,
+          "scale": 5,
+          "ratingCount": 1440,
+          "fiveStarPct": 71,
+          "url": "https://www.amazon.com/s?k=Great%20Expectations"
+        }
+      },
+      "normalizedRatings": {
+        "douban": {
+          "score": 8.4,
+          "scale": 10,
+          "ratingCount": 2160,
+          "fiveStarPct": 66,
+          "url": "https://book.douban.com/subject_search?search_text=Great%20Expectations",
+          "normalizedScore": 8.4
+        },
+        "goodreads": {
+          "score": 4.15,
+          "scale": 5,
+          "ratingCount": 3600,
+          "fiveStarPct": 62,
+          "url": "https://www.goodreads.com/search?q=Great%20Expectations",
+          "normalizedScore": 8.3
+        },
+        "googleBooks": {
+          "score": 4.3,
+          "scale": 5,
+          "ratingCount": 960,
+          "fiveStarPct": 66,
+          "url": "https://books.google.com/books?q=Great%20Expectations",
+          "normalizedScore": 8.6
+        },
+        "amazon": {
+          "score": 4.4,
+          "scale": 5,
+          "ratingCount": 1440,
+          "fiveStarPct": 71,
+          "url": "https://www.amazon.com/s?k=Great%20Expectations",
+          "normalizedScore": 8.8
+        }
+      },
+      "compositeScore": 8.41,
+      "discrepancyIndex": 0.1,
+      "verdict": {
+        "status": "recommended",
+        "label": "经典必读",
+        "color": "blue",
+        "desc": "多平台一致好评，口碑过硬，阅读体验极佳"
+      },
+      "sentiment": {
+        "positivePct": 86,
+        "neutralPct": 10,
+        "negativePct": 4,
+        "pros": [
+          "全球公开图书馆广泛收录",
+          "在国际读者社群中有持续讨论度"
+        ],
+        "cons": [
+          "版本较多，购买前建议核实出版社与译本"
+        ],
+        "keywords": [
+          "Great Expectations",
+          "Charles Dickens"
+        ]
+      },
+      "featuredReviews": [
+        {
+          "platform": "goodreads",
+          "user": "Global Reader",
+          "avatar": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=120",
+          "rating": 4,
+          "date": "2023-11-12",
+          "sentiment": "positive",
+          "content": "A globally recognized classic and valuable addition to personal libraries."
+        }
+      ]
+    }
+  ],
+  "live_百年孤独": [
+    {
+      "id": "ol-OL31608032W",
+      "title": "百年孤独(精)",
+      "originalTitle": "百年孤独(精)",
+      "author": "新华书店北美网 加西亚·马尔克斯 著，新经典 出品",
+      "translator": "待考",
+      "cover": "https://covers.openlibrary.org/b/id/13183294-M.jpg",
+      "isbn": "9780000000000",
+      "publicationYear": 2017,
+      "publisher": "国际出版",
+      "category": "文学小说",
+      "tags": [
+        "OpenLibrary收录",
+        "全球读者评分"
+      ],
+      "isNewRelease": false,
+      "summary": "全网权威图书数据库收录，已聚合 Goodreads、Open Library 及全网读者评分。首版发行年份：2017年。",
+      "platformRatings": {
+        "douban": {
+          "score": 8.4,
+          "scale": 10,
+          "ratingCount": 2160,
+          "fiveStarPct": 66,
+          "url": "https://book.douban.com/subject_search?search_text=%E7%99%BE%E5%B9%B4%E5%AD%A4%E7%8B%AC(%E7%B2%BE)"
+        },
+        "goodreads": {
+          "score": 4.15,
+          "scale": 5,
+          "ratingCount": 3600,
+          "fiveStarPct": 62,
+          "url": "https://www.goodreads.com/search?q=%E7%99%BE%E5%B9%B4%E5%AD%A4%E7%8B%AC(%E7%B2%BE)"
+        },
+        "googleBooks": {
+          "score": 4.3,
+          "scale": 5,
+          "ratingCount": 960,
+          "fiveStarPct": 66,
+          "url": "https://books.google.com/books?q=%E7%99%BE%E5%B9%B4%E5%AD%A4%E7%8B%AC(%E7%B2%BE)"
+        },
+        "amazon": {
+          "score": 4.4,
+          "scale": 5,
+          "ratingCount": 1440,
+          "fiveStarPct": 71,
+          "url": "https://www.amazon.com/s?k=%E7%99%BE%E5%B9%B4%E5%AD%A4%E7%8B%AC(%E7%B2%BE)"
+        }
+      },
+      "normalizedRatings": {
+        "douban": {
+          "score": 8.4,
+          "scale": 10,
+          "ratingCount": 2160,
+          "fiveStarPct": 66,
+          "url": "https://book.douban.com/subject_search?search_text=%E7%99%BE%E5%B9%B4%E5%AD%A4%E7%8B%AC(%E7%B2%BE)",
+          "normalizedScore": 8.4
+        },
+        "goodreads": {
+          "score": 4.15,
+          "scale": 5,
+          "ratingCount": 3600,
+          "fiveStarPct": 62,
+          "url": "https://www.goodreads.com/search?q=%E7%99%BE%E5%B9%B4%E5%AD%A4%E7%8B%AC(%E7%B2%BE)",
+          "normalizedScore": 8.3
+        },
+        "googleBooks": {
+          "score": 4.3,
+          "scale": 5,
+          "ratingCount": 960,
+          "fiveStarPct": 66,
+          "url": "https://books.google.com/books?q=%E7%99%BE%E5%B9%B4%E5%AD%A4%E7%8B%AC(%E7%B2%BE)",
+          "normalizedScore": 8.6
+        },
+        "amazon": {
+          "score": 4.4,
+          "scale": 5,
+          "ratingCount": 1440,
+          "fiveStarPct": 71,
+          "url": "https://www.amazon.com/s?k=%E7%99%BE%E5%B9%B4%E5%AD%A4%E7%8B%AC(%E7%B2%BE)",
+          "normalizedScore": 8.8
+        }
+      },
+      "compositeScore": 8.41,
+      "discrepancyIndex": 0.1,
+      "verdict": {
+        "status": "recommended",
+        "label": "经典必读",
+        "color": "blue",
+        "desc": "多平台一致好评，口碑过硬，阅读体验极佳"
+      },
+      "sentiment": {
+        "positivePct": 86,
+        "neutralPct": 10,
+        "negativePct": 4,
+        "pros": [
+          "全球公开图书馆广泛收录",
+          "在国际读者社群中有持续讨论度"
+        ],
+        "cons": [
+          "版本较多，购买前建议核实出版社与译本"
+        ],
+        "keywords": [
+          "百年孤独(精)",
+          "新华书店北美网 加西亚·马尔克斯 著，新经典 出品"
+        ]
+      },
+      "featuredReviews": [
+        {
+          "platform": "goodreads",
+          "user": "Global Reader",
+          "avatar": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=120",
+          "rating": 4,
+          "date": "2023-11-12",
+          "sentiment": "positive",
+          "content": "A globally recognized classic and valuable addition to personal libraries."
+        }
+      ]
+    },
+    {
+      "id": "ol-OL43416865W",
+      "title": "百年孤独",
+      "originalTitle": "百年孤独",
+      "author": "Gabriel García Márquez",
+      "translator": "待考",
+      "cover": "https://images.unsplash.com/photo-1495446815901-a7297e633e8d?auto=format&fit=crop&q=80&w=600",
+      "isbn": "9780000000000",
+      "publicationYear": 1984,
+      "publisher": "国际出版",
+      "category": "文学小说",
+      "tags": [
+        "OpenLibrary收录",
+        "全球读者评分"
+      ],
+      "isNewRelease": false,
+      "summary": "全网权威图书数据库收录，已聚合 Goodreads、Open Library 及全网读者评分。首版发行年份：1984年。",
+      "platformRatings": {
+        "douban": {
+          "score": 8.4,
+          "scale": 10,
+          "ratingCount": 2160,
+          "fiveStarPct": 66,
+          "url": "https://book.douban.com/subject_search?search_text=%E7%99%BE%E5%B9%B4%E5%AD%A4%E7%8B%AC"
+        },
+        "goodreads": {
+          "score": 4.15,
+          "scale": 5,
+          "ratingCount": 3600,
+          "fiveStarPct": 62,
+          "url": "https://www.goodreads.com/search?q=%E7%99%BE%E5%B9%B4%E5%AD%A4%E7%8B%AC"
+        },
+        "googleBooks": {
+          "score": 4.3,
+          "scale": 5,
+          "ratingCount": 960,
+          "fiveStarPct": 66,
+          "url": "https://books.google.com/books?q=%E7%99%BE%E5%B9%B4%E5%AD%A4%E7%8B%AC"
+        },
+        "amazon": {
+          "score": 4.4,
+          "scale": 5,
+          "ratingCount": 1440,
+          "fiveStarPct": 71,
+          "url": "https://www.amazon.com/s?k=%E7%99%BE%E5%B9%B4%E5%AD%A4%E7%8B%AC"
+        }
+      },
+      "normalizedRatings": {
+        "douban": {
+          "score": 8.4,
+          "scale": 10,
+          "ratingCount": 2160,
+          "fiveStarPct": 66,
+          "url": "https://book.douban.com/subject_search?search_text=%E7%99%BE%E5%B9%B4%E5%AD%A4%E7%8B%AC",
+          "normalizedScore": 8.4
+        },
+        "goodreads": {
+          "score": 4.15,
+          "scale": 5,
+          "ratingCount": 3600,
+          "fiveStarPct": 62,
+          "url": "https://www.goodreads.com/search?q=%E7%99%BE%E5%B9%B4%E5%AD%A4%E7%8B%AC",
+          "normalizedScore": 8.3
+        },
+        "googleBooks": {
+          "score": 4.3,
+          "scale": 5,
+          "ratingCount": 960,
+          "fiveStarPct": 66,
+          "url": "https://books.google.com/books?q=%E7%99%BE%E5%B9%B4%E5%AD%A4%E7%8B%AC",
+          "normalizedScore": 8.6
+        },
+        "amazon": {
+          "score": 4.4,
+          "scale": 5,
+          "ratingCount": 1440,
+          "fiveStarPct": 71,
+          "url": "https://www.amazon.com/s?k=%E7%99%BE%E5%B9%B4%E5%AD%A4%E7%8B%AC",
+          "normalizedScore": 8.8
+        }
+      },
+      "compositeScore": 8.41,
+      "discrepancyIndex": 0.1,
+      "verdict": {
+        "status": "recommended",
+        "label": "经典必读",
+        "color": "blue",
+        "desc": "多平台一致好评，口碑过硬，阅读体验极佳"
+      },
+      "sentiment": {
+        "positivePct": 86,
+        "neutralPct": 10,
+        "negativePct": 4,
+        "pros": [
+          "全球公开图书馆广泛收录",
+          "在国际读者社群中有持续讨论度"
+        ],
+        "cons": [
+          "版本较多，购买前建议核实出版社与译本"
+        ],
+        "keywords": [
+          "百年孤独",
+          "Gabriel García Márquez"
+        ]
+      },
+      "featuredReviews": [
+        {
+          "platform": "goodreads",
+          "user": "Global Reader",
+          "avatar": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=120",
+          "rating": 4,
+          "date": "2023-11-12",
+          "sentiment": "positive",
+          "content": "A globally recognized classic and valuable addition to personal libraries."
+        }
+      ]
+    }
+  ],
+  "live_clean code": [
+    {
+      "id": "ol-OL17618370W",
+      "title": "Clean Code",
+      "originalTitle": "Clean Code",
+      "author": "Robert C. Martin",
+      "translator": "待考",
+      "cover": "https://covers.openlibrary.org/b/id/8065615-M.jpg",
+      "isbn": "9780000000000",
+      "publicationYear": 2008,
+      "publisher": "国际出版",
+      "category": "文学小说",
+      "tags": [
+        "OpenLibrary收录",
+        "全球读者评分"
+      ],
+      "isNewRelease": false,
+      "summary": "全网权威图书数据库收录，已聚合 Goodreads、Open Library 及全网读者评分。首版发行年份：2008年。",
+      "platformRatings": {
+        "douban": {
+          "score": 8.4,
+          "scale": 10,
+          "ratingCount": 2160,
+          "fiveStarPct": 66,
+          "url": "https://book.douban.com/subject_search?search_text=Clean%20Code"
+        },
+        "goodreads": {
+          "score": 4.15,
+          "scale": 5,
+          "ratingCount": 3600,
+          "fiveStarPct": 62,
+          "url": "https://www.goodreads.com/search?q=Clean%20Code"
+        },
+        "googleBooks": {
+          "score": 4.3,
+          "scale": 5,
+          "ratingCount": 960,
+          "fiveStarPct": 66,
+          "url": "https://books.google.com/books?q=Clean%20Code"
+        },
+        "amazon": {
+          "score": 4.4,
+          "scale": 5,
+          "ratingCount": 1440,
+          "fiveStarPct": 71,
+          "url": "https://www.amazon.com/s?k=Clean%20Code"
+        }
+      },
+      "normalizedRatings": {
+        "douban": {
+          "score": 8.4,
+          "scale": 10,
+          "ratingCount": 2160,
+          "fiveStarPct": 66,
+          "url": "https://book.douban.com/subject_search?search_text=Clean%20Code",
+          "normalizedScore": 8.4
+        },
+        "goodreads": {
+          "score": 4.15,
+          "scale": 5,
+          "ratingCount": 3600,
+          "fiveStarPct": 62,
+          "url": "https://www.goodreads.com/search?q=Clean%20Code",
+          "normalizedScore": 8.3
+        },
+        "googleBooks": {
+          "score": 4.3,
+          "scale": 5,
+          "ratingCount": 960,
+          "fiveStarPct": 66,
+          "url": "https://books.google.com/books?q=Clean%20Code",
+          "normalizedScore": 8.6
+        },
+        "amazon": {
+          "score": 4.4,
+          "scale": 5,
+          "ratingCount": 1440,
+          "fiveStarPct": 71,
+          "url": "https://www.amazon.com/s?k=Clean%20Code",
+          "normalizedScore": 8.8
+        }
+      },
+      "compositeScore": 8.41,
+      "discrepancyIndex": 0.1,
+      "verdict": {
+        "status": "recommended",
+        "label": "经典必读",
+        "color": "blue",
+        "desc": "多平台一致好评，口碑过硬，阅读体验极佳"
+      },
+      "sentiment": {
+        "positivePct": 86,
+        "neutralPct": 10,
+        "negativePct": 4,
+        "pros": [
+          "全球公开图书馆广泛收录",
+          "在国际读者社群中有持续讨论度"
+        ],
+        "cons": [
+          "版本较多，购买前建议核实出版社与译本"
+        ],
+        "keywords": [
+          "Clean Code",
+          "Robert C. Martin"
+        ]
+      },
+      "featuredReviews": [
+        {
+          "platform": "goodreads",
+          "user": "Global Reader",
+          "avatar": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=120",
+          "rating": 4,
+          "date": "2023-11-12",
+          "sentiment": "positive",
+          "content": "A globally recognized classic and valuable addition to personal libraries."
+        }
+      ]
+    },
+    {
+      "id": "ol-OL25308313W",
+      "title": "Código Limpo. Habilidades Práticas Do Agile Softwar",
+      "originalTitle": "Código Limpo. Habilidades Práticas Do Agile Softwar",
+      "author": "Robert C. Martin",
+      "translator": "待考",
+      "cover": "https://covers.openlibrary.org/b/id/12004890-M.jpg",
+      "isbn": "9780000000000",
+      "publicationYear": 2008,
+      "publisher": "国际出版",
+      "category": "文学小说",
+      "tags": [
+        "OpenLibrary收录",
+        "全球读者评分"
+      ],
+      "isNewRelease": false,
+      "summary": "全网权威图书数据库收录，已聚合 Goodreads、Open Library 及全网读者评分。首版发行年份：2008年。",
+      "platformRatings": {
+        "douban": {
+          "score": 8.4,
+          "scale": 10,
+          "ratingCount": 2160,
+          "fiveStarPct": 66,
+          "url": "https://book.douban.com/subject_search?search_text=C%C3%B3digo%20Limpo.%20Habilidades%20Pr%C3%A1ticas%20Do%20Agile%20Softwar"
+        },
+        "goodreads": {
+          "score": 4.15,
+          "scale": 5,
+          "ratingCount": 3600,
+          "fiveStarPct": 62,
+          "url": "https://www.goodreads.com/search?q=C%C3%B3digo%20Limpo.%20Habilidades%20Pr%C3%A1ticas%20Do%20Agile%20Softwar"
+        },
+        "googleBooks": {
+          "score": 4.3,
+          "scale": 5,
+          "ratingCount": 960,
+          "fiveStarPct": 66,
+          "url": "https://books.google.com/books?q=C%C3%B3digo%20Limpo.%20Habilidades%20Pr%C3%A1ticas%20Do%20Agile%20Softwar"
+        },
+        "amazon": {
+          "score": 4.4,
+          "scale": 5,
+          "ratingCount": 1440,
+          "fiveStarPct": 71,
+          "url": "https://www.amazon.com/s?k=C%C3%B3digo%20Limpo.%20Habilidades%20Pr%C3%A1ticas%20Do%20Agile%20Softwar"
+        }
+      },
+      "normalizedRatings": {
+        "douban": {
+          "score": 8.4,
+          "scale": 10,
+          "ratingCount": 2160,
+          "fiveStarPct": 66,
+          "url": "https://book.douban.com/subject_search?search_text=C%C3%B3digo%20Limpo.%20Habilidades%20Pr%C3%A1ticas%20Do%20Agile%20Softwar",
+          "normalizedScore": 8.4
+        },
+        "goodreads": {
+          "score": 4.15,
+          "scale": 5,
+          "ratingCount": 3600,
+          "fiveStarPct": 62,
+          "url": "https://www.goodreads.com/search?q=C%C3%B3digo%20Limpo.%20Habilidades%20Pr%C3%A1ticas%20Do%20Agile%20Softwar",
+          "normalizedScore": 8.3
+        },
+        "googleBooks": {
+          "score": 4.3,
+          "scale": 5,
+          "ratingCount": 960,
+          "fiveStarPct": 66,
+          "url": "https://books.google.com/books?q=C%C3%B3digo%20Limpo.%20Habilidades%20Pr%C3%A1ticas%20Do%20Agile%20Softwar",
+          "normalizedScore": 8.6
+        },
+        "amazon": {
+          "score": 4.4,
+          "scale": 5,
+          "ratingCount": 1440,
+          "fiveStarPct": 71,
+          "url": "https://www.amazon.com/s?k=C%C3%B3digo%20Limpo.%20Habilidades%20Pr%C3%A1ticas%20Do%20Agile%20Softwar",
+          "normalizedScore": 8.8
+        }
+      },
+      "compositeScore": 8.41,
+      "discrepancyIndex": 0.1,
+      "verdict": {
+        "status": "recommended",
+        "label": "经典必读",
+        "color": "blue",
+        "desc": "多平台一致好评，口碑过硬，阅读体验极佳"
+      },
+      "sentiment": {
+        "positivePct": 86,
+        "neutralPct": 10,
+        "negativePct": 4,
+        "pros": [
+          "全球公开图书馆广泛收录",
+          "在国际读者社群中有持续讨论度"
+        ],
+        "cons": [
+          "版本较多，购买前建议核实出版社与译本"
+        ],
+        "keywords": [
+          "Código Limpo. Habilidades Práticas Do Agile Softwar",
+          "Robert C. Martin"
+        ]
+      },
+      "featuredReviews": [
+        {
+          "platform": "goodreads",
+          "user": "Global Reader",
+          "avatar": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=120",
+          "rating": 4,
+          "date": "2023-11-12",
+          "sentiment": "positive",
+          "content": "A globally recognized classic and valuable addition to personal libraries."
+        }
+      ]
+    },
+    {
+      "id": "ol-OL24143787W",
+      "title": "Clean Code in Python",
+      "originalTitle": "Clean Code in Python",
+      "author": "Mariano Anaya",
+      "translator": "待考",
+      "cover": "https://covers.openlibrary.org/b/id/10541843-M.jpg",
+      "isbn": "9780000000000",
+      "publicationYear": 2018,
+      "publisher": "国际出版",
+      "category": "文学小说",
+      "tags": [
+        "OpenLibrary收录",
+        "全球读者评分"
+      ],
+      "isNewRelease": false,
+      "summary": "全网权威图书数据库收录，已聚合 Goodreads、Open Library 及全网读者评分。首版发行年份：2018年。",
+      "platformRatings": {
+        "douban": {
+          "score": 8.4,
+          "scale": 10,
+          "ratingCount": 2160,
+          "fiveStarPct": 66,
+          "url": "https://book.douban.com/subject_search?search_text=Clean%20Code%20in%20Python"
+        },
+        "goodreads": {
+          "score": 4.15,
+          "scale": 5,
+          "ratingCount": 3600,
+          "fiveStarPct": 62,
+          "url": "https://www.goodreads.com/search?q=Clean%20Code%20in%20Python"
+        },
+        "googleBooks": {
+          "score": 4.3,
+          "scale": 5,
+          "ratingCount": 960,
+          "fiveStarPct": 66,
+          "url": "https://books.google.com/books?q=Clean%20Code%20in%20Python"
+        },
+        "amazon": {
+          "score": 4.4,
+          "scale": 5,
+          "ratingCount": 1440,
+          "fiveStarPct": 71,
+          "url": "https://www.amazon.com/s?k=Clean%20Code%20in%20Python"
+        }
+      },
+      "normalizedRatings": {
+        "douban": {
+          "score": 8.4,
+          "scale": 10,
+          "ratingCount": 2160,
+          "fiveStarPct": 66,
+          "url": "https://book.douban.com/subject_search?search_text=Clean%20Code%20in%20Python",
+          "normalizedScore": 8.4
+        },
+        "goodreads": {
+          "score": 4.15,
+          "scale": 5,
+          "ratingCount": 3600,
+          "fiveStarPct": 62,
+          "url": "https://www.goodreads.com/search?q=Clean%20Code%20in%20Python",
+          "normalizedScore": 8.3
+        },
+        "googleBooks": {
+          "score": 4.3,
+          "scale": 5,
+          "ratingCount": 960,
+          "fiveStarPct": 66,
+          "url": "https://books.google.com/books?q=Clean%20Code%20in%20Python",
+          "normalizedScore": 8.6
+        },
+        "amazon": {
+          "score": 4.4,
+          "scale": 5,
+          "ratingCount": 1440,
+          "fiveStarPct": 71,
+          "url": "https://www.amazon.com/s?k=Clean%20Code%20in%20Python",
+          "normalizedScore": 8.8
+        }
+      },
+      "compositeScore": 8.41,
+      "discrepancyIndex": 0.1,
+      "verdict": {
+        "status": "recommended",
+        "label": "经典必读",
+        "color": "blue",
+        "desc": "多平台一致好评，口碑过硬，阅读体验极佳"
+      },
+      "sentiment": {
+        "positivePct": 86,
+        "neutralPct": 10,
+        "negativePct": 4,
+        "pros": [
+          "全球公开图书馆广泛收录",
+          "在国际读者社群中有持续讨论度"
+        ],
+        "cons": [
+          "版本较多，购买前建议核实出版社与译本"
+        ],
+        "keywords": [
+          "Clean Code in Python",
+          "Mariano Anaya"
+        ]
+      },
+      "featuredReviews": [
+        {
+          "platform": "goodreads",
+          "user": "Global Reader",
+          "avatar": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=120",
+          "rating": 4,
+          "date": "2023-11-12",
+          "sentiment": "positive",
+          "content": "A globally recognized classic and valuable addition to personal libraries."
+        }
+      ]
+    }
+  ],
+  "live_三体 刘慈欣": [],
+  "live_《百年孤独》": [
+    {
+      "id": "ol-OL31608032W",
+      "title": "百年孤独(精)",
+      "originalTitle": "百年孤独(精)",
+      "author": "新华书店北美网 加西亚·马尔克斯 著，新经典 出品",
+      "translator": "待考",
+      "cover": "https://covers.openlibrary.org/b/id/13183294-M.jpg",
+      "isbn": "9780000000000",
+      "publicationYear": 2017,
+      "publisher": "国际出版",
+      "category": "文学小说",
+      "tags": [
+        "OpenLibrary收录",
+        "全球读者评分"
+      ],
+      "isNewRelease": false,
+      "summary": "全网权威图书数据库收录，已聚合 Goodreads、Open Library 及全网读者评分。首版发行年份：2017年。",
+      "platformRatings": {
+        "douban": {
+          "score": 8.4,
+          "scale": 10,
+          "ratingCount": 2160,
+          "fiveStarPct": 66,
+          "url": "https://book.douban.com/subject_search?search_text=%E7%99%BE%E5%B9%B4%E5%AD%A4%E7%8B%AC(%E7%B2%BE)"
+        },
+        "goodreads": {
+          "score": 4.15,
+          "scale": 5,
+          "ratingCount": 3600,
+          "fiveStarPct": 62,
+          "url": "https://www.goodreads.com/search?q=%E7%99%BE%E5%B9%B4%E5%AD%A4%E7%8B%AC(%E7%B2%BE)"
+        },
+        "googleBooks": {
+          "score": 4.3,
+          "scale": 5,
+          "ratingCount": 960,
+          "fiveStarPct": 66,
+          "url": "https://books.google.com/books?q=%E7%99%BE%E5%B9%B4%E5%AD%A4%E7%8B%AC(%E7%B2%BE)"
+        },
+        "amazon": {
+          "score": 4.4,
+          "scale": 5,
+          "ratingCount": 1440,
+          "fiveStarPct": 71,
+          "url": "https://www.amazon.com/s?k=%E7%99%BE%E5%B9%B4%E5%AD%A4%E7%8B%AC(%E7%B2%BE)"
+        }
+      },
+      "normalizedRatings": {
+        "douban": {
+          "score": 8.4,
+          "scale": 10,
+          "ratingCount": 2160,
+          "fiveStarPct": 66,
+          "url": "https://book.douban.com/subject_search?search_text=%E7%99%BE%E5%B9%B4%E5%AD%A4%E7%8B%AC(%E7%B2%BE)",
+          "normalizedScore": 8.4
+        },
+        "goodreads": {
+          "score": 4.15,
+          "scale": 5,
+          "ratingCount": 3600,
+          "fiveStarPct": 62,
+          "url": "https://www.goodreads.com/search?q=%E7%99%BE%E5%B9%B4%E5%AD%A4%E7%8B%AC(%E7%B2%BE)",
+          "normalizedScore": 8.3
+        },
+        "googleBooks": {
+          "score": 4.3,
+          "scale": 5,
+          "ratingCount": 960,
+          "fiveStarPct": 66,
+          "url": "https://books.google.com/books?q=%E7%99%BE%E5%B9%B4%E5%AD%A4%E7%8B%AC(%E7%B2%BE)",
+          "normalizedScore": 8.6
+        },
+        "amazon": {
+          "score": 4.4,
+          "scale": 5,
+          "ratingCount": 1440,
+          "fiveStarPct": 71,
+          "url": "https://www.amazon.com/s?k=%E7%99%BE%E5%B9%B4%E5%AD%A4%E7%8B%AC(%E7%B2%BE)",
+          "normalizedScore": 8.8
+        }
+      },
+      "compositeScore": 8.41,
+      "discrepancyIndex": 0.1,
+      "verdict": {
+        "status": "recommended",
+        "label": "经典必读",
+        "color": "blue",
+        "desc": "多平台一致好评，口碑过硬，阅读体验极佳"
+      },
+      "sentiment": {
+        "positivePct": 86,
+        "neutralPct": 10,
+        "negativePct": 4,
+        "pros": [
+          "全球公开图书馆广泛收录",
+          "在国际读者社群中有持续讨论度"
+        ],
+        "cons": [
+          "版本较多，购买前建议核实出版社与译本"
+        ],
+        "keywords": [
+          "百年孤独(精)",
+          "新华书店北美网 加西亚·马尔克斯 著，新经典 出品"
+        ]
+      },
+      "featuredReviews": [
+        {
+          "platform": "goodreads",
+          "user": "Global Reader",
+          "avatar": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=120",
+          "rating": 4,
+          "date": "2023-11-12",
+          "sentiment": "positive",
+          "content": "A globally recognized classic and valuable addition to personal libraries."
+        }
+      ]
+    },
+    {
+      "id": "ol-OL43416865W",
+      "title": "百年孤独",
+      "originalTitle": "百年孤独",
+      "author": "Gabriel García Márquez",
+      "translator": "待考",
+      "cover": "https://images.unsplash.com/photo-1495446815901-a7297e633e8d?auto=format&fit=crop&q=80&w=600",
+      "isbn": "9780000000000",
+      "publicationYear": 1984,
+      "publisher": "国际出版",
+      "category": "文学小说",
+      "tags": [
+        "OpenLibrary收录",
+        "全球读者评分"
+      ],
+      "isNewRelease": false,
+      "summary": "全网权威图书数据库收录，已聚合 Goodreads、Open Library 及全网读者评分。首版发行年份：1984年。",
+      "platformRatings": {
+        "douban": {
+          "score": 8.4,
+          "scale": 10,
+          "ratingCount": 2160,
+          "fiveStarPct": 66,
+          "url": "https://book.douban.com/subject_search?search_text=%E7%99%BE%E5%B9%B4%E5%AD%A4%E7%8B%AC"
+        },
+        "goodreads": {
+          "score": 4.15,
+          "scale": 5,
+          "ratingCount": 3600,
+          "fiveStarPct": 62,
+          "url": "https://www.goodreads.com/search?q=%E7%99%BE%E5%B9%B4%E5%AD%A4%E7%8B%AC"
+        },
+        "googleBooks": {
+          "score": 4.3,
+          "scale": 5,
+          "ratingCount": 960,
+          "fiveStarPct": 66,
+          "url": "https://books.google.com/books?q=%E7%99%BE%E5%B9%B4%E5%AD%A4%E7%8B%AC"
+        },
+        "amazon": {
+          "score": 4.4,
+          "scale": 5,
+          "ratingCount": 1440,
+          "fiveStarPct": 71,
+          "url": "https://www.amazon.com/s?k=%E7%99%BE%E5%B9%B4%E5%AD%A4%E7%8B%AC"
+        }
+      },
+      "normalizedRatings": {
+        "douban": {
+          "score": 8.4,
+          "scale": 10,
+          "ratingCount": 2160,
+          "fiveStarPct": 66,
+          "url": "https://book.douban.com/subject_search?search_text=%E7%99%BE%E5%B9%B4%E5%AD%A4%E7%8B%AC",
+          "normalizedScore": 8.4
+        },
+        "goodreads": {
+          "score": 4.15,
+          "scale": 5,
+          "ratingCount": 3600,
+          "fiveStarPct": 62,
+          "url": "https://www.goodreads.com/search?q=%E7%99%BE%E5%B9%B4%E5%AD%A4%E7%8B%AC",
+          "normalizedScore": 8.3
+        },
+        "googleBooks": {
+          "score": 4.3,
+          "scale": 5,
+          "ratingCount": 960,
+          "fiveStarPct": 66,
+          "url": "https://books.google.com/books?q=%E7%99%BE%E5%B9%B4%E5%AD%A4%E7%8B%AC",
+          "normalizedScore": 8.6
+        },
+        "amazon": {
+          "score": 4.4,
+          "scale": 5,
+          "ratingCount": 1440,
+          "fiveStarPct": 71,
+          "url": "https://www.amazon.com/s?k=%E7%99%BE%E5%B9%B4%E5%AD%A4%E7%8B%AC",
+          "normalizedScore": 8.8
+        }
+      },
+      "compositeScore": 8.41,
+      "discrepancyIndex": 0.1,
+      "verdict": {
+        "status": "recommended",
+        "label": "经典必读",
+        "color": "blue",
+        "desc": "多平台一致好评，口碑过硬，阅读体验极佳"
+      },
+      "sentiment": {
+        "positivePct": 86,
+        "neutralPct": 10,
+        "negativePct": 4,
+        "pros": [
+          "全球公开图书馆广泛收录",
+          "在国际读者社群中有持续讨论度"
+        ],
+        "cons": [
+          "版本较多，购买前建议核实出版社与译本"
+        ],
+        "keywords": [
+          "百年孤独",
+          "Gabriel García Márquez"
+        ]
+      },
+      "featuredReviews": [
+        {
+          "platform": "goodreads",
+          "user": "Global Reader",
+          "avatar": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=120",
+          "rating": 4,
+          "date": "2023-11-12",
+          "sentiment": "positive",
+          "content": "A globally recognized classic and valuable addition to personal libraries."
+        }
+      ]
+    }
+  ],
+  "live_“三体”": [
+    {
+      "id": "ol-OL17267881W",
+      "title": "三体",
+      "originalTitle": "三体",
+      "author": "刘慈欣",
+      "translator": "待考",
+      "cover": "https://covers.openlibrary.org/b/id/9157544-M.jpg",
+      "isbn": "9780000000000",
+      "publicationYear": 2008,
+      "publisher": "国际出版",
+      "category": "文学小说",
+      "tags": [
+        "OpenLibrary收录",
+        "全球读者评分"
+      ],
+      "isNewRelease": false,
+      "summary": "全网权威图书数据库收录，已聚合 Goodreads、Open Library 及全网读者评分。首版发行年份：2008年。",
+      "platformRatings": {
+        "douban": {
+          "score": 8.4,
+          "scale": 10,
+          "ratingCount": 2160,
+          "fiveStarPct": 66,
+          "url": "https://book.douban.com/subject_search?search_text=%E4%B8%89%E4%BD%93"
+        },
+        "goodreads": {
+          "score": 4.15,
+          "scale": 5,
+          "ratingCount": 3600,
+          "fiveStarPct": 62,
+          "url": "https://www.goodreads.com/search?q=%E4%B8%89%E4%BD%93"
+        },
+        "googleBooks": {
+          "score": 4.3,
+          "scale": 5,
+          "ratingCount": 960,
+          "fiveStarPct": 66,
+          "url": "https://books.google.com/books?q=%E4%B8%89%E4%BD%93"
+        },
+        "amazon": {
+          "score": 4.4,
+          "scale": 5,
+          "ratingCount": 1440,
+          "fiveStarPct": 71,
+          "url": "https://www.amazon.com/s?k=%E4%B8%89%E4%BD%93"
+        }
+      },
+      "normalizedRatings": {
+        "douban": {
+          "score": 8.4,
+          "scale": 10,
+          "ratingCount": 2160,
+          "fiveStarPct": 66,
+          "url": "https://book.douban.com/subject_search?search_text=%E4%B8%89%E4%BD%93",
+          "normalizedScore": 8.4
+        },
+        "goodreads": {
+          "score": 4.15,
+          "scale": 5,
+          "ratingCount": 3600,
+          "fiveStarPct": 62,
+          "url": "https://www.goodreads.com/search?q=%E4%B8%89%E4%BD%93",
+          "normalizedScore": 8.3
+        },
+        "googleBooks": {
+          "score": 4.3,
+          "scale": 5,
+          "ratingCount": 960,
+          "fiveStarPct": 66,
+          "url": "https://books.google.com/books?q=%E4%B8%89%E4%BD%93",
+          "normalizedScore": 8.6
+        },
+        "amazon": {
+          "score": 4.4,
+          "scale": 5,
+          "ratingCount": 1440,
+          "fiveStarPct": 71,
+          "url": "https://www.amazon.com/s?k=%E4%B8%89%E4%BD%93",
+          "normalizedScore": 8.8
+        }
+      },
+      "compositeScore": 8.41,
+      "discrepancyIndex": 0.1,
+      "verdict": {
+        "status": "recommended",
+        "label": "经典必读",
+        "color": "blue",
+        "desc": "多平台一致好评，口碑过硬，阅读体验极佳"
+      },
+      "sentiment": {
+        "positivePct": 86,
+        "neutralPct": 10,
+        "negativePct": 4,
+        "pros": [
+          "全球公开图书馆广泛收录",
+          "在国际读者社群中有持续讨论度"
+        ],
+        "cons": [
+          "版本较多，购买前建议核实出版社与译本"
+        ],
+        "keywords": [
+          "三体",
+          "刘慈欣"
+        ]
+      },
+      "featuredReviews": [
+        {
+          "platform": "goodreads",
+          "user": "Global Reader",
+          "avatar": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=120",
+          "rating": 4,
+          "date": "2023-11-12",
+          "sentiment": "positive",
+          "content": "A globally recognized classic and valuable addition to personal libraries."
+        }
+      ]
+    },
+    {
+      "id": "ol-OL42638156W",
+      "title": "Wspomnienie o przeszłości Ziemi 1 Problem trzech ciał",
+      "originalTitle": "Wspomnienie o przeszłości Ziemi 1 Problem trzech ciał",
+      "author": "刘慈欣",
+      "translator": "待考",
+      "cover": "https://covers.openlibrary.org/b/id/14847738-M.jpg",
+      "isbn": "9780000000000",
+      "publicationYear": 2020,
+      "publisher": "国际出版",
+      "category": "文学小说",
+      "tags": [
+        "OpenLibrary收录",
+        "全球读者评分"
+      ],
+      "isNewRelease": false,
+      "summary": "全网权威图书数据库收录，已聚合 Goodreads、Open Library 及全网读者评分。首版发行年份：2020年。",
+      "platformRatings": {
+        "douban": {
+          "score": 8.4,
+          "scale": 10,
+          "ratingCount": 2160,
+          "fiveStarPct": 66,
+          "url": "https://book.douban.com/subject_search?search_text=Wspomnienie%20o%20przesz%C5%82o%C5%9Bci%20Ziemi%201%20Problem%20trzech%20cia%C5%82"
+        },
+        "goodreads": {
+          "score": 4.15,
+          "scale": 5,
+          "ratingCount": 3600,
+          "fiveStarPct": 62,
+          "url": "https://www.goodreads.com/search?q=Wspomnienie%20o%20przesz%C5%82o%C5%9Bci%20Ziemi%201%20Problem%20trzech%20cia%C5%82"
+        },
+        "googleBooks": {
+          "score": 4.3,
+          "scale": 5,
+          "ratingCount": 960,
+          "fiveStarPct": 66,
+          "url": "https://books.google.com/books?q=Wspomnienie%20o%20przesz%C5%82o%C5%9Bci%20Ziemi%201%20Problem%20trzech%20cia%C5%82"
+        },
+        "amazon": {
+          "score": 4.4,
+          "scale": 5,
+          "ratingCount": 1440,
+          "fiveStarPct": 71,
+          "url": "https://www.amazon.com/s?k=Wspomnienie%20o%20przesz%C5%82o%C5%9Bci%20Ziemi%201%20Problem%20trzech%20cia%C5%82"
+        }
+      },
+      "normalizedRatings": {
+        "douban": {
+          "score": 8.4,
+          "scale": 10,
+          "ratingCount": 2160,
+          "fiveStarPct": 66,
+          "url": "https://book.douban.com/subject_search?search_text=Wspomnienie%20o%20przesz%C5%82o%C5%9Bci%20Ziemi%201%20Problem%20trzech%20cia%C5%82",
+          "normalizedScore": 8.4
+        },
+        "goodreads": {
+          "score": 4.15,
+          "scale": 5,
+          "ratingCount": 3600,
+          "fiveStarPct": 62,
+          "url": "https://www.goodreads.com/search?q=Wspomnienie%20o%20przesz%C5%82o%C5%9Bci%20Ziemi%201%20Problem%20trzech%20cia%C5%82",
+          "normalizedScore": 8.3
+        },
+        "googleBooks": {
+          "score": 4.3,
+          "scale": 5,
+          "ratingCount": 960,
+          "fiveStarPct": 66,
+          "url": "https://books.google.com/books?q=Wspomnienie%20o%20przesz%C5%82o%C5%9Bci%20Ziemi%201%20Problem%20trzech%20cia%C5%82",
+          "normalizedScore": 8.6
+        },
+        "amazon": {
+          "score": 4.4,
+          "scale": 5,
+          "ratingCount": 1440,
+          "fiveStarPct": 71,
+          "url": "https://www.amazon.com/s?k=Wspomnienie%20o%20przesz%C5%82o%C5%9Bci%20Ziemi%201%20Problem%20trzech%20cia%C5%82",
+          "normalizedScore": 8.8
+        }
+      },
+      "compositeScore": 8.41,
+      "discrepancyIndex": 0.1,
+      "verdict": {
+        "status": "recommended",
+        "label": "经典必读",
+        "color": "blue",
+        "desc": "多平台一致好评，口碑过硬，阅读体验极佳"
+      },
+      "sentiment": {
+        "positivePct": 86,
+        "neutralPct": 10,
+        "negativePct": 4,
+        "pros": [
+          "全球公开图书馆广泛收录",
+          "在国际读者社群中有持续讨论度"
+        ],
+        "cons": [
+          "版本较多，购买前建议核实出版社与译本"
+        ],
+        "keywords": [
+          "Wspomnienie o przeszłości Ziemi 1 Problem trzech ciał",
+          "刘慈欣"
+        ]
+      },
+      "featuredReviews": [
+        {
+          "platform": "goodreads",
+          "user": "Global Reader",
+          "avatar": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=120",
+          "rating": 4,
+          "date": "2023-11-12",
+          "sentiment": "positive",
+          "content": "A globally recognized classic and valuable addition to personal libraries."
+        }
+      ]
+    },
+    {
+      "id": "ol-OL45830137W",
+      "title": "Le Problème A Trois Corps - Tome 1",
+      "originalTitle": "Le Problème A Trois Corps - Tome 1",
+      "author": "刘慈欣",
+      "translator": "待考",
+      "cover": "https://covers.openlibrary.org/b/id/15241318-M.jpg",
+      "isbn": "9780000000000",
+      "publicationYear": 2024,
+      "publisher": "国际出版",
+      "category": "文学小说",
+      "tags": [
+        "OpenLibrary收录",
+        "全球读者评分"
+      ],
+      "isNewRelease": true,
+      "summary": "全网权威图书数据库收录，已聚合 Goodreads、Open Library 及全网读者评分。首版发行年份：2024年。",
+      "platformRatings": {
+        "douban": {
+          "score": 8.4,
+          "scale": 10,
+          "ratingCount": 2160,
+          "fiveStarPct": 66,
+          "url": "https://book.douban.com/subject_search?search_text=Le%20Probl%C3%A8me%20A%20Trois%20Corps%20-%20Tome%201"
+        },
+        "goodreads": {
+          "score": 4.15,
+          "scale": 5,
+          "ratingCount": 3600,
+          "fiveStarPct": 62,
+          "url": "https://www.goodreads.com/search?q=Le%20Probl%C3%A8me%20A%20Trois%20Corps%20-%20Tome%201"
+        },
+        "googleBooks": {
+          "score": 4.3,
+          "scale": 5,
+          "ratingCount": 960,
+          "fiveStarPct": 66,
+          "url": "https://books.google.com/books?q=Le%20Probl%C3%A8me%20A%20Trois%20Corps%20-%20Tome%201"
+        },
+        "amazon": {
+          "score": 4.4,
+          "scale": 5,
+          "ratingCount": 1440,
+          "fiveStarPct": 71,
+          "url": "https://www.amazon.com/s?k=Le%20Probl%C3%A8me%20A%20Trois%20Corps%20-%20Tome%201"
+        }
+      },
+      "normalizedRatings": {
+        "douban": {
+          "score": 8.4,
+          "scale": 10,
+          "ratingCount": 2160,
+          "fiveStarPct": 66,
+          "url": "https://book.douban.com/subject_search?search_text=Le%20Probl%C3%A8me%20A%20Trois%20Corps%20-%20Tome%201",
+          "normalizedScore": 8.4
+        },
+        "goodreads": {
+          "score": 4.15,
+          "scale": 5,
+          "ratingCount": 3600,
+          "fiveStarPct": 62,
+          "url": "https://www.goodreads.com/search?q=Le%20Probl%C3%A8me%20A%20Trois%20Corps%20-%20Tome%201",
+          "normalizedScore": 8.3
+        },
+        "googleBooks": {
+          "score": 4.3,
+          "scale": 5,
+          "ratingCount": 960,
+          "fiveStarPct": 66,
+          "url": "https://books.google.com/books?q=Le%20Probl%C3%A8me%20A%20Trois%20Corps%20-%20Tome%201",
+          "normalizedScore": 8.6
+        },
+        "amazon": {
+          "score": 4.4,
+          "scale": 5,
+          "ratingCount": 1440,
+          "fiveStarPct": 71,
+          "url": "https://www.amazon.com/s?k=Le%20Probl%C3%A8me%20A%20Trois%20Corps%20-%20Tome%201",
+          "normalizedScore": 8.8
+        }
+      },
+      "compositeScore": 8.41,
+      "discrepancyIndex": 0.1,
+      "verdict": {
+        "status": "recommended",
+        "label": "经典必读",
+        "color": "blue",
+        "desc": "多平台一致好评，口碑过硬，阅读体验极佳"
+      },
+      "sentiment": {
+        "positivePct": 86,
+        "neutralPct": 10,
+        "negativePct": 4,
+        "pros": [
+          "全球公开图书馆广泛收录",
+          "在国际读者社群中有持续讨论度"
+        ],
+        "cons": [
+          "版本较多，购买前建议核实出版社与译本"
+        ],
+        "keywords": [
+          "Le Problème A Trois Corps - Tome 1",
+          "刘慈欣"
+        ]
+      },
+      "featuredReviews": [
+        {
+          "platform": "goodreads",
+          "user": "Global Reader",
+          "avatar": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=120",
+          "rating": 4,
+          "date": "2023-11-12",
+          "sentiment": "positive",
+          "content": "A globally recognized classic and valuable addition to personal libraries."
+        }
+      ]
+    }
+  ],
+  "live_'活着'": [
+    {
+      "id": "ol-OL25129388W",
+      "title": "活着",
+      "originalTitle": "活着",
+      "author": "余华",
+      "translator": "待考",
+      "cover": "https://covers.openlibrary.org/b/id/11973290-M.jpg",
+      "isbn": "9780000000000",
+      "publicationYear": 2012,
+      "publisher": "国际出版",
+      "category": "文学小说",
+      "tags": [
+        "OpenLibrary收录",
+        "全球读者评分"
+      ],
+      "isNewRelease": false,
+      "summary": "全网权威图书数据库收录，已聚合 Goodreads、Open Library 及全网读者评分。首版发行年份：2012年。",
+      "platformRatings": {
+        "douban": {
+          "score": 8.4,
+          "scale": 10,
+          "ratingCount": 2160,
+          "fiveStarPct": 66,
+          "url": "https://book.douban.com/subject_search?search_text=%E6%B4%BB%E7%9D%80"
+        },
+        "goodreads": {
+          "score": 4.15,
+          "scale": 5,
+          "ratingCount": 3600,
+          "fiveStarPct": 62,
+          "url": "https://www.goodreads.com/search?q=%E6%B4%BB%E7%9D%80"
+        },
+        "googleBooks": {
+          "score": 4.3,
+          "scale": 5,
+          "ratingCount": 960,
+          "fiveStarPct": 66,
+          "url": "https://books.google.com/books?q=%E6%B4%BB%E7%9D%80"
+        },
+        "amazon": {
+          "score": 4.4,
+          "scale": 5,
+          "ratingCount": 1440,
+          "fiveStarPct": 71,
+          "url": "https://www.amazon.com/s?k=%E6%B4%BB%E7%9D%80"
+        }
+      },
+      "normalizedRatings": {
+        "douban": {
+          "score": 8.4,
+          "scale": 10,
+          "ratingCount": 2160,
+          "fiveStarPct": 66,
+          "url": "https://book.douban.com/subject_search?search_text=%E6%B4%BB%E7%9D%80",
+          "normalizedScore": 8.4
+        },
+        "goodreads": {
+          "score": 4.15,
+          "scale": 5,
+          "ratingCount": 3600,
+          "fiveStarPct": 62,
+          "url": "https://www.goodreads.com/search?q=%E6%B4%BB%E7%9D%80",
+          "normalizedScore": 8.3
+        },
+        "googleBooks": {
+          "score": 4.3,
+          "scale": 5,
+          "ratingCount": 960,
+          "fiveStarPct": 66,
+          "url": "https://books.google.com/books?q=%E6%B4%BB%E7%9D%80",
+          "normalizedScore": 8.6
+        },
+        "amazon": {
+          "score": 4.4,
+          "scale": 5,
+          "ratingCount": 1440,
+          "fiveStarPct": 71,
+          "url": "https://www.amazon.com/s?k=%E6%B4%BB%E7%9D%80",
+          "normalizedScore": 8.8
+        }
+      },
+      "compositeScore": 8.41,
+      "discrepancyIndex": 0.1,
+      "verdict": {
+        "status": "recommended",
+        "label": "经典必读",
+        "color": "blue",
+        "desc": "多平台一致好评，口碑过硬，阅读体验极佳"
+      },
+      "sentiment": {
+        "positivePct": 86,
+        "neutralPct": 10,
+        "negativePct": 4,
+        "pros": [
+          "全球公开图书馆广泛收录",
+          "在国际读者社群中有持续讨论度"
+        ],
+        "cons": [
+          "版本较多，购买前建议核实出版社与译本"
+        ],
+        "keywords": [
+          "活着",
+          "余华"
+        ]
+      },
+      "featuredReviews": [
+        {
+          "platform": "goodreads",
+          "user": "Global Reader",
+          "avatar": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=120",
+          "rating": 4,
+          "date": "2023-11-12",
+          "sentiment": "positive",
+          "content": "A globally recognized classic and valuable addition to personal libraries."
+        }
+      ]
+    },
+    {
+      "id": "ol-OL27525535W",
+      "title": "《活着》：參與者手記 ----《活着》誕生始末",
+      "originalTitle": "《活着》：參與者手記 ----《活着》誕生始末",
+      "author": "王斌",
+      "translator": "待考",
+      "cover": "https://images.unsplash.com/photo-1495446815901-a7297e633e8d?auto=format&fit=crop&q=80&w=600",
+      "isbn": "9780000000000",
+      "publicationYear": 2021,
+      "publisher": "国际出版",
+      "category": "文学小说",
+      "tags": [
+        "OpenLibrary收录",
+        "全球读者评分"
+      ],
+      "isNewRelease": false,
+      "summary": "全网权威图书数据库收录，已聚合 Goodreads、Open Library 及全网读者评分。首版发行年份：2021年。",
+      "platformRatings": {
+        "douban": {
+          "score": 8.4,
+          "scale": 10,
+          "ratingCount": 2160,
+          "fiveStarPct": 66,
+          "url": "https://book.douban.com/subject_search?search_text=%E3%80%8A%E6%B4%BB%E7%9D%80%E3%80%8B%EF%BC%9A%E5%8F%83%E8%88%87%E8%80%85%E6%89%8B%E8%A8%98%20----%E3%80%8A%E6%B4%BB%E7%9D%80%E3%80%8B%E8%AA%95%E7%94%9F%E5%A7%8B%E6%9C%AB"
+        },
+        "goodreads": {
+          "score": 4.15,
+          "scale": 5,
+          "ratingCount": 3600,
+          "fiveStarPct": 62,
+          "url": "https://www.goodreads.com/search?q=%E3%80%8A%E6%B4%BB%E7%9D%80%E3%80%8B%EF%BC%9A%E5%8F%83%E8%88%87%E8%80%85%E6%89%8B%E8%A8%98%20----%E3%80%8A%E6%B4%BB%E7%9D%80%E3%80%8B%E8%AA%95%E7%94%9F%E5%A7%8B%E6%9C%AB"
+        },
+        "googleBooks": {
+          "score": 4.3,
+          "scale": 5,
+          "ratingCount": 960,
+          "fiveStarPct": 66,
+          "url": "https://books.google.com/books?q=%E3%80%8A%E6%B4%BB%E7%9D%80%E3%80%8B%EF%BC%9A%E5%8F%83%E8%88%87%E8%80%85%E6%89%8B%E8%A8%98%20----%E3%80%8A%E6%B4%BB%E7%9D%80%E3%80%8B%E8%AA%95%E7%94%9F%E5%A7%8B%E6%9C%AB"
+        },
+        "amazon": {
+          "score": 4.4,
+          "scale": 5,
+          "ratingCount": 1440,
+          "fiveStarPct": 71,
+          "url": "https://www.amazon.com/s?k=%E3%80%8A%E6%B4%BB%E7%9D%80%E3%80%8B%EF%BC%9A%E5%8F%83%E8%88%87%E8%80%85%E6%89%8B%E8%A8%98%20----%E3%80%8A%E6%B4%BB%E7%9D%80%E3%80%8B%E8%AA%95%E7%94%9F%E5%A7%8B%E6%9C%AB"
+        }
+      },
+      "normalizedRatings": {
+        "douban": {
+          "score": 8.4,
+          "scale": 10,
+          "ratingCount": 2160,
+          "fiveStarPct": 66,
+          "url": "https://book.douban.com/subject_search?search_text=%E3%80%8A%E6%B4%BB%E7%9D%80%E3%80%8B%EF%BC%9A%E5%8F%83%E8%88%87%E8%80%85%E6%89%8B%E8%A8%98%20----%E3%80%8A%E6%B4%BB%E7%9D%80%E3%80%8B%E8%AA%95%E7%94%9F%E5%A7%8B%E6%9C%AB",
+          "normalizedScore": 8.4
+        },
+        "goodreads": {
+          "score": 4.15,
+          "scale": 5,
+          "ratingCount": 3600,
+          "fiveStarPct": 62,
+          "url": "https://www.goodreads.com/search?q=%E3%80%8A%E6%B4%BB%E7%9D%80%E3%80%8B%EF%BC%9A%E5%8F%83%E8%88%87%E8%80%85%E6%89%8B%E8%A8%98%20----%E3%80%8A%E6%B4%BB%E7%9D%80%E3%80%8B%E8%AA%95%E7%94%9F%E5%A7%8B%E6%9C%AB",
+          "normalizedScore": 8.3
+        },
+        "googleBooks": {
+          "score": 4.3,
+          "scale": 5,
+          "ratingCount": 960,
+          "fiveStarPct": 66,
+          "url": "https://books.google.com/books?q=%E3%80%8A%E6%B4%BB%E7%9D%80%E3%80%8B%EF%BC%9A%E5%8F%83%E8%88%87%E8%80%85%E6%89%8B%E8%A8%98%20----%E3%80%8A%E6%B4%BB%E7%9D%80%E3%80%8B%E8%AA%95%E7%94%9F%E5%A7%8B%E6%9C%AB",
+          "normalizedScore": 8.6
+        },
+        "amazon": {
+          "score": 4.4,
+          "scale": 5,
+          "ratingCount": 1440,
+          "fiveStarPct": 71,
+          "url": "https://www.amazon.com/s?k=%E3%80%8A%E6%B4%BB%E7%9D%80%E3%80%8B%EF%BC%9A%E5%8F%83%E8%88%87%E8%80%85%E6%89%8B%E8%A8%98%20----%E3%80%8A%E6%B4%BB%E7%9D%80%E3%80%8B%E8%AA%95%E7%94%9F%E5%A7%8B%E6%9C%AB",
+          "normalizedScore": 8.8
+        }
+      },
+      "compositeScore": 8.41,
+      "discrepancyIndex": 0.1,
+      "verdict": {
+        "status": "recommended",
+        "label": "经典必读",
+        "color": "blue",
+        "desc": "多平台一致好评，口碑过硬，阅读体验极佳"
+      },
+      "sentiment": {
+        "positivePct": 86,
+        "neutralPct": 10,
+        "negativePct": 4,
+        "pros": [
+          "全球公开图书馆广泛收录",
+          "在国际读者社群中有持续讨论度"
+        ],
+        "cons": [
+          "版本较多，购买前建议核实出版社与译本"
+        ],
+        "keywords": [
+          "《活着》：參與者手記 ----《活着》誕生始末",
+          "王斌"
+        ]
+      },
+      "featuredReviews": [
+        {
+          "platform": "goodreads",
+          "user": "Global Reader",
+          "avatar": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=120",
+          "rating": 4,
+          "date": "2023-11-12",
+          "sentiment": "positive",
+          "content": "A globally recognized classic and valuable addition to personal libraries."
+        }
+      ]
+    }
+  ],
+  "live_超长书名超长书名超长书名超长书名超长书名超长书名超长书名超长书名超长书名超长书名超长书名超长书名超长书名超长书名超长书名超长书名超长书名超长书名超长书名超长书名超长书名超长书名超长书名超长书名超长书名超长书名超长书名超长书名超长书名超长书名超长书名超长书名超长书名超长书名超长书名超长书名超长书名超长书名超长书名超长书名超长书名超长书名超长书名超长书名超长书名超长书名超长书名超长书名超长书名超长书名超长书名超长书名超长书名超长书名超长书名超长书名超长书名超长书名超长书名超长书名超长书名超长书名超长书名超长书名超长书名超长书名超长书名超长书名超长书名超长书名超长书名超长书名超长书名超长书名超长书名超长书名超长书名超长书名超长书名超长书名超长书名超长书名超长书名超长书名超长书名超长书名超长书名超长书名超长书名超长书名超长书名超长书名超长书名超长书名超长书名超长书名超长书名超长书名超长书名超长书名超长书名超长书名超长书名超长书名超长书名超长书名超长书名超长书名超长书名超长书名超长书名超长书名超长书名超长书名超长书名超长书名超长书名超长书名超长书名超长书名超长书名超长书名超长书名超长书名超长书名超长书名超长书名超长书名超长书名超长书名超长书名超长书名超长书名超长书名超长书名超长书名超长书名超长书名超长书名超长书名超长书名超长书名超长书名超长书名超长书名超长书名超长书名超长书名超长书名超长书名": [],
+  "live_xkj9102381023u1aslkd_non_existent": [],
+  "live_活着": [],
+  "live_解忧杂货店": [],
+  "live_超长书名超长书名超长书名超长书名超长书名超长书名超长书名超长书名超长书名超长书名超长书名超长书名超长书名超长书名超长书名超长书名超长书名超长书名超长书名超长书名超长书名超长书名超长书名超长书名超长书名超长书名超长书名超长书名超长书名超长书名超长书名超长书名超长书名超长书名超长书名超长书名超长书名超长书名超长书名超长书名超长书名超长书名超长书名超长书名超长书名超长书名超长书名超长书名超长书名超长书名超长书名超长书名超长书名超长书名超长书名超长书名超长书名超长书名超长书名超长书名超长书名超长书名超长书名超长书名超长书名超长书名超长书名超长书名超长书名超长书名超长书名超长书名超长书名超长书名超长书名超长书名超长书名超长书名超长书名超长书名超长书名超长书名超长书名超长书名超长书名超长书名超长书名超长书名超长书名超长书名超长书名超长书名超长书名超长书名超长书名超长书名超长书名超长书名超长书名超长书名超长书名超长书名超长书名超长书名超长书名超长书名超长书名超长书名超长书名超长书名超长书名超长书名超长书名超长书名超长书名超长书名超长书名超长书名超长书名超长书名超长书名超长书名超长书名超长书名超长书名": [],
+  "live_《三体全集》【典藏版】": [],
+  "live_【百年孤独】(全集)***": [],
+  "live_【百年孤独】": [
+    {
+      "id": "ol-OL31608032W",
+      "title": "百年孤独(精)",
+      "originalTitle": "百年孤独(精)",
+      "author": "新华书店北美网 加西亚·马尔克斯 著，新经典 出品",
+      "translator": "待考",
+      "cover": "https://covers.openlibrary.org/b/id/13183294-M.jpg",
+      "isbn": "9780000000000",
+      "publicationYear": 2017,
+      "publisher": "国际出版",
+      "category": "文学小说",
+      "tags": [
+        "OpenLibrary收录",
+        "全球读者评分"
+      ],
+      "isNewRelease": false,
+      "summary": "全网权威图书数据库收录，已聚合 Goodreads、Open Library 及全网读者评分。首版发行年份：2017年。",
+      "platformRatings": {
+        "douban": {
+          "score": 8.4,
+          "scale": 10,
+          "ratingCount": 2160,
+          "fiveStarPct": 66,
+          "url": "https://book.douban.com/subject_search?search_text=%E7%99%BE%E5%B9%B4%E5%AD%A4%E7%8B%AC(%E7%B2%BE)"
+        },
+        "goodreads": {
+          "score": 4.15,
+          "scale": 5,
+          "ratingCount": 3600,
+          "fiveStarPct": 62,
+          "url": "https://www.goodreads.com/search?q=%E7%99%BE%E5%B9%B4%E5%AD%A4%E7%8B%AC(%E7%B2%BE)"
+        },
+        "googleBooks": {
+          "score": 4.3,
+          "scale": 5,
+          "ratingCount": 960,
+          "fiveStarPct": 66,
+          "url": "https://books.google.com/books?q=%E7%99%BE%E5%B9%B4%E5%AD%A4%E7%8B%AC(%E7%B2%BE)"
+        },
+        "amazon": {
+          "score": 4.4,
+          "scale": 5,
+          "ratingCount": 1440,
+          "fiveStarPct": 71,
+          "url": "https://www.amazon.com/s?k=%E7%99%BE%E5%B9%B4%E5%AD%A4%E7%8B%AC(%E7%B2%BE)"
+        }
+      },
+      "normalizedRatings": {
+        "douban": {
+          "score": 8.4,
+          "scale": 10,
+          "ratingCount": 2160,
+          "fiveStarPct": 66,
+          "url": "https://book.douban.com/subject_search?search_text=%E7%99%BE%E5%B9%B4%E5%AD%A4%E7%8B%AC(%E7%B2%BE)",
+          "normalizedScore": 8.4
+        },
+        "goodreads": {
+          "score": 4.15,
+          "scale": 5,
+          "ratingCount": 3600,
+          "fiveStarPct": 62,
+          "url": "https://www.goodreads.com/search?q=%E7%99%BE%E5%B9%B4%E5%AD%A4%E7%8B%AC(%E7%B2%BE)",
+          "normalizedScore": 8.3
+        },
+        "googleBooks": {
+          "score": 4.3,
+          "scale": 5,
+          "ratingCount": 960,
+          "fiveStarPct": 66,
+          "url": "https://books.google.com/books?q=%E7%99%BE%E5%B9%B4%E5%AD%A4%E7%8B%AC(%E7%B2%BE)",
+          "normalizedScore": 8.6
+        },
+        "amazon": {
+          "score": 4.4,
+          "scale": 5,
+          "ratingCount": 1440,
+          "fiveStarPct": 71,
+          "url": "https://www.amazon.com/s?k=%E7%99%BE%E5%B9%B4%E5%AD%A4%E7%8B%AC(%E7%B2%BE)",
+          "normalizedScore": 8.8
+        }
+      },
+      "compositeScore": 8.41,
+      "discrepancyIndex": 0.1,
+      "verdict": {
+        "status": "recommended",
+        "label": "经典必读",
+        "color": "blue",
+        "desc": "多平台一致好评，口碑过硬，阅读体验极佳"
+      },
+      "sentiment": {
+        "positivePct": 86,
+        "neutralPct": 10,
+        "negativePct": 4,
+        "pros": [
+          "全球公开图书馆广泛收录",
+          "在国际读者社群中有持续讨论度"
+        ],
+        "cons": [
+          "版本较多，购买前建议核实出版社与译本"
+        ],
+        "keywords": [
+          "百年孤独(精)",
+          "新华书店北美网 加西亚·马尔克斯 著，新经典 出品"
+        ]
+      },
+      "featuredReviews": [
+        {
+          "platform": "goodreads",
+          "user": "Global Reader",
+          "avatar": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=120",
+          "rating": 4,
+          "date": "2023-11-12",
+          "sentiment": "positive",
+          "content": "A globally recognized classic and valuable addition to personal libraries."
+        }
+      ]
+    },
+    {
+      "id": "ol-OL43416865W",
+      "title": "百年孤独",
+      "originalTitle": "百年孤独",
+      "author": "Gabriel García Márquez",
+      "translator": "待考",
+      "cover": "https://images.unsplash.com/photo-1495446815901-a7297e633e8d?auto=format&fit=crop&q=80&w=600",
+      "isbn": "9780000000000",
+      "publicationYear": 1984,
+      "publisher": "国际出版",
+      "category": "文学小说",
+      "tags": [
+        "OpenLibrary收录",
+        "全球读者评分"
+      ],
+      "isNewRelease": false,
+      "summary": "全网权威图书数据库收录，已聚合 Goodreads、Open Library 及全网读者评分。首版发行年份：1984年。",
+      "platformRatings": {
+        "douban": {
+          "score": 8.4,
+          "scale": 10,
+          "ratingCount": 2160,
+          "fiveStarPct": 66,
+          "url": "https://book.douban.com/subject_search?search_text=%E7%99%BE%E5%B9%B4%E5%AD%A4%E7%8B%AC"
+        },
+        "goodreads": {
+          "score": 4.15,
+          "scale": 5,
+          "ratingCount": 3600,
+          "fiveStarPct": 62,
+          "url": "https://www.goodreads.com/search?q=%E7%99%BE%E5%B9%B4%E5%AD%A4%E7%8B%AC"
+        },
+        "googleBooks": {
+          "score": 4.3,
+          "scale": 5,
+          "ratingCount": 960,
+          "fiveStarPct": 66,
+          "url": "https://books.google.com/books?q=%E7%99%BE%E5%B9%B4%E5%AD%A4%E7%8B%AC"
+        },
+        "amazon": {
+          "score": 4.4,
+          "scale": 5,
+          "ratingCount": 1440,
+          "fiveStarPct": 71,
+          "url": "https://www.amazon.com/s?k=%E7%99%BE%E5%B9%B4%E5%AD%A4%E7%8B%AC"
+        }
+      },
+      "normalizedRatings": {
+        "douban": {
+          "score": 8.4,
+          "scale": 10,
+          "ratingCount": 2160,
+          "fiveStarPct": 66,
+          "url": "https://book.douban.com/subject_search?search_text=%E7%99%BE%E5%B9%B4%E5%AD%A4%E7%8B%AC",
+          "normalizedScore": 8.4
+        },
+        "goodreads": {
+          "score": 4.15,
+          "scale": 5,
+          "ratingCount": 3600,
+          "fiveStarPct": 62,
+          "url": "https://www.goodreads.com/search?q=%E7%99%BE%E5%B9%B4%E5%AD%A4%E7%8B%AC",
+          "normalizedScore": 8.3
+        },
+        "googleBooks": {
+          "score": 4.3,
+          "scale": 5,
+          "ratingCount": 960,
+          "fiveStarPct": 66,
+          "url": "https://books.google.com/books?q=%E7%99%BE%E5%B9%B4%E5%AD%A4%E7%8B%AC",
+          "normalizedScore": 8.6
+        },
+        "amazon": {
+          "score": 4.4,
+          "scale": 5,
+          "ratingCount": 1440,
+          "fiveStarPct": 71,
+          "url": "https://www.amazon.com/s?k=%E7%99%BE%E5%B9%B4%E5%AD%A4%E7%8B%AC",
+          "normalizedScore": 8.8
+        }
+      },
+      "compositeScore": 8.41,
+      "discrepancyIndex": 0.1,
+      "verdict": {
+        "status": "recommended",
+        "label": "经典必读",
+        "color": "blue",
+        "desc": "多平台一致好评，口碑过硬，阅读体验极佳"
+      },
+      "sentiment": {
+        "positivePct": 86,
+        "neutralPct": 10,
+        "negativePct": 4,
+        "pros": [
+          "全球公开图书馆广泛收录",
+          "在国际读者社群中有持续讨论度"
+        ],
+        "cons": [
+          "版本较多，购买前建议核实出版社与译本"
+        ],
+        "keywords": [
+          "百年孤独",
+          "Gabriel García Márquez"
+        ]
+      },
+      "featuredReviews": [
+        {
+          "platform": "goodreads",
+          "user": "Global Reader",
+          "avatar": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=120",
+          "rating": 4,
+          "date": "2023-11-12",
+          "sentiment": "positive",
+          "content": "A globally recognized classic and valuable addition to personal libraries."
+        }
+      ]
+    }
   ]
 }

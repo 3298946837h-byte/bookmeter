@@ -1,15 +1,53 @@
 const path = require('path');
+const fs = require('fs');
 const express = require('express');
 const cors = require('cors');
 const { books } = require('./data/books');
 const { searchLiveBooks } = require('./services/bookFetcher');
 const { generateBookDeepInsight, askBookConsultant } = require('./services/aiService');
+const { getDownloadOptions, streamEbookDownload, getDownloadInfo } = require('./services/ebookDownloadService');
+const ebookService = require('./services/ebookService');
 
 const app = express();
 const PORT = process.env.PORT || 5000;
 
 app.use(cors());
 app.use(express.json());
+
+/**
+ * Clean search query removing Chinese quotes, book brackets, and extra punctuation
+ */
+function cleanSearchQuery(query) {
+  if (!query || typeof query !== 'string') return '';
+  return query
+    .replace(/[《》\u201c\u201d\u2018\u2019\u300c\u300d\u300e\u300f\[\]【】\(\)（）]/g, ' ')
+    .replace(/['"]/g, ' ')
+    .trim();
+}
+
+/**
+ * Multi-word tokenized search matcher
+ * Matches books where all whitespace-separated tokens match across title, author, originalTitle, tags, category, or summary
+ */
+function matchBookQuery(book, query) {
+  const cleaned = cleanSearchQuery(query);
+  if (!cleaned) return false;
+  const tokens = cleaned.toLowerCase().split(/\s+/).filter(Boolean);
+  if (tokens.length === 0) return false;
+
+  const searchableText = [
+    book.title || '',
+    book.originalTitle || '',
+    book.author || '',
+    book.translator || '',
+    book.category || '',
+    ...(book.tags || []),
+    book.isbn || '',
+    book.summary || ''
+  ].join(' ').toLowerCase();
+
+  return tokens.every(token => searchableText.includes(token));
+}
 
 // Serve production static build if available
 const distPath = path.join(__dirname, '../client/dist');
@@ -23,14 +61,7 @@ app.get('/api/books', (req, res) => {
 
   // Search keyword in title, author, originalTitle, tags, or summary
   if (q) {
-    const query = q.toLowerCase().trim();
-    filtered = filtered.filter(b =>
-      b.title.toLowerCase().includes(query) ||
-      b.originalTitle.toLowerCase().includes(query) ||
-      b.author.toLowerCase().includes(query) ||
-      b.tags.some(t => t.toLowerCase().includes(query)) ||
-      (b.isbn && b.isbn.includes(query))
-    );
+    filtered = filtered.filter(b => matchBookQuery(b, q));
   }
 
   // Filter by category
@@ -78,22 +109,16 @@ app.get('/api/books/:id', (req, res) => {
 // 3. Search endpoint with live fallback (DeepSeek + OpenLibrary)
 app.get('/api/search', async (req, res) => {
   const { q } = req.query;
-  if (!q) return res.json({ local: [], live: [] });
+  if (!q || !String(q).trim()) return res.json({ local: [], live: [] });
 
-  const query = q.toLowerCase().trim();
-  const localResults = books.filter(b =>
-    b.title.toLowerCase().includes(query) ||
-    b.originalTitle.toLowerCase().includes(query) ||
-    b.author.toLowerCase().includes(query) ||
-    b.tags.some(t => t.toLowerCase().includes(query)) ||
-    (b.isbn && b.isbn.includes(query))
-  );
+  const queryToUse = String(q).length > 500 ? String(q).slice(0, 500) : String(q);
+  const localResults = books.filter(b => matchBookQuery(b, queryToUse));
 
   let liveResults = [];
   // If local has 0 or 1 result, trigger universal live search
   if (localResults.length <= 1) {
     try {
-      liveResults = await searchLiveBooks(q);
+      liveResults = await searchLiveBooks(queryToUse);
     } catch (e) {
       console.error('Live search error:', e.message);
     }
@@ -103,6 +128,164 @@ app.get('/api/search', async (req, res) => {
     local: localResults,
     live: liveResults
   });
+});
+
+// ==========================================
+// Ebook Engine REST Endpoints (Milestone M1)
+// ==========================================
+
+// 1. Ebook Options Discovery
+app.get('/api/ebooks/options', async (req, res) => {
+  try {
+    const rawId = req.query.id;
+    const rawTitle = req.query.title;
+    const rawAuthor = req.query.author;
+    if (!rawId && !rawTitle) {
+      return res.status(400).json({ success: false, error: 'Book ID or title is required' });
+    }
+    if (ebookService.hasPathTraversal(rawId) || ebookService.hasPathTraversal(rawTitle) || ebookService.hasPathTraversal(rawAuthor)) {
+      return res.status(400).json({ success: false, error: 'Path traversal attempt rejected' });
+    }
+    const options = await ebookService.getDownloadOptions(rawId, rawTitle, rawAuthor);
+    res.json(options);
+  } catch (err) {
+    res.status(500).json({ success: false, error: err.message });
+  }
+});
+
+// 2. Real Ebook Binary Download (EPUB, PDF, TXT)
+app.get('/api/ebooks/download', async (req, res) => {
+  try {
+    await ebookService.handleEbookDownload(req, res);
+  } catch (err) {
+    if (!res.headersSent) {
+      res.status(500).json({ success: false, error: err.message });
+    }
+  }
+});
+
+app.head('/api/ebooks/download', async (req, res) => {
+  try {
+    await ebookService.handleEbookDownload(req, res);
+  } catch (err) {
+    if (!res.headersSent) {
+      res.status(500).end();
+    }
+  }
+});
+
+/**
+ * Verify whether a process is alive
+ */
+function isPidAlive(pid) {
+  if (!pid || typeof pid !== 'number' || pid <= 0) return false;
+  try {
+    process.kill(pid, 0);
+    return true;
+  } catch (err) {
+    return err.code === 'EPERM';
+  }
+}
+
+// 3. Public Tunnel Status (Health & Share Discovery)
+app.get('/api/tunnel-status', (req, res) => {
+  const tunnelFile = path.join(__dirname, '../public_tunnel.json');
+  if (fs.existsSync(tunnelFile)) {
+    try {
+      const data = JSON.parse(fs.readFileSync(tunnelFile, 'utf8'));
+      if (data && data.status) {
+        // Verify process liveness before reporting online or starting
+        let isAlive = true;
+        const hasDaemon = typeof data.daemonPid === 'number';
+        const hasChild = typeof data.childPid === 'number';
+        if (data.status === 'online' || data.status === 'starting') {
+          if (hasDaemon || hasChild) {
+            const daemonAlive = hasDaemon && isPidAlive(data.daemonPid);
+            const childAlive = hasChild && isPidAlive(data.childPid);
+            isAlive = daemonAlive || childAlive;
+          }
+        }
+
+        const effectiveStatus = isAlive ? data.status : 'offline';
+        const effectiveActive = effectiveStatus === 'online';
+        const effectiveUrl = effectiveStatus === 'online' ? (data.publicUrl || null) : null;
+
+        return res.json({
+          status: effectiveStatus,
+          active: effectiveActive,
+          daemonPid: data.daemonPid || null,
+          childPid: data.childPid || null,
+          provider: data.provider || 'cloudflare',
+          publicUrl: effectiveUrl,
+          target: data.target || `http://localhost:${PORT}`,
+          localPort: Number(PORT),
+          updatedAt: data.updatedAt || new Date().toISOString()
+        });
+      }
+    } catch (e) {
+      // Ignore parse errors, fall through to default
+    }
+  }
+
+  res.json({
+    status: 'offline',
+    active: false,
+    daemonPid: null,
+    childPid: null,
+    provider: 'cloudflare',
+    localPort: Number(PORT),
+    publicUrl: null,
+    target: `http://localhost:${PORT}`,
+    updatedAt: null
+  });
+});
+
+// 3.6. Book Ebook Direct Download APIs (Milestone 1)
+// Query available formats, sizes, and stream URLs
+app.get('/api/download/options', async (req, res) => {
+  try {
+    const { q, author } = req.query;
+    const result = await getDownloadOptions(q, author);
+    res.json(result);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// Stream actual binary ebook file (EPUB, PDF, MOBI, TXT) with zero memory accumulation
+app.get('/api/download/stream', async (req, res) => {
+  try {
+    await streamEbookDownload(req, res);
+  } catch (err) {
+    if (!res.headersSent) {
+      res.status(500).json({ error: err.message });
+    }
+  }
+});
+
+// Compatibility file streaming alias
+app.get('/api/download/file', async (req, res) => {
+  try {
+    if (!req.query.q && req.query.id) {
+      req.query.q = req.query.id;
+    }
+    await streamEbookDownload(req, res);
+  } catch (err) {
+    if (!res.headersSent) {
+      res.status(500).json({ error: err.message });
+    }
+  }
+});
+
+// Compatibility info endpoint for UI
+app.get('/api/download/info', async (req, res) => {
+  try {
+    const { id, title, q, author } = req.query;
+    const result = await getDownloadInfo(id, title || q, author);
+    res.json(result);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
 });
 
 // 3.5. Full Dataset Export & Direct Download API (CSV with UTF-8 BOM, JSON)

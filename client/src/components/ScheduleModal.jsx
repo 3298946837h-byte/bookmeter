@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { X, Clock, Play, CheckCircle2, RefreshCw, Calendar, ShieldCheck, Database, Terminal, Sparkles, Key, Check } from 'lucide-react';
+import { X, Clock, Play, RefreshCw, Calendar, Terminal, Sparkles, Key, Check } from 'lucide-react';
 
 export default function ScheduleModal({ isOpen, onClose, onRefreshData }) {
   const [isRunning, setIsRunning] = useState(false);
@@ -26,8 +26,23 @@ export default function ScheduleModal({ isOpen, onClose, onRefreshData }) {
     }
   }, [isOpen]);
 
+  // Escape key handler for accessible dialog closing
+  useEffect(() => {
+    if (!isOpen) return;
+    const handleKeyDown = (e) => {
+      if (e.key === 'Escape' && onClose) {
+        onClose();
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [isOpen, onClose]);
+
   const handleSaveToken = async (e) => {
     e.preventDefault();
+    if (typeof document !== 'undefined' && document.activeElement) {
+      document.activeElement.blur();
+    }
     if (!githubToken.trim()) return;
 
     try {
@@ -71,7 +86,12 @@ export default function ScheduleModal({ isOpen, onClose, onRefreshData }) {
   };
 
   return (
-    <div className="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-sm flex items-center justify-center p-4">
+    <div
+      role="dialog"
+      aria-modal="true"
+      aria-label="自动抓取与定时排程管理"
+      className="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-sm flex items-center justify-center p-4"
+    >
       <div
         className="bg-white w-full max-w-2xl rounded-3xl shadow-2xl border border-slate-200 overflow-hidden flex flex-col"
         onClick={(e) => e.stopPropagation()}
@@ -84,7 +104,8 @@ export default function ScheduleModal({ isOpen, onClose, onRefreshData }) {
           </div>
           <button
             onClick={onClose}
-            className="p-1 rounded-full text-slate-400 hover:text-white hover:bg-slate-800"
+            aria-label="关闭排程管理窗口"
+            className="p-1 rounded-full text-slate-400 hover:text-white hover:bg-slate-800 transition-colors cursor-pointer"
           >
             <X className="w-5 h-5" />
           </button>
@@ -125,7 +146,9 @@ export default function ScheduleModal({ isOpen, onClose, onRefreshData }) {
                   value={githubToken}
                   onChange={(e) => setGithubToken(e.target.value)}
                   placeholder="ghp_xxxx 或 github_pat_xxxx..."
-                  className="w-full pl-8 pr-3 py-1.5 text-xs bg-white/10 rounded-xl border border-white/20 text-white placeholder-slate-400 focus:outline-none focus:border-sky-400"
+                  style={{ fontSize: '16px' }}
+                  aria-label="GitHub Personal Access Token"
+                  className="w-full pl-8 pr-3 py-2 text-base bg-white/10 rounded-xl border border-white/20 text-white placeholder-slate-400 focus:outline-none focus:border-sky-400"
                 />
                 <Key className="w-3.5 h-3.5 text-slate-400 absolute left-2.5 top-1/2 -translate-y-1/2" />
               </div>

@@ -1,5 +1,5 @@
 import React from 'react';
-import { SlidersHorizontal, ArrowUpDown, Filter, Sparkles, AlertTriangle } from 'lucide-react';
+import { ArrowUpDown, Filter } from 'lucide-react';
 
 export default function FilterBar({
   categories,
@@ -44,7 +44,8 @@ export default function FilterBar({
               <button
                 key={option.id}
                 onClick={() => setSelectedVerdict(option.id)}
-                className={`text-xs px-3 py-1.5 rounded-full font-semibold border transition-all ${
+                aria-label={`筛选口碑评级: ${option.label}`}
+                className={`text-xs min-h-[36px] sm:min-h-[32px] inline-flex items-center justify-center px-3.5 py-1.5 rounded-full font-semibold border transition-all touch-manipulation cursor-pointer ${
                   isActive
                     ? 'bg-slate-900 text-white border-slate-900 shadow-sm'
                     : 'bg-slate-50 text-slate-600 border-slate-200 hover:bg-slate-100'
@@ -68,7 +69,8 @@ export default function FilterBar({
               <button
                 key={cat.name}
                 onClick={() => setSelectedCategory(cat.name)}
-                className={`whitespace-nowrap text-xs px-3 py-1.5 rounded-lg font-medium transition-all ${
+                aria-label={`选择图书分类: ${cat.name}`}
+                className={`whitespace-nowrap text-xs min-h-[36px] sm:min-h-[32px] inline-flex items-center justify-center px-3.5 py-1.5 rounded-lg font-medium transition-all touch-manipulation cursor-pointer ${
                   isActive
                     ? 'bg-sky-600 text-white shadow-sm'
                     : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
@@ -91,7 +93,9 @@ export default function FilterBar({
             <select
               value={sortBy}
               onChange={(e) => setSortBy(e.target.value)}
-              className="bg-transparent text-xs font-semibold text-slate-700 outline-none cursor-pointer"
+              style={{ fontSize: '16px' }}
+              aria-label="书籍排序方式"
+              className="bg-transparent text-base font-semibold text-slate-700 outline-none cursor-pointer"
             >
               {sortOptions.map(opt => (
                 <option key={opt.id} value={opt.id}>

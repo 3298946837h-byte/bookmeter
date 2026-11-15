@@ -1,16 +1,6 @@
 // Client-side Direct Live Book Fetcher & Infinite Stream Engine
 // Works 100% in pure browser, 0 CORS blocks, 0 API key required, millions of real books
 
-const SUBJECT_MAP = {
-  '全部': 'fiction',
-  '文学小说': 'literature',
-  '科幻世界': 'science_fiction',
-  '计算机与技术': 'computer_science',
-  '历史社科': 'history',
-  '商业经管': 'business',
-  '哲学心理': 'psychology'
-};
-
 // Curated pool of global authoritative titles across genres to guarantee infinite streaming even offline
 export const STREAM_CATALOG_POOL = [
   // 文学经典
@@ -103,7 +93,6 @@ export function getGuaranteedStreamBooks(category = '全部', offset = 0, limit 
 
     const dScore = item.ds;
     const gScore = item.gs;
-    const ratingCount = item.dc + item.gc;
 
     const fiveStar = Math.min(88, Math.max(25, Math.round((dScore - 5.5) * 20)));
     const fourStar = Math.min(45, Math.max(12, Math.round((100 - fiveStar) * 0.65)));
@@ -181,6 +170,8 @@ export function getGuaranteedStreamBooks(category = '全部', offset = 0, limit 
         cons: ['大部头篇幅或深刻思辨对快餐阅读习惯有一定门槛'],
         keywords: ['经典神作', '多源对冲', '真实高赞', '深度长评']
       },
+      downloadAvailable: true,
+      formats: ['epub', 'pdf', 'txt'],
       featuredReviews: [
         {
           platform: 'douban',
@@ -217,7 +208,7 @@ export async function fetchInfiniteBooks(category = '全部', offset = 0, limit 
 // Generate rich, realistic multi-platform book rating profile for any searched query
 export function generateUniversalBookProfile(query) {
   if (!query || !query.trim()) return null;
-  const cleanTitle = query.trim().replace(/[《》""''“”‘’「」『』]/g, '');
+  const cleanTitle = query.trim().replace(/[《》""''“”‘’「」『』[\]【】()（）]/g, ' ').replace(/\s+/g, ' ').trim();
   const hash = Array.from(cleanTitle).reduce((acc, char) => acc + char.charCodeAt(0), 0);
   
   const dScore = Number((8.2 + (hash % 16) / 10).toFixed(1)); // 8.2 - 9.7
@@ -300,6 +291,8 @@ export function generateUniversalBookProfile(query) {
       cons: ['部分篇幅信息量大，需静心沉浸式阅读'],
       keywords: ['读者盛赞', '全网高分', '真实书评', '多维对冲']
     },
+    downloadAvailable: true,
+    formats: ['epub', 'pdf', 'txt'],
     featuredReviews: [
       {
         platform: 'douban',
@@ -431,7 +424,9 @@ export async function searchOpenLibraryLive(query) {
           cons: ['部分专业章节阅读需一定背景常识'],
           keywords: ['全球开放收录', '多源聚合', '真实评星', 'ISBN核验']
         },
-        featuredReviews: [
+        downloadAvailable: true,
+      formats: ['epub', 'pdf', 'txt'],
+      featuredReviews: [
           {
             platform: 'goodreads',
             user: 'Global Verified Reader',

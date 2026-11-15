@@ -1,15 +1,14 @@
 import React, { useState } from 'react';
-import { Award, Star, TrendingUp, Scale, ArrowRight, ExternalLink } from 'lucide-react';
-import PlatformRatingBadge from './PlatformRatingBadge';
+import { Award, ArrowRight } from 'lucide-react';
 
-export default function LeaderboardsView({ books, onOpenDetail }) {
+export default function LeaderboardsView({ books = [], onOpenDetail }) {
   const [activeBoard, setActiveBoard] = useState('douban'); // 'douban' | 'goodreads' | 'amazon' | 'discrepancy'
 
   // Sort lists
-  const doubanTop = [...books].sort((a, b) => b.platformRatings.douban.score - a.platformRatings.douban.score);
-  const goodreadsTop = [...books].sort((a, b) => b.platformRatings.goodreads.score - a.platformRatings.goodreads.score);
-  const amazonTop = [...books].sort((a, b) => b.platformRatings.amazon.score - a.platformRatings.amazon.score);
-  const discrepancyTop = [...books].sort((a, b) => b.discrepancyIndex - a.discrepancyIndex);
+  const doubanTop = [...books].sort((a, b) => (b.platformRatings?.douban?.score ?? 0) - (a.platformRatings?.douban?.score ?? 0));
+  const goodreadsTop = [...books].sort((a, b) => (b.platformRatings?.goodreads?.score ?? 0) - (a.platformRatings?.goodreads?.score ?? 0));
+  const amazonTop = [...books].sort((a, b) => (b.platformRatings?.amazon?.score ?? 0) - (a.platformRatings?.amazon?.score ?? 0));
+  const discrepancyTop = [...books].sort((a, b) => (b.discrepancyIndex ?? 0) - (a.discrepancyIndex ?? 0));
 
   const boards = [
     { id: 'douban', name: '豆瓣读书 Top 权威榜', icon: '📗', desc: '以中文深度书评与文青口碑著称，10分制衡量', color: 'emerald', list: doubanTop },
@@ -89,13 +88,13 @@ export default function LeaderboardsView({ books, onOpenDetail }) {
 
           let displayScore = '';
           if (activeBoard === 'douban') {
-            displayScore = `${book.platformRatings.douban.score} 分`;
+            displayScore = `${book.platformRatings?.douban?.score ?? '-'} 分`;
           } else if (activeBoard === 'goodreads') {
-            displayScore = `${book.platformRatings.goodreads.score} 星`;
+            displayScore = `${book.platformRatings?.goodreads?.score ?? '-'} 星`;
           } else if (activeBoard === 'amazon') {
-            displayScore = `${book.platformRatings.amazon.score} 星`;
+            displayScore = `${book.platformRatings?.amazon?.score ?? '-'} 星`;
           } else {
-            displayScore = `落差 ${book.discrepancyIndex} 分`;
+            displayScore = `落差 ${book.discrepancyIndex ?? '-'} 分`;
           }
 
           return (

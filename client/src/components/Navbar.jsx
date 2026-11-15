@@ -1,5 +1,5 @@
-import React from 'react';
-import { Search, BookOpen, Clock, AlertTriangle, Sparkles, X, Flame, Award, BarChart3, Scale, Download } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import { Search, BookOpen, Clock, AlertTriangle, Sparkles, X, Flame, Award, BarChart3, Scale, Download, Share2, Check, Heart } from 'lucide-react';
 
 export default function Navbar({
   searchQuery,
@@ -10,8 +10,49 @@ export default function Navbar({
   setActiveTab,
   onOpenScheduleModal,
   onOpenDownloadModal,
-  visibleBooksCount
+  visibleBooksCount,
+  favoritesCount
 }) {
+  const [tunnelStatus, setTunnelStatus] = useState({ status: 'offline', publicUrl: null });
+  const [copiedShare, setCopiedShare] = useState(false);
+
+  useEffect(() => {
+    let isMounted = true;
+    const fetchTunnelStatus = async () => {
+      try {
+        const res = await fetch('/api/tunnel-status');
+        if (res.ok) {
+          const data = await res.json();
+          if (isMounted) setTunnelStatus(data);
+        }
+      } catch (e) {
+        // Standby/offline
+      }
+    };
+
+    fetchTunnelStatus();
+    const interval = setInterval(fetchTunnelStatus, 8000);
+    return () => {
+      isMounted = false;
+      clearInterval(interval);
+    };
+  }, []);
+
+  const handleShare = async () => {
+    const urlToShare = tunnelStatus.publicUrl || (typeof window !== 'undefined' ? window.location.origin : '');
+    if (!urlToShare) return;
+
+    if (navigator.clipboard) {
+      try {
+        await navigator.clipboard.writeText(urlToShare);
+        setCopiedShare(true);
+        setTimeout(() => setCopiedShare(false), 3000);
+      } catch (err) {
+        // Fallback
+      }
+    }
+  };
+
   const handleClear = () => {
     setSearchQuery('');
     onSearchSubmit('');
@@ -27,6 +68,13 @@ export default function Navbar({
 
   return (
     <header className="sticky top-0 z-40 bg-white/95 backdrop-blur border-b border-slate-200 shadow-xs">
+      {/* Toast Notification for Sharing */}
+      {copiedShare && (
+        <div className="fixed top-16 left-1/2 -translate-x-1/2 z-50 px-4 py-2 bg-emerald-900 text-white rounded-full shadow-2xl text-xs font-bold flex items-center gap-2 animate-in fade-in slide-in-from-top-2 duration-200 border border-emerald-500/50">
+          <Check className="w-4 h-4 text-emerald-300" />
+          <span>链接已复制，朋友免翻墙直接打开！</span>
+        </div>
+      )}
       <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8">
         
         {/* Row 1: Brand & Desktop Search & Actions */}
@@ -72,8 +120,9 @@ export default function Navbar({
                 placeholder="搜索任意全网图书（如: 芯片战争、三体、原子习惯）..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                style={{ fontSize: '15px' }}
-                className="w-full pl-9 pr-20 py-2 bg-slate-100 hover:bg-slate-200/70 focus:bg-white focus:ring-2 focus:ring-sky-500 rounded-xl border border-transparent focus:border-sky-500 transition-all outline-none"
+                style={{ fontSize: '16px' }}
+                aria-label="搜索任意全网图书或作者"
+                className="w-full pl-9 pr-20 py-2 text-base bg-slate-100 hover:bg-slate-200/70 focus:bg-white focus:ring-2 focus:ring-sky-500 rounded-xl border border-transparent focus:border-sky-500 transition-all outline-none"
               />
               <Search className="w-4 h-4 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none" />
               
@@ -81,7 +130,8 @@ export default function Navbar({
                 <button
                   type="button"
                   onClick={handleClear}
-                  className="absolute right-14 top-1/2 -translate-y-1/2 p-1 text-slate-400 hover:text-slate-600"
+                  aria-label="清空搜索"
+                  className="absolute right-14 top-1/2 -translate-y-1/2 p-1 text-slate-400 hover:text-slate-600 cursor-pointer"
                 >
                   <X className="w-3.5 h-3.5" />
                 </button>
@@ -90,7 +140,8 @@ export default function Navbar({
               <button
                 type="submit"
                 disabled={isSearching || !searchQuery.trim()}
-                className="absolute right-1.5 top-1/2 -translate-y-1/2 px-2.5 py-1 text-xs font-bold bg-slate-900 hover:bg-slate-800 text-white rounded-lg transition-all disabled:opacity-50"
+                aria-label="执行全网搜索"
+                className="absolute right-1.5 top-1/2 -translate-y-1/2 px-2.5 py-1 text-xs font-bold bg-slate-900 hover:bg-slate-800 text-white rounded-lg transition-all disabled:opacity-50 cursor-pointer"
               >
                 {isSearching ? '检索中' : '全网搜'}
               </button>
@@ -99,6 +150,32 @@ export default function Navbar({
 
           {/* Right Action Buttons */}
           <div className="flex items-center gap-1.5 sm:gap-2 shrink-0">
+            {/* Public Share Button with Live Status Indicator */}
+            <button
+              onClick={handleShare}
+              title={tunnelStatus.publicUrl ? `公网直接访问地址: ${tunnelStatus.publicUrl}\n点击复制链接发给朋友，免翻墙直接打开！` : "复制网站链接分享给朋友"}
+              className={`flex items-center gap-1.5 px-2.5 sm:px-3 py-1.5 text-xs rounded-lg font-bold transition-all shrink-0 cursor-pointer shadow-xs active:scale-95 ${
+                tunnelStatus.status === 'online' || tunnelStatus.publicUrl
+                  ? 'bg-emerald-50 text-emerald-800 border border-emerald-300 hover:bg-emerald-100 hover:border-emerald-400'
+                  : 'bg-slate-100 text-slate-700 border border-slate-200 hover:bg-slate-200'
+              }`}
+            >
+              {tunnelStatus.status === 'online' || tunnelStatus.publicUrl ? (
+                <span className="relative flex h-2 w-2">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                  <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+                </span>
+              ) : (
+                <Share2 className="w-3.5 h-3.5 text-slate-500" />
+              )}
+              <span className="hidden sm:inline">
+                {copiedShare ? '已复制公网链接！' : '分享网站给朋友'}
+              </span>
+              <span className="sm:hidden">
+                {copiedShare ? '已复制！' : '分享'}
+              </span>
+            </button>
+
             <button
               onClick={onOpenDownloadModal}
               title="一键下载与数据导出中心（支持 CSV/Excel、JSON、Markdown/TXT）"
@@ -138,6 +215,7 @@ export default function Navbar({
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 style={{ fontSize: '16px' }} // 16px strictly avoids iOS / Android browser zoom-in bug!
+                aria-label="手机端搜索任意图书或作者"
                 className="w-full pl-9 pr-8 py-2 bg-slate-100 focus:bg-white focus:ring-2 focus:ring-sky-500 rounded-xl border border-slate-200 focus:border-sky-500 transition-all outline-none text-slate-800"
               />
               <Search className="w-4 h-4 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none" />
@@ -146,7 +224,8 @@ export default function Navbar({
                 <button
                   type="button"
                   onClick={handleClear}
-                  className="absolute right-2.5 top-1/2 -translate-y-1/2 p-1 text-slate-400 hover:text-slate-600 touch-manipulation"
+                  aria-label="清空搜索"
+                  className="absolute right-2.5 top-1/2 -translate-y-1/2 p-1 text-slate-400 hover:text-slate-600 touch-manipulation cursor-pointer"
                 >
                   <X className="w-4 h-4" />
                 </button>
@@ -156,7 +235,8 @@ export default function Navbar({
             <button
               type="submit"
               disabled={isSearching || !searchQuery.trim()}
-              className="h-10 px-3.5 bg-slate-900 active:bg-slate-800 text-white text-xs font-bold rounded-xl shadow-xs shrink-0 flex items-center justify-center transition-all disabled:opacity-50 touch-manipulation"
+              aria-label="执行全网搜索"
+              className="h-10 px-3.5 bg-slate-900 active:bg-slate-800 text-white text-xs font-bold rounded-xl shadow-xs shrink-0 flex items-center justify-center transition-all disabled:opacity-50 touch-manipulation cursor-pointer"
             >
               {isSearching ? '检索中' : '全网搜'}
             </button>
@@ -234,6 +314,18 @@ export default function Navbar({
           >
             <BarChart3 className="w-3.5 h-3.5" />
             <span>📊 数据透视</span>
+          </button>
+
+          <button
+            onClick={() => setActiveTab('favorites')}
+            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg font-bold transition-all whitespace-nowrap shrink-0 cursor-pointer ${
+              activeTab === 'favorites'
+                ? 'bg-rose-600 text-white shadow-sm'
+                : 'text-rose-700 bg-rose-50/80 hover:bg-rose-100'
+            }`}
+          >
+            <Heart className={`w-3.5 h-3.5 ${activeTab === 'favorites' ? 'fill-white text-white' : 'fill-rose-500 text-rose-500'}`} />
+            <span>⭐ 我的书架 ({favoritesCount || 0})</span>
           </button>
         </div>
 

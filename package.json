@@ -9,6 +9,8 @@
     "client": "npm --prefix client run dev",
     "dev": "concurrently \"npm run server\" \"npm run client\"",
     "build": "npm --prefix client run build",
+    "test": "node tests/e2e/run-all-tests.js",
+    "share": "node scripts/tunnel-daemon.js",
     "install:all": "npm install && npm --prefix client install"
   },
   "dependencies": {

@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import Navbar from './components/Navbar';
 import StatsBanner from './components/StatsBanner';
 import FilterBar from './components/FilterBar';
@@ -7,12 +7,13 @@ import BookDetailModal from './components/BookDetailModal';
 import ComparisonView from './components/ComparisonView';
 import LeaderboardsView from './components/LeaderboardsView';
 import AnalyticsView from './components/AnalyticsView';
+import FavoritesView from './components/FavoritesView';
 import ScheduleModal from './components/ScheduleModal';
 import DownloadModal from './components/DownloadModal';
 import BookDownloadModal from './components/BookDownloadModal';
 import fallbackBooks from './data/staticBooks.json';
 import { searchOpenLibraryLive, fetchInfiniteBooks, getGuaranteedStreamBooks, generateUniversalBookProfile } from './services/clientCrawler';
-import { Search, BookOpen, AlertTriangle, Sparkles, RefreshCw, Flame, ArrowLeft, CheckCircle2, Award, ArrowRight, Star, ExternalLink } from 'lucide-react';
+import { Search, BookOpen, Sparkles, RefreshCw, Flame, ArrowLeft, CheckCircle2, Award, ArrowRight } from 'lucide-react';
 
 export default function App() {
   const [books, setBooks] = useState([]);
@@ -37,12 +38,45 @@ export default function App() {
   const [downloadingBook, setDownloadingBook] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
 
+  // Favorites / Personal Bookshelf State
+  const [favorites, setFavorites] = useState(() => {
+    try {
+      const saved = localStorage.getItem('bookmeter_favorites_v1');
+      return saved ? JSON.parse(saved) : [];
+    } catch {
+      return [];
+    }
+  });
+
+  const handleToggleFavorite = (book) => {
+    if (!book) return;
+    setFavorites(prev => {
+      const exists = prev.some(b => b.id === book.id || b.title === book.title);
+      let updated;
+      if (exists) {
+        updated = prev.filter(b => b.id !== book.id && b.title !== book.title);
+      } else {
+        updated = [...prev, { ...book, savedAt: Date.now() }];
+      }
+      try {
+        localStorage.setItem('bookmeter_favorites_v1', JSON.stringify(updated));
+      } catch (err) {
+        console.warn('Failed to save favorites to localStorage:', err);
+      }
+      return updated;
+    });
+  };
+
+  const isBookFavorite = (book) => {
+    if (!book) return false;
+    return favorites.some(b => b.id === book.id || b.title === book.title);
+  };
+
   // Infinite Scrolling Stream ("滚不完的书单")
   const [streamOffset, setStreamOffset] = useState(0);
   const [isLoadingMore, setIsLoadingMore] = useState(false);
-  const sentinelRef = useRef(null);
 
-  const loadMoreBooks = async () => {
+  const loadMoreBooks = useCallback(async () => {
     if (isLoadingMore || activeTab !== 'explore' || activeSearchTerm) return;
     try {
       setIsLoadingMore(true);
@@ -71,7 +105,7 @@ export default function App() {
     } finally {
       setIsLoadingMore(false);
     }
-  };
+  }, [isLoadingMore, activeTab, activeSearchTerm, streamOffset, selectedCategory]);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -94,11 +128,7 @@ export default function App() {
       window.removeEventListener('scroll', handleScroll);
       window.removeEventListener('touchmove', handleScroll);
     };
-  }, [activeTab, activeSearchTerm, isLoadingMore, streamOffset, selectedCategory]);
-
-  useEffect(() => {
-    setStreamOffset(0);
-  }, [selectedCategory]);
+  }, [activeTab, activeSearchTerm, isLoadingMore, loadMoreBooks]);
 
   // Fetch initial books & data (with static fallback for GitHub Pages / Vercel)
   const loadData = async () => {
@@ -162,7 +192,7 @@ export default function App() {
     } else if (activeTab === 'explore' && selectedVerdict === 'warning') {
       setSelectedVerdict('all');
     }
-  }, [activeTab]);
+  }, [activeTab, selectedVerdict]);
 
   // Execute global search (Local + Backend API + Client-side OpenLibrary Live Crawler)
   const handleSearchSubmit = async (overrideQuery) => {
@@ -189,28 +219,29 @@ export default function App() {
       let local = [];
       let live = [];
 
-      // Clean query: strip punctuation like 《》, "", '', brackets
-      const cleanQ = query.replace(/[《》""''“”‘’「」『』\s]/g, '').toLowerCase();
-      const qLower = query.toLowerCase();
+      // Clean query: strip punctuation like 《》, "", '', brackets [ ] 【 】 ( ) （ ）
+      const cleanQ = query.replace(/[《》""''“”‘’「」『』[\]【】()（）]/g, ' ').replace(/['"]/g, ' ').trim().toLowerCase();
+      const tokens = cleanQ.split(/\s+/).filter(Boolean);
 
       // Combine fallback static books and all guaranteed stream catalog books
       const allLocalBooks = [...(fallbackBooks || []), ...getGuaranteedStreamBooks('全部', 0, 75)];
 
-      // 1. Search local memory across both static database and curated stream catalog
+      // 1. Search local memory across both static database and curated stream catalog with multi-token intersection
       const localMatches = allLocalBooks.filter(b => {
-        const cleanTitle = (b.title || '').replace(/[《》""''“”‘’「」『』\s]/g, '').toLowerCase();
-        const cleanAuthor = (b.author || '').toLowerCase();
-        const cleanOriginal = (b.originalTitle || '').toLowerCase();
-        const category = (b.category || '').toLowerCase();
-        const tags = (b.tags || []).map(t => t.toLowerCase());
+        if (tokens.length === 0) return true;
+        const searchableText = [
+          (b.title || '').replace(/[《》""''“”‘’「」『』[\]【】()（）]/g, ' '),
+          b.author || '',
+          b.translator || '',
+          b.originalTitle || '',
+          b.category || '',
+          ...(b.tags || []),
+          b.isbn || '',
+          b.publisher || '',
+          b.summary || ''
+        ].join(' ').toLowerCase();
 
-        return (
-          cleanTitle.includes(cleanQ) ||
-          cleanAuthor.includes(cleanQ) ||
-          cleanOriginal.includes(qLower) ||
-          category.includes(cleanQ) ||
-          tags.some(t => t.includes(cleanQ))
-        );
+        return tokens.every(token => searchableText.includes(token));
       });
       local = localMatches;
 
@@ -301,13 +332,13 @@ export default function App() {
 
     return true;
   }).sort((a, b) => {
-    if (sortBy === 'composite') return b.compositeScore - a.compositeScore;
-    if (sortBy === 'douban') return b.platformRatings.douban.score - a.platformRatings.douban.score;
-    if (sortBy === 'goodreads') return b.platformRatings.goodreads.score - a.platformRatings.goodreads.score;
-    if (sortBy === 'discrepancy') return b.discrepancyIndex - a.discrepancyIndex;
+    if (sortBy === 'composite') return (b.compositeScore || 0) - (a.compositeScore || 0);
+    if (sortBy === 'douban') return (b.platformRatings?.douban?.score || 0) - (a.platformRatings?.douban?.score || 0);
+    if (sortBy === 'goodreads') return (b.platformRatings?.goodreads?.score || 0) - (a.platformRatings?.goodreads?.score || 0);
+    if (sortBy === 'discrepancy') return (b.discrepancyIndex || 0) - (a.discrepancyIndex || 0);
     if (sortBy === 'reviews') {
-      const countA = Object.values(a.platformRatings).reduce((sum, p) => sum + (p.ratingCount || 0), 0);
-      const countB = Object.values(b.platformRatings).reduce((sum, p) => sum + (p.ratingCount || 0), 0);
+      const countA = Object.values(a.platformRatings || {}).reduce((sum, p) => sum + (p?.ratingCount || 0), 0);
+      const countB = Object.values(b.platformRatings || {}).reduce((sum, p) => sum + (p?.ratingCount || 0), 0);
       return countB - countA;
     }
     return 0;
@@ -327,6 +358,7 @@ export default function App() {
         onOpenScheduleModal={() => setIsScheduleOpen(true)}
         onOpenDownloadModal={() => setIsDownloadOpen(true)}
         visibleBooksCount={displayBooks.length}
+        favoritesCount={favorites.length}
       />
 
       {/* Main Content Area */}
@@ -499,7 +531,14 @@ export default function App() {
         )}
 
         {/* View Switching Logic */}
-        {activeTab === 'leaderboards' ? (
+        {activeTab === 'favorites' ? (
+          <FavoritesView
+            favorites={favorites}
+            onToggleFavorite={handleToggleFavorite}
+            onOpenDetail={(b) => setSelectedBook(b)}
+            onExploreBooks={() => setActiveTab('explore')}
+          />
+        ) : activeTab === 'leaderboards' ? (
           <LeaderboardsView
             books={books}
             onOpenDetail={(b) => setSelectedBook(b)}
@@ -535,7 +574,10 @@ export default function App() {
             <FilterBar
               categories={categories}
               selectedCategory={selectedCategory}
-              setSelectedCategory={setSelectedCategory}
+              setSelectedCategory={(cat) => {
+                setSelectedCategory(cat);
+                setStreamOffset(0);
+              }}
               selectedVerdict={selectedVerdict}
               setSelectedVerdict={setSelectedVerdict}
               sortBy={sortBy}
@@ -580,6 +622,8 @@ export default function App() {
                       book={book}
                       onOpenDetail={(b) => setSelectedBook(b)}
                       onOpenDownload={(b) => setDownloadingBook(b)}
+                      isFavorite={isBookFavorite(book)}
+                      onToggleFavorite={handleToggleFavorite}
                     />
                   ))}
                 </div>
@@ -639,6 +683,8 @@ export default function App() {
           book={selectedBook}
           onClose={() => setSelectedBook(null)}
           onOpenDownload={(b) => setDownloadingBook(b)}
+          isFavorite={isBookFavorite(selectedBook)}
+          onToggleFavorite={handleToggleFavorite}
         />
       )}
 

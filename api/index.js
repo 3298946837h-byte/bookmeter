@@ -3,10 +3,46 @@ const cors = require('cors');
 const { books } = require('../server/data/books');
 const { searchLiveBooks } = require('../server/services/bookFetcher');
 const { generateBookDeepInsight, askBookConsultant } = require('../server/services/aiService');
+const { getDownloadOptions, streamEbookDownload, getDownloadInfo } = require('../server/services/ebookDownloadService');
+const ebookService = require('../server/services/ebookService');
 
 const app = express();
 app.use(cors());
 app.use(express.json());
+
+/**
+ * Clean search query removing Chinese quotes, book brackets, and extra punctuation
+ */
+function cleanSearchQuery(query) {
+  if (!query || typeof query !== 'string') return '';
+  return query
+    .replace(/[《》\u201c\u201d\u2018\u2019\u300c\u300d\u300e\u300f\[\]【】\(\)（）]/g, ' ')
+    .replace(/['"]/g, ' ')
+    .trim();
+}
+
+/**
+ * Multi-word tokenized search matcher
+ */
+function matchBookQuery(book, query) {
+  const cleaned = cleanSearchQuery(query);
+  if (!cleaned) return false;
+  const tokens = cleaned.toLowerCase().split(/\s+/).filter(Boolean);
+  if (tokens.length === 0) return false;
+
+  const searchableText = [
+    book.title || '',
+    book.originalTitle || '',
+    book.author || '',
+    book.translator || '',
+    book.category || '',
+    ...(book.tags || []),
+    book.isbn || '',
+    book.summary || ''
+  ].join(' ').toLowerCase();
+
+  return tokens.every(token => searchableText.includes(token));
+}
 
 // 1. Get all books with filtering, searching, and sorting
 app.get('/api/books', (req, res) => {
@@ -15,14 +51,7 @@ app.get('/api/books', (req, res) => {
   let filtered = [...books];
 
   if (q) {
-    const query = q.toLowerCase().trim();
-    filtered = filtered.filter(b =>
-      b.title.toLowerCase().includes(query) ||
-      b.originalTitle.toLowerCase().includes(query) ||
-      b.author.toLowerCase().includes(query) ||
-      b.tags.some(t => t.toLowerCase().includes(query)) ||
-      (b.isbn && b.isbn.includes(query))
-    );
+    filtered = filtered.filter(b => matchBookQuery(b, q));
   }
 
   if (category && category !== '全部') {
@@ -67,21 +96,15 @@ app.get('/api/books/:id', (req, res) => {
 // 3. Search endpoint with live crawler fallback
 app.get('/api/search', async (req, res) => {
   const { q } = req.query;
-  if (!q) return res.json({ local: [], live: [] });
+  if (!q || !String(q).trim()) return res.json({ local: [], live: [] });
 
-  const query = q.toLowerCase().trim();
-  const localResults = books.filter(b =>
-    b.title.toLowerCase().includes(query) ||
-    b.originalTitle.toLowerCase().includes(query) ||
-    b.author.toLowerCase().includes(query) ||
-    b.tags.some(t => t.toLowerCase().includes(query)) ||
-    (b.isbn && b.isbn.includes(query))
-  );
+  const queryToUse = String(q).length > 500 ? String(q).slice(0, 500) : String(q);
+  const localResults = books.filter(b => matchBookQuery(b, queryToUse));
 
   let liveResults = [];
   if (localResults.length <= 1) {
     try {
-      liveResults = await searchLiveBooks(q);
+      liveResults = await searchLiveBooks(queryToUse);
     } catch (e) {
       console.error('Live search error:', e.message);
     }
@@ -91,6 +114,105 @@ app.get('/api/search', async (req, res) => {
     local: localResults,
     live: liveResults
   });
+});
+
+// ==========================================
+// Ebook Engine REST Endpoints (Milestone M1)
+// ==========================================
+
+// 1. Ebook Options Discovery
+app.get('/api/ebooks/options', async (req, res) => {
+  try {
+    const rawId = req.query.id;
+    const rawTitle = req.query.title;
+    const rawAuthor = req.query.author;
+    if (!rawId && !rawTitle) {
+      return res.status(400).json({ success: false, error: 'Book ID or title is required' });
+    }
+    if (ebookService.hasPathTraversal(rawId) || ebookService.hasPathTraversal(rawTitle) || ebookService.hasPathTraversal(rawAuthor)) {
+      return res.status(400).json({ success: false, error: 'Path traversal attempt rejected' });
+    }
+    const options = await ebookService.getDownloadOptions(rawId, rawTitle, rawAuthor);
+    res.json(options);
+  } catch (err) {
+    res.status(500).json({ success: false, error: err.message });
+  }
+});
+
+// 2. Real Ebook Binary Download (EPUB, PDF, TXT)
+app.get('/api/ebooks/download', async (req, res) => {
+  try {
+    await ebookService.handleEbookDownload(req, res);
+  } catch (err) {
+    if (!res.headersSent) {
+      res.status(500).json({ success: false, error: err.message });
+    }
+  }
+});
+
+app.head('/api/ebooks/download', async (req, res) => {
+  try {
+    await ebookService.handleEbookDownload(req, res);
+  } catch (err) {
+    if (!res.headersSent) {
+      res.status(500).end();
+    }
+  }
+});
+
+// 3. Public Tunnel Status (Health & Share Discovery)
+app.get('/api/tunnel-status', (req, res) => {
+  res.json({
+    active: false,
+    status: 'standby',
+    provider: 'cloudflare',
+    localPort: 5000,
+    publicUrl: null
+  });
+});
+
+// Book Ebook Direct Download APIs (Milestone 1)
+app.get('/api/download/options', async (req, res) => {
+  try {
+    const { q, author } = req.query;
+    const result = await getDownloadOptions(q, author);
+    res.json(result);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+app.get('/api/download/stream', async (req, res) => {
+  try {
+    await streamEbookDownload(req, res);
+  } catch (err) {
+    if (!res.headersSent) {
+      res.status(500).json({ error: err.message });
+    }
+  }
+});
+
+app.get('/api/download/file', async (req, res) => {
+  try {
+    if (!req.query.q && req.query.id) {
+      req.query.q = req.query.id;
+    }
+    await streamEbookDownload(req, res);
+  } catch (err) {
+    if (!res.headersSent) {
+      res.status(500).json({ error: err.message });
+    }
+  }
+});
+
+app.get('/api/download/info', async (req, res) => {
+  try {
+    const { id, title, q, author } = req.query;
+    const result = await getDownloadInfo(id, title || q, author);
+    res.json(result);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
 });
 
 // 4. Statistics endpoint
@@ -134,6 +256,96 @@ app.get('/api/categories', (req, res) => {
 
   const list = Object.entries(counts).map(([name, count]) => ({ name, count }));
   res.json(list);
+});
+
+// 5.5 Full Dataset Export & Direct Download API (CSV with UTF-8 BOM, JSON)
+app.get('/api/export', (req, res) => {
+  const { format = 'csv', category, verdict } = req.query;
+
+  let targetBooks = [...books];
+  if (category && category !== '全部') {
+    targetBooks = targetBooks.filter(b => b.category === category);
+  }
+  if (verdict && verdict !== 'all') {
+    targetBooks = targetBooks.filter(b => b.verdict && b.verdict.status === verdict);
+  }
+
+  const d = new Date();
+  const pad = (n) => String(n).padStart(2, '0');
+  const timestamp = `${d.getFullYear()}${pad(d.getMonth() + 1)}${pad(d.getDate())}`;
+
+  if (format === 'json') {
+    const filename = `BookMeter_Dataset_${timestamp}.json`;
+    res.setHeader('Content-Type', 'application/json; charset=utf-8');
+    res.setHeader('Content-Disposition', `attachment; filename="${filename}"`);
+    return res.send(JSON.stringify({
+      exportedAt: new Date().toISOString(),
+      totalBooks: targetBooks.length,
+      data: targetBooks
+    }, null, 2));
+  }
+
+  // Default: CSV format with UTF-8 BOM
+  const headers = [
+    '书名',
+    '原著名',
+    '作者',
+    '译者',
+    '分类',
+    '综合贝叶斯权威分',
+    '口碑评级',
+    '跨平台分歧指数',
+    '豆瓣评分',
+    '豆瓣参评人数',
+    'Goodreads评分(5星制)',
+    'Goodreads参评人数',
+    'Amazon评分',
+    'GoogleBooks评分',
+    '核心好评亮点',
+    '差评槽点与劝退提示',
+    '读者代表性热评',
+    '出版社',
+    '出版年份',
+    'ISBN'
+  ];
+
+  const escapeCSV = (val) => {
+    if (val === undefined || val === null) return '""';
+    const str = String(val).replace(/"/g, '""');
+    return `"${str}"`;
+  };
+
+  const rows = targetBooks.map(b => {
+    const p = b.platformRatings || {};
+    return [
+      escapeCSV(b.title),
+      escapeCSV(b.originalTitle || ''),
+      escapeCSV(b.author),
+      escapeCSV(b.translator || ''),
+      escapeCSV(b.category),
+      escapeCSV(b.compositeScore),
+      escapeCSV(b.verdict?.label || ''),
+      escapeCSV(b.discrepancyIndex),
+      escapeCSV(p.douban?.score ?? ''),
+      escapeCSV(p.douban?.ratingCount ?? ''),
+      escapeCSV(p.goodreads?.score ?? ''),
+      escapeCSV(p.goodreads?.ratingCount ?? ''),
+      escapeCSV(p.amazon?.score ?? ''),
+      escapeCSV(p.googleBooks?.score ?? ''),
+      escapeCSV((b.pros || []).join('；')),
+      escapeCSV((b.cons || []).join('；')),
+      escapeCSV(b.representativeReview || ''),
+      escapeCSV(b.publisher || ''),
+      escapeCSV(b.publicationYear || ''),
+      escapeCSV(b.isbn || '')
+    ].join(',');
+  });
+
+  const csvContent = '\uFEFF' + [headers.join(','), ...rows].join('\r\n');
+  const filename = `BookMeter_Dataset_${timestamp}.csv`;
+  res.setHeader('Content-Type', 'text/csv; charset=utf-8');
+  res.setHeader('Content-Disposition', `attachment; filename="${filename}"`);
+  return res.send(csvContent);
 });
 
 // 6. AI Insight endpoint (0 cost cache / safe)

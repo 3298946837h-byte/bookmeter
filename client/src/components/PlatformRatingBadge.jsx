@@ -1,7 +1,7 @@
 import React from 'react';
-import { ExternalLink, Star, CheckCircle, ShieldCheck } from 'lucide-react';
+import { ExternalLink, Star, CheckCircle } from 'lucide-react';
 
-export default function PlatformRatingBadge({ platform, data, compact = false, showBreakdown = false }) {
+export default function PlatformRatingBadge({ platform, data, compact = false }) {
   if (!data) return null;
 
   const platformMeta = {
@@ -51,17 +51,6 @@ export default function PlatformRatingBadge({ platform, data, compact = false, s
     barColor: 'bg-slate-500',
     scaleText: '/10',
     domain: 'web'
-  };
-
-  const formatCount = (count) => {
-    if (!count) return '真实评价';
-    if (count >= 10000) {
-      return `${(count / 10000).toFixed(1)}万条真实评价`;
-    }
-    if (count >= 1000) {
-      return `${(count / 1000).toFixed(1)}k条评价`;
-    }
-    return `${count}条真实评价`;
   };
 
   if (compact) {

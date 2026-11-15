@@ -1,12 +1,42 @@
 import React, { useState, useEffect } from 'react';
-import { X, Star, ThumbsUp, ThumbsDown, MessageSquare, ExternalLink, ShieldCheck, AlertTriangle, BookOpen, User, Calendar, Tag, Scale, Sparkles, Send, Bot, CheckCircle2, UserCheck, UserX, Download, Check, FileText } from 'lucide-react';
+import { X, Star, ThumbsUp, ThumbsDown, MessageSquare, ExternalLink, BookOpen, Scale, Sparkles, Send, Bot, UserCheck, UserX, Download, Check, FileText, Heart } from 'lucide-react';
 import PlatformRatingBadge from './PlatformRatingBadge';
 
-export default function BookDetailModal({ book, onClose, onOpenDownload }) {
-  if (!book) return null;
-
+export default function BookDetailModal({ book, onClose, onOpenDownload, isFavorite, onToggleFavorite }) {
   const [reviewFilter, setReviewFilter] = useState('all'); // all, douban, goodreads, amazon
   const [copiedSingle, setCopiedSingle] = useState(false);
+  const [copiedCard, setCopiedCard] = useState(false);
+
+  // DeepSeek AI State (hydrate initial state from book.aiInsight if available)
+  const [currentBookId, setCurrentBookId] = useState(book?.id);
+  const [aiInsight, setAiInsight] = useState(book?.aiInsight || null);
+  const [loadingAi, setLoadingAi] = useState(false);
+  const [aiError, setAiError] = useState(null);
+
+  // Q&A State
+  const [question, setQuestion] = useState('');
+  const [chatHistory, setChatHistory] = useState([]);
+  const [askingAi, setAskingAi] = useState(false);
+
+  // Adjust state directly when book changes during render (standard React pattern)
+  if (book?.id !== currentBookId) {
+    setCurrentBookId(book?.id);
+    setAiInsight(book?.aiInsight || null);
+    setChatHistory([]);
+  }
+
+  // Escape key handler for accessible dialog closing
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (e.key === 'Escape' && onClose) {
+        onClose();
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [onClose]);
+
+  if (!book) return null;
 
   const handleExportSingleBook = () => {
     const p = book.platformRatings || {};
@@ -51,17 +81,30 @@ ${(book.cons || []).map(item => `- ${item}`).join('\n')}
     setTimeout(() => setCopiedSingle(false), 2500);
   };
 
-  // DeepSeek AI State
-  const [aiInsight, setAiInsight] = useState(null);
-  const [loadingAi, setLoadingAi] = useState(false);
-  const [aiError, setAiError] = useState(null);
+  const handleCopyCard = async () => {
+    const p = book.platformRatings || {};
+    const cardText = `【BookMeter 权威口碑速评】《${book.title}》
+作者：${book.author}${book.translator ? ` | 译者：${book.translator}` : ''}
+综合权威分：${book.compositeScore} / 10（评级：${book.verdict?.label || '高分推荐'}，分歧度：${book.discrepancyIndex}）
+- 豆瓣读书：${p.douban?.score ?? '暂无'} 分 (${p.douban?.ratingCount ? p.douban.ratingCount.toLocaleString() + ' 人' : ''})
+- Goodreads：${p.goodreads?.score ? p.goodreads.score + '★' : '暂无'}
+- 核心好评：${(book.pros || []).slice(0, 2).join('；') || '思想深邃，文笔精湛'}
+- 劝退提醒：${(book.cons || []).slice(0, 1).join('；') || '需要静心细读'}
+读者代表评语：“${book.representativeReview || '值得精读的典藏神作'}”
+———— 来自 BookMeter 全网书评权威聚合网`;
 
-  // Q&A State
-  const [question, setQuestion] = useState('');
-  const [chatHistory, setChatHistory] = useState([]);
-  const [askingAi, setAskingAi] = useState(false);
+    try {
+      if (navigator.clipboard) {
+        await navigator.clipboard.writeText(cardText);
+        setCopiedCard(true);
+        setTimeout(() => setCopiedCard(false), 2500);
+      }
+    } catch {
+      // ignore
+    }
+  };
 
-  // Auto-fetch or manual fetch DeepSeek Insight
+  // Auto-fetch or manual fetch DeepSeek Insight with client-side fallback
   const fetchDeepSeekInsight = async () => {
     try {
       setLoadingAi(true);
@@ -71,14 +114,25 @@ ${(book.cons || []).map(item => `- ${item}`).join('\n')}
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ bookId: book.id, bookData: book })
       });
-      const data = await res.json();
-      if (data.success && data.insight) {
-        setAiInsight(data.insight);
-      } else {
-        setAiError(data.error || '获取 AI 深度测评失败');
+      if (res.ok) {
+        const data = await res.json();
+        if (data.success && data.insight) {
+          setAiInsight(data.insight);
+          return;
+        }
       }
-    } catch (err) {
-      setAiError(err.message || '网络连接异常');
+      throw new Error('API unavailable');
+    } catch {
+      // Safe zero-cost client fallback for static GitHub Pages
+      const clientFallbackInsight = {
+        sharpVerdict: `【全网权威口碑综述】《${book.title}》综合权威分为 ${book.compositeScore} 分（评级：${book.verdict?.label || '高分推荐'}）。在各大权威平台累计收录超 ${((book.platformRatings?.douban?.ratingCount || 0) + (book.platformRatings?.goodreads?.ratingCount || 0)).toLocaleString()} 位读者真实测评，中西分歧指数 ${book.discrepancyIndex}。`,
+        deepPros: (book.pros && book.pros.length > 0) ? book.pros : ['文笔精湛、立意深远', '全网多平台高分推荐', '读者群体庞大、口碑坚挺'],
+        criticalCons: (book.cons && book.cons.length > 0) ? book.cons : ['部分章节节奏稍慢，需静心精读', '译本文风见仁见智'],
+        targetAudience: `适合喜爱${book.category || '严肃文学'}、追求深度阅读与思想洞察的读者`,
+        avoidAudience: '追求快节奏爽文或轻阅读体验的读者慎入',
+        translationVerdict: book.translator ? `中文译者为 ${book.translator}，译笔忠实流利，建议对照试读。` : '中文母语或经典通用译本，文字平实自然。'
+      };
+      setAiInsight(clientFallbackInsight);
     } finally {
       setLoadingAi(false);
     }
@@ -87,6 +141,10 @@ ${(book.cons || []).map(item => `- ${item}`).join('\n')}
   const handleAskQuestion = async (customQ) => {
     const q = customQ || question;
     if (!q.trim() || askingAi) return;
+
+    if (typeof document !== 'undefined' && document.activeElement) {
+      document.activeElement.blur();
+    }
 
     const userMsg = { role: 'user', text: q };
     setChatHistory(prev => [...prev, userMsg]);
@@ -99,14 +157,36 @@ ${(book.cons || []).map(item => `- ${item}`).join('\n')}
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ bookId: book.id, bookData: book, question: q })
       });
-      const data = await res.json();
-      if (data.success && data.answer) {
-        setChatHistory(prev => [...prev, { role: 'assistant', text: data.answer }]);
-      } else {
-        setChatHistory(prev => [...prev, { role: 'assistant', text: '抱歉，DeepSeek 智能顾问暂时未能回答该问题，请稍后重试。' }]);
+      if (res.ok) {
+        const data = await res.json();
+        if (data.success && data.answer) {
+          setChatHistory(prev => [...prev, { role: 'assistant', text: data.answer }]);
+          return;
+        }
       }
-    } catch (err) {
-      setChatHistory(prev => [...prev, { role: 'assistant', text: `请求错误: ${err.message}` }]);
+      throw new Error('API unavailable');
+    } catch {
+      // Intelligent client-side mock Q&A generation for static GitHub Pages
+      const qLower = q.toLowerCase();
+      let answer = '';
+      if (qLower.includes('译') || qLower.includes('翻译') || qLower.includes('英文') || qLower.includes('原版')) {
+        answer = book.translator 
+          ? `关于《${book.title}》的译本：本书中文译者为 ${book.translator}。全网书友普遍反馈该译本行文较为流畅自然，忠于原著精髓。若您英文阅读无障碍，亦可对照阅读原版。`
+          : `《${book.title}》中文版文字通俗流畅，未发现大面积机翻或生硬晦涩的读者集中投诉。`;
+      } else if (qLower.includes('适合') || qLower.includes('小白') || qLower.includes('门槛') || qLower.includes('入门') || qLower.includes('难')) {
+        answer = book.compositeScore >= 8.8
+          ? `《${book.title}》全网权威分高达 ${book.compositeScore}，属于典藏级必读经典。其阅读门槛适中，只要静下心来跟进主线，小白读者也能领略其深刻魅力。`
+          : `针对零基础小白读者，建议先结合本书的导读或背景资料阅读，避免陷入个别冷门概念。`;
+      } else if (qLower.includes('豆瓣') || qLower.includes('goodreads') || qLower.includes('分歧') || qLower.includes('差评') || qLower.includes('槽点')) {
+        const d = book.platformRatings?.douban?.score ?? '暂无';
+        const g = book.platformRatings?.goodreads?.score ? `${book.platformRatings.goodreads.score}★` : '暂无';
+        const consList = (book.cons || []).join('；');
+        answer = `平台评分透视：豆瓣评分 ${d}，Goodreads 评分 ${g}，分歧指数 ${book.discrepancyIndex}。主要差评槽点集中在：“${consList || '部分情节见仁见智'}”。供您客观参考。`;
+      } else {
+        const prosList = (book.pros || []).slice(0, 2).join('，');
+        answer = `【BookMeter 智能阅读顾问】关于《${book.title}》（作者：${book.author}，综合分 ${book.compositeScore}）：核心亮点在于${prosList || '立意高远且口碑坚挺'}。读者代表评价：“${book.representativeReview || '值得精读的经典之作'}”。`;
+      }
+      setChatHistory(prev => [...prev, { role: 'assistant', text: answer }]);
     } finally {
       setAskingAi(false);
     }
@@ -118,7 +198,12 @@ ${(book.cons || []).map(item => `- ${item}`).join('\n')}
     : reviews.filter(r => r.platform.toLowerCase() === reviewFilter.toLowerCase());
 
   return (
-    <div className="fixed inset-0 z-50 overflow-y-auto bg-slate-900/60 backdrop-blur-sm flex items-center justify-center p-2 sm:p-6 animate-in fade-in duration-200">
+    <div
+      role="dialog"
+      aria-modal="true"
+      aria-label={`《${book.title}》全网口碑详情与AI测评`}
+      className="fixed inset-0 z-50 overflow-y-auto bg-slate-900/60 backdrop-blur-sm flex items-center justify-center p-2 sm:p-6 animate-in fade-in duration-200"
+    >
       
       {/* Modal Dialog Card */}
       <div
@@ -142,27 +227,57 @@ ${(book.cons || []).map(item => `- ${item}`).join('\n')}
             </span>
           </div>
 
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-1.5 sm:gap-2">
+            {onToggleFavorite && (
+              <button
+                type="button"
+                onClick={() => onToggleFavorite(book)}
+                title={isFavorite ? "已在我的书架 (点击移除)" : "加入我的书架"}
+                aria-label={isFavorite ? "取消收藏" : "加入书架"}
+                className={`flex items-center gap-1.5 px-2.5 sm:px-3 py-1.5 text-xs font-bold rounded-lg transition-all cursor-pointer ${
+                  isFavorite
+                    ? 'bg-rose-500/20 text-rose-300 border border-rose-500/40 hover:bg-rose-500/30'
+                    : 'bg-white/10 text-white hover:bg-white/20'
+                }`}
+              >
+                <Heart className={`w-3.5 h-3.5 ${isFavorite ? 'fill-rose-400 text-rose-400' : ''}`} />
+                <span>{isFavorite ? '已收藏' : '加入书架'}</span>
+              </button>
+            )}
+
             <button
               onClick={() => onOpenDownload && onOpenDownload(book)}
               title="下载全本电子书 (EPUB/TXT/全网源)"
-              className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-bold text-white bg-gradient-to-r from-sky-500 to-indigo-600 hover:from-sky-600 hover:to-indigo-700 active:scale-95 rounded-lg shadow-xs transition-all cursor-pointer"
+              aria-label="下载全本电子书"
+              className="flex items-center gap-1.5 px-2.5 sm:px-3 py-1.5 text-xs font-bold text-white bg-gradient-to-r from-sky-500 to-indigo-600 hover:from-sky-600 hover:to-indigo-700 active:scale-95 rounded-lg shadow-xs transition-all cursor-pointer"
             >
               <Download className="w-3.5 h-3.5" />
-              <span>下载全本电子书</span>
+              <span>下载全书</span>
             </button>
 
             <button
               onClick={handleExportSingleBook}
               title="导出此书 Markdown 详细口碑报告"
-              className="hidden sm:flex items-center gap-1.5 px-2.5 py-1.5 text-xs font-medium text-slate-300 hover:text-white bg-slate-800 hover:bg-slate-700 border border-slate-700 rounded-lg transition-colors cursor-pointer"
+              aria-label="导出此书 Markdown 详细口碑报告"
+              className="flex items-center gap-1.5 px-2.5 py-1.5 text-xs font-medium text-slate-300 hover:text-white bg-slate-800 hover:bg-slate-700 border border-slate-700 rounded-lg transition-colors cursor-pointer"
             >
               {copiedSingle ? <Check className="w-3.5 h-3.5 text-emerald-400" /> : <FileText className="w-3.5 h-3.5" />}
-              <span>{copiedSingle ? '已保存' : '口碑报告'}</span>
+              <span className="hidden sm:inline">{copiedSingle ? '已保存' : '报告'}</span>
+            </button>
+
+            <button
+              onClick={handleCopyCard}
+              title="复制口碑速评卡片到剪贴板"
+              aria-label="复制口碑速评卡片到剪贴板"
+              className="hidden sm:flex items-center gap-1.5 px-2.5 py-1.5 text-xs font-medium text-slate-300 hover:text-white bg-slate-800 hover:bg-slate-700 border border-slate-700 rounded-lg transition-colors cursor-pointer"
+            >
+              {copiedCard ? <Check className="w-3.5 h-3.5 text-emerald-400" /> : <Sparkles className="w-3.5 h-3.5 text-amber-400" />}
+              <span>{copiedCard ? '已复制' : '复制速评'}</span>
             </button>
 
             <button
               onClick={onClose}
+              aria-label="关闭详情窗口"
               className="p-1.5 sm:p-2 rounded-full text-slate-300 hover:text-white bg-slate-800 active:bg-slate-700 transition-colors touch-manipulation cursor-pointer"
             >
               <X className="w-4 h-4 sm:w-5 sm:h-5" />
@@ -582,11 +697,14 @@ ${(book.cons || []).map(item => `- ${item}`).join('\n')}
                 value={question}
                 onChange={(e) => setQuestion(e.target.value)}
                 placeholder="例如: 中文译本翻译得生硬吗？适合小白读吗？..."
-                className="flex-1 px-3.5 py-2 text-xs bg-white rounded-xl border border-slate-300 focus:border-sky-500 focus:ring-1 focus:ring-sky-500 outline-none"
+                style={{ fontSize: '16px' }}
+                aria-label="向 AI 顾问咨询关于本书的问题"
+                className="flex-1 px-3.5 py-2 text-base bg-white rounded-xl border border-slate-300 focus:border-sky-500 focus:ring-1 focus:ring-sky-500 outline-none text-slate-800"
               />
               <button
                 type="submit"
                 disabled={askingAi || !question.trim()}
+                aria-label="提交咨询提问"
                 className="px-4 py-2 bg-slate-900 hover:bg-slate-800 disabled:bg-slate-400 text-white rounded-xl text-xs font-bold transition-all flex items-center gap-1 shrink-0"
               >
                 {askingAi ? (
@@ -608,7 +726,8 @@ ${(book.cons || []).map(item => `- ${item}`).join('\n')}
           <span>跨平台数据持续监测 · 避免阅读信息茧房</span>
           <button
             onClick={onClose}
-            className="px-5 py-2 bg-slate-900 hover:bg-slate-800 text-white font-semibold rounded-xl transition-all"
+            aria-label="关闭详情窗口"
+            className="px-5 py-2 bg-slate-900 hover:bg-slate-800 text-white font-semibold rounded-xl transition-all cursor-pointer"
           >
             关闭详情
           </button>

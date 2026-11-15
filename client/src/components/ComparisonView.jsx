@@ -1,33 +1,206 @@
-import React from 'react';
-import { Award, AlertTriangle, Scale, Star, ThumbsUp, ThumbsDown, ArrowRight } from 'lucide-react';
+import React, { useState } from 'react';
+import { Award, AlertTriangle, Scale, ThumbsUp, ThumbsDown, ArrowRight, Swords, Sparkles, CheckCircle2, ChevronRight } from 'lucide-react';
+import PlatformRatingBadge from './PlatformRatingBadge';
 
-export default function ComparisonView({ books, onOpenDetail }) {
-  const masterpieces = books.filter(b => b.verdict?.status === 'masterpiece').slice(0, 5);
-  const warnings = books.filter(b => b.verdict?.status === 'warning').slice(0, 5);
-  const controversial = books.filter(b => b.verdict?.status === 'controversial' || b.discrepancyIndex >= 1.0).slice(0, 5);
+export default function ComparisonView({ books = [], onOpenDetail }) {
+  const masterpieces = books.filter(b => b.verdict?.status === 'masterpiece').slice(0, 6);
+  const warnings = books.filter(b => b.verdict?.status === 'warning').slice(0, 6);
+  const controversial = books.filter(b => b.verdict?.status === 'controversial' || b.discrepancyIndex >= 1.0).slice(0, 6);
+
+  // Interactive 2-Book Duel State
+  const [bookAId, setBookAId] = useState(books[0]?.id || '');
+  const [bookBId, setBookBId] = useState(books[1]?.id || '');
+
+  const bookA = books.find(b => b.id === bookAId) || books[0];
+  const bookB = books.find(b => b.id === bookBId) || books[1] || books[0];
+
+  const getScoreLeader = (valA, valB) => {
+    if (valA === valB) return 'tie';
+    return valA > valB ? 'A' : 'B';
+  };
 
   return (
     <div className="space-y-8 animate-in fade-in duration-300">
       
       {/* Intro Explainer Banner */}
-      <div className="bg-indigo-900 text-white rounded-3xl p-6 sm:p-8 flex flex-col md:flex-row items-center justify-between gap-6 shadow-xl">
+      <div className="bg-gradient-to-r from-indigo-950 via-slate-900 to-indigo-900 text-white rounded-3xl p-6 sm:p-8 flex flex-col md:flex-row items-start md:items-center justify-between gap-6 shadow-xl border border-indigo-800/40">
         <div className="space-y-2 max-w-2xl">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 text-indigo-300 text-xs font-semibold">
             <Scale className="w-3.5 h-3.5" />
             <span>好书 vs 避坑 横向全景对决</span>
           </div>
-          <h2 className="text-2xl font-black">
-            一眼分清：哪些是全网交口称赞的真经典，哪些是差评如潮的翻车之作
+          <h2 className="text-2xl sm:text-3xl font-black tracking-tight">
+            一眼分清：全网交口称赞的真神作 vs 差评如潮的避坑作
           </h2>
-          <p className="text-xs sm:text-sm text-indigo-200 leading-relaxed">
-            我们对比了各大平台（豆瓣、Goodreads、Amazon、Google Books）数百万条真实评价，把评分最坚挺的殿堂级好书与差评率奇高、机翻翻车或营销空洞的避坑书直观列出。
+          <p className="text-xs sm:text-sm text-indigo-200/90 leading-relaxed">
+            对比各大平台（豆瓣、Goodreads、Amazon、Google Books）数百万条真实评价，把评分最坚挺的殿堂级好书与差评率奇高、机翻翻车或营销空洞的避坑书直观列出。
           </p>
         </div>
         <div className="shrink-0 p-4 rounded-2xl bg-white/10 border border-white/10 text-center">
           <div className="text-3xl font-black text-amber-300">4 大维度</div>
-          <div className="text-xs text-indigo-200 mt-1">分数 · 差评率 · 分歧度 · 真实书评</div>
+          <div className="text-xs text-indigo-200 mt-1">综合分 · 差评率 · 分歧度 · 真实口碑</div>
         </div>
       </div>
+
+      {/* Feature 1: Interactive Head-to-Head Book Duel (自由双书 PK 对决) */}
+      {bookA && bookB && (
+        <div className="bg-white rounded-3xl p-5 sm:p-7 border border-indigo-200 shadow-md space-y-6">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-4 border-b border-indigo-100">
+            <div className="flex items-center gap-2.5">
+              <div className="w-9 h-9 rounded-xl bg-indigo-100 text-indigo-700 flex items-center justify-center">
+                <Swords className="w-5 h-5 text-indigo-600" />
+              </div>
+              <div>
+                <h3 className="font-extrabold text-base sm:text-lg text-slate-900">
+                  🥊 自由双书全维度 PK 对决
+                </h3>
+                <p className="text-xs text-slate-500">
+                  任意挑选两部作品，全景对比各大权威平台打分、好评率与优缺点
+                </p>
+              </div>
+            </div>
+            <span className="text-xs font-bold text-indigo-700 bg-indigo-50 px-3 py-1 rounded-full border border-indigo-200 self-start sm:self-auto">
+              多平台横向透视
+            </span>
+          </div>
+
+          {/* Book Selectors */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="space-y-1.5">
+              <label className="text-xs font-bold text-slate-700 flex items-center gap-1.5">
+                <span className="w-2 h-2 rounded-full bg-sky-500"></span>
+                <span>选择擂主 A：</span>
+              </label>
+              <select
+                value={bookAId}
+                onChange={(e) => setBookAId(e.target.value)}
+                className="w-full text-xs font-medium p-2.5 bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:ring-2 focus:ring-sky-500 outline-none transition-all cursor-pointer"
+              >
+                {books.map(b => (
+                  <option key={`a-${b.id}`} value={b.id}>
+                    《{b.title}》({b.author}) - ★{b.compositeScore}
+                  </option>
+                ))}
+              </select>
+            </div>
+
+            <div className="space-y-1.5">
+              <label className="text-xs font-bold text-slate-700 flex items-center gap-1.5">
+                <span className="w-2 h-2 rounded-full bg-indigo-500"></span>
+                <span>选择对决方 B：</span>
+              </label>
+              <select
+                value={bookBId}
+                onChange={(e) => setBookBId(e.target.value)}
+                className="w-full text-xs font-medium p-2.5 bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:ring-2 focus:ring-indigo-500 outline-none transition-all cursor-pointer"
+              >
+                {books.map(b => (
+                  <option key={`b-${b.id}`} value={b.id}>
+                    《{b.title}》({b.author}) - ★{b.compositeScore}
+                  </option>
+                ))}
+              </select>
+            </div>
+          </div>
+
+          {/* Duel Comparison Arena Cards */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 bg-slate-50/70 p-4 sm:p-6 rounded-2xl border border-slate-200">
+            {/* Book A Card */}
+            <div className="bg-white rounded-2xl p-5 border border-sky-200 shadow-sm flex flex-col justify-between space-y-4">
+              <div className="flex gap-4">
+                <img
+                  src={bookA.cover}
+                  alt={bookA.title}
+                  className="w-20 h-28 object-cover rounded-xl shadow-md border border-slate-200 shrink-0"
+                />
+                <div className="min-w-0 flex-1">
+                  <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-sky-100 text-sky-800">
+                    作品 A
+                  </span>
+                  <h4 className="font-extrabold text-base text-slate-900 truncate mt-1">
+                    {bookA.title}
+                  </h4>
+                  <p className="text-xs text-slate-500 truncate">{bookA.author}</p>
+                  <div className="mt-2 flex items-baseline gap-1.5">
+                    <span className="text-xs text-slate-400">综合权威分</span>
+                    <span className="text-2xl font-black text-sky-600 font-mono">
+                      {bookA.compositeScore}
+                    </span>
+                    <span className="text-xs text-slate-400">/ 10</span>
+                  </div>
+                </div>
+              </div>
+
+              {/* Sub-ratings */}
+              <div className="grid grid-cols-2 gap-2 text-xs bg-slate-50 p-3 rounded-xl border border-slate-100">
+                <div>豆瓣读书：<b className="text-slate-800">{bookA.platformRatings?.douban?.score ? `${bookA.platformRatings.douban.score}分` : '-'}</b></div>
+                <div>Goodreads：<b className="text-slate-800">{bookA.platformRatings?.goodreads?.score ? `${bookA.platformRatings.goodreads.score}★` : '-'}</b></div>
+                <div>Amazon：<b className="text-slate-800">{bookA.platformRatings?.amazon?.score ? `${bookA.platformRatings.amazon.score}★` : '-'}</b></div>
+                <div>读者好评率：<b className="text-emerald-700">{bookA.sentiment?.positivePct || 90}%</b></div>
+              </div>
+
+              <div className="text-xs text-slate-600 line-clamp-2 leading-relaxed italic">
+                “{bookA.sentiment?.pros?.[0] || bookA.summary}”
+              </div>
+
+              <button
+                onClick={() => onOpenDetail(bookA)}
+                className="w-full py-2 bg-sky-50 hover:bg-sky-100 text-sky-700 font-bold text-xs rounded-xl border border-sky-200 transition-all flex items-center justify-center gap-1 cursor-pointer"
+              >
+                <span>查看《{bookA.title}》全网深度研报</span>
+                <ChevronRight className="w-3.5 h-3.5" />
+              </button>
+            </div>
+
+            {/* Book B Card */}
+            <div className="bg-white rounded-2xl p-5 border border-indigo-200 shadow-sm flex flex-col justify-between space-y-4">
+              <div className="flex gap-4">
+                <img
+                  src={bookB.cover}
+                  alt={bookB.title}
+                  className="w-20 h-28 object-cover rounded-xl shadow-md border border-slate-200 shrink-0"
+                />
+                <div className="min-w-0 flex-1">
+                  <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-indigo-100 text-indigo-800">
+                    作品 B
+                  </span>
+                  <h4 className="font-extrabold text-base text-slate-900 truncate mt-1">
+                    {bookB.title}
+                  </h4>
+                  <p className="text-xs text-slate-500 truncate">{bookB.author}</p>
+                  <div className="mt-2 flex items-baseline gap-1.5">
+                    <span className="text-xs text-slate-400">综合权威分</span>
+                    <span className="text-2xl font-black text-indigo-600 font-mono">
+                      {bookB.compositeScore}
+                    </span>
+                    <span className="text-xs text-slate-400">/ 10</span>
+                  </div>
+                </div>
+              </div>
+
+              {/* Sub-ratings */}
+              <div className="grid grid-cols-2 gap-2 text-xs bg-slate-50 p-3 rounded-xl border border-slate-100">
+                <div>豆瓣读书：<b className="text-slate-800">{bookB.platformRatings?.douban?.score ? `${bookB.platformRatings.douban.score}分` : '-'}</b></div>
+                <div>Goodreads：<b className="text-slate-800">{bookB.platformRatings?.goodreads?.score ? `${bookB.platformRatings.goodreads.score}★` : '-'}</b></div>
+                <div>Amazon：<b className="text-slate-800">{bookB.platformRatings?.amazon?.score ? `${bookB.platformRatings.amazon.score}★` : '-'}</b></div>
+                <div>读者好评率：<b className="text-emerald-700">{bookB.sentiment?.positivePct || 90}%</b></div>
+              </div>
+
+              <div className="text-xs text-slate-600 line-clamp-2 leading-relaxed italic">
+                “{bookB.sentiment?.pros?.[0] || bookB.summary}”
+              </div>
+
+              <button
+                onClick={() => onOpenDetail(bookB)}
+                className="w-full py-2 bg-indigo-50 hover:bg-indigo-100 text-indigo-700 font-bold text-xs rounded-xl border border-indigo-200 transition-all flex items-center justify-center gap-1 cursor-pointer"
+              >
+                <span>查看《{bookB.title}》全网深度研报</span>
+                <ChevronRight className="w-3.5 h-3.5" />
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* Two Column Layout: Masterpieces vs Warnings */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">

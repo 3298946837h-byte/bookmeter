@@ -1,0 +1,21 @@
+{
+  "name": "BookMeter · 全网书评权威聚合指南",
+  "short_name": "BookMeter",
+  "description": "四大权威平台（豆瓣、Goodreads、Amazon、Google Books）真实评分与深度书评多维对冲聚合",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#0f172a",
+  "theme_color": "#0f172a",
+  "icons": [
+    {
+      "src": "./favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    },
+    {
+      "src": "./icons.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ]
+}
