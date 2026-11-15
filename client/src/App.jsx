@@ -8,13 +8,11 @@ import ComparisonView from './components/ComparisonView';
 import LeaderboardsView from './components/LeaderboardsView';
 import AnalyticsView from './components/AnalyticsView';
 import ScheduleModal from './components/ScheduleModal';
-import MobileBottomNav from './components/MobileBottomNav';
 import fallbackBooks from './data/staticBooks.json';
 import { Search, BookOpen, AlertTriangle, Sparkles, RefreshCw, Flame, ArrowLeft, CheckCircle2 } from 'lucide-react';
 
 export default function App() {
-  const [allMasterBooks, setAllMasterBooks] = useState(fallbackBooks);
-  const [books, setBooks] = useState(fallbackBooks);
+  const [books, setBooks] = useState([]);
   const [stats, setStats] = useState(null);
   const [categories, setCategories] = useState([{ name: '全部', count: 0 }]);
   
@@ -49,14 +47,11 @@ export default function App() {
         const statsData = statsRes && statsRes.ok ? await statsRes.json() : null;
         const catData = catRes && catRes.ok ? await catRes.json() : null;
 
-        const loadedList = booksData.data || fallbackBooks;
-        setAllMasterBooks(loadedList);
-        setBooks(loadedList);
+        setBooks(booksData.data || fallbackBooks);
         setStats(statsData);
-        setCategories(catData || [{ name: '全部', count: loadedList.length }]);
+        setCategories(catData || [{ name: '全部', count: fallbackBooks.length }]);
       } else {
         // Fallback for static hosting environments (e.g. GitHub Pages)
-        setAllMasterBooks(fallbackBooks);
         setBooks(fallbackBooks);
         const categoriesMap = { '全部': fallbackBooks.length };
         fallbackBooks.forEach(b => {
@@ -65,14 +60,13 @@ export default function App() {
         setCategories(Object.entries(categoriesMap).map(([name, count]) => ({ name, count })));
         setStats({
           totalBooks: fallbackBooks.length,
-          totalReviewsAggregated: 11485880,
-          averageCompositeScore: 8.4,
-          verdictCounts: { masterpiece: 11, recommended: 11, controversial: 3, warning: 3, mediocre: 0 }
+          totalReviewsAggregated: 10885880,
+          averageCompositeScore: 8.3,
+          verdictCounts: { masterpiece: 7, recommended: 7, controversial: 2, warning: 3, mediocre: 0 }
         });
       }
     } catch (err) {
       console.warn('API error, using offline database:', err);
-      setAllMasterBooks(fallbackBooks);
       setBooks(fallbackBooks);
     } finally {
       setIsLoading(false);
@@ -93,57 +87,31 @@ export default function App() {
   }, [activeTab]);
 
   // Execute global search (Local + OpenLibrary + DeepSeek Live Resolver)
-  const handleSearchSubmit = async (overrideQuery) => {
-    const query = (overrideQuery !== undefined ? overrideQuery : searchQuery).trim();
-    if (!query) {
+  const handleSearchSubmit = async () => {
+    if (!searchQuery.trim()) {
       setActiveSearchTerm('');
-      setBooks(allMasterBooks);
+      loadData();
       return;
     }
 
     try {
       setIsSearching(true);
-      const term = query.toLowerCase();
-      setActiveSearchTerm(query);
+      setActiveSearchTerm(searchQuery.trim());
       setActiveTab('explore'); // Switch to explore grid to show results
       setSelectedCategory('全部');
       setSelectedVerdict('all');
 
-      // 1. Instant local search across master catalog
-      const localMatches = allMasterBooks.filter(b => {
-        const titleMatch = b.title && b.title.toLowerCase().includes(term);
-        const origMatch = b.originalTitle && b.originalTitle.toLowerCase().includes(term);
-        const authorMatch = b.author && b.author.toLowerCase().includes(term);
-        const transMatch = b.translator && b.translator.toLowerCase().includes(term);
-        const catMatch = b.category && b.category.toLowerCase().includes(term);
-        const tagMatch = b.tags && b.tags.some(t => t.toLowerCase().includes(term));
-        const summaryMatch = b.summary && b.summary.toLowerCase().includes(term);
-        return titleMatch || origMatch || authorMatch || transMatch || catMatch || tagMatch || summaryMatch;
-      });
+      const res = await fetch(`/api/search?q=${encodeURIComponent(searchQuery.trim())}`);
+      const searchData = await res.json();
+      
+      const local = searchData.local || [];
+      const live = searchData.live || [];
 
-      // 2. Also query server API if available
-      let remoteMatches = [];
-      try {
-        const res = await fetch(`/api/search?q=${encodeURIComponent(query)}`);
-        if (res.ok) {
-          const searchData = await res.json();
-          remoteMatches = [...(searchData.local || []), ...(searchData.live || [])];
-        }
-      } catch (err) {
-        // static hosting or offline, silently ignore
-      }
+      // Deduplicate by title
+      const titleSet = new Set(local.map(b => b.title.toLowerCase()));
+      const filteredLive = live.filter(b => !titleSet.has(b.title.toLowerCase()));
 
-      // Merge and deduplicate
-      const combined = [...localMatches];
-      const seenIds = new Set(localMatches.map(b => b.id));
-      for (const b of remoteMatches) {
-        if (!seenIds.has(b.id)) {
-          combined.push(b);
-          seenIds.add(b.id);
-        }
-      }
-
-      setBooks(combined);
+      setBooks([...local, ...filteredLive]);
     } catch (err) {
       console.error('Search failed:', err);
     } finally {
@@ -154,26 +122,11 @@ export default function App() {
   const handleClearSearch = () => {
     setSearchQuery('');
     setActiveSearchTerm('');
-    setBooks(allMasterBooks);
+    loadData();
   };
 
   // Filter books locally according to the active tab and options
   const displayBooks = books.filter(b => {
-    // If active search term is present, strictly match
-    if (activeSearchTerm) {
-      const term = activeSearchTerm.toLowerCase();
-      const titleMatch = b.title && b.title.toLowerCase().includes(term);
-      const origMatch = b.originalTitle && b.originalTitle.toLowerCase().includes(term);
-      const authorMatch = b.author && b.author.toLowerCase().includes(term);
-      const transMatch = b.translator && b.translator.toLowerCase().includes(term);
-      const catMatch = b.category && b.category.toLowerCase().includes(term);
-      const tagMatch = b.tags && b.tags.some(t => t.toLowerCase().includes(term));
-      const summaryMatch = b.summary && b.summary.toLowerCase().includes(term);
-      if (!(titleMatch || origMatch || authorMatch || transMatch || catMatch || tagMatch || summaryMatch)) {
-        return false;
-      }
-    }
-
     // If in "new" tab, only show books from 2023-2026 or flagged as isNewRelease
     if (activeTab === 'new') {
       if (!b.isNewRelease && b.publicationYear < 2022) return false;
@@ -220,7 +173,7 @@ export default function App() {
       />
 
       {/* Main Content Area */}
-      <main className="flex-1 max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 pt-4 sm:pt-8 pb-24 md:pb-8 w-full">
+      <main className="flex-1 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 w-full">
         
         {/* Global Search Banner when user searched */}
         {activeSearchTerm && (
@@ -308,55 +261,22 @@ export default function App() {
                 </p>
               </div>
             ) : displayBooks.length === 0 ? (
-              <div className="bg-white rounded-3xl p-6 sm:p-12 text-center border border-slate-200 shadow-sm max-w-lg mx-auto my-8 space-y-4">
-                <div className="w-16 h-16 rounded-2xl bg-amber-50 text-amber-600 flex items-center justify-center mx-auto border border-amber-200">
+              <div className="bg-white rounded-3xl p-12 text-center border border-slate-200 shadow-sm max-w-md mx-auto my-12 space-y-4">
+                <div className="w-16 h-16 rounded-2xl bg-slate-100 flex items-center justify-center mx-auto text-slate-400">
                   <Search className="w-8 h-8" />
                 </div>
                 <div>
-                  <h3 className="font-bold text-base sm:text-lg text-slate-900">
-                    {activeSearchTerm ? `未找到匹配 “${activeSearchTerm}” 的书籍` : '当前分类暂无匹配书籍'}
-                  </h3>
-                  <p className="text-xs sm:text-sm text-slate-500 mt-2 leading-relaxed">
-                    当前书库已深度收录 28 部中外典藏名著、科普神作与避坑警示书。<br />
-                    您可以尝试点击下方热门书目快速体验多源对冲与真实长评：
+                  <h3 className="font-bold text-base text-slate-800">未找到匹配的书籍</h3>
+                  <p className="text-xs text-slate-500 mt-1 leading-relaxed">
+                    您可以尝试在上方搜索框输入任意书名（如《蛤蟆先生》《原子习惯》《三体》），系统将通过 DeepSeek 实时拉取全网数据！
                   </p>
                 </div>
-
-                {/* Hot book suggestions chips */}
-                <div className="flex flex-wrap justify-center gap-1.5 sm:gap-2 pt-1">
-                  {[
-                    '女士品茶',
-                    '蛤蟆先生去看心理医生',
-                    '被讨厌的勇气',
-                    '思考，快与慢',
-                    '穷查理宝典',
-                    '原则',
-                    '自私的基因',
-                    '微积分的力量',
-                    '三体',
-                    '芯片战争'
-                  ].map(kw => (
-                    <button
-                      key={kw}
-                      onClick={() => {
-                        setSearchQuery(kw);
-                        handleSearchSubmit(kw);
-                      }}
-                      className="px-2.5 py-1 text-xs bg-slate-100 hover:bg-sky-50 hover:text-sky-700 hover:border-sky-300 text-slate-700 rounded-lg border border-slate-200 transition-all font-medium active:scale-95"
-                    >
-                      {kw}
-                    </button>
-                  ))}
-                </div>
-
-                <div className="pt-2">
-                  <button
-                    onClick={handleClearSearch}
-                    className="px-4 py-2 bg-slate-900 text-white rounded-xl text-xs font-semibold hover:bg-slate-800 transition-all active:scale-95"
-                  >
-                    重置并返回全部书库
-                  </button>
-                </div>
+                <button
+                  onClick={handleClearSearch}
+                  className="px-4 py-2 bg-slate-900 text-white rounded-xl text-xs font-semibold hover:bg-slate-800 transition-all"
+                >
+                  重置所有筛选
+                </button>
               </div>
             ) : (
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -375,24 +295,21 @@ export default function App() {
       </main>
 
       {/* Footer */}
-      <footer className="bg-white border-t border-slate-200 py-6 sm:py-8 text-xs text-slate-500 mt-8 sm:mt-12 pb-24 md:pb-8">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-3 sm:gap-4 text-center sm:text-left">
-          <div className="flex flex-col sm:flex-row items-center gap-1 sm:gap-2">
+      <footer className="bg-white border-t border-slate-200 py-8 text-xs text-slate-500 mt-12">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+          <div className="flex items-center gap-2">
             <span className="font-bold text-slate-800">BookMeter · 全网书评权威聚合</span>
-            <span className="hidden sm:inline">-</span>
-            <span className="text-[11px] sm:text-xs">对冲多平台评价偏见，呈现真实读者口碑</span>
+            <span>-</span>
+            <span>对冲多平台评价偏见，呈现真实读者口碑</span>
           </div>
 
-          <div className="flex flex-wrap justify-center items-center gap-2 sm:gap-4 text-[10px] sm:text-xs text-slate-400">
-            <span>数据源: 豆瓣 / Goodreads / Amazon / Google Books</span>
+          <div className="flex items-center gap-4 text-slate-400">
+            <span>数据源: 豆瓣读书 / Goodreads / Amazon / Open Library / DeepSeek AI</span>
             <span>·</span>
             <span>已支持全网实时检索</span>
           </div>
         </div>
       </footer>
-
-      {/* Mobile Sticky Bottom Navigation Bar */}
-      <MobileBottomNav activeTab={activeTab} setActiveTab={setActiveTab} />
 
       {/* Detailed Book Modal */}
       {selectedBook && (

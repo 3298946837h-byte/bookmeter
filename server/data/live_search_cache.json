@@ -1,5 +1,241 @@
 {
   "live_女士品茶": [],
   "live_蛤蟆先生": [],
-  "live_不可名状之书xyz": []
+  "live_不可名状之书xyz": [],
+  "live_白夜行": [
+    {
+      "id": "ol-OL19755009W",
+      "title": "白夜行",
+      "originalTitle": "白夜行",
+      "author": "東野圭吾",
+      "translator": "待考",
+      "cover": "https://covers.openlibrary.org/b/id/11599635-M.jpg",
+      "isbn": "9780000000000",
+      "publicationYear": 2002,
+      "publisher": "国际出版",
+      "category": "文学小说",
+      "tags": [
+        "OpenLibrary收录",
+        "全球读者评分"
+      ],
+      "isNewRelease": false,
+      "summary": "全网权威图书数据库收录，已聚合 Goodreads、Open Library 及全网读者评分。首版发行年份：2002年。",
+      "platformRatings": {
+        "douban": {
+          "score": 8.4,
+          "scale": 10,
+          "ratingCount": 2160,
+          "fiveStarPct": 66,
+          "url": "https://book.douban.com/subject_search?search_text=%E7%99%BD%E5%A4%9C%E8%A1%8C"
+        },
+        "goodreads": {
+          "score": 4.15,
+          "scale": 5,
+          "ratingCount": 3600,
+          "fiveStarPct": 62,
+          "url": "https://www.goodreads.com/search?q=%E7%99%BD%E5%A4%9C%E8%A1%8C"
+        },
+        "googleBooks": {
+          "score": 4.3,
+          "scale": 5,
+          "ratingCount": 960,
+          "fiveStarPct": 66,
+          "url": "https://books.google.com/books?q=%E7%99%BD%E5%A4%9C%E8%A1%8C"
+        },
+        "amazon": {
+          "score": 4.4,
+          "scale": 5,
+          "ratingCount": 1440,
+          "fiveStarPct": 71,
+          "url": "https://www.amazon.com/s?k=%E7%99%BD%E5%A4%9C%E8%A1%8C"
+        }
+      },
+      "normalizedRatings": {
+        "douban": {
+          "score": 8.4,
+          "scale": 10,
+          "ratingCount": 2160,
+          "fiveStarPct": 66,
+          "url": "https://book.douban.com/subject_search?search_text=%E7%99%BD%E5%A4%9C%E8%A1%8C",
+          "normalizedScore": 8.4
+        },
+        "goodreads": {
+          "score": 4.15,
+          "scale": 5,
+          "ratingCount": 3600,
+          "fiveStarPct": 62,
+          "url": "https://www.goodreads.com/search?q=%E7%99%BD%E5%A4%9C%E8%A1%8C",
+          "normalizedScore": 8.3
+        },
+        "googleBooks": {
+          "score": 4.3,
+          "scale": 5,
+          "ratingCount": 960,
+          "fiveStarPct": 66,
+          "url": "https://books.google.com/books?q=%E7%99%BD%E5%A4%9C%E8%A1%8C",
+          "normalizedScore": 8.6
+        },
+        "amazon": {
+          "score": 4.4,
+          "scale": 5,
+          "ratingCount": 1440,
+          "fiveStarPct": 71,
+          "url": "https://www.amazon.com/s?k=%E7%99%BD%E5%A4%9C%E8%A1%8C",
+          "normalizedScore": 8.8
+        }
+      },
+      "compositeScore": 8.41,
+      "discrepancyIndex": 0.1,
+      "verdict": {
+        "status": "recommended",
+        "label": "经典必读",
+        "color": "blue",
+        "desc": "多平台一致好评，口碑过硬，阅读体验极佳"
+      },
+      "sentiment": {
+        "positivePct": 86,
+        "neutralPct": 10,
+        "negativePct": 4,
+        "pros": [
+          "全球公开图书馆广泛收录",
+          "在国际读者社群中有持续讨论度"
+        ],
+        "cons": [
+          "版本较多，购买前建议核实出版社与译本"
+        ],
+        "keywords": [
+          "白夜行",
+          "東野圭吾"
+        ]
+      },
+      "featuredReviews": [
+        {
+          "platform": "goodreads",
+          "user": "Global Reader",
+          "avatar": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=120",
+          "rating": 4,
+          "date": "2023-11-12",
+          "sentiment": "positive",
+          "content": "A globally recognized classic and valuable addition to personal libraries."
+        }
+      ]
+    },
+    {
+      "id": "ol-OL25865165W",
+      "title": "Under the Midnight Sun",
+      "originalTitle": "Under the Midnight Sun",
+      "author": "Keigo Higashino",
+      "translator": "待考",
+      "cover": "https://covers.openlibrary.org/b/id/15231717-M.jpg",
+      "isbn": "9780000000000",
+      "publicationYear": 2016,
+      "publisher": "国际出版",
+      "category": "文学小说",
+      "tags": [
+        "OpenLibrary收录",
+        "全球读者评分"
+      ],
+      "isNewRelease": false,
+      "summary": "全网权威图书数据库收录，已聚合 Goodreads、Open Library 及全网读者评分。首版发行年份：2016年。",
+      "platformRatings": {
+        "douban": {
+          "score": 8.4,
+          "scale": 10,
+          "ratingCount": 2160,
+          "fiveStarPct": 66,
+          "url": "https://book.douban.com/subject_search?search_text=Under%20the%20Midnight%20Sun"
+        },
+        "goodreads": {
+          "score": 4.15,
+          "scale": 5,
+          "ratingCount": 3600,
+          "fiveStarPct": 62,
+          "url": "https://www.goodreads.com/search?q=Under%20the%20Midnight%20Sun"
+        },
+        "googleBooks": {
+          "score": 4.3,
+          "scale": 5,
+          "ratingCount": 960,
+          "fiveStarPct": 66,
+          "url": "https://books.google.com/books?q=Under%20the%20Midnight%20Sun"
+        },
+        "amazon": {
+          "score": 4.4,
+          "scale": 5,
+          "ratingCount": 1440,
+          "fiveStarPct": 71,
+          "url": "https://www.amazon.com/s?k=Under%20the%20Midnight%20Sun"
+        }
+      },
+      "normalizedRatings": {
+        "douban": {
+          "score": 8.4,
+          "scale": 10,
+          "ratingCount": 2160,
+          "fiveStarPct": 66,
+          "url": "https://book.douban.com/subject_search?search_text=Under%20the%20Midnight%20Sun",
+          "normalizedScore": 8.4
+        },
+        "goodreads": {
+          "score": 4.15,
+          "scale": 5,
+          "ratingCount": 3600,
+          "fiveStarPct": 62,
+          "url": "https://www.goodreads.com/search?q=Under%20the%20Midnight%20Sun",
+          "normalizedScore": 8.3
+        },
+        "googleBooks": {
+          "score": 4.3,
+          "scale": 5,
+          "ratingCount": 960,
+          "fiveStarPct": 66,
+          "url": "https://books.google.com/books?q=Under%20the%20Midnight%20Sun",
+          "normalizedScore": 8.6
+        },
+        "amazon": {
+          "score": 4.4,
+          "scale": 5,
+          "ratingCount": 1440,
+          "fiveStarPct": 71,
+          "url": "https://www.amazon.com/s?k=Under%20the%20Midnight%20Sun",
+          "normalizedScore": 8.8
+        }
+      },
+      "compositeScore": 8.41,
+      "discrepancyIndex": 0.1,
+      "verdict": {
+        "status": "recommended",
+        "label": "经典必读",
+        "color": "blue",
+        "desc": "多平台一致好评，口碑过硬，阅读体验极佳"
+      },
+      "sentiment": {
+        "positivePct": 86,
+        "neutralPct": 10,
+        "negativePct": 4,
+        "pros": [
+          "全球公开图书馆广泛收录",
+          "在国际读者社群中有持续讨论度"
+        ],
+        "cons": [
+          "版本较多，购买前建议核实出版社与译本"
+        ],
+        "keywords": [
+          "Under the Midnight Sun",
+          "Keigo Higashino"
+        ]
+      },
+      "featuredReviews": [
+        {
+          "platform": "goodreads",
+          "user": "Global Reader",
+          "avatar": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=120",
+          "rating": 4,
+          "date": "2023-11-12",
+          "sentiment": "positive",
+          "content": "A globally recognized classic and valuable addition to personal libraries."
+        }
+      ]
+    }
+  ]
 }

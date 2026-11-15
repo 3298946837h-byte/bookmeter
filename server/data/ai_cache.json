@@ -820,5 +820,21 @@
     "targetAudience": "渴望精神突围、反思人生意义、热爱经典文学与纯粹艺术的深度读者",
     "avoidAudience": "期待家庭伦理温情剧或以传统道德标准审视艺术家的读者",
     "translationVerdict": "上海译文出版社徐淳刚译本或李继宏译本语言均极为出彩，推荐阅读。"
+  },
+  "insight_ol-ol19755009w": {
+    "sharpVerdict": "【当前处于 0 消耗安全防护模式】已帮您安全暂停付费 DeepSeek API 扣费，防止产生任何账单。您可以在排程设置中开启 GitHub Models 免费额度，或直接查看各大平台真实书评。",
+    "deepPros": [
+      "已自动切断外部付费大模型请求通道，彻底杜绝额度损耗",
+      "全站所有功能（多平台比价、好书对决、避坑筛选）正常运转",
+      "本地磁盘缓存持续生效中"
+    ],
+    "criticalCons": [
+      "付费 DeepSeek 实时推理处于人工静音状态",
+      "如需生成全新 AI 书评，建议使用 GitHub Models 免费配额"
+    ],
+    "targetAudience": "希望零成本体验全网权威书评的读者",
+    "avoidAudience": "无",
+    "translationVerdict": "建议参考各大权威平台（豆瓣/Goodreads）真实长评与折算分",
+    "_provider": "本地 0 消耗防护引擎 (已暂停付费 API)"
   }
 }

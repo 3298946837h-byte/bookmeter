@@ -7,16 +7,10 @@ export default function BookDetailModal({ book, onClose }) {
 
   const [reviewFilter, setReviewFilter] = useState('all'); // all, douban, goodreads, amazon
 
-  // DeepSeek AI State (Defaults to pre-computed rich insight if available)
-  const [aiInsight, setAiInsight] = useState(book.aiInsight || null);
+  // DeepSeek AI State
+  const [aiInsight, setAiInsight] = useState(null);
   const [loadingAi, setLoadingAi] = useState(false);
   const [aiError, setAiError] = useState(null);
-
-  useEffect(() => {
-    if (book?.aiInsight) {
-      setAiInsight(book.aiInsight);
-    }
-  }, [book]);
 
   // Q&A State
   const [question, setQuestion] = useState('');
@@ -80,21 +74,18 @@ export default function BookDetailModal({ book, onClose }) {
     : reviews.filter(r => r.platform.toLowerCase() === reviewFilter.toLowerCase());
 
   return (
-    <div className="fixed inset-0 z-50 overflow-y-auto bg-slate-900/60 backdrop-blur-sm flex items-end sm:items-center justify-center p-0 sm:p-4 animate-in fade-in duration-200">
+    <div className="fixed inset-0 z-50 overflow-y-auto bg-slate-900/60 backdrop-blur-sm flex items-center justify-center p-3 sm:p-6 animate-in fade-in duration-200">
       
-      {/* Modal Dialog Card (Bottom sheet on mobile, centered modal on desktop) */}
+      {/* Modal Dialog Card */}
       <div
-        className="bg-white w-full max-w-4xl rounded-t-3xl sm:rounded-3xl shadow-2xl overflow-hidden border border-slate-200 flex flex-col max-h-[92vh]"
+        className="bg-white w-full max-w-4xl rounded-3xl shadow-2xl overflow-hidden border border-slate-200 flex flex-col max-h-[92vh]"
         onClick={(e) => e.stopPropagation()}
       >
         
-        {/* Mobile Drag Indicator */}
-        <div className="w-10 h-1 bg-slate-300 rounded-full mx-auto my-2 sm:hidden shrink-0" />
-
         {/* Top Header Bar */}
-        <div className="px-4 sm:px-6 py-3 sm:py-4 bg-slate-900 text-white flex items-center justify-between shrink-0">
+        <div className="px-6 py-4 bg-slate-900 text-white flex items-center justify-between shrink-0">
           <div className="flex items-center gap-2">
-            <span className={`px-2.5 py-0.5 rounded-full text-[11px] sm:text-xs font-bold ${
+            <span className={`px-2.5 py-0.5 rounded-full text-xs font-bold ${
               book.verdict?.status === 'masterpiece' ? 'bg-emerald-500 text-white' :
               book.verdict?.status === 'warning' ? 'bg-rose-500 text-white' :
               book.verdict?.status === 'controversial' ? 'bg-amber-500 text-white' :
@@ -102,7 +93,7 @@ export default function BookDetailModal({ book, onClose }) {
             }`}>
               {book.verdict?.label}
             </span>
-            <span className="text-[11px] sm:text-xs text-slate-300 hidden sm:inline">
+            <span className="text-xs text-slate-300 hidden sm:inline">
               {book.category} · {book.publicationYear} · 全网多源权威对冲报告
             </span>
           </div>
@@ -116,34 +107,24 @@ export default function BookDetailModal({ book, onClose }) {
         </div>
 
         {/* Modal Scrollable Body */}
-        <div className="overflow-y-auto p-4 sm:p-6 space-y-4 sm:space-y-6">
+        <div className="overflow-y-auto p-6 space-y-6">
           
           {/* Section 1: Hero Info & Master Score */}
-          <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 items-start pb-4 sm:pb-6 border-b border-slate-100">
-            <div className="flex gap-3 sm:gap-4 items-start w-full sm:w-auto">
-              {/* Book Cover */}
-              <div className="w-20 h-28 sm:w-32 sm:h-44 shrink-0 rounded-xl sm:rounded-2xl overflow-hidden shadow-lg border border-slate-200 bg-slate-100">
-                <img
-                  src={book.cover}
-                  alt={book.title}
-                  className="w-full h-full object-cover"
-                  onError={(e) => {
-                    e.target.src = 'https://images.unsplash.com/photo-1544947950-fa07a98d237f?auto=format&fit=crop&q=80&w=300';
-                  }}
-                />
-              </div>
-
-              {/* Title & Author on mobile */}
-              <div className="flex-1 sm:hidden space-y-1">
-                <h2 className="text-lg font-black text-slate-900 leading-snug line-clamp-2">{book.title}</h2>
-                <p className="text-xs font-semibold text-sky-700">{book.author}</p>
-                {book.translator && <p className="text-[11px] text-slate-500">译: {book.translator}</p>}
-                <div className="text-[10px] text-slate-400">{book.publisher} · {book.publicationYear}</div>
-              </div>
+          <div className="flex flex-col sm:flex-row gap-6 items-start pb-6 border-b border-slate-100">
+            {/* Book Cover */}
+            <div className="w-32 h-44 shrink-0 rounded-2xl overflow-hidden shadow-lg border border-slate-200 bg-slate-100">
+              <img
+                src={book.cover}
+                alt={book.title}
+                className="w-full h-full object-cover"
+                onError={(e) => {
+                  e.target.src = 'https://images.unsplash.com/photo-1544947950-fa07a98d237f?auto=format&fit=crop&q=80&w=300';
+                }}
+              />
             </div>
 
-            {/* Metadata (Desktop) */}
-            <div className="flex-1 space-y-2 hidden sm:block">
+            {/* Metadata */}
+            <div className="flex-1 space-y-2">
               <div className="flex flex-wrap items-center gap-2">
                 <h2 className="text-2xl font-black text-slate-900">{book.title}</h2>
                 {book.originalTitle && (
@@ -180,25 +161,20 @@ export default function BookDetailModal({ book, onClose }) {
               </p>
             </div>
 
-            {/* Mobile Summary */}
-            <p className="text-xs text-slate-600 leading-relaxed sm:hidden line-clamp-3">
-              {book.summary}
-            </p>
-
             {/* Master Score Block */}
-            <div className="w-full sm:w-44 shrink-0 p-3 sm:p-4 rounded-xl sm:rounded-2xl bg-gradient-to-br from-slate-50 to-sky-50 border border-sky-100 text-center flex flex-col justify-center">
-              <span className="text-[10px] sm:text-[11px] font-bold text-sky-800 uppercase tracking-wider">
+            <div className="w-full sm:w-44 shrink-0 p-4 rounded-2xl bg-gradient-to-br from-slate-50 to-sky-50 border border-sky-100 text-center flex flex-col justify-center">
+              <span className="text-[11px] font-bold text-sky-800 uppercase tracking-wider">
                 全网综合权威分
               </span>
-              <div className="flex items-baseline justify-center gap-1 my-0.5 sm:my-1">
-                <span className="text-3xl sm:text-4xl font-black text-slate-900">{book.compositeScore}</span>
+              <div className="flex items-baseline justify-center gap-1 my-1">
+                <span className="text-4xl font-black text-slate-900">{book.compositeScore}</span>
                 <span className="text-xs font-bold text-slate-400">/10</span>
               </div>
-              <div className="text-[10px] sm:text-[11px] text-slate-500">
+              <div className="text-[11px] text-slate-500 mt-1">
                 基于 {book.verdict?.desc}
               </div>
               {book.discrepancyIndex >= 1.0 && (
-                <div className="mt-1.5 sm:mt-2 text-[10px] font-bold text-amber-700 bg-amber-100/80 px-2 py-0.5 rounded-md">
+                <div className="mt-2 text-[10px] font-bold text-amber-700 bg-amber-100/80 px-2 py-1 rounded-md">
                   各平台落差 {book.discrepancyIndex} 分
                 </div>
               )}
