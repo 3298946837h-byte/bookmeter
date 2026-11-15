@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import Navbar from './components/Navbar';
 import StatsBanner from './components/StatsBanner';
 import FilterBar from './components/FilterBar';
@@ -9,7 +9,7 @@ import LeaderboardsView from './components/LeaderboardsView';
 import AnalyticsView from './components/AnalyticsView';
 import ScheduleModal from './components/ScheduleModal';
 import fallbackBooks from './data/staticBooks.json';
-import { searchOpenLibraryLive } from './services/clientCrawler';
+import { searchOpenLibraryLive, fetchInfiniteBooks } from './services/clientCrawler';
 import { Search, BookOpen, AlertTriangle, Sparkles, RefreshCw, Flame, ArrowLeft, CheckCircle2 } from 'lucide-react';
 
 export default function App() {
@@ -32,6 +32,55 @@ export default function App() {
   const [selectedBook, setSelectedBook] = useState(null);
   const [isScheduleOpen, setIsScheduleOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
+
+  // Infinite Scrolling Stream ("滚不完的书单")
+  const [streamOffset, setStreamOffset] = useState(0);
+  const [isLoadingMore, setIsLoadingMore] = useState(false);
+  const sentinelRef = useRef(null);
+
+  const loadMoreBooks = async () => {
+    if (isLoadingMore || activeTab !== 'explore' || activeSearchTerm) return;
+    try {
+      setIsLoadingMore(true);
+      const nextOffset = streamOffset + 16;
+      const newBooks = await fetchInfiniteBooks(selectedCategory, nextOffset, 16);
+      if (newBooks && newBooks.length > 0) {
+        setStreamOffset(nextOffset);
+        setBooks(prev => {
+          const existingIds = new Set(prev.map(b => b.id));
+          const existingTitles = new Set(prev.map(b => b.title.toLowerCase().trim()));
+          const filtered = newBooks.filter(b => !existingIds.has(b.id) && !existingTitles.has(b.title.toLowerCase().trim()));
+          return [...prev, ...filtered];
+        });
+      }
+    } catch (e) {
+      console.warn('Infinite scroll error:', e);
+    } finally {
+      setIsLoadingMore(false);
+    }
+  };
+
+  useEffect(() => {
+    if (activeTab !== 'explore' || activeSearchTerm) return;
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting && !isLoadingMore) {
+          loadMoreBooks();
+        }
+      },
+      { rootMargin: '350px' }
+    );
+
+    const currentSentinel = sentinelRef.current;
+    if (currentSentinel) observer.observe(currentSentinel);
+    return () => {
+      if (currentSentinel) observer.unobserve(currentSentinel);
+    };
+  }, [sentinelRef.current, streamOffset, isLoadingMore, activeTab, activeSearchTerm, selectedCategory]);
+
+  useEffect(() => {
+    setStreamOffset(0);
+  }, [selectedCategory]);
 
   // Fetch initial books & data (with static fallback for GitHub Pages / Vercel)
   const loadData = async () => {
@@ -317,14 +366,33 @@ export default function App() {
                 </button>
               </div>
             ) : (
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {displayBooks.map((book) => (
-                  <BookCard
-                    key={book.id}
-                    book={book}
-                    onOpenDetail={(b) => setSelectedBook(b)}
-                  />
-                ))}
+              <div>
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                  {displayBooks.map((book) => (
+                    <BookCard
+                      key={book.id}
+                      book={book}
+                      onOpenDetail={(b) => setSelectedBook(b)}
+                    />
+                  ))}
+                </div>
+
+                {/* Infinite Stream Sentinel & Dynamic Loader ("滚不完的书单") */}
+                {activeTab === 'explore' && !activeSearchTerm && (
+                  <div ref={sentinelRef} className="py-12 flex flex-col items-center justify-center gap-2">
+                    {isLoadingMore ? (
+                      <div className="flex items-center gap-2 text-xs text-sky-800 font-bold bg-sky-50 px-5 py-2.5 rounded-full border border-sky-200 animate-pulse shadow-sm">
+                        <RefreshCw className="w-4 h-4 animate-spin text-sky-600" />
+                        <span>正在从全球开放图书库动态载入更多图书...</span>
+                      </div>
+                    ) : (
+                      <div className="text-xs text-slate-400 flex items-center gap-2 bg-slate-50 px-4 py-2 rounded-full border border-slate-200/60 shadow-2xs">
+                        <Sparkles className="w-3.5 h-3.5 text-amber-500" />
+                        <span>向下滚动无限加载更多权威书单 · 全网多源真实评星实时呈现</span>
+                      </div>
+                    )}
+                  </div>
+                )}
               </div>
             )}
           </>
