@@ -143,8 +143,9 @@ export default function App() {
   }, [activeTab]);
 
   // Execute global search (Local + Backend API + Client-side OpenLibrary Live Crawler)
-  const handleSearchSubmit = async () => {
-    const query = searchQuery.trim();
+  const handleSearchSubmit = async (overrideQuery) => {
+    const rawQuery = typeof overrideQuery === 'string' ? overrideQuery : searchQuery;
+    const query = rawQuery.trim();
     if (!query) {
       setActiveSearchTerm('');
       loadData();

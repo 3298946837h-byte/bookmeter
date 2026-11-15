@@ -170,7 +170,7 @@ export default function Navbar({
               key={title}
               onClick={() => {
                 setSearchQuery(title);
-                setTimeout(() => onSearchSubmit(title), 50);
+                onSearchSubmit(title);
               }}
               className="px-2 py-0.5 rounded-full bg-slate-100 hover:bg-sky-50 text-slate-700 hover:text-sky-600 border border-slate-200/80 hover:border-sky-300 font-medium whitespace-nowrap transition-colors"
             >
