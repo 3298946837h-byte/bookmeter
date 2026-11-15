@@ -7,10 +7,16 @@ export default function BookDetailModal({ book, onClose }) {
 
   const [reviewFilter, setReviewFilter] = useState('all'); // all, douban, goodreads, amazon
 
-  // DeepSeek AI State
-  const [aiInsight, setAiInsight] = useState(null);
+  // DeepSeek AI State (Defaults to pre-computed rich insight if available)
+  const [aiInsight, setAiInsight] = useState(book.aiInsight || null);
   const [loadingAi, setLoadingAi] = useState(false);
   const [aiError, setAiError] = useState(null);
+
+  useEffect(() => {
+    if (book?.aiInsight) {
+      setAiInsight(book.aiInsight);
+    }
+  }, [book]);
 
   // Q&A State
   const [question, setQuestion] = useState('');
