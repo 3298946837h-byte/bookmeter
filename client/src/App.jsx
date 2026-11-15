@@ -8,6 +8,7 @@ import ComparisonView from './components/ComparisonView';
 import LeaderboardsView from './components/LeaderboardsView';
 import AnalyticsView from './components/AnalyticsView';
 import ScheduleModal from './components/ScheduleModal';
+import fallbackBooks from './data/staticBooks.json';
 import { Search, BookOpen, AlertTriangle, Sparkles, RefreshCw, Flame, ArrowLeft, CheckCircle2 } from 'lucide-react';
 
 export default function App() {
@@ -31,25 +32,42 @@ export default function App() {
   const [isScheduleOpen, setIsScheduleOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
 
-  // Fetch initial books & data
+  // Fetch initial books & data (with static fallback for GitHub Pages / Vercel)
   const loadData = async () => {
     try {
       setIsLoading(true);
       const [booksRes, statsRes, catRes] = await Promise.all([
-        fetch('/api/books'),
-        fetch('/api/stats'),
-        fetch('/api/categories')
+        fetch('/api/books').catch(() => null),
+        fetch('/api/stats').catch(() => null),
+        fetch('/api/categories').catch(() => null)
       ]);
 
-      const booksData = await booksRes.json();
-      const statsData = await statsRes.json();
-      const catData = await catRes.json();
+      if (booksRes && booksRes.ok) {
+        const booksData = await booksRes.json();
+        const statsData = statsRes && statsRes.ok ? await statsRes.json() : null;
+        const catData = catRes && catRes.ok ? await catRes.json() : null;
 
-      setBooks(booksData.data || []);
-      setStats(statsData);
-      setCategories(catData || [{ name: '全部', count: booksData.data?.length || 0 }]);
+        setBooks(booksData.data || fallbackBooks);
+        setStats(statsData);
+        setCategories(catData || [{ name: '全部', count: fallbackBooks.length }]);
+      } else {
+        // Fallback for static hosting environments (e.g. GitHub Pages)
+        setBooks(fallbackBooks);
+        const categoriesMap = { '全部': fallbackBooks.length };
+        fallbackBooks.forEach(b => {
+          categoriesMap[b.category] = (categoriesMap[b.category] || 0) + 1;
+        });
+        setCategories(Object.entries(categoriesMap).map(([name, count]) => ({ name, count })));
+        setStats({
+          totalBooks: fallbackBooks.length,
+          totalReviewsAggregated: 10885880,
+          averageCompositeScore: 8.3,
+          verdictCounts: { masterpiece: 7, recommended: 7, controversial: 2, warning: 3, mediocre: 0 }
+        });
+      }
     } catch (err) {
-      console.error('Failed to load initial data:', err);
+      console.warn('API error, using offline database:', err);
+      setBooks(fallbackBooks);
     } finally {
       setIsLoading(false);
     }
