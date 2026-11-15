@@ -1,8 +1,8 @@
 import React from 'react';
-import { Star, MessageSquare, ThumbsUp, ThumbsDown, AlertCircle, ArrowUpRight, Scale } from 'lucide-react';
+import { Star, MessageSquare, ThumbsUp, ThumbsDown, AlertCircle, ArrowUpRight, Scale, Download } from 'lucide-react';
 import PlatformRatingBadge from './PlatformRatingBadge';
 
-export default function BookCard({ book, onOpenDetail }) {
+export default function BookCard({ book, onOpenDetail, onOpenDownload }) {
   if (!book) return null;
 
   const verdictStyles = {
@@ -165,16 +165,30 @@ export default function BookCard({ book, onOpenDetail }) {
           </span>
         </div>
 
-        <button
-          onClick={(e) => {
-            e.stopPropagation();
-            onOpenDetail(book);
-          }}
-          className="text-sky-600 hover:text-sky-700 font-semibold text-xs flex items-center gap-1 group-hover:underline"
-        >
-          <MessageSquare className="w-3.5 h-3.5" />
-          <span>看书评与分析</span>
-        </button>
+        <div className="flex items-center gap-1.5 sm:gap-2">
+          <button
+            onClick={(e) => {
+              e.stopPropagation();
+              if (onOpenDownload) onOpenDownload(book);
+            }}
+            title="下载全本电子书 (EPUB/TXT/全网源)"
+            className="px-2.5 py-1 text-[11px] font-bold text-sky-700 bg-sky-50 hover:bg-sky-600 hover:text-white rounded-lg border border-sky-200 hover:border-sky-600 transition-all flex items-center gap-1 active:scale-95 cursor-pointer shadow-2xs"
+          >
+            <Download className="w-3 h-3 text-sky-600 group-hover:text-white" />
+            <span>下载全书</span>
+          </button>
+
+          <button
+            onClick={(e) => {
+              e.stopPropagation();
+              onOpenDetail(book);
+            }}
+            className="text-slate-600 hover:text-sky-600 font-semibold text-xs flex items-center gap-1 group-hover:underline cursor-pointer"
+          >
+            <MessageSquare className="w-3.5 h-3.5" />
+            <span className="hidden sm:inline">看书评</span>
+          </button>
+        </div>
       </div>
 
     </div>

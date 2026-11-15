@@ -9,6 +9,7 @@ import LeaderboardsView from './components/LeaderboardsView';
 import AnalyticsView from './components/AnalyticsView';
 import ScheduleModal from './components/ScheduleModal';
 import DownloadModal from './components/DownloadModal';
+import BookDownloadModal from './components/BookDownloadModal';
 import fallbackBooks from './data/staticBooks.json';
 import { searchOpenLibraryLive, fetchInfiniteBooks, getGuaranteedStreamBooks, generateUniversalBookProfile } from './services/clientCrawler';
 import { Search, BookOpen, AlertTriangle, Sparkles, RefreshCw, Flame, ArrowLeft, CheckCircle2, Award, ArrowRight, Star, ExternalLink } from 'lucide-react';
@@ -33,6 +34,7 @@ export default function App() {
   const [selectedBook, setSelectedBook] = useState(null);
   const [isScheduleOpen, setIsScheduleOpen] = useState(false);
   const [isDownloadOpen, setIsDownloadOpen] = useState(false);
+  const [downloadingBook, setDownloadingBook] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
 
   // Infinite Scrolling Stream ("滚不完的书单")
@@ -224,13 +226,16 @@ export default function App() {
         // Fallback for static GitHub Pages deployment
       }
 
-      // 3. If local matches are sparse (<= 1), trigger direct browser live crawler (Open Library)
+      // 3. If local matches are sparse (<= 1), check if non-Chinese query for Open Library
       if (local.length <= 1) {
-        try {
-          const directLiveBooks = await searchOpenLibraryLive(cleanQ || query);
-          live = [...live, ...directLiveBooks];
-        } catch (crawlerErr) {
-          console.warn('Direct crawler error:', crawlerErr);
+        const isChinese = /[\u4e00-\u9fa5]/.test(query);
+        if (!isChinese) {
+          try {
+            const directLiveBooks = await searchOpenLibraryLive(cleanQ || query);
+            live = [...live, ...directLiveBooks];
+          } catch (crawlerErr) {
+            console.warn('Direct crawler error:', crawlerErr);
+          }
         }
       }
 
@@ -574,6 +579,7 @@ export default function App() {
                       key={book.id}
                       book={book}
                       onOpenDetail={(b) => setSelectedBook(b)}
+                      onOpenDownload={(b) => setDownloadingBook(b)}
                     />
                   ))}
                 </div>
@@ -632,6 +638,7 @@ export default function App() {
         <BookDetailModal
           book={selectedBook}
           onClose={() => setSelectedBook(null)}
+          onOpenDownload={(b) => setDownloadingBook(b)}
         />
       )}
 
@@ -649,6 +656,14 @@ export default function App() {
         currentBooks={displayBooks}
         allBooks={books}
       />
+
+      {/* Single Book Ebook Direct Download Modal */}
+      {downloadingBook && (
+        <BookDownloadModal
+          book={downloadingBook}
+          onClose={() => setDownloadingBook(null)}
+        />
+      )}
 
     </div>
   );

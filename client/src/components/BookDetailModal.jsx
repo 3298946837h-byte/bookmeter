@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { X, Star, ThumbsUp, ThumbsDown, MessageSquare, ExternalLink, ShieldCheck, AlertTriangle, BookOpen, User, Calendar, Tag, Scale, Sparkles, Send, Bot, CheckCircle2, UserCheck, UserX, Download, Check } from 'lucide-react';
+import { X, Star, ThumbsUp, ThumbsDown, MessageSquare, ExternalLink, ShieldCheck, AlertTriangle, BookOpen, User, Calendar, Tag, Scale, Sparkles, Send, Bot, CheckCircle2, UserCheck, UserX, Download, Check, FileText } from 'lucide-react';
 import PlatformRatingBadge from './PlatformRatingBadge';
 
-export default function BookDetailModal({ book, onClose }) {
+export default function BookDetailModal({ book, onClose, onOpenDownload }) {
   if (!book) return null;
 
   const [reviewFilter, setReviewFilter] = useState('all'); // all, douban, goodreads, amazon
@@ -144,12 +144,21 @@ ${(book.cons || []).map(item => `- ${item}`).join('\n')}
 
           <div className="flex items-center gap-2">
             <button
+              onClick={() => onOpenDownload && onOpenDownload(book)}
+              title="下载全本电子书 (EPUB/TXT/全网源)"
+              className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-bold text-white bg-gradient-to-r from-sky-500 to-indigo-600 hover:from-sky-600 hover:to-indigo-700 active:scale-95 rounded-lg shadow-xs transition-all cursor-pointer"
+            >
+              <Download className="w-3.5 h-3.5" />
+              <span>下载全本电子书</span>
+            </button>
+
+            <button
               onClick={handleExportSingleBook}
               title="导出此书 Markdown 详细口碑报告"
-              className="flex items-center gap-1.5 px-3 py-1 text-xs font-bold text-sky-200 bg-sky-900/70 hover:bg-sky-800 border border-sky-400/30 rounded-lg transition-colors cursor-pointer"
+              className="hidden sm:flex items-center gap-1.5 px-2.5 py-1.5 text-xs font-medium text-slate-300 hover:text-white bg-slate-800 hover:bg-slate-700 border border-slate-700 rounded-lg transition-colors cursor-pointer"
             >
-              {copiedSingle ? <Check className="w-3.5 h-3.5 text-emerald-400" /> : <Download className="w-3.5 h-3.5 text-sky-300" />}
-              <span>{copiedSingle ? '已保存报告' : '导出本书报告'}</span>
+              {copiedSingle ? <Check className="w-3.5 h-3.5 text-emerald-400" /> : <FileText className="w-3.5 h-3.5" />}
+              <span>{copiedSingle ? '已保存' : '口碑报告'}</span>
             </button>
 
             <button
@@ -234,6 +243,34 @@ ${(book.cons || []).map(item => `- ${item}`).join('\n')}
                 </div>
               )}
             </div>
+          </div>
+
+          {/* Ebook Download & Full Reading Action Bar */}
+          <div className="p-4 rounded-2xl bg-gradient-to-r from-sky-50 via-indigo-50 to-emerald-50 border border-sky-200/80 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 shadow-xs">
+            <div className="flex items-center gap-3">
+              <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-sky-600 to-indigo-600 text-white flex items-center justify-center shrink-0 shadow-md">
+                <BookOpen className="w-5 h-5" />
+              </div>
+              <div>
+                <div className="font-extrabold text-sm text-slate-900 flex items-center gap-2">
+                  想要阅读《{book.title}》全本内容？
+                  <span className="text-[10px] font-bold px-1.5 py-0.2 rounded-full bg-emerald-100 text-emerald-800">
+                    免安装 · 极速直下
+                  </span>
+                </div>
+                <div className="text-xs text-slate-600 mt-0.5">
+                  支持一键打包下载 EPUB / TXT 离线电子书，或直达全网电子书下载源与微信读书
+                </div>
+              </div>
+            </div>
+
+            <button
+              onClick={() => onOpenDownload && onOpenDownload(book)}
+              className="w-full sm:w-auto px-4 py-2 text-xs font-bold text-white bg-slate-900 hover:bg-slate-800 active:scale-95 rounded-xl shadow-md flex items-center justify-center gap-1.5 transition-all shrink-0 cursor-pointer"
+            >
+              <Download className="w-4 h-4 text-sky-400" />
+              <span>下载全本书籍</span>
+            </button>
           </div>
 
           {/* Section 2: DeepSeek AI Insight Special Card */}

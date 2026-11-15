@@ -330,7 +330,7 @@ export async function searchOpenLibraryLive(query) {
   try {
     const q = encodeURIComponent(query.trim());
     const controller = new AbortController();
-    const timeoutId = setTimeout(() => controller.abort(), 3500);
+    const timeoutId = setTimeout(() => controller.abort(), 1200);
     const res = await fetch(`https://openlibrary.org/search.json?q=${q}&limit=12`, {
       signal: controller.signal
     });
