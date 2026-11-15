@@ -48,8 +48,15 @@ export default function BookCard({ book, onOpenDetail }) {
       
       {/* Top Banner / Verdict Ribbon */}
       <div className="flex items-center justify-between px-3.5 sm:px-4 py-2 bg-slate-50/80 border-b border-slate-100 text-[11px] sm:text-xs">
-        <span className="font-semibold text-slate-500">{book.category} · {book.publicationYear}</span>
-        <div className="flex items-center gap-1.5">
+        <div className="flex items-center gap-1.5 min-w-0">
+          <span className="font-semibold text-slate-500 truncate">{book.category} · {book.publicationYear}</span>
+          {book.isLiveCrawled && (
+            <span className="text-[9px] sm:text-[10px] font-black px-1.5 py-0.2 rounded-full bg-gradient-to-r from-sky-500 to-indigo-600 text-white shrink-0 shadow-sm animate-pulse">
+              ⚡ 全网实时新收录
+            </span>
+          )}
+        </div>
+        <div className="flex items-center gap-1.5 shrink-0">
           {book.discrepancyIndex >= 1.0 && (
             <span className="flex items-center gap-1 text-[10px] sm:text-[11px] font-bold px-1.5 sm:px-2 py-0.5 rounded-full bg-amber-100 text-amber-800" title="各平台评分分歧较大">
               <Scale className="w-3 h-3" />

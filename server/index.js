@@ -105,6 +105,27 @@ app.get('/api/search', async (req, res) => {
   });
 });
 
+// Auto-add live crawled book into persistent catalog
+app.post('/api/books/auto-add', (req, res) => {
+  const newBook = req.body;
+  if (!newBook || !newBook.title) return res.status(400).json({ error: 'Missing title' });
+
+  const staticPath = path.join(__dirname, '../client/src/data/staticBooks.json');
+  try {
+    const list = JSON.parse(fs.readFileSync(staticPath, 'utf8'));
+    if (!list.some(b => b.title.toLowerCase() === newBook.title.toLowerCase())) {
+      list.unshift(newBook);
+      fs.writeFileSync(staticPath, JSON.stringify(list, null, 2), 'utf8');
+      books.unshift(newBook);
+      console.log(`[Auto Add] Saved new book to catalog: ${newBook.title}`);
+    }
+    res.json({ success: true, count: list.length });
+  } catch (e) {
+    console.error('Failed to auto-add book:', e.message);
+    res.status(500).json({ error: e.message });
+  }
+});
+
 // 4. Statistics endpoint
 app.get('/api/stats', (req, res) => {
   let totalReviews = 0;
