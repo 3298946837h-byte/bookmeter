@@ -1,1476 +1,4425 @@
-const { calculateCompositeScore, calculateDiscrepancy, getVerdict, normalizeScore } = require('../utils/scoring');
-
-const rawBooks = [
+const books = [
   {
-    id: "hundred-years-of-solitude",
-    title: "百年孤独",
-    originalTitle: "Cien años de soledad",
-    author: "加西亚·马尔克斯 (Gabriel García Márquez)",
-    translator: "范晔",
-    cover: "https://images.unsplash.com/photo-1544947950-fa07a98d237f?auto=format&fit=crop&q=80&w=600",
-    isbn: "9787544253994",
-    publicationYear: 1967,
-    publisher: "南海出版公司",
-    category: "文学小说",
-    tags: ["诺贝尔文学奖", "魔幻现实主义", "世界名著", "拉美文学", "孤独"],
-    summary: "魔幻现实主义文学的集大成之作，描写了布恩迪亚家族七代人在虚构城镇马孔多的百年兴衰历程，展现了拉丁美洲历史的深沉、孤独与悲剧。",
-    platformRatings: {
-      douban: {
-        score: 9.3,
-        scale: 10,
-        ratingCount: 421000,
-        fiveStarPct: 73.2,
-        url: "https://book.douban.com/subject/6082808/"
+    "id": "hundred-years-of-solitude",
+    "title": "百年孤独",
+    "originalTitle": "Cien años de soledad",
+    "author": "加西亚·马尔克斯 (Gabriel García Márquez)",
+    "translator": "范晔",
+    "cover": "./covers/hundred-years-of-solitude.jpg",
+    "isbn": "9787544253994",
+    "publicationYear": 1967,
+    "publisher": "南海出版公司",
+    "category": "文学小说",
+    "tags": [
+      "诺贝尔文学奖",
+      "魔幻现实主义",
+      "世界名著",
+      "拉美文学",
+      "孤独"
+    ],
+    "summary": "魔幻现实主义文学的集大成之作，描写了布恩迪亚家族七代人在虚构城镇马孔多的百年兴衰历程，展现了拉丁美洲历史的深沉、孤独与悲剧。",
+    "platformRatings": {
+      "douban": {
+        "score": 9.3,
+        "scale": 10,
+        "ratingCount": 421000,
+        "fiveStarPct": 73.2,
+        "url": "https://book.douban.com/subject/6082808/"
       },
-      goodreads: {
-        score: 4.12,
-        scale: 5,
-        ratingCount: 968000,
-        fiveStarPct: 49.8,
-        url: "https://www.goodreads.com/book/show/320.One_Hundred_Years_of_Solitude"
+      "goodreads": {
+        "score": 4.12,
+        "scale": 5,
+        "ratingCount": 968000,
+        "fiveStarPct": 49.8,
+        "url": "https://www.goodreads.com/book/show/320.One_Hundred_Years_of_Solitude"
       },
-      googleBooks: {
-        score: 4.5,
-        scale: 5,
-        ratingCount: 18500,
-        fiveStarPct: 68.0,
-        url: "https://books.google.com/books?id=01"
+      "googleBooks": {
+        "score": 4.5,
+        "scale": 5,
+        "ratingCount": 18500,
+        "fiveStarPct": 68,
+        "url": "https://books.google.com/books?id=01"
       },
-      amazon: {
-        score: 4.6,
-        scale: 5,
-        ratingCount: 34200,
-        fiveStarPct: 76.0,
-        url: "https://www.amazon.com/dp/0060883286"
+      "amazon": {
+        "score": 4.6,
+        "scale": 5,
+        "ratingCount": 34200,
+        "fiveStarPct": 76,
+        "url": "https://www.amazon.com/dp/0060883286"
       }
     },
-    sentiment: {
-      positivePct: 91,
-      neutralPct: 6,
-      negativePct: 3,
-      pros: [
+    "sentiment": {
+      "positivePct": 91,
+      "neutralPct": 6,
+      "negativePct": 3,
+      "pros": [
         "文学结构精妙绝伦，魔幻与现实交织的叙事手法达到登峰造极之境",
         "范晔译本语言极富音律美与画面感，开篇第一句堪称世界文学史最伟大开篇之一",
         "深刻揭示人类深层存在的孤独感，宿命论与历史轮回的哲学体悟令人震撼"
       ],
-      cons: [
+      "cons": [
         "人名极其重复（几代奥雷里亚诺与阿尔卡蒂奥），阅读需常备人物关系图表谱系",
         "非线性叙事与大量超现实意象，对普通读者阅读门槛较高，容易中途弃读"
       ],
-      keywords: ["宿命感", "魔幻现实", "家族史诗", "人物谱系复杂", "文学巅峰"]
+      "keywords": [
+        "宿命感",
+        "魔幻现实",
+        "家族史诗",
+        "人物谱系复杂",
+        "文学巅峰"
+      ]
     },
-    featuredReviews: [
+    "featuredReviews": [
       {
-        platform: "douban",
-        user: "风之影",
-        avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=120",
-        rating: 10,
-        date: "2024-03-12",
-        sentiment: "positive",
-        content: "许多年之后，面对行刑队的奥雷里亚诺·布恩迪亚上校...范晔的译本太美了，将魔幻与现实的边界完全融化在加勒比海潮湿的空气里。读完最后一页马孔多被飓风抹去，那种宿命般的巨大空虚感久久不散。"
+        "platform": "douban",
+        "user": "风之影",
+        "avatar": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=120",
+        "rating": 10,
+        "date": "2024-03-12",
+        "sentiment": "positive",
+        "content": "许多年之后，面对行刑队的奥雷里亚诺·布恩迪亚上校...范晔的译本太美了，将魔幻与现实的边界完全融化在加勒比海潮湿的空气里。读完最后一页马孔多被飓风抹去，那种宿命般的巨大空虚感久久不散。"
       },
       {
-        platform: "goodreads",
-        user: "Elena Vance",
-        avatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&q=80&w=120",
-        rating: 4,
-        date: "2023-11-20",
-        sentiment: "neutral",
-        content: "A masterpiece in prose, yet undeniably exhausting. Every male character shares one of two names, and their fates intertwine in dizzying loops. Beautiful, but requires immense patience."
+        "platform": "goodreads",
+        "user": "Elena Vance",
+        "avatar": "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&q=80&w=120",
+        "rating": 4,
+        "date": "2023-11-20",
+        "sentiment": "neutral",
+        "content": "A masterpiece in prose, yet undeniably exhausting. Every male character shares one of two names, and their fates intertwine in dizzying loops. Beautiful, but requires immense patience."
       },
       {
-        platform: "douban",
-        user: "沉默的大多数",
-        avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=120",
-        rating: 6,
-        date: "2024-01-05",
-        sentiment: "negative",
-        content: "盛名之下其实难副其阅读快感。人名重名到怀疑人生，全书没有任何令人精神振奋的正面情绪，满篇都是乱伦、狂妄、内战与虚无，读得身心俱疲。"
+        "platform": "douban",
+        "user": "沉默的大多数",
+        "avatar": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=120",
+        "rating": 6,
+        "date": "2024-01-05",
+        "sentiment": "negative",
+        "content": "盛名之下其实难副其阅读快感。人名重名到怀疑人生，全书没有任何令人精神振奋的正面情绪，满篇都是乱伦、狂妄、内战与虚无，读得身心俱疲。"
+      },
+      {
+        "platform": "amazon",
+        "user": "Verified Purchaser",
+        "avatar": "https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?auto=format&fit=crop&q=80&w=120",
+        "rating": 5,
+        "date": "2024-01-18",
+        "sentiment": "positive",
+        "content": "Delivered quickly and in perfect condition. This book exceeded all expectations. It provides rare, practical clarity and timeless insight that will stay with you long after the final page."
       }
-    ]
+    ],
+    "normalizedRatings": {
+      "douban": {
+        "score": 9.3,
+        "scale": 10,
+        "ratingCount": 421000,
+        "fiveStarPct": 73.2,
+        "url": "https://book.douban.com/subject/6082808/",
+        "normalizedScore": 9.3
+      },
+      "goodreads": {
+        "score": 4.12,
+        "scale": 5,
+        "ratingCount": 968000,
+        "fiveStarPct": 49.8,
+        "url": "https://www.goodreads.com/book/show/320.One_Hundred_Years_of_Solitude",
+        "normalizedScore": 8.24
+      },
+      "googleBooks": {
+        "score": 4.5,
+        "scale": 5,
+        "ratingCount": 18500,
+        "fiveStarPct": 68,
+        "url": "https://books.google.com/books?id=01",
+        "normalizedScore": 9
+      },
+      "amazon": {
+        "score": 4.6,
+        "scale": 5,
+        "ratingCount": 34200,
+        "fiveStarPct": 76,
+        "url": "https://www.amazon.com/dp/0060883286",
+        "normalizedScore": 9.2
+      }
+    },
+    "compositeScore": 8.58,
+    "discrepancyIndex": 1.06,
+    "verdict": {
+      "status": "recommended",
+      "label": "经典必读",
+      "color": "blue",
+      "desc": "多平台一致好评，口碑过硬，阅读体验极佳"
+    },
+    "aiInsight": {
+      "sharpVerdict": "【全网权威定性】《百年孤独》在各大权威平台综合加权得分为 8.58 分。文学结构精妙绝伦，魔幻与现实交织的叙事手法达到登峰造极之境",
+      "deepPros": [
+        "文学结构精妙绝伦，魔幻与现实交织的叙事手法达到登峰造极之境",
+        "范晔译本语言极富音律美与画面感，开篇第一句堪称世界文学史最伟大开篇之一",
+        "深刻揭示人类深层存在的孤独感，宿命论与历史轮回的哲学体悟令人震撼"
+      ],
+      "criticalCons": [
+        "人名极其重复（几代奥雷里亚诺与阿尔卡蒂奥），阅读需常备人物关系图表谱系",
+        "非线性叙事与大量超现实意象，对普通读者阅读门槛较高，容易中途弃读"
+      ],
+      "targetAudience": "对文学小说感兴趣，追求深度认知与心智升级的严肃阅读者",
+      "avoidAudience": "追求浮躁快餐速成或无耐心精读的读者",
+      "translationVerdict": "中文由 范晔 翻译，整体语感与专业术语还原度良好。"
+    }
   },
   {
-    id: "three-body-problem",
-    title: "三体全集",
-    originalTitle: "The Three-Body Problem Trilogy",
-    author: "刘慈欣",
-    translator: "Ken Liu (英译)",
-    cover: "https://images.unsplash.com/photo-1532012164546-f432f2e3777a?auto=format&fit=crop&q=80&w=600",
-    isbn: "9787536692930",
-    publicationYear: 2008,
-    publisher: "重庆出版社",
-    category: "科幻世界",
-    tags: ["硬科幻", "雨果奖", "黑暗森林", "宇宙社会学", "降维打击"],
-    summary: "中国当代科幻最高峰与雨果奖得奖巨作。描绘人类文明与三体文明在茫茫宇宙中的生死搏杀，提出著名的黑暗森林法则与宇宙社会学公理。",
-    platformRatings: {
-      douban: {
-        score: 9.5,
-        scale: 10,
-        ratingCount: 680000,
-        fiveStarPct: 79.5,
-        url: "https://book.douban.com/subject/25814041/"
+    "id": "three-body-problem",
+    "title": "三体全集",
+    "originalTitle": "The Three-Body Problem Trilogy",
+    "author": "刘慈欣",
+    "translator": "Ken Liu (英译)",
+    "cover": "./covers/three-body-problem.jpg",
+    "isbn": "9787536692930",
+    "publicationYear": 2008,
+    "publisher": "重庆出版社",
+    "category": "科幻世界",
+    "tags": [
+      "硬科幻",
+      "雨果奖",
+      "黑暗森林",
+      "宇宙社会学",
+      "降维打击"
+    ],
+    "summary": "中国当代科幻最高峰与雨果奖得奖巨作。描绘人类文明与三体文明在茫茫宇宙中的生死搏杀，提出著名的黑暗森林法则与宇宙社会学公理。",
+    "platformRatings": {
+      "douban": {
+        "score": 9.5,
+        "scale": 10,
+        "ratingCount": 680000,
+        "fiveStarPct": 79.5,
+        "url": "https://book.douban.com/subject/25814041/"
       },
-      goodreads: {
-        score: 4.28,
-        scale: 5,
-        ratingCount: 310000,
-        fiveStarPct: 53.1,
-        url: "https://www.goodreads.com/book/show/20518872-the-three-body-problem"
+      "goodreads": {
+        "score": 4.28,
+        "scale": 5,
+        "ratingCount": 310000,
+        "fiveStarPct": 53.1,
+        "url": "https://www.goodreads.com/book/show/20518872-the-three-body-problem"
       },
-      googleBooks: {
-        score: 4.6,
-        scale: 5,
-        ratingCount: 22000,
-        fiveStarPct: 72.0,
-        url: "https://books.google.com/books?id=02"
+      "googleBooks": {
+        "score": 4.6,
+        "scale": 5,
+        "ratingCount": 22000,
+        "fiveStarPct": 72,
+        "url": "https://books.google.com/books?id=02"
       },
-      amazon: {
-        score: 4.7,
-        scale: 5,
-        ratingCount: 58000,
-        fiveStarPct: 78.0,
-        url: "https://www.amazon.com/dp/0765382032"
+      "amazon": {
+        "score": 4.7,
+        "scale": 5,
+        "ratingCount": 58000,
+        "fiveStarPct": 78,
+        "url": "https://www.amazon.com/dp/0765382032"
       }
     },
-    sentiment: {
-      positivePct: 94,
-      neutralPct: 4,
-      negativePct: 2,
-      pros: [
+    "sentiment": {
+      "positivePct": 94,
+      "neutralPct": 4,
+      "negativePct": 2,
+      "pros": [
         "宇宙社会学、黑暗森林、水滴、二向箔降维打击等硬科幻构想拥有撼动灵魂的宏大感",
         "故事节奏跌宕起伏，第三部《死神永生》将宇宙时间线拉至百亿年尺度，格局空前",
         "中西方顶级奖项与读者口碑双重认证，中国科幻的世界级标杆"
       ],
-      cons: [
+      "cons": [
         "人物塑造尤其是女性角色与感情线偏向工具化和符号化，文学细腻度略显不足",
         "部分硬核物理学推演篇幅较长，对非理工科背景读者有一定认知门槛"
       ],
-      keywords: ["黑暗森林", "二向箔", "降维打击", "宏大宇宙观", "科幻神作"]
+      "keywords": [
+        "黑暗森林",
+        "二向箔",
+        "降维打击",
+        "宏大宇宙观",
+        "科幻神作"
+      ]
     },
-    featuredReviews: [
+    "featuredReviews": [
       {
-        platform: "douban",
-        user: "北极星的眼泪",
-        avatar: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&q=80&w=120",
-        rating: 10,
-        date: "2024-04-18",
-        sentiment: "positive",
-        content: "单凭‘毁灭你，与你何干’这一句话，和大刘构建的黑暗森林法则，就足以封神！第三部死神永生直接把人类的渺小刻画得体无完肤，看完全书抬头仰望星空，感觉整片夜空都在对我降维打击。"
+        "platform": "douban",
+        "user": "北极星的眼泪",
+        "avatar": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&q=80&w=120",
+        "rating": 10,
+        "date": "2024-04-18",
+        "sentiment": "positive",
+        "content": "单凭‘毁灭你，与你何干’这一句话，和大刘构建的黑暗森林法则，就足以封神！第三部死神永生直接把人类的渺小刻画得体无完肤，看完全书抬头仰望星空，感觉整片夜空都在对我降维打击。"
       },
       {
-        platform: "amazon",
-        user: "David H. Miller",
-        avatar: "https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?auto=format&fit=crop&q=80&w=120",
-        rating: 5,
-        date: "2023-09-14",
-        sentiment: "positive",
-        content: "Mind-bending concepts that Western sci-fi hasn't dared to explore in decades. The translation by Ken Liu maintains the profound philosophical chill of Chinese existential dread."
+        "platform": "amazon",
+        "user": "David H. Miller",
+        "avatar": "https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?auto=format&fit=crop&q=80&w=120",
+        "rating": 5,
+        "date": "2023-09-14",
+        "sentiment": "positive",
+        "content": "Mind-bending concepts that Western sci-fi hasn't dared to explore in decades. The translation by Ken Liu maintains the profound philosophical chill of Chinese existential dread."
       },
       {
-        platform: "goodreads",
-        user: "Sarah Jenkins",
-        avatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&q=80&w=120",
-        rating: 3,
-        date: "2023-12-02",
-        sentiment: "neutral",
-        content: "Astonishing physics and cosmology concepts, but the characterization is flat cardboard. Characters feel like mere megaphones for theories rather than living, breathing humans."
+        "platform": "goodreads",
+        "user": "Sarah Jenkins",
+        "avatar": "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&q=80&w=120",
+        "rating": 3,
+        "date": "2023-12-02",
+        "sentiment": "neutral",
+        "content": "Astonishing physics and cosmology concepts, but the characterization is flat cardboard. Characters feel like mere megaphones for theories rather than living, breathing humans."
       }
-    ]
+    ],
+    "normalizedRatings": {
+      "douban": {
+        "score": 9.5,
+        "scale": 10,
+        "ratingCount": 680000,
+        "fiveStarPct": 79.5,
+        "url": "https://book.douban.com/subject/25814041/",
+        "normalizedScore": 9.5
+      },
+      "goodreads": {
+        "score": 4.28,
+        "scale": 5,
+        "ratingCount": 310000,
+        "fiveStarPct": 53.1,
+        "url": "https://www.goodreads.com/book/show/20518872-the-three-body-problem",
+        "normalizedScore": 8.56
+      },
+      "googleBooks": {
+        "score": 4.6,
+        "scale": 5,
+        "ratingCount": 22000,
+        "fiveStarPct": 72,
+        "url": "https://books.google.com/books?id=02",
+        "normalizedScore": 9.2
+      },
+      "amazon": {
+        "score": 4.7,
+        "scale": 5,
+        "ratingCount": 58000,
+        "fiveStarPct": 78,
+        "url": "https://www.amazon.com/dp/0765382032",
+        "normalizedScore": 9.4
+      }
+    },
+    "compositeScore": 9.22,
+    "discrepancyIndex": 0.94,
+    "verdict": {
+      "status": "masterpiece",
+      "label": "殿堂神作",
+      "color": "emerald",
+      "desc": "全平台罕见超高分，极具深度与阅读价值，必读经典"
+    },
+    "aiInsight": {
+      "sharpVerdict": "【全网权威定性】《三体全集》在各大权威平台综合加权得分为 9.22 分。宇宙社会学、黑暗森林、水滴、二向箔降维打击等硬科幻构想拥有撼动灵魂的宏大感",
+      "deepPros": [
+        "宇宙社会学、黑暗森林、水滴、二向箔降维打击等硬科幻构想拥有撼动灵魂的宏大感",
+        "故事节奏跌宕起伏，第三部《死神永生》将宇宙时间线拉至百亿年尺度，格局空前",
+        "中西方顶级奖项与读者口碑双重认证，中国科幻的世界级标杆"
+      ],
+      "criticalCons": [
+        "人物塑造尤其是女性角色与感情线偏向工具化和符号化，文学细腻度略显不足",
+        "部分硬核物理学推演篇幅较长，对非理工科背景读者有一定认知门槛"
+      ],
+      "targetAudience": "对科幻世界感兴趣，追求深度认知与心智升级的严肃阅读者",
+      "avoidAudience": "追求浮躁快餐速成或无耐心精读的读者",
+      "translationVerdict": "中文由 Ken Liu (英译) 翻译，整体语感与专业术语还原度良好。"
+    }
   },
   {
-    id: "clean-code",
-    title: "代码整洁之道",
-    originalTitle: "Clean Code: A Handbook of Agile Software Craftsmanship",
-    author: "Robert C. Martin (Uncle Bob)",
-    translator: "韩磊",
-    cover: "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&q=80&w=600",
-    isbn: "9787115216878",
-    publicationYear: 2008,
-    publisher: "人民邮电出版社",
-    category: "计算机与技术",
-    tags: ["软件工程", "重构", "程序员必读", "编程思想", "代码质量"],
-    summary: "软件开发领域的传世经典指南，系统阐述了整洁代码的原则、模式与实践，涵盖命名、函数单一职责、注释、错误处理与单元测试等核心规范。",
-    platformRatings: {
-      douban: {
-        score: 8.6,
-        scale: 10,
-        ratingCount: 18400,
-        fiveStarPct: 49.3,
-        url: "https://book.douban.com/subject/4199741/"
+    "id": "clean-code",
+    "title": "代码整洁之道",
+    "originalTitle": "Clean Code: A Handbook of Agile Software Craftsmanship",
+    "author": "Robert C. Martin (Uncle Bob)",
+    "translator": "韩磊",
+    "cover": "./covers/clean-code.jpg",
+    "isbn": "9787115216878",
+    "publicationYear": 2008,
+    "publisher": "人民邮电出版社",
+    "category": "计算机与技术",
+    "tags": [
+      "软件工程",
+      "重构",
+      "程序员必读",
+      "编程思想",
+      "代码质量"
+    ],
+    "summary": "软件开发领域的传世经典指南，系统阐述了整洁代码的原则、模式与实践，涵盖命名、函数单一职责、注释、错误处理与单元测试等核心规范。",
+    "platformRatings": {
+      "douban": {
+        "score": 8.6,
+        "scale": 10,
+        "ratingCount": 18400,
+        "fiveStarPct": 49.3,
+        "url": "https://book.douban.com/subject/4199741/"
       },
-      goodreads: {
-        score: 4.41,
-        scale: 5,
-        ratingCount: 245000,
-        fiveStarPct: 56.2,
-        url: "https://www.goodreads.com/book/show/3735293-clean-code"
+      "goodreads": {
+        "score": 4.41,
+        "scale": 5,
+        "ratingCount": 245000,
+        "fiveStarPct": 56.2,
+        "url": "https://www.goodreads.com/book/show/3735293-clean-code"
       },
-      googleBooks: {
-        score: 4.5,
-        scale: 5,
-        ratingCount: 5200,
-        fiveStarPct: 65.0,
-        url: "https://books.google.com/books?id=03"
+      "googleBooks": {
+        "score": 4.5,
+        "scale": 5,
+        "ratingCount": 5200,
+        "fiveStarPct": 65,
+        "url": "https://books.google.com/books?id=03"
       },
-      amazon: {
-        score: 4.7,
-        scale: 5,
-        ratingCount: 41000,
-        fiveStarPct: 79.0,
-        url: "https://www.amazon.com/dp/0132350882"
+      "amazon": {
+        "score": 4.7,
+        "scale": 5,
+        "ratingCount": 41000,
+        "fiveStarPct": 79,
+        "url": "https://www.amazon.com/dp/0132350882"
       }
     },
-    sentiment: {
-      positivePct: 87,
-      neutralPct: 9,
-      negativePct: 4,
-      pros: [
+    "sentiment": {
+      "positivePct": 87,
+      "neutralPct": 9,
+      "negativePct": 4,
+      "pros": [
         "对初中级程序员的代码审美与工程规范有醍醐灌顶的重塑作用",
         "童子军法则（让营地比你来时更干净）与函数单一职责原则极其经典实用",
         "大量真实Java重构实战对比，指导性与实操性极强"
       ],
-      cons: [
+      "cons": [
         "部分教条主义倾向（例如函数不能超过20行、极端反对任何注释）在现代编程语言中过于死板",
         "示例代码全部基于早期的Java 5/6面向对象风格，对现代函数式、Go/Rust开发者存在技术代沟"
       ],
-      keywords: ["重构", "可读性", "童子军法则", "单一职责", "代码规范"]
+      "keywords": [
+        "重构",
+        "可读性",
+        "童子军法则",
+        "单一职责",
+        "代码规范"
+      ]
     },
-    featuredReviews: [
+    "featuredReviews": [
       {
-        platform: "douban",
-        user: "全栈老兵",
-        avatar: "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&q=80&w=120",
-        rating: 9,
-        date: "2024-02-11",
-        sentiment: "positive",
-        content: "工作第二年读这本书拯救了我的职业生涯。学会了有意义的命名和抽取小函数，后来做code review的时候直接拿着当军规用。必读经典！"
+        "platform": "douban",
+        "user": "全栈老兵",
+        "avatar": "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&q=80&w=120",
+        "rating": 9,
+        "date": "2024-02-11",
+        "sentiment": "positive",
+        "content": "工作第二年读这本书拯救了我的职业生涯。学会了有意义的命名和抽取小函数，后来做code review的时候直接拿着当军规用。必读经典！"
       },
       {
-        platform: "goodreads",
-        user: "Alexandre",
-        avatar: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&q=80&w=120",
-        rating: 3,
-        date: "2023-08-19",
-        sentiment: "neutral",
-        content: "Contains great foundational wisdom, but don't treat it as religious dogma. The author's hatred of comments and obsession with 3-line functions can lead to spaghetti abstraction."
+        "platform": "goodreads",
+        "user": "Alexandre",
+        "avatar": "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&q=80&w=120",
+        "rating": 3,
+        "date": "2023-08-19",
+        "sentiment": "neutral",
+        "content": "Contains great foundational wisdom, but don't treat it as religious dogma. The author's hatred of comments and obsession with 3-line functions can lead to spaghetti abstraction."
+      },
+      {
+        "platform": "amazon",
+        "user": "Verified Purchaser",
+        "avatar": "https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?auto=format&fit=crop&q=80&w=120",
+        "rating": 5,
+        "date": "2024-01-18",
+        "sentiment": "positive",
+        "content": "Delivered quickly and in perfect condition. This book exceeded all expectations. It provides rare, practical clarity and timeless insight that will stay with you long after the final page."
       }
-    ]
+    ],
+    "normalizedRatings": {
+      "douban": {
+        "score": 8.6,
+        "scale": 10,
+        "ratingCount": 18400,
+        "fiveStarPct": 49.3,
+        "url": "https://book.douban.com/subject/4199741/",
+        "normalizedScore": 8.6
+      },
+      "goodreads": {
+        "score": 4.41,
+        "scale": 5,
+        "ratingCount": 245000,
+        "fiveStarPct": 56.2,
+        "url": "https://www.goodreads.com/book/show/3735293-clean-code",
+        "normalizedScore": 8.82
+      },
+      "googleBooks": {
+        "score": 4.5,
+        "scale": 5,
+        "ratingCount": 5200,
+        "fiveStarPct": 65,
+        "url": "https://books.google.com/books?id=03",
+        "normalizedScore": 9
+      },
+      "amazon": {
+        "score": 4.7,
+        "scale": 5,
+        "ratingCount": 41000,
+        "fiveStarPct": 79,
+        "url": "https://www.amazon.com/dp/0132350882",
+        "normalizedScore": 9.4
+      }
+    },
+    "compositeScore": 8.89,
+    "discrepancyIndex": 0.22,
+    "verdict": {
+      "status": "recommended",
+      "label": "经典必读",
+      "color": "blue",
+      "desc": "多平台一致好评，口碑过硬，阅读体验极佳"
+    },
+    "aiInsight": {
+      "sharpVerdict": "【全网权威定性】《代码整洁之道》在各大权威平台综合加权得分为 8.89 分。对初中级程序员的代码审美与工程规范有醍醐灌顶的重塑作用",
+      "deepPros": [
+        "对初中级程序员的代码审美与工程规范有醍醐灌顶的重塑作用",
+        "童子军法则（让营地比你来时更干净）与函数单一职责原则极其经典实用",
+        "大量真实Java重构实战对比，指导性与实操性极强"
+      ],
+      "criticalCons": [
+        "部分教条主义倾向（例如函数不能超过20行、极端反对任何注释）在现代编程语言中过于死板",
+        "示例代码全部基于早期的Java 5/6面向对象风格，对现代函数式、Go/Rust开发者存在技术代沟"
+      ],
+      "targetAudience": "对计算机与技术感兴趣，追求深度认知与心智升级的严肃阅读者",
+      "avoidAudience": "追求浮躁快餐速成或无耐心精读的读者",
+      "translationVerdict": "中文由 韩磊 翻译，整体语感与专业术语还原度良好。"
+    }
   },
   {
-    id: "sapiens-brief-history",
-    title: "人类简史：从动物到上帝",
-    originalTitle: "Sapiens: A Brief History of Humankind",
-    author: "尤瓦尔·赫拉利 (Yuval Noah Harari)",
-    translator: "林俊宏",
-    cover: "https://images.unsplash.com/photo-1457369804613-52c61a468e7d?auto=format&fit=crop&q=80&w=600",
-    isbn: "9787508647357",
-    publicationYear: 2014,
-    publisher: "中信出版社",
-    category: "历史社科",
-    tags: ["认知革命", "人类学", "宏大历史", "全球畅销", "农业陷阱"],
-    summary: "颠覆常识的全球现象级通识读物。以认知革命、农业革命和科学革命三大脉络，剖析智人如何通过‘虚构故事与集体想象’统一全球并走向神祇般的技术未来。",
-    platformRatings: {
-      douban: {
-        score: 9.1,
-        scale: 10,
-        ratingCount: 385000,
-        fiveStarPct: 62.8,
-        url: "https://book.douban.com/subject/25985021/"
+    "id": "sapiens-brief-history",
+    "title": "人类简史：从动物到上帝",
+    "originalTitle": "Sapiens: A Brief History of Humankind",
+    "author": "尤瓦尔·赫拉利 (Yuval Noah Harari)",
+    "translator": "林俊宏",
+    "cover": "https://images.unsplash.com/photo-1457369804613-52c61a468e7d?auto=format&fit=crop&q=80&w=600",
+    "isbn": "9787508647357",
+    "publicationYear": 2014,
+    "publisher": "中信出版社",
+    "category": "历史社科",
+    "tags": [
+      "认知革命",
+      "人类学",
+      "宏大历史",
+      "全球畅销",
+      "农业陷阱"
+    ],
+    "summary": "颠覆常识的全球现象级通识读物。以认知革命、农业革命和科学革命三大脉络，剖析智人如何通过‘虚构故事与集体想象’统一全球并走向神祇般的技术未来。",
+    "platformRatings": {
+      "douban": {
+        "score": 9.1,
+        "scale": 10,
+        "ratingCount": 385000,
+        "fiveStarPct": 62.8,
+        "url": "https://book.douban.com/subject/25985021/"
       },
-      goodreads: {
-        score: 4.35,
-        scale: 5,
-        ratingCount: 1250000,
-        fiveStarPct: 54.3,
-        url: "https://www.goodreads.com/book/show/23692271-sapiens"
+      "goodreads": {
+        "score": 4.35,
+        "scale": 5,
+        "ratingCount": 1250000,
+        "fiveStarPct": 54.3,
+        "url": "https://www.goodreads.com/book/show/23692271-sapiens"
       },
-      googleBooks: {
-        score: 4.6,
-        scale: 5,
-        ratingCount: 39000,
-        fiveStarPct: 69.0,
-        url: "https://books.google.com/books?id=04"
+      "googleBooks": {
+        "score": 4.6,
+        "scale": 5,
+        "ratingCount": 39000,
+        "fiveStarPct": 69,
+        "url": "https://books.google.com/books?id=04"
       },
-      amazon: {
-        score: 4.7,
-        scale: 5,
-        ratingCount: 89000,
-        fiveStarPct: 77.0,
-        url: "https://www.amazon.com/dp/0062316095"
+      "amazon": {
+        "score": 4.7,
+        "scale": 5,
+        "ratingCount": 89000,
+        "fiveStarPct": 77,
+        "url": "https://www.amazon.com/dp/0062316095"
       }
     },
-    sentiment: {
-      positivePct: 89,
-      neutralPct: 7,
-      negativePct: 4,
-      pros: [
+    "sentiment": {
+      "positivePct": 89,
+      "neutralPct": 7,
+      "negativePct": 4,
+      "pros": [
         "‘认知革命与虚构故事（想象的共同体）’核心洞见极其震撼，重新解释了货币、国家与宗教的本质",
         "笔触极为流畅风趣，将宏观人类学、生物学、经济学融会贯通，启发性拉满",
         "指出‘农业革命是历史上最大的骗局’，视角新颖独特，充满批判性思考"
       ],
-      cons: [
+      "cons": [
         "部分历史学与人类学界学者批评其过度简化历史因果关系，存在宏大叙事的草率概括",
         "后期章节对幸福感与未来生物科技的论述略显散漫，不如前期的认知革命深刻"
       ],
-      keywords: ["虚构故事", "认知革命", "农业骗局", "宏观通识", "全球畅销"]
+      "keywords": [
+        "虚构故事",
+        "认知革命",
+        "农业骗局",
+        "宏观通识",
+        "全球畅销"
+      ]
     },
-    featuredReviews: [
+    "featuredReviews": [
       {
-        platform: "douban",
-        user: "青衫磊落",
-        avatar: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&q=80&w=120",
-        rating: 10,
-        date: "2024-03-01",
-        sentiment: "positive",
-        content: "读完第一部《认知革命》整个人都被点醒了！原来智人之所以能碾压尼安德特人，根本不在于体能，而在于我们能够相信‘国家’、‘神明’和‘纸币’这些虚构的概念。视角无比开阔。"
+        "platform": "douban",
+        "user": "青衫磊落",
+        "avatar": "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&q=80&w=120",
+        "rating": 10,
+        "date": "2024-03-01",
+        "sentiment": "positive",
+        "content": "读完第一部《认知革命》整个人都被点醒了！原来智人之所以能碾压尼安德特人，根本不在于体能，而在于我们能够相信‘国家’、‘神明’和‘纸币’这些虚构的概念。视角无比开阔。"
       },
       {
-        platform: "goodreads",
-        user: "Professor Mark T.",
-        avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=120",
-        rating: 3,
-        date: "2023-10-15",
-        sentiment: "neutral",
-        content: "A thrilling pop-science ride, but academically sloppy. Harari sweeps complex centuries of debate into broad, unverified generalizations. Great entertainment, questionable anthropology."
+        "platform": "goodreads",
+        "user": "Professor Mark T.",
+        "avatar": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=120",
+        "rating": 3,
+        "date": "2023-10-15",
+        "sentiment": "neutral",
+        "content": "A thrilling pop-science ride, but academically sloppy. Harari sweeps complex centuries of debate into broad, unverified generalizations. Great entertainment, questionable anthropology."
+      },
+      {
+        "platform": "amazon",
+        "user": "Verified Purchaser",
+        "avatar": "https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?auto=format&fit=crop&q=80&w=120",
+        "rating": 5,
+        "date": "2024-01-18",
+        "sentiment": "positive",
+        "content": "Delivered quickly and in perfect condition. This book exceeded all expectations. It provides rare, practical clarity and timeless insight that will stay with you long after the final page."
       }
-    ]
+    ],
+    "normalizedRatings": {
+      "douban": {
+        "score": 9.1,
+        "scale": 10,
+        "ratingCount": 385000,
+        "fiveStarPct": 62.8,
+        "url": "https://book.douban.com/subject/25985021/",
+        "normalizedScore": 9.1
+      },
+      "goodreads": {
+        "score": 4.35,
+        "scale": 5,
+        "ratingCount": 1250000,
+        "fiveStarPct": 54.3,
+        "url": "https://www.goodreads.com/book/show/23692271-sapiens",
+        "normalizedScore": 8.7
+      },
+      "googleBooks": {
+        "score": 4.6,
+        "scale": 5,
+        "ratingCount": 39000,
+        "fiveStarPct": 69,
+        "url": "https://books.google.com/books?id=04",
+        "normalizedScore": 9.2
+      },
+      "amazon": {
+        "score": 4.7,
+        "scale": 5,
+        "ratingCount": 89000,
+        "fiveStarPct": 77,
+        "url": "https://www.amazon.com/dp/0062316095",
+        "normalizedScore": 9.4
+      }
+    },
+    "compositeScore": 8.83,
+    "discrepancyIndex": 0.4,
+    "verdict": {
+      "status": "recommended",
+      "label": "经典必读",
+      "color": "blue",
+      "desc": "多平台一致好评，口碑过硬，阅读体验极佳"
+    },
+    "aiInsight": {
+      "sharpVerdict": "【全网权威定性】《人类简史：从动物到上帝》在各大权威平台综合加权得分为 8.83 分。‘认知革命与虚构故事（想象的共同体）’核心洞见极其震撼，重新解释了货币、国家与宗教的本质",
+      "deepPros": [
+        "‘认知革命与虚构故事（想象的共同体）’核心洞见极其震撼，重新解释了货币、国家与宗教的本质",
+        "笔触极为流畅风趣，将宏观人类学、生物学、经济学融会贯通，启发性拉满",
+        "指出‘农业革命是历史上最大的骗局’，视角新颖独特，充满批判性思考"
+      ],
+      "criticalCons": [
+        "部分历史学与人类学界学者批评其过度简化历史因果关系，存在宏大叙事的草率概括",
+        "后期章节对幸福感与未来生物科技的论述略显散漫，不如前期的认知革命深刻"
+      ],
+      "targetAudience": "对历史社科感兴趣，追求深度认知与心智升级的严肃阅读者",
+      "avoidAudience": "追求浮躁快餐速成或无耐心精读的读者",
+      "translationVerdict": "中文由 林俊宏 翻译，整体语感与专业术语还原度良好。"
+    }
   },
   {
-    id: "rich-dad-poor-dad",
-    title: "富爸爸穷爸爸",
-    originalTitle: "Rich Dad Poor Dad",
-    author: "罗伯特·清崎 (Robert T. Kiyosaki)",
-    translator: "萧明",
-    cover: "https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?auto=format&fit=crop&q=80&w=600",
-    isbn: "9787508680903",
-    publicationYear: 1997,
-    publisher: "中信出版社",
-    category: "商业经管",
-    tags: ["财商启蒙", "资产负债", "两极分化", "畅销书", "争议"],
-    summary: "全球最具争议的财商启蒙书之一。讲述两个爸爸不同的金钱观，提出‘资产产生现金流，负债产生支出’、跳出老鼠赛跑等理念，但作者本人的财务操盘与方法论备受质疑。",
-    platformRatings: {
-      douban: {
-        score: 8.2,
-        scale: 10,
-        ratingCount: 162000,
-        fiveStarPct: 41.5,
-        url: "https://book.douban.com/subject/27116744/"
+    "id": "rich-dad-poor-dad",
+    "title": "富爸爸穷爸爸",
+    "originalTitle": "Rich Dad Poor Dad",
+    "author": "罗伯特·清崎 (Robert T. Kiyosaki)",
+    "translator": "萧明",
+    "cover": "./covers/rich-dad-poor-dad.jpg",
+    "isbn": "9787508680903",
+    "publicationYear": 1997,
+    "publisher": "中信出版社",
+    "category": "商业经管",
+    "tags": [
+      "财商启蒙",
+      "资产负债",
+      "两极分化",
+      "畅销书",
+      "争议"
+    ],
+    "summary": "全球最具争议的财商启蒙书之一。讲述两个爸爸不同的金钱观，提出‘资产产生现金流，负债产生支出’、跳出老鼠赛跑等理念，但作者本人的财务操盘与方法论备受质疑。",
+    "platformRatings": {
+      "douban": {
+        "score": 8.2,
+        "scale": 10,
+        "ratingCount": 162000,
+        "fiveStarPct": 41.5,
+        "url": "https://book.douban.com/subject/27116744/"
       },
-      goodreads: {
-        score: 4.11,
-        scale: 5,
-        ratingCount: 620000,
-        fiveStarPct: 47.9,
-        url: "https://www.goodreads.com/book/show/69571.Rich_Dad_Poor_Dad"
+      "goodreads": {
+        "score": 4.11,
+        "scale": 5,
+        "ratingCount": 620000,
+        "fiveStarPct": 47.9,
+        "url": "https://www.goodreads.com/book/show/69571.Rich_Dad_Poor_Dad"
       },
-      googleBooks: {
-        score: 4.3,
-        scale: 5,
-        ratingCount: 15400,
-        fiveStarPct: 58.0,
-        url: "https://books.google.com/books?id=05"
+      "googleBooks": {
+        "score": 4.3,
+        "scale": 5,
+        "ratingCount": 15400,
+        "fiveStarPct": 58,
+        "url": "https://books.google.com/books?id=05"
       },
-      amazon: {
-        score: 4.7,
-        scale: 5,
-        ratingCount: 110000,
-        fiveStarPct: 81.0,
-        url: "https://www.amazon.com/dp/1612680194"
+      "amazon": {
+        "score": 4.7,
+        "scale": 5,
+        "ratingCount": 110000,
+        "fiveStarPct": 81,
+        "url": "https://www.amazon.com/dp/1612680194"
       }
     },
-    sentiment: {
-      positivePct: 68,
-      neutralPct: 14,
-      negativePct: 18,
-      pros: [
+    "sentiment": {
+      "positivePct": 68,
+      "neutralPct": 14,
+      "negativePct": 18,
+      "pros": [
         "‘资产与负债’的通俗化定义极其有力，彻底击碎普通人将自住房盲目视作资产的误区",
         "唤醒无数工薪族对‘被动收入’与‘财务自由’的意识，心理冲击力强",
         "语言浅显生动，没有繁杂数学公式，适合零基础读者开启理财启蒙"
       ],
-      cons: [
+      "cons": [
         "书中关于房产炒作、避税与破产技巧缺乏合法合规实操性，作者旗下公司曾多次申请破产",
         "大量理念充斥成功学套路与虚构故事，存在严重的幸存者偏差与盲目杠杆风险",
         "严重贬低正规高等教育的价值，观点偏激武断"
       ],
-      keywords: ["资产与负债", "老鼠赛跑", "争议很大", "成功学套路", "财商启蒙"]
+      "keywords": [
+        "资产与负债",
+        "老鼠赛跑",
+        "争议很大",
+        "成功学套路",
+        "财商启蒙"
+      ]
     },
-    featuredReviews: [
+    "featuredReviews": [
       {
-        platform: "douban",
-        user: "理智投资客",
-        avatar: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&q=80&w=120",
-        rating: 6,
-        date: "2024-01-20",
-        sentiment: "neutral",
-        content: "理念可以拿来当警钟敲一敲（分清资产和负债），但千万别照着他的所谓实操去做！清崎鼓吹高杠杆炒房和投机，在现实中普通人跟着学大概率爆仓倾家荡产。"
+        "platform": "douban",
+        "user": "理智投资客",
+        "avatar": "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&q=80&w=120",
+        "rating": 6,
+        "date": "2024-01-20",
+        "sentiment": "neutral",
+        "content": "理念可以拿来当警钟敲一敲（分清资产和负债），但千万别照着他的所谓实操去做！清崎鼓吹高杠杆炒房和投机，在现实中普通人跟着学大概率爆仓倾家荡产。"
       },
       {
-        platform: "goodreads",
-        user: "Financial Analyst Dan",
-        avatar: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&q=80&w=120",
-        rating: 2,
-        date: "2023-07-11",
-        sentiment: "negative",
-        content: "Mostly anecdotal snake oil. His definition of assets contradicts basic accounting, and his aggressive tax/debt advice borders on reckless illegality in many jurisdictions."
+        "platform": "goodreads",
+        "user": "Financial Analyst Dan",
+        "avatar": "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&q=80&w=120",
+        "rating": 2,
+        "date": "2023-07-11",
+        "sentiment": "negative",
+        "content": "Mostly anecdotal snake oil. His definition of assets contradicts basic accounting, and his aggressive tax/debt advice borders on reckless illegality in many jurisdictions."
       },
       {
-        platform: "amazon",
-        user: "Young Entrepreneur",
-        avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=120",
-        rating: 5,
-        date: "2024-02-15",
-        sentiment: "positive",
-        content: "Completely changed how I look at my paycheck. I stopped buying depreciating junk and started funneling cash into index funds and small businesses."
+        "platform": "amazon",
+        "user": "Young Entrepreneur",
+        "avatar": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=120",
+        "rating": 5,
+        "date": "2024-02-15",
+        "sentiment": "positive",
+        "content": "Completely changed how I look at my paycheck. I stopped buying depreciating junk and started funneling cash into index funds and small businesses."
       }
-    ]
+    ],
+    "normalizedRatings": {
+      "douban": {
+        "score": 8.2,
+        "scale": 10,
+        "ratingCount": 162000,
+        "fiveStarPct": 41.5,
+        "url": "https://book.douban.com/subject/27116744/",
+        "normalizedScore": 8.2
+      },
+      "goodreads": {
+        "score": 4.11,
+        "scale": 5,
+        "ratingCount": 620000,
+        "fiveStarPct": 47.9,
+        "url": "https://www.goodreads.com/book/show/69571.Rich_Dad_Poor_Dad",
+        "normalizedScore": 8.22
+      },
+      "googleBooks": {
+        "score": 4.3,
+        "scale": 5,
+        "ratingCount": 15400,
+        "fiveStarPct": 58,
+        "url": "https://books.google.com/books?id=05",
+        "normalizedScore": 8.6
+      },
+      "amazon": {
+        "score": 4.7,
+        "scale": 5,
+        "ratingCount": 110000,
+        "fiveStarPct": 81,
+        "url": "https://www.amazon.com/dp/1612680194",
+        "normalizedScore": 9.4
+      }
+    },
+    "compositeScore": 8.37,
+    "discrepancyIndex": 0.02,
+    "verdict": {
+      "status": "controversial",
+      "label": "两极分化 / 争议",
+      "color": "amber",
+      "desc": "各大平台评分分歧显著或读者评价两极撕裂，需辩证看待"
+    },
+    "aiInsight": {
+      "sharpVerdict": "【全网权威定性】《富爸爸穷爸爸》在各大权威平台综合加权得分为 8.37 分。‘资产与负债’的通俗化定义极其有力，彻底击碎普通人将自住房盲目视作资产的误区",
+      "deepPros": [
+        "‘资产与负债’的通俗化定义极其有力，彻底击碎普通人将自住房盲目视作资产的误区",
+        "唤醒无数工薪族对‘被动收入’与‘财务自由’的意识，心理冲击力强",
+        "语言浅显生动，没有繁杂数学公式，适合零基础读者开启理财启蒙"
+      ],
+      "criticalCons": [
+        "书中关于房产炒作、避税与破产技巧缺乏合法合规实操性，作者旗下公司曾多次申请破产",
+        "大量理念充斥成功学套路与虚构故事，存在严重的幸存者偏差与盲目杠杆风险",
+        "严重贬低正规高等教育的价值，观点偏激武断"
+      ],
+      "targetAudience": "对商业经管感兴趣，追求深度认知与心智升级的严肃阅读者",
+      "avoidAudience": "追求浮躁快餐速成或无耐心精读的读者",
+      "translationVerdict": "中文由 萧明 翻译，整体语感与专业术语还原度良好。"
+    }
   },
   {
-    id: "miracles-of-namiya-store",
-    title: "解忧杂货店",
-    originalTitle: "ナミヤ雑貨店の奇蹟",
-    author: "东野圭吾",
-    translator: "李盈春",
-    cover: "https://images.unsplash.com/photo-1512820790803-83ca734da794?auto=format&fit=crop&q=80&w=600",
-    isbn: "9787544270878",
-    publicationYear: 2012,
-    publisher: "南海出版公司",
-    category: "文学小说",
-    tags: ["东野圭吾", "治愈系", "温情推理", "口碑分化", "畅销王"],
-    summary: "僻静街道旁的一家杂货店，只要写下烦恼投进卷帘门的投信口，第二天就会在牛奶箱里得到回信。五个时空交织的暖心故事，因时空信箱串联在一起。",
-    platformRatings: {
-      douban: {
-        score: 8.5,
-        scale: 10,
-        ratingCount: 1120000,
-        fiveStarPct: 45.3,
-        url: "https://book.douban.com/subject/25862578/"
+    "id": "miracles-of-namiya-store",
+    "title": "解忧杂货店",
+    "originalTitle": "ナミヤ雑貨店の奇蹟",
+    "author": "东野圭吾",
+    "translator": "李盈春",
+    "cover": "https://images.unsplash.com/photo-1512820790803-83ca734da794?auto=format&fit=crop&q=80&w=600",
+    "isbn": "9787544270878",
+    "publicationYear": 2012,
+    "publisher": "南海出版公司",
+    "category": "文学小说",
+    "tags": [
+      "东野圭吾",
+      "治愈系",
+      "温情推理",
+      "口碑分化",
+      "畅销王"
+    ],
+    "summary": "僻静街道旁的一家杂货店，只要写下烦恼投进卷帘门的投信口，第二天就会在牛奶箱里得到回信。五个时空交织的暖心故事，因时空信箱串联在一起。",
+    "platformRatings": {
+      "douban": {
+        "score": 8.5,
+        "scale": 10,
+        "ratingCount": 1120000,
+        "fiveStarPct": 45.3,
+        "url": "https://book.douban.com/subject/25862578/"
       },
-      goodreads: {
-        score: 4.14,
-        scale: 5,
-        ratingCount: 78000,
-        fiveStarPct: 43.1,
-        url: "https://www.goodreads.com/book/show/44088547-the-miracles-of-the-namiya-general-store"
+      "goodreads": {
+        "score": 4.14,
+        "scale": 5,
+        "ratingCount": 78000,
+        "fiveStarPct": 43.1,
+        "url": "https://www.goodreads.com/book/show/44088547-the-miracles-of-the-namiya-general-store"
       },
-      googleBooks: {
-        score: 4.3,
-        scale: 5,
-        ratingCount: 8900,
-        fiveStarPct: 55.0,
-        url: "https://books.google.com/books?id=06"
+      "googleBooks": {
+        "score": 4.3,
+        "scale": 5,
+        "ratingCount": 8900,
+        "fiveStarPct": 55,
+        "url": "https://books.google.com/books?id=06"
       },
-      amazon: {
-        score: 4.6,
-        scale: 5,
-        ratingCount: 14000,
-        fiveStarPct: 74.0,
-        url: "https://www.amazon.com/dp/1975382519"
+      "amazon": {
+        "score": 4.6,
+        "scale": 5,
+        "ratingCount": 14000,
+        "fiveStarPct": 74,
+        "url": "https://www.amazon.com/dp/1975382519"
       }
     },
-    sentiment: {
-      positivePct: 83,
-      neutralPct: 11,
-      negativePct: 6,
-      pros: [
+    "sentiment": {
+      "positivePct": 83,
+      "neutralPct": 11,
+      "negativePct": 6,
+      "pros": [
         "精巧的圆环形时空交错伏线结构，展现了东野圭吾高超的情节编织能力",
         "温暖治愈，褪去以往推理小说的阴暗残酷，充满对底层普通人的温情关怀",
         "阅读体验极度顺畅，‘白纸回信’的高潮收尾感人至深"
       ],
-      cons: [
+      "cons": [
         "部分资深文学读者批评其‘鸡汤味过浓’、人物心理动机过分理想化甚至廉价",
         "后半程煽情套路较为刻意，与东野圭吾代表作《白夜行》《嫌疑人X的献身》的深度不可同日而语"
       ],
-      keywords: ["治愈温暖", "环形时空", "鸡汤嫌疑", "营销大热", "通俗畅销"]
+      "keywords": [
+        "治愈温暖",
+        "环形时空",
+        "鸡汤嫌疑",
+        "营销大热",
+        "通俗畅销"
+      ]
     },
-    featuredReviews: [
+    "featuredReviews": [
       {
-        platform: "douban",
-        user: "温暖如初",
-        avatar: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&q=80&w=120",
-        rating: 10,
-        date: "2024-03-08",
-        sentiment: "positive",
-        content: "在最低谷的时候看哭了。那张白纸的回答：正因为是一张白纸，才可以随心所欲地描绘地图。世界上如果有这样一家杂货店该有多好啊。"
+        "platform": "douban",
+        "user": "温暖如初",
+        "avatar": "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&q=80&w=120",
+        "rating": 10,
+        "date": "2024-03-08",
+        "sentiment": "positive",
+        "content": "在最低谷的时候看哭了。那张白纸的回答：正因为是一张白纸，才可以随心所欲地描绘地图。世界上如果有这样一家杂货店该有多好啊。"
       },
       {
-        platform: "douban",
-        user: "冷眼看书人",
-        avatar: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&q=80&w=120",
-        rating: 5,
-        date: "2023-12-14",
-        sentiment: "negative",
-        content: "东野圭吾最流水线的一部作品，本质上就是一本高智商鸡汤合集。没有本格推理的严谨，也没有社会派的深刻刺痛，全靠巧合与煽情维系。"
+        "platform": "douban",
+        "user": "冷眼看书人",
+        "avatar": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&q=80&w=120",
+        "rating": 5,
+        "date": "2023-12-14",
+        "sentiment": "negative",
+        "content": "东野圭吾最流水线的一部作品，本质上就是一本高智商鸡汤合集。没有本格推理的严谨，也没有社会派的深刻刺痛，全靠巧合与煽情维系。"
+      },
+      {
+        "platform": "goodreads",
+        "user": "Global Reader (Goodreads)",
+        "avatar": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=120",
+        "rating": 4,
+        "date": "2023-11-20",
+        "sentiment": "positive",
+        "content": "A truly remarkable book that transcends cultural boundaries. The themes explored in ナミヤ雑貨店の奇蹟 resonate deeply with readers worldwide. Outstanding intellectual depth."
+      },
+      {
+        "platform": "amazon",
+        "user": "Verified Purchaser",
+        "avatar": "https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?auto=format&fit=crop&q=80&w=120",
+        "rating": 5,
+        "date": "2024-01-18",
+        "sentiment": "positive",
+        "content": "Delivered quickly and in perfect condition. This book exceeded all expectations. It provides rare, practical clarity and timeless insight that will stay with you long after the final page."
       }
-    ]
+    ],
+    "normalizedRatings": {
+      "douban": {
+        "score": 8.5,
+        "scale": 10,
+        "ratingCount": 1120000,
+        "fiveStarPct": 45.3,
+        "url": "https://book.douban.com/subject/25862578/",
+        "normalizedScore": 8.5
+      },
+      "goodreads": {
+        "score": 4.14,
+        "scale": 5,
+        "ratingCount": 78000,
+        "fiveStarPct": 43.1,
+        "url": "https://www.goodreads.com/book/show/44088547-the-miracles-of-the-namiya-general-store",
+        "normalizedScore": 8.28
+      },
+      "googleBooks": {
+        "score": 4.3,
+        "scale": 5,
+        "ratingCount": 8900,
+        "fiveStarPct": 55,
+        "url": "https://books.google.com/books?id=06",
+        "normalizedScore": 8.6
+      },
+      "amazon": {
+        "score": 4.6,
+        "scale": 5,
+        "ratingCount": 14000,
+        "fiveStarPct": 74,
+        "url": "https://www.amazon.com/dp/1975382519",
+        "normalizedScore": 9.2
+      }
+    },
+    "compositeScore": 8.49,
+    "discrepancyIndex": 0.22,
+    "verdict": {
+      "status": "recommended",
+      "label": "经典必读",
+      "color": "blue",
+      "desc": "多平台一致好评，口碑过硬，阅读体验极佳"
+    },
+    "aiInsight": {
+      "sharpVerdict": "【全网权威定性】《解忧杂货店》在各大权威平台综合加权得分为 8.49 分。精巧的圆环形时空交错伏线结构，展现了东野圭吾高超的情节编织能力",
+      "deepPros": [
+        "精巧的圆环形时空交错伏线结构，展现了东野圭吾高超的情节编织能力",
+        "温暖治愈，褪去以往推理小说的阴暗残酷，充满对底层普通人的温情关怀",
+        "阅读体验极度顺畅，‘白纸回信’的高潮收尾感人至深"
+      ],
+      "criticalCons": [
+        "部分资深文学读者批评其‘鸡汤味过浓’、人物心理动机过分理想化甚至廉价",
+        "后半程煽情套路较为刻意，与东野圭吾代表作《白夜行》《嫌疑人X的献身》的深度不可同日而语"
+      ],
+      "targetAudience": "对文学小说感兴趣，追求深度认知与心智升级的严肃阅读者",
+      "avoidAudience": "追求浮躁快餐速成或无耐心精读的读者",
+      "translationVerdict": "中文由 李盈春 翻译，整体语感与专业术语还原度良好。"
+    }
   },
   {
-    id: "metaverse-bubble-hype",
-    title: "元宇宙狂潮：开启人类未来新维度",
-    originalTitle: "The Metaverse Phenomenon",
-    author: "张某某 / 某前沿商业研究室",
-    translator: "无",
-    cover: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&q=80&w=600",
-    isbn: "9787999812345",
-    publicationYear: 2021,
-    publisher: "某快速出版机构",
-    category: "商业经管",
-    tags: ["避坑预警", "概念炒作", "拼凑内容", "蹭热点", "低分"],
-    summary: "2021年元宇宙概念火爆时应运而生的快餐书。大量摘录网络百科、新闻通稿与投行PPT，充斥宏大却空洞的造词狂欢，缺乏实际技术落地与严谨论据。",
-    platformRatings: {
-      douban: {
-        score: 4.8,
-        scale: 10,
-        ratingCount: 3200,
-        fiveStarPct: 4.2,
-        url: "https://book.douban.com/subject/35600000/"
+    "id": "metaverse-bubble-hype",
+    "title": "元宇宙狂潮：开启人类未来新维度",
+    "originalTitle": "The Metaverse Phenomenon",
+    "author": "张某某 / 某前沿商业研究室",
+    "translator": "无",
+    "cover": "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&q=80&w=600",
+    "isbn": "9787999812345",
+    "publicationYear": 2021,
+    "publisher": "某快速出版机构",
+    "category": "商业经管",
+    "tags": [
+      "避坑预警",
+      "概念炒作",
+      "拼凑内容",
+      "蹭热点",
+      "低分"
+    ],
+    "summary": "2021年元宇宙概念火爆时应运而生的快餐书。大量摘录网络百科、新闻通稿与投行PPT，充斥宏大却空洞的造词狂欢，缺乏实际技术落地与严谨论据。",
+    "platformRatings": {
+      "douban": {
+        "score": 4.8,
+        "scale": 10,
+        "ratingCount": 3200,
+        "fiveStarPct": 4.2,
+        "url": "https://book.douban.com/subject/35600000/"
       },
-      goodreads: {
-        score: 2.75,
-        scale: 5,
-        ratingCount: 1800,
-        fiveStarPct: 9.1,
-        url: "https://www.goodreads.com/book/show/99999"
+      "goodreads": {
+        "score": 2.75,
+        "scale": 5,
+        "ratingCount": 1800,
+        "fiveStarPct": 9.1,
+        "url": "https://www.goodreads.com/book/show/99999"
       },
-      googleBooks: {
-        score: 2.8,
-        scale: 5,
-        ratingCount: 420,
-        fiveStarPct: 8.0,
-        url: "https://books.google.com/books?id=07"
+      "googleBooks": {
+        "score": 2.8,
+        "scale": 5,
+        "ratingCount": 420,
+        "fiveStarPct": 8,
+        "url": "https://books.google.com/books?id=07"
       },
-      amazon: {
-        score: 3.1,
-        scale: 5,
-        ratingCount: 890,
-        fiveStarPct: 15.0,
-        url: "https://www.amazon.com/dp/B09FAKE001"
+      "amazon": {
+        "score": 3.1,
+        "scale": 5,
+        "ratingCount": 890,
+        "fiveStarPct": 15,
+        "url": "https://www.amazon.com/dp/B09FAKE001"
       }
     },
-    sentiment: {
-      positivePct: 18,
-      neutralPct: 22,
-      negativePct: 60,
-      pros: [
+    "sentiment": {
+      "positivePct": 18,
+      "neutralPct": 22,
+      "negativePct": 60,
+      "pros": [
         "对完全不知道元宇宙是什么的外行提供了粗浅的概念汇总词汇表",
         "装帧与副标题非常吸引眼球，营销包装精美"
       ],
-      cons: [
+      "cons": [
         "通篇为新闻稿与投行研报的大杂烩洗稿，充斥大量未经验证的技术狂言与虚假泡沫",
         "无核心原创观点，概念偷换严重，将VR、区块链、数字孪生简单生搬硬套",
         "定价虚高，典型的收割热点跟风劣质快餐读物，极不建议购买"
       ],
-      keywords: ["概念炒作", "东拼西凑", "避坑差评", "割韭菜", "空洞无物"]
+      "keywords": [
+        "概念炒作",
+        "东拼西凑",
+        "避坑差评",
+        "割韭菜",
+        "空洞无物"
+      ]
     },
-    featuredReviews: [
+    "featuredReviews": [
       {
-        platform: "douban",
-        user: "科技观察员Leo",
-        avatar: "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&q=80&w=120",
-        rating: 2,
-        date: "2023-05-19",
-        sentiment: "negative",
-        content: "纯粹的垃圾拼凑书！全书看下来就是百度百科+券商研报直接机翻缝合，连基本的分布式系统常识都没有。骗读者钱包的劣质跟风之作，大家千万避坑！"
+        "platform": "douban",
+        "user": "科技观察员Leo",
+        "avatar": "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&q=80&w=120",
+        "rating": 2,
+        "date": "2023-05-19",
+        "sentiment": "negative",
+        "content": "纯粹的垃圾拼凑书！全书看下来就是百度百科+券商研报直接机翻缝合，连基本的分布式系统常识都没有。骗读者钱包的劣质跟风之作，大家千万避坑！"
       },
       {
-        platform: "amazon",
-        user: "Disappointed Techie",
-        avatar: "https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?auto=format&fit=crop&q=80&w=120",
-        rating: 1,
-        date: "2023-04-10",
-        sentiment: "negative",
-        content: "Read like a collection of buzzwords generated by a 2021 sales brochure. Zero technical depth, zero realistic insights. Pure hype."
+        "platform": "amazon",
+        "user": "Disappointed Techie",
+        "avatar": "https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?auto=format&fit=crop&q=80&w=120",
+        "rating": 1,
+        "date": "2023-04-10",
+        "sentiment": "negative",
+        "content": "Read like a collection of buzzwords generated by a 2021 sales brochure. Zero technical depth, zero realistic insights. Pure hype."
+      },
+      {
+        "platform": "goodreads",
+        "user": "Global Reader (Goodreads)",
+        "avatar": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=120",
+        "rating": 3,
+        "date": "2023-11-20",
+        "sentiment": "positive",
+        "content": "A truly remarkable book that transcends cultural boundaries. The themes explored in The Metaverse Phenomenon resonate deeply with readers worldwide. Outstanding intellectual depth."
       }
-    ]
+    ],
+    "normalizedRatings": {
+      "douban": {
+        "score": 4.8,
+        "scale": 10,
+        "ratingCount": 3200,
+        "fiveStarPct": 4.2,
+        "url": "https://book.douban.com/subject/35600000/",
+        "normalizedScore": 4.8
+      },
+      "goodreads": {
+        "score": 2.75,
+        "scale": 5,
+        "ratingCount": 1800,
+        "fiveStarPct": 9.1,
+        "url": "https://www.goodreads.com/book/show/99999",
+        "normalizedScore": 5.5
+      },
+      "googleBooks": {
+        "score": 2.8,
+        "scale": 5,
+        "ratingCount": 420,
+        "fiveStarPct": 8,
+        "url": "https://books.google.com/books?id=07",
+        "normalizedScore": 5.6
+      },
+      "amazon": {
+        "score": 3.1,
+        "scale": 5,
+        "ratingCount": 890,
+        "fiveStarPct": 15,
+        "url": "https://www.amazon.com/dp/B09FAKE001",
+        "normalizedScore": 6.2
+      }
+    },
+    "compositeScore": 5.44,
+    "discrepancyIndex": 0.7,
+    "verdict": {
+      "status": "warning",
+      "label": "避坑预警",
+      "color": "rose",
+      "desc": "读者负评较多，内容质量欠佳或存在营销虚高、翻译翻车"
+    },
+    "aiInsight": {
+      "sharpVerdict": "【全网权威定性】《元宇宙狂潮：开启人类未来新维度》在各大权威平台综合加权得分为 5.44 分。对完全不知道元宇宙是什么的外行提供了粗浅的概念汇总词汇表",
+      "deepPros": [
+        "对完全不知道元宇宙是什么的外行提供了粗浅的概念汇总词汇表",
+        "装帧与副标题非常吸引眼球，营销包装精美"
+      ],
+      "criticalCons": [
+        "通篇为新闻稿与投行研报的大杂烩洗稿，充斥大量未经验证的技术狂言与虚假泡沫",
+        "无核心原创观点，概念偷换严重，将VR、区块链、数字孪生简单生搬硬套",
+        "定价虚高，典型的收割热点跟风劣质快餐读物，极不建议购买"
+      ],
+      "targetAudience": "对商业经管感兴趣，追求深度认知与心智升级的严肃阅读者",
+      "avoidAudience": "追求浮躁快餐速成或无耐心精读的读者",
+      "translationVerdict": "中文由 无 翻译，整体语感与专业术语还原度良好。"
+    }
   },
   {
-    id: "to-live",
-    title: "活着",
-    originalTitle: "To Live",
-    author: "余华",
-    translator: "Michael Berry (英译)",
-    cover: "https://images.unsplash.com/photo-1516979187457-637abb4f9353?auto=format&fit=crop&q=80&w=600",
-    isbn: "9787506365437",
-    publicationYear: 1993,
-    publisher: "作家出版社",
-    category: "文学小说",
-    tags: ["当代文学", "余华", "苦难史诗", "国民经典", "高分神作"],
-    summary: "中国当代文学最高峰之一。地主少爷福贵嗜赌成性输光家产沦为贫农，在往后的漫长岁月中，亲历战争、灾荒与动荡，亲人相继离他而去，最后唯有一头老牛与他相依为命。",
-    platformRatings: {
-      douban: {
-        score: 9.4,
-        scale: 10,
-        ratingCount: 795000,
-        fiveStarPct: 76.8,
-        url: "https://book.douban.com/subject/4913064/"
+    "id": "to-live",
+    "title": "活着",
+    "originalTitle": "To Live",
+    "author": "余华",
+    "translator": "Michael Berry (英译)",
+    "cover": "./covers/to-live.jpg",
+    "isbn": "9787506365437",
+    "publicationYear": 1993,
+    "publisher": "作家出版社",
+    "category": "文学小说",
+    "tags": [
+      "当代文学",
+      "余华",
+      "苦难史诗",
+      "国民经典",
+      "高分神作"
+    ],
+    "summary": "中国当代文学最高峰之一。地主少爷福贵嗜赌成性输光家产沦为贫农，在往后的漫长岁月中，亲历战争、灾荒与动荡，亲人相继离他而去，最后唯有一头老牛与他相依为命。",
+    "platformRatings": {
+      "douban": {
+        "score": 9.4,
+        "scale": 10,
+        "ratingCount": 795000,
+        "fiveStarPct": 76.8,
+        "url": "https://book.douban.com/subject/4913064/"
       },
-      goodreads: {
-        score: 4.42,
-        scale: 5,
-        ratingCount: 115000,
-        fiveStarPct: 57.8,
-        url: "https://www.goodreads.com/book/show/330999.To_Live"
+      "goodreads": {
+        "score": 4.42,
+        "scale": 5,
+        "ratingCount": 115000,
+        "fiveStarPct": 57.8,
+        "url": "https://www.goodreads.com/book/show/330999.To_Live"
       },
-      googleBooks: {
-        score: 4.7,
-        scale: 5,
-        ratingCount: 16800,
-        fiveStarPct: 75.0,
-        url: "https://books.google.com/books?id=08"
+      "googleBooks": {
+        "score": 4.7,
+        "scale": 5,
+        "ratingCount": 16800,
+        "fiveStarPct": 75,
+        "url": "https://books.google.com/books?id=08"
       },
-      amazon: {
-        score: 4.8,
-        scale: 5,
-        ratingCount: 28000,
-        fiveStarPct: 83.0,
-        url: "https://www.amazon.com/dp/1400031869"
+      "amazon": {
+        "score": 4.8,
+        "scale": 5,
+        "ratingCount": 28000,
+        "fiveStarPct": 83,
+        "url": "https://www.amazon.com/dp/1400031869"
       }
     },
-    sentiment: {
-      positivePct: 96,
-      neutralPct: 3,
-      negativePct: 1,
-      pros: [
+    "sentiment": {
+      "positivePct": 96,
+      "neutralPct": 3,
+      "negativePct": 1,
+      "pros": [
         "语言洗练质朴到了极致，毫无雕饰感，却具有穿透纸背的震撼力量",
         "‘人是为了活着本身而活着，而不是为了活着之外的任何事物所活着’这一命题直击灵魂",
         "苦难叙事不矫情不怨怼，福贵平静叙述口吻下涌动的生命韧性令人落泪"
       ],
-      cons: [
+      "cons": [
         "情节极度悲惨致郁，亲人相继离世的密集冲击可能导致部分读者心理压抑不适"
       ],
-      keywords: ["生命韧性", "余华代表作", "质朴深沉", "当代经典", "万人垂泪"]
+      "keywords": [
+        "生命韧性",
+        "余华代表作",
+        "质朴深沉",
+        "当代经典",
+        "万人垂泪"
+      ]
     },
-    featuredReviews: [
+    "featuredReviews": [
       {
-        platform: "douban",
-        user: "月落乌啼",
-        avatar: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&q=80&w=120",
-        rating: 10,
-        date: "2024-04-02",
-        sentiment: "positive",
-        content: "余华用最克制的文字写尽了世间最惨烈的离别。有庆抽血而死、凤霞大出血、家珍病死、二喜工伤、苦根吃豆子撑死...读完坐在窗前大哭一场。但合上书本，福贵哼着歌赶着老牛的背影，又给了我无比巨大的活着的力量。"
+        "platform": "douban",
+        "user": "月落乌啼",
+        "avatar": "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&q=80&w=120",
+        "rating": 10,
+        "date": "2024-04-02",
+        "sentiment": "positive",
+        "content": "余华用最克制的文字写尽了世间最惨烈的离别。有庆抽血而死、凤霞大出血、家珍病死、二喜工伤、苦根吃豆子撑死...读完坐在窗前大哭一场。但合上书本，福贵哼着歌赶着老牛的背影，又给了我无比巨大的活着的力量。"
       },
       {
-        platform: "goodreads",
-        user: "James K.",
-        avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=120",
-        rating: 5,
-        date: "2023-11-09",
-        sentiment: "positive",
-        content: "A devastating masterpiece. It shows human resilience stripped of romanticism or heroic delusion. Fugui's voice will stay with me for the rest of my life."
+        "platform": "goodreads",
+        "user": "James K.",
+        "avatar": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=120",
+        "rating": 5,
+        "date": "2023-11-09",
+        "sentiment": "positive",
+        "content": "A devastating masterpiece. It shows human resilience stripped of romanticism or heroic delusion. Fugui's voice will stay with me for the rest of my life."
+      },
+      {
+        "platform": "amazon",
+        "user": "Verified Purchaser",
+        "avatar": "https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?auto=format&fit=crop&q=80&w=120",
+        "rating": 5,
+        "date": "2024-01-18",
+        "sentiment": "positive",
+        "content": "Delivered quickly and in perfect condition. This book exceeded all expectations. It provides rare, practical clarity and timeless insight that will stay with you long after the final page."
       }
-    ]
+    ],
+    "normalizedRatings": {
+      "douban": {
+        "score": 9.4,
+        "scale": 10,
+        "ratingCount": 795000,
+        "fiveStarPct": 76.8,
+        "url": "https://book.douban.com/subject/4913064/",
+        "normalizedScore": 9.4
+      },
+      "goodreads": {
+        "score": 4.42,
+        "scale": 5,
+        "ratingCount": 115000,
+        "fiveStarPct": 57.8,
+        "url": "https://www.goodreads.com/book/show/330999.To_Live",
+        "normalizedScore": 8.84
+      },
+      "googleBooks": {
+        "score": 4.7,
+        "scale": 5,
+        "ratingCount": 16800,
+        "fiveStarPct": 75,
+        "url": "https://books.google.com/books?id=08",
+        "normalizedScore": 9.4
+      },
+      "amazon": {
+        "score": 4.8,
+        "scale": 5,
+        "ratingCount": 28000,
+        "fiveStarPct": 83,
+        "url": "https://www.amazon.com/dp/1400031869",
+        "normalizedScore": 9.6
+      }
+    },
+    "compositeScore": 9.34,
+    "discrepancyIndex": 0.56,
+    "verdict": {
+      "status": "masterpiece",
+      "label": "殿堂神作",
+      "color": "emerald",
+      "desc": "全平台罕见超高分，极具深度与阅读价值，必读经典"
+    },
+    "aiInsight": {
+      "sharpVerdict": "【全网权威定性】《活着》在各大权威平台综合加权得分为 9.34 分。语言洗练质朴到了极致，毫无雕饰感，却具有穿透纸背的震撼力量",
+      "deepPros": [
+        "语言洗练质朴到了极致，毫无雕饰感，却具有穿透纸背的震撼力量",
+        "‘人是为了活着本身而活着，而不是为了活着之外的任何事物所活着’这一命题直击灵魂",
+        "苦难叙事不矫情不怨怼，福贵平静叙述口吻下涌动的生命韧性令人落泪"
+      ],
+      "criticalCons": [
+        "情节极度悲惨致郁，亲人相继离世的密集冲击可能导致部分读者心理压抑不适"
+      ],
+      "targetAudience": "对文学小说感兴趣，追求深度认知与心智升级的严肃阅读者",
+      "avoidAudience": "追求浮躁快餐速成或无耐心精读的读者",
+      "translationVerdict": "中文由 Michael Berry (英译) 翻译，整体语感与专业术语还原度良好。"
+    }
   },
   {
-    id: "csapp-computer-systems",
-    title: "深入理解计算机系统",
-    originalTitle: "Computer Systems: A Programmer's Perspective (CS:APP)",
-    author: "Randal E. Bryant / David R. O'Hallaron",
-    translator: "龚奕利 / 贺莲",
-    cover: "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&q=80&w=600",
-    isbn: "9787111544937",
-    publicationYear: 2016,
-    publisher: "机械工业出版社",
-    category: "计算机与技术",
-    tags: ["底层原理", "操作系统", "经典教材", "程序员内功", "高分力作"],
-    summary: "全球计算机科学圣经级读物。从程序员的视角切入，融汇信息表示、汇编语言、处理器架构、优化、存储器层次结构、链接、异常控制流与网络编程，打通计算机全栈底层认知。",
-    platformRatings: {
-      douban: {
-        score: 9.8,
-        scale: 10,
-        ratingCount: 22800,
-        fiveStarPct: 88.6,
-        url: "https://book.douban.com/subject/26912767/"
+    "id": "csapp-computer-systems",
+    "title": "深入理解计算机系统",
+    "originalTitle": "Computer Systems: A Programmer's Perspective (CS:APP)",
+    "author": "Randal E. Bryant / David R. O'Hallaron",
+    "translator": "龚奕利 / 贺莲",
+    "cover": "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&q=80&w=600",
+    "isbn": "9787111544937",
+    "publicationYear": 2016,
+    "publisher": "机械工业出版社",
+    "category": "计算机与技术",
+    "tags": [
+      "底层原理",
+      "操作系统",
+      "经典教材",
+      "程序员内功",
+      "高分力作"
+    ],
+    "summary": "全球计算机科学圣经级读物。从程序员的视角切入，融汇信息表示、汇编语言、处理器架构、优化、存储器层次结构、链接、异常控制流与网络编程，打通计算机全栈底层认知。",
+    "platformRatings": {
+      "douban": {
+        "score": 9.8,
+        "scale": 10,
+        "ratingCount": 22800,
+        "fiveStarPct": 88.6,
+        "url": "https://book.douban.com/subject/26912767/"
       },
-      goodreads: {
-        score: 4.67,
-        scale: 5,
-        ratingCount: 38000,
-        fiveStarPct: 76.5,
-        url: "https://www.goodreads.com/book/show/829182.Computer_Systems"
+      "goodreads": {
+        "score": 4.67,
+        "scale": 5,
+        "ratingCount": 38000,
+        "fiveStarPct": 76.5,
+        "url": "https://www.goodreads.com/book/show/829182.Computer_Systems"
       },
-      googleBooks: {
-        score: 4.8,
-        scale: 5,
-        ratingCount: 3100,
-        fiveStarPct: 84.0,
-        url: "https://books.google.com/books?id=09"
+      "googleBooks": {
+        "score": 4.8,
+        "scale": 5,
+        "ratingCount": 3100,
+        "fiveStarPct": 84,
+        "url": "https://books.google.com/books?id=09"
       },
-      amazon: {
-        score: 4.7,
-        scale: 5,
-        ratingCount: 6200,
-        fiveStarPct: 82.0,
-        url: "https://www.amazon.com/dp/013409266X"
+      "amazon": {
+        "score": 4.7,
+        "scale": 5,
+        "ratingCount": 6200,
+        "fiveStarPct": 82,
+        "url": "https://www.amazon.com/dp/013409266X"
       }
     },
-    sentiment: {
-      positivePct: 98,
-      neutralPct: 2,
-      negativePct: 0,
-      pros: [
+    "sentiment": {
+      "positivePct": 98,
+      "neutralPct": 2,
+      "negativePct": 0,
+      "pros": [
         "融会贯通硬件与软件的桥梁之作，读完后对程序的执行过程再无黑盒迷茫",
         "配套实验（Data Lab, Bomb Lab, Cache Lab, Malloc Lab）设计堪称神工鬼斧",
         "逻辑极其严谨，由浅入深，技术人职业生涯最值得反复研读的底蕴之作"
       ],
-      cons: [
+      "cons": [
         "近千页的大部头厚重如砖，需要投入数月时间与扎实的C语言功底，啃读难度极大"
       ],
-      keywords: ["计算机圣经", "打通任督二脉", "硬核内功", "Lab神作", "9.8分超神"]
+      "keywords": [
+        "计算机圣经",
+        "打通任督二脉",
+        "硬核内功",
+        "Lab神作",
+        "9.8分超神"
+      ]
     },
-    featuredReviews: [
+    "featuredReviews": [
       {
-        platform: "douban",
-        user: "KernelDev",
-        avatar: "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&q=80&w=120",
-        rating: 10,
-        date: "2024-03-22",
-        sentiment: "positive",
-        content: "如果大学四年计算机专业只能留下一本书，那我毫不犹豫选CSAPP！做完Bomb Lab和Cache Lab的那一刻，真的感觉全身任督二脉都被打通了，从汇编到虚拟内存再到链接器，所有的碎知识全连成了坚固的网络！"
+        "platform": "douban",
+        "user": "KernelDev",
+        "avatar": "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&q=80&w=120",
+        "rating": 10,
+        "date": "2024-03-22",
+        "sentiment": "positive",
+        "content": "如果大学四年计算机专业只能留下一本书，那我毫不犹豫选CSAPP！做完Bomb Lab和Cache Lab的那一刻，真的感觉全身任督二脉都被打通了，从汇编到虚拟内存再到链接器，所有的碎知识全连成了坚固的网络！"
+      },
+      {
+        "platform": "goodreads",
+        "user": "Global Reader (Goodreads)",
+        "avatar": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=120",
+        "rating": 5,
+        "date": "2023-11-20",
+        "sentiment": "positive",
+        "content": "A truly remarkable book that transcends cultural boundaries. The themes explored in Computer Systems: A Programmer's Perspective (CS:APP) resonate deeply with readers worldwide. Outstanding intellectual depth."
+      },
+      {
+        "platform": "amazon",
+        "user": "Verified Purchaser",
+        "avatar": "https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?auto=format&fit=crop&q=80&w=120",
+        "rating": 5,
+        "date": "2024-01-18",
+        "sentiment": "positive",
+        "content": "Delivered quickly and in perfect condition. This book exceeded all expectations. It provides rare, practical clarity and timeless insight that will stay with you long after the final page."
       }
-    ]
+    ],
+    "normalizedRatings": {
+      "douban": {
+        "score": 9.8,
+        "scale": 10,
+        "ratingCount": 22800,
+        "fiveStarPct": 88.6,
+        "url": "https://book.douban.com/subject/26912767/",
+        "normalizedScore": 9.8
+      },
+      "goodreads": {
+        "score": 4.67,
+        "scale": 5,
+        "ratingCount": 38000,
+        "fiveStarPct": 76.5,
+        "url": "https://www.goodreads.com/book/show/829182.Computer_Systems",
+        "normalizedScore": 9.34
+      },
+      "googleBooks": {
+        "score": 4.8,
+        "scale": 5,
+        "ratingCount": 3100,
+        "fiveStarPct": 84,
+        "url": "https://books.google.com/books?id=09",
+        "normalizedScore": 9.6
+      },
+      "amazon": {
+        "score": 4.7,
+        "scale": 5,
+        "ratingCount": 6200,
+        "fiveStarPct": 82,
+        "url": "https://www.amazon.com/dp/013409266X",
+        "normalizedScore": 9.4
+      }
+    },
+    "compositeScore": 9.49,
+    "discrepancyIndex": 0.46,
+    "verdict": {
+      "status": "masterpiece",
+      "label": "殿堂神作",
+      "color": "emerald",
+      "desc": "全平台罕见超高分，极具深度与阅读价值，必读经典"
+    },
+    "aiInsight": {
+      "sharpVerdict": "【全网权威定性】《深入理解计算机系统》在各大权威平台综合加权得分为 9.49 分。融会贯通硬件与软件的桥梁之作，读完后对程序的执行过程再无黑盒迷茫",
+      "deepPros": [
+        "融会贯通硬件与软件的桥梁之作，读完后对程序的执行过程再无黑盒迷茫",
+        "配套实验（Data Lab, Bomb Lab, Cache Lab, Malloc Lab）设计堪称神工鬼斧",
+        "逻辑极其严谨，由浅入深，技术人职业生涯最值得反复研读的底蕴之作"
+      ],
+      "criticalCons": [
+        "近千页的大部头厚重如砖，需要投入数月时间与扎实的C语言功底，啃读难度极大"
+      ],
+      "targetAudience": "对计算机与技术感兴趣，追求深度认知与心智升级的严肃阅读者",
+      "avoidAudience": "追求浮躁快餐速成或无耐心精读的读者",
+      "translationVerdict": "中文由 龚奕利 / 贺莲 翻译，整体语感与专业术语还原度良好。"
+    }
   },
   {
-    id: "mechanical-heart-disaster-translation",
-    title: "机械心（某争议翻车译本）",
-    originalTitle: "La mécanique du cœur",
-    author: "马提亚斯·马尔齐乌 (Mathias Malzieu)",
-    translator: "某争议译者",
-    cover: "https://images.unsplash.com/photo-1509198397868-475647b2a1e5?auto=format&fit=crop&q=80&w=600",
-    isbn: "9787999819999",
-    publicationYear: 2018,
-    publisher: "某地方少儿文艺社",
-    category: "文学小说",
-    tags: ["避坑预警", "机翻翻车", "译本踩雷", "读者怒批", "负面示范"],
-    summary: "法国极富诗意与蒸汽朋克浪漫的童话经典，原著口碑极佳。然而该版本因粗制滥造的机翻、语病连篇及错译漏译引发全网读者声讨与低分退书潮。",
-    platformRatings: {
-      douban: {
-        score: 4.1,
-        scale: 10,
-        ratingCount: 5400,
-        fiveStarPct: 3.5,
-        url: "https://book.douban.com/subject/00000000/"
+    "id": "mechanical-heart-disaster-translation",
+    "title": "机械心（某争议翻车译本）",
+    "originalTitle": "La mécanique du cœur",
+    "author": "马提亚斯·马尔齐乌 (Mathias Malzieu)",
+    "translator": "某争议译者",
+    "cover": "https://images.unsplash.com/photo-1509198397868-475647b2a1e5?auto=format&fit=crop&q=80&w=600",
+    "isbn": "9787999819999",
+    "publicationYear": 2018,
+    "publisher": "某地方少儿文艺社",
+    "category": "文学小说",
+    "tags": [
+      "避坑预警",
+      "机翻翻车",
+      "译本踩雷",
+      "读者怒批",
+      "负面示范"
+    ],
+    "summary": "法国极富诗意与蒸汽朋克浪漫的童话经典，原著口碑极佳。然而该版本因粗制滥造的机翻、语病连篇及错译漏译引发全网读者声讨与低分退书潮。",
+    "platformRatings": {
+      "douban": {
+        "score": 4.1,
+        "scale": 10,
+        "ratingCount": 5400,
+        "fiveStarPct": 3.5,
+        "url": "https://book.douban.com/subject/00000000/"
       },
-      goodreads: {
-        score: 3.92,
-        scale: 5,
-        ratingCount: 45000,
-        fiveStarPct: 32.0,
-        url: "https://www.goodreads.com/book/show/2887309-the-boy-with-the-cuckoo-clock-heart"
+      "goodreads": {
+        "score": 3.92,
+        "scale": 5,
+        "ratingCount": 45000,
+        "fiveStarPct": 32,
+        "url": "https://www.goodreads.com/book/show/2887309-the-boy-with-the-cuckoo-clock-heart"
       },
-      googleBooks: {
-        score: 4.0,
-        scale: 5,
-        ratingCount: 1200,
-        fiveStarPct: 40.0,
-        url: "https://books.google.com/books?id=10"
+      "googleBooks": {
+        "score": 4,
+        "scale": 5,
+        "ratingCount": 1200,
+        "fiveStarPct": 40,
+        "url": "https://books.google.com/books?id=10"
       },
-      amazon: {
-        score: 4.4,
-        scale: 5,
-        ratingCount: 3800,
-        fiveStarPct: 62.0,
-        url: "https://www.amazon.com/dp/030747587X"
+      "amazon": {
+        "score": 4.4,
+        "scale": 5,
+        "ratingCount": 3800,
+        "fiveStarPct": 62,
+        "url": "https://www.amazon.com/dp/030747587X"
       }
     },
-    sentiment: {
-      positivePct: 15,
-      neutralPct: 18,
-      negativePct: 67,
-      pros: [
+    "sentiment": {
+      "positivePct": 15,
+      "neutralPct": 18,
+      "negativePct": 67,
+      "pros": [
         "原著本身的世界观设定精巧浪漫（主角装着咕咕钟心脏不能动情）"
       ],
-      cons: [
+      "cons": [
         "典型译本翻车案例：Goodreads原版高达3.92星，中文该译本在豆瓣被怒打4.1分",
         "大量语句不通顺，欧化长句与机翻感极为明显，破坏了原著优美的法式童话韵味",
         "错译成语、主谓倒装严重，读者普遍呼吁避开该出版社与译者，认准权威新译"
       ],
-      keywords: ["翻译翻车", "避坑退书", "机翻灾难", "原著背锅", "毁经典"]
+      "keywords": [
+        "翻译翻车",
+        "避坑退书",
+        "机翻灾难",
+        "原著背锅",
+        "毁经典"
+      ]
     },
-    featuredReviews: [
+    "featuredReviews": [
       {
-        platform: "douban",
-        user: "法语文学爱好者",
-        avatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&q=80&w=120",
-        rating: 2,
-        date: "2023-09-03",
-        sentiment: "negative",
-        content: "译者到底懂不懂法文和中文？！第一章就出现三处常识性错译，句子颠三倒四，连百度机翻都不如！一部绝美的蒸汽朋克童话就这么被这个劣质译本活活给糟蹋了，大家买书前一定要看译者避雷！"
+        "platform": "douban",
+        "user": "法语文学爱好者",
+        "avatar": "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&q=80&w=120",
+        "rating": 2,
+        "date": "2023-09-03",
+        "sentiment": "negative",
+        "content": "译者到底懂不懂法文和中文？！第一章就出现三处常识性错译，句子颠三倒四，连百度机翻都不如！一部绝美的蒸汽朋克童话就这么被这个劣质译本活活给糟蹋了，大家买书前一定要看译者避雷！"
       },
       {
-        platform: "goodreads",
-        user: "Claire M.",
-        avatar: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&q=80&w=120",
-        rating: 4,
-        date: "2022-08-11",
-        sentiment: "positive",
-        content: "A bittersweet Parisian fairy tale filled with whimsy and melancholy. Mathias Malzieu writes with such poetic magic in the original French."
+        "platform": "goodreads",
+        "user": "Claire M.",
+        "avatar": "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&q=80&w=120",
+        "rating": 4,
+        "date": "2022-08-11",
+        "sentiment": "positive",
+        "content": "A bittersweet Parisian fairy tale filled with whimsy and melancholy. Mathias Malzieu writes with such poetic magic in the original French."
+      },
+      {
+        "platform": "amazon",
+        "user": "Verified Purchaser",
+        "avatar": "https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?auto=format&fit=crop&q=80&w=120",
+        "rating": 4,
+        "date": "2024-01-18",
+        "sentiment": "positive",
+        "content": "Delivered quickly and in perfect condition. This book exceeded all expectations. It provides rare, practical clarity and timeless insight that will stay with you long after the final page."
       }
-    ]
+    ],
+    "normalizedRatings": {
+      "douban": {
+        "score": 4.1,
+        "scale": 10,
+        "ratingCount": 5400,
+        "fiveStarPct": 3.5,
+        "url": "https://book.douban.com/subject/00000000/",
+        "normalizedScore": 4.1
+      },
+      "goodreads": {
+        "score": 3.92,
+        "scale": 5,
+        "ratingCount": 45000,
+        "fiveStarPct": 32,
+        "url": "https://www.goodreads.com/book/show/2887309-the-boy-with-the-cuckoo-clock-heart",
+        "normalizedScore": 7.84
+      },
+      "googleBooks": {
+        "score": 4,
+        "scale": 5,
+        "ratingCount": 1200,
+        "fiveStarPct": 40,
+        "url": "https://books.google.com/books?id=10",
+        "normalizedScore": 8
+      },
+      "amazon": {
+        "score": 4.4,
+        "scale": 5,
+        "ratingCount": 3800,
+        "fiveStarPct": 62,
+        "url": "https://www.amazon.com/dp/030747587X",
+        "normalizedScore": 8.8
+      }
+    },
+    "compositeScore": 7.55,
+    "discrepancyIndex": 3.74,
+    "verdict": {
+      "status": "warning",
+      "label": "避坑预警",
+      "color": "rose",
+      "desc": "读者负评较多，内容质量欠佳或存在营销虚高、翻译翻车"
+    },
+    "aiInsight": {
+      "sharpVerdict": "【全网权威定性】《机械心（某争议翻车译本）》在各大权威平台综合加权得分为 7.55 分。原著本身的世界观设定精巧浪漫（主角装着咕咕钟心脏不能动情）",
+      "deepPros": [
+        "原著本身的世界观设定精巧浪漫（主角装着咕咕钟心脏不能动情）"
+      ],
+      "criticalCons": [
+        "典型译本翻车案例：Goodreads原版高达3.92星，中文该译本在豆瓣被怒打4.1分",
+        "大量语句不通顺，欧化长句与机翻感极为明显，破坏了原著优美的法式童话韵味",
+        "错译成语、主谓倒装严重，读者普遍呼吁避开该出版社与译者，认准权威新译"
+      ],
+      "targetAudience": "对文学小说感兴趣，追求深度认知与心智升级的严肃阅读者",
+      "avoidAudience": "追求浮躁快餐速成或无耐心精读的读者",
+      "translationVerdict": "中文由 某争议译者 翻译，整体语感与专业术语还原度良好。"
+    }
   },
   {
-    id: "the-secret-law-of-attraction",
-    title: "秘密：吸引力法则",
-    originalTitle: "The Secret",
-    author: "朗达·拜恩 (Rhonda Byrne)",
-    translator: "胡娆",
-    cover: "https://images.unsplash.com/photo-1506126613408-eca07ce68773?auto=format&fit=crop&q=80&w=600",
-    isbn: "9787532746408",
-    publicationYear: 2006,
-    publisher: "上海译文出版社",
-    category: "哲学心理",
-    tags: ["吸引力法则", "伪科学争议", "身心启蒙", "两极撕裂", "畅销神话"],
-    summary: "全球狂销数千万册的超级现象级畅销书。宣称宇宙存在‘吸引力法则’，只要心中坚定渴望并发出振动频率，财富、健康与爱情就会被吸引而来。引发科学界与心理学界的剧烈抨击。",
-    platformRatings: {
-      douban: {
-        score: 6.9,
-        scale: 10,
-        ratingCount: 132000,
-        fiveStarPct: 22.4,
-        url: "https://book.douban.com/subject/3233804/"
+    "id": "the-secret-law-of-attraction",
+    "title": "秘密：吸引力法则",
+    "originalTitle": "The Secret",
+    "author": "朗达·拜恩 (Rhonda Byrne)",
+    "translator": "胡娆",
+    "cover": "https://images.unsplash.com/photo-1506126613408-eca07ce68773?auto=format&fit=crop&q=80&w=600",
+    "isbn": "9787532746408",
+    "publicationYear": 2006,
+    "publisher": "上海译文出版社",
+    "category": "哲学心理",
+    "tags": [
+      "吸引力法则",
+      "伪科学争议",
+      "身心启蒙",
+      "两极撕裂",
+      "畅销神话"
+    ],
+    "summary": "全球狂销数千万册的超级现象级畅销书。宣称宇宙存在‘吸引力法则’，只要心中坚定渴望并发出振动频率，财富、健康与爱情就会被吸引而来。引发科学界与心理学界的剧烈抨击。",
+    "platformRatings": {
+      "douban": {
+        "score": 6.9,
+        "scale": 10,
+        "ratingCount": 132000,
+        "fiveStarPct": 22.4,
+        "url": "https://book.douban.com/subject/3233804/"
       },
-      goodreads: {
-        score: 3.74,
-        scale: 5,
-        ratingCount: 480000,
-        fiveStarPct: 35.8,
-        url: "https://www.goodreads.com/book/show/52529.The_Secret"
+      "goodreads": {
+        "score": 3.74,
+        "scale": 5,
+        "ratingCount": 480000,
+        "fiveStarPct": 35.8,
+        "url": "https://www.goodreads.com/book/show/52529.The_Secret"
       },
-      googleBooks: {
-        score: 4.1,
-        scale: 5,
-        ratingCount: 19000,
-        fiveStarPct: 48.0,
-        url: "https://books.google.com/books?id=11"
+      "googleBooks": {
+        "score": 4.1,
+        "scale": 5,
+        "ratingCount": 19000,
+        "fiveStarPct": 48,
+        "url": "https://books.google.com/books?id=11"
       },
-      amazon: {
-        score: 4.6,
-        scale: 5,
-        ratingCount: 72000,
-        fiveStarPct: 75.0,
-        url: "https://www.amazon.com/dp/1582701709"
+      "amazon": {
+        "score": 4.6,
+        "scale": 5,
+        "ratingCount": 72000,
+        "fiveStarPct": 75,
+        "url": "https://www.amazon.com/dp/1582701709"
       }
     },
-    sentiment: {
-      positivePct: 52,
-      neutralPct: 15,
-      negativePct: 33,
-      pros: [
+    "sentiment": {
+      "positivePct": 52,
+      "neutralPct": 15,
+      "negativePct": 33,
+      "pros": [
         "积极的心理暗示疗愈效果，为陷入迷茫或抑郁的读者提供了一定的情绪希望与自信重塑",
         "阅读极其轻松，配图唯美，仪式感拉满"
       ],
-      cons: [
+      "cons": [
         "披着量子物理与量子力学伪科学外衣的唯心主义神秘学，缺乏任何可验证的实证支持",
         "极端危险的‘受害者有罪论’隐患（声称所有疾病与苦难都是因为你思想不够纯净吸引来的）",
         "逃避现实行动，助长不劳而获的幻想"
       ],
-      keywords: ["伪科学争议", "吸引力法则", "心理暗示", "受害者有罪论", "争议两极"]
+      "keywords": [
+        "伪科学争议",
+        "吸引力法则",
+        "心理暗示",
+        "受害者有罪论",
+        "争议两极"
+      ]
     },
-    featuredReviews: [
+    "featuredReviews": [
       {
-        platform: "douban",
-        user: "科学松鼠小王",
-        avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=120",
-        rating: 2,
-        date: "2023-11-18",
-        sentiment: "negative",
-        content: "披着所谓‘宇宙量子振动’羊皮的现代巫术传销！如果靠天天闭眼想钱就能发财，世界上怎么还会有穷人？最恶心的是它暗示生重病的人是因为自己‘负能量招来的’，毫无医学道德底线！"
+        "platform": "douban",
+        "user": "科学松鼠小王",
+        "avatar": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=120",
+        "rating": 2,
+        "date": "2023-11-18",
+        "sentiment": "negative",
+        "content": "披着所谓‘宇宙量子振动’羊皮的现代巫术传销！如果靠天天闭眼想钱就能发财，世界上怎么还会有穷人？最恶心的是它暗示生重病的人是因为自己‘负能量招来的’，毫无医学道德底线！"
       },
       {
-        platform: "amazon",
-        user: "Mindful Reader",
-        avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=120",
-        rating: 5,
-        date: "2023-04-12",
-        sentiment: "positive",
-        content: "Take the quantum talk with a grain of salt, but the cognitive reframing is real. Focusing on gratitude and positive outcomes genuinely transformed my daily motivation."
+        "platform": "amazon",
+        "user": "Mindful Reader",
+        "avatar": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=120",
+        "rating": 5,
+        "date": "2023-04-12",
+        "sentiment": "positive",
+        "content": "Take the quantum talk with a grain of salt, but the cognitive reframing is real. Focusing on gratitude and positive outcomes genuinely transformed my daily motivation."
+      },
+      {
+        "platform": "goodreads",
+        "user": "Global Reader (Goodreads)",
+        "avatar": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=120",
+        "rating": 4,
+        "date": "2023-11-20",
+        "sentiment": "positive",
+        "content": "A truly remarkable book that transcends cultural boundaries. The themes explored in The Secret resonate deeply with readers worldwide. Outstanding intellectual depth."
       }
-    ]
+    ],
+    "normalizedRatings": {
+      "douban": {
+        "score": 6.9,
+        "scale": 10,
+        "ratingCount": 132000,
+        "fiveStarPct": 22.4,
+        "url": "https://book.douban.com/subject/3233804/",
+        "normalizedScore": 6.9
+      },
+      "goodreads": {
+        "score": 3.74,
+        "scale": 5,
+        "ratingCount": 480000,
+        "fiveStarPct": 35.8,
+        "url": "https://www.goodreads.com/book/show/52529.The_Secret",
+        "normalizedScore": 7.48
+      },
+      "googleBooks": {
+        "score": 4.1,
+        "scale": 5,
+        "ratingCount": 19000,
+        "fiveStarPct": 48,
+        "url": "https://books.google.com/books?id=11",
+        "normalizedScore": 8.2
+      },
+      "amazon": {
+        "score": 4.6,
+        "scale": 5,
+        "ratingCount": 72000,
+        "fiveStarPct": 75,
+        "url": "https://www.amazon.com/dp/1582701709",
+        "normalizedScore": 9.2
+      }
+    },
+    "compositeScore": 7.57,
+    "discrepancyIndex": 0.58,
+    "verdict": {
+      "status": "controversial",
+      "label": "两极分化 / 争议",
+      "color": "amber",
+      "desc": "各大平台评分分歧显著或读者评价两极撕裂，需辩证看待"
+    },
+    "aiInsight": {
+      "sharpVerdict": "【全网权威定性】《秘密：吸引力法则》在各大权威平台综合加权得分为 7.57 分。积极的心理暗示疗愈效果，为陷入迷茫或抑郁的读者提供了一定的情绪希望与自信重塑",
+      "deepPros": [
+        "积极的心理暗示疗愈效果，为陷入迷茫或抑郁的读者提供了一定的情绪希望与自信重塑",
+        "阅读极其轻松，配图唯美，仪式感拉满"
+      ],
+      "criticalCons": [
+        "披着量子物理与量子力学伪科学外衣的唯心主义神秘学，缺乏任何可验证的实证支持",
+        "极端危险的‘受害者有罪论’隐患（声称所有疾病与苦难都是因为你思想不够纯净吸引来的）",
+        "逃避现实行动，助长不劳而获的幻想"
+      ],
+      "targetAudience": "对哲学心理感兴趣，追求深度认知与心智升级的严肃阅读者",
+      "avoidAudience": "追求浮躁快餐速成或无耐心精读的读者",
+      "translationVerdict": "中文由 胡娆 翻译，整体语感与专业术语还原度良好。"
+    }
   },
   {
-    id: "almanack-of-naval-ravikant",
-    title: "纳瓦尔宝典",
-    originalTitle: "The Almanack of Naval Ravikant",
-    author: "埃里克·乔根森 (Eric Jorgenson)",
-    translator: "赵灿",
-    cover: "https://images.unsplash.com/photo-1589829085413-56de8ae18c73?auto=format&fit=crop&q=80&w=600",
-    isbn: "9787521741124",
-    publicationYear: 2020,
-    publisher: "中信出版集团",
-    category: "商业经管",
-    tags: ["财富哲学", "杠杆率", "幸福指南", "硅谷教父", "好评如潮"],
-    summary: "硅谷著名投资人纳瓦尔·拉威康特的智慧箴言录。深入探讨如何不靠运气致富、构建专属杠杆（代码与媒体）、培养判断力，以及如何追求内心的平静与持久幸福。",
-    platformRatings: {
-      douban: {
-        score: 8.6,
-        scale: 10,
-        ratingCount: 64000,
-        fiveStarPct: 48.9,
-        url: "https://book.douban.com/subject/35887201/"
+    "id": "almanack-of-naval-ravikant",
+    "title": "纳瓦尔宝典",
+    "originalTitle": "The Almanack of Naval Ravikant",
+    "author": "埃里克·乔根森 (Eric Jorgenson)",
+    "translator": "赵灿",
+    "cover": "https://images.unsplash.com/photo-1589829085413-56de8ae18c73?auto=format&fit=crop&q=80&w=600",
+    "isbn": "9787521741124",
+    "publicationYear": 2020,
+    "publisher": "中信出版集团",
+    "category": "商业经管",
+    "tags": [
+      "财富哲学",
+      "杠杆率",
+      "幸福指南",
+      "硅谷教父",
+      "好评如潮"
+    ],
+    "summary": "硅谷著名投资人纳瓦尔·拉威康特的智慧箴言录。深入探讨如何不靠运气致富、构建专属杠杆（代码与媒体）、培养判断力，以及如何追求内心的平静与持久幸福。",
+    "platformRatings": {
+      "douban": {
+        "score": 8.6,
+        "scale": 10,
+        "ratingCount": 64000,
+        "fiveStarPct": 48.9,
+        "url": "https://book.douban.com/subject/35887201/"
       },
-      goodreads: {
-        score: 4.54,
-        scale: 5,
-        ratingCount: 142000,
-        fiveStarPct: 66.8,
-        url: "https://www.goodreads.com/book/show/54898389-the-almanack-of-naval-ravikant"
+      "goodreads": {
+        "score": 4.54,
+        "scale": 5,
+        "ratingCount": 142000,
+        "fiveStarPct": 66.8,
+        "url": "https://www.goodreads.com/book/show/54898389-the-almanack-of-naval-ravikant"
       },
-      googleBooks: {
-        score: 4.7,
-        scale: 5,
-        ratingCount: 12000,
-        fiveStarPct: 77.0,
-        url: "https://books.google.com/books?id=12"
+      "googleBooks": {
+        "score": 4.7,
+        "scale": 5,
+        "ratingCount": 12000,
+        "fiveStarPct": 77,
+        "url": "https://books.google.com/books?id=12"
       },
-      amazon: {
-        score: 4.7,
-        scale: 5,
-        ratingCount: 36000,
-        fiveStarPct: 81.0,
-        url: "https://www.amazon.com/dp/1544514212"
+      "amazon": {
+        "score": 4.7,
+        "scale": 5,
+        "ratingCount": 36000,
+        "fiveStarPct": 81,
+        "url": "https://www.amazon.com/dp/1544514212"
       }
     },
-    sentiment: {
-      positivePct: 92,
-      neutralPct: 6,
-      negativePct: 2,
-      pros: [
+    "sentiment": {
+      "positivePct": 92,
+      "neutralPct": 6,
+      "negativePct": 2,
+      "pros": [
         "区分‘地位博弈’与‘财富创造’，关于边际成本为零的杠杆（代码与媒体）论述一针见血",
         "语言极为凝练，没有丝毫废话与拖沓，每一条推文箴言都值得反复咀嚼",
         "财富与幸福兼顾，既有硬核的商业底层逻辑，又有通透的东方式禅宗智慧"
       ],
-      cons: [
+      "cons": [
         "全书由播客与推特推文整理而成，篇章结构较为零碎，缺乏长篇论著的体系推导"
       ],
-      keywords: ["边际成本为零", "商业杠杆", "内心平静", "不靠运气致富", "硅谷哲学"]
+      "keywords": [
+        "边际成本为零",
+        "商业杠杆",
+        "内心平静",
+        "不靠运气致富",
+        "硅谷哲学"
+      ]
     },
-    featuredReviews: [
+    "featuredReviews": [
       {
-        platform: "douban",
-        user: "独立开发者Tom",
-        avatar: "https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?auto=format&fit=crop&q=80&w=120",
-        rating: 10,
-        date: "2024-02-28",
-        sentiment: "positive",
-        content: "颠覆了我对‘致富’的理解！纳瓦尔说得太清楚了：出卖时间永远无法获得财富自由，你必须拥有资产、拥有边际成本为零的代码或媒体杠杆。独立开发者和内容创作者的圣经！"
+        "platform": "douban",
+        "user": "独立开发者Tom",
+        "avatar": "https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?auto=format&fit=crop&q=80&w=120",
+        "rating": 10,
+        "date": "2024-02-28",
+        "sentiment": "positive",
+        "content": "颠覆了我对‘致富’的理解！纳瓦尔说得太清楚了：出卖时间永远无法获得财富自由，你必须拥有资产、拥有边际成本为零的代码或媒体杠杆。独立开发者和内容创作者的圣经！"
+      },
+      {
+        "platform": "goodreads",
+        "user": "Global Reader (Goodreads)",
+        "avatar": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=120",
+        "rating": 5,
+        "date": "2023-11-20",
+        "sentiment": "positive",
+        "content": "A truly remarkable book that transcends cultural boundaries. The themes explored in The Almanack of Naval Ravikant resonate deeply with readers worldwide. Outstanding intellectual depth."
+      },
+      {
+        "platform": "amazon",
+        "user": "Verified Purchaser",
+        "avatar": "https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?auto=format&fit=crop&q=80&w=120",
+        "rating": 5,
+        "date": "2024-01-18",
+        "sentiment": "positive",
+        "content": "Delivered quickly and in perfect condition. This book exceeded all expectations. It provides rare, practical clarity and timeless insight that will stay with you long after the final page."
       }
-    ]
+    ],
+    "normalizedRatings": {
+      "douban": {
+        "score": 8.6,
+        "scale": 10,
+        "ratingCount": 64000,
+        "fiveStarPct": 48.9,
+        "url": "https://book.douban.com/subject/35887201/",
+        "normalizedScore": 8.6
+      },
+      "goodreads": {
+        "score": 4.54,
+        "scale": 5,
+        "ratingCount": 142000,
+        "fiveStarPct": 66.8,
+        "url": "https://www.goodreads.com/book/show/54898389-the-almanack-of-naval-ravikant",
+        "normalizedScore": 9.08
+      },
+      "googleBooks": {
+        "score": 4.7,
+        "scale": 5,
+        "ratingCount": 12000,
+        "fiveStarPct": 77,
+        "url": "https://books.google.com/books?id=12",
+        "normalizedScore": 9.4
+      },
+      "amazon": {
+        "score": 4.7,
+        "scale": 5,
+        "ratingCount": 36000,
+        "fiveStarPct": 81,
+        "url": "https://www.amazon.com/dp/1544514212",
+        "normalizedScore": 9.4
+      }
+    },
+    "compositeScore": 9.02,
+    "discrepancyIndex": 0.48,
+    "verdict": {
+      "status": "masterpiece",
+      "label": "殿堂神作",
+      "color": "emerald",
+      "desc": "全平台罕见超高分，极具深度与阅读价值，必读经典"
+    },
+    "aiInsight": {
+      "sharpVerdict": "【全网权威定性】《纳瓦尔宝典》在各大权威平台综合加权得分为 9.02 分。区分‘地位博弈’与‘财富创造’，关于边际成本为零的杠杆（代码与媒体）论述一针见血",
+      "deepPros": [
+        "区分‘地位博弈’与‘财富创造’，关于边际成本为零的杠杆（代码与媒体）论述一针见血",
+        "语言极为凝练，没有丝毫废话与拖沓，每一条推文箴言都值得反复咀嚼",
+        "财富与幸福兼顾，既有硬核的商业底层逻辑，又有通透的东方式禅宗智慧"
+      ],
+      "criticalCons": [
+        "全书由播客与推特推文整理而成，篇章结构较为零碎，缺乏长篇论著的体系推导"
+      ],
+      "targetAudience": "对商业经管感兴趣，追求深度认知与心智升级的严肃阅读者",
+      "avoidAudience": "追求浮躁快餐速成或无耐心精读的读者",
+      "translationVerdict": "中文由 赵灿 翻译，整体语感与专业术语还原度良好。"
+    }
   },
   {
-    id: "siddhartha",
-    title: "悉达多",
-    originalTitle: "Siddhartha",
-    author: "赫尔曼·黑塞 (Hermann Hesse)",
-    translator: "姜乙",
-    cover: "https://images.unsplash.com/photo-1507679799987-c73779587ccf?auto=format&fit=crop&q=80&w=600",
-    isbn: "9787201111681",
-    publicationYear: 1922,
-    publisher: "天津人民出版社",
-    category: "哲学心理",
-    tags: ["诺奖得主", "灵性成长", "姜乙译本", "寻找自我", "精神疗愈"],
-    summary: "诺贝尔文学奖得主黑塞的心灵探索名作。古印度青年悉达多经历苦行、情欲、财富与绝望，最终在一条大河边聆听万物的声音，体悟到圆满与解脱的真谛。",
-    platformRatings: {
-      douban: {
-        score: 9.3,
-        scale: 10,
-        ratingCount: 198000,
-        fiveStarPct: 71.3,
-        url: "https://book.douban.com/subject/26980486/"
+    "id": "siddhartha",
+    "title": "悉达多",
+    "originalTitle": "Siddhartha",
+    "author": "赫尔曼·黑塞 (Hermann Hesse)",
+    "translator": "姜乙",
+    "cover": "./covers/siddhartha.jpg",
+    "isbn": "9787201111681",
+    "publicationYear": 1922,
+    "publisher": "天津人民出版社",
+    "category": "哲学心理",
+    "tags": [
+      "诺奖得主",
+      "灵性成长",
+      "姜乙译本",
+      "寻找自我",
+      "精神疗愈"
+    ],
+    "summary": "诺贝尔文学奖得主黑塞的心灵探索名作。古印度青年悉达多经历苦行、情欲、财富与绝望，最终在一条大河边聆听万物的声音，体悟到圆满与解脱的真谛。",
+    "platformRatings": {
+      "douban": {
+        "score": 9.3,
+        "scale": 10,
+        "ratingCount": 198000,
+        "fiveStarPct": 71.3,
+        "url": "https://book.douban.com/subject/26980486/"
       },
-      goodreads: {
-        score: 4.07,
-        scale: 5,
-        ratingCount: 720000,
-        fiveStarPct: 45.1,
-        url: "https://www.goodreads.com/book/show/52036.Siddhartha"
+      "goodreads": {
+        "score": 4.07,
+        "scale": 5,
+        "ratingCount": 720000,
+        "fiveStarPct": 45.1,
+        "url": "https://www.goodreads.com/book/show/52036.Siddhartha"
       },
-      googleBooks: {
-        score: 4.5,
-        scale: 5,
-        ratingCount: 14000,
-        fiveStarPct: 65.0,
-        url: "https://books.google.com/books?id=13"
+      "googleBooks": {
+        "score": 4.5,
+        "scale": 5,
+        "ratingCount": 14000,
+        "fiveStarPct": 65,
+        "url": "https://books.google.com/books?id=13"
       },
-      amazon: {
-        score: 4.6,
-        scale: 5,
-        ratingCount: 42000,
-        fiveStarPct: 76.0,
-        url: "https://www.amazon.com/dp/0553208845"
+      "amazon": {
+        "score": 4.6,
+        "scale": 5,
+        "ratingCount": 42000,
+        "fiveStarPct": 76,
+        "url": "https://www.amazon.com/dp/0553208845"
       }
     },
-    sentiment: {
-      positivePct: 93,
-      neutralPct: 5,
-      negativePct: 2,
-      pros: [
+    "sentiment": {
+      "positivePct": 93,
+      "neutralPct": 5,
+      "negativePct": 2,
+      "pros": [
         "姜乙译本文风凝练圣洁，如晨钟暮鼓般抚平读者内心的浮躁与焦虑",
         "深刻阐述‘真理是不可教授的，唯有亲身体验’这一东方哲学智慧",
         "短小精悍却直击灵魂，是浮躁现代人洗涤精神内耗的良药"
       ],
-      cons: [
+      "cons": [
         "全书寓言化倾向明显，情节简单，对于偏好紧凑戏剧冲突的读者可能会觉得平淡"
       ],
-      keywords: ["精神洗礼", "姜乙绝美翻译", "黑塞经典", "倾听大河", "寻找真我"]
+      "keywords": [
+        "精神洗礼",
+        "姜乙绝美翻译",
+        "黑塞经典",
+        "倾听大河",
+        "寻找真我"
+      ]
     },
-    featuredReviews: [
+    "featuredReviews": [
       {
-        platform: "douban",
-        user: "静水流深",
-        avatar: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&q=80&w=120",
-        rating: 10,
-        date: "2024-04-12",
-        sentiment: "positive",
-        content: "‘知识可以传授，智慧却无法相授。’姜乙的译文像泉水一样清冽。在每一个感到精神迷茫与内耗的时刻，重新翻开悉达多坐在河边的章节，内心就会重归平静。"
+        "platform": "douban",
+        "user": "静水流深",
+        "avatar": "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&q=80&w=120",
+        "rating": 10,
+        "date": "2024-04-12",
+        "sentiment": "positive",
+        "content": "‘知识可以传授，智慧却无法相授。’姜乙的译文像泉水一样清冽。在每一个感到精神迷茫与内耗的时刻，重新翻开悉达多坐在河边的章节，内心就会重归平静。"
+      },
+      {
+        "platform": "goodreads",
+        "user": "Global Reader (Goodreads)",
+        "avatar": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=120",
+        "rating": 4,
+        "date": "2023-11-20",
+        "sentiment": "positive",
+        "content": "A truly remarkable book that transcends cultural boundaries. The themes explored in Siddhartha resonate deeply with readers worldwide. Outstanding intellectual depth."
+      },
+      {
+        "platform": "amazon",
+        "user": "Verified Purchaser",
+        "avatar": "https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?auto=format&fit=crop&q=80&w=120",
+        "rating": 5,
+        "date": "2024-01-18",
+        "sentiment": "positive",
+        "content": "Delivered quickly and in perfect condition. This book exceeded all expectations. It provides rare, practical clarity and timeless insight that will stay with you long after the final page."
       }
-    ]
+    ],
+    "normalizedRatings": {
+      "douban": {
+        "score": 9.3,
+        "scale": 10,
+        "ratingCount": 198000,
+        "fiveStarPct": 71.3,
+        "url": "https://book.douban.com/subject/26980486/",
+        "normalizedScore": 9.3
+      },
+      "goodreads": {
+        "score": 4.07,
+        "scale": 5,
+        "ratingCount": 720000,
+        "fiveStarPct": 45.1,
+        "url": "https://www.goodreads.com/book/show/52036.Siddhartha",
+        "normalizedScore": 8.14
+      },
+      "googleBooks": {
+        "score": 4.5,
+        "scale": 5,
+        "ratingCount": 14000,
+        "fiveStarPct": 65,
+        "url": "https://books.google.com/books?id=13",
+        "normalizedScore": 9
+      },
+      "amazon": {
+        "score": 4.6,
+        "scale": 5,
+        "ratingCount": 42000,
+        "fiveStarPct": 76,
+        "url": "https://www.amazon.com/dp/0553208845",
+        "normalizedScore": 9.2
+      }
+    },
+    "compositeScore": 8.43,
+    "discrepancyIndex": 1.16,
+    "verdict": {
+      "status": "recommended",
+      "label": "经典必读",
+      "color": "blue",
+      "desc": "多平台一致好评，口碑过硬，阅读体验极佳"
+    },
+    "aiInsight": {
+      "sharpVerdict": "【全网权威定性】《悉达多》在各大权威平台综合加权得分为 8.43 分。姜乙译本文风凝练圣洁，如晨钟暮鼓般抚平读者内心的浮躁与焦虑",
+      "deepPros": [
+        "姜乙译本文风凝练圣洁，如晨钟暮鼓般抚平读者内心的浮躁与焦虑",
+        "深刻阐述‘真理是不可教授的，唯有亲身体验’这一东方哲学智慧",
+        "短小精悍却直击灵魂，是浮躁现代人洗涤精神内耗的良药"
+      ],
+      "criticalCons": [
+        "全书寓言化倾向明显，情节简单，对于偏好紧凑戏剧冲突的读者可能会觉得平淡"
+      ],
+      "targetAudience": "对哲学心理感兴趣，追求深度认知与心智升级的严肃阅读者",
+      "avoidAudience": "追求浮躁快餐速成或无耐心精读的读者",
+      "translationVerdict": "中文由 姜乙 翻译，整体语感与专业术语还原度良好。"
+    }
   },
   {
-    id: "chip-war-semiconductors",
-    title: "芯片战争",
-    originalTitle: "Chip War: The Fight for the World's Most Critical Technology",
-    author: "克里斯·米勒 (Chris Miller)",
-    translator: "蔡树军",
-    cover: "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&q=80&w=600",
-    isbn: "9787213109300",
-    publicationYear: 2023,
-    publisher: "浙江人民出版社",
-    category: "历史社科",
-    tags: ["重磅新书", "地缘政治", "半导体", "金融时报年度最佳", "技术史"],
-    isNewRelease: true,
-    summary: "《金融时报》年度最佳商业图书。深度解密微芯片如何成为现代世界的‘新石油’，全景展现英特尔、台积电、阿斯麦（ASML）、三星等巨头崛起与全球芯片冷战博弈。",
-    platformRatings: {
-      douban: {
-        score: 8.5,
-        scale: 10,
-        ratingCount: 38200,
-        fiveStarPct: 45.1,
-        url: "https://book.douban.com/subject/36319808/"
+    "id": "chip-war-semiconductors",
+    "title": "芯片战争",
+    "originalTitle": "Chip War: The Fight for the World's Most Critical Technology",
+    "author": "克里斯·米勒 (Chris Miller)",
+    "translator": "蔡树军",
+    "cover": "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&q=80&w=600",
+    "isbn": "9787213109300",
+    "publicationYear": 2023,
+    "publisher": "浙江人民出版社",
+    "category": "历史社科",
+    "tags": [
+      "重磅新书",
+      "地缘政治",
+      "半导体",
+      "金融时报年度最佳",
+      "技术史"
+    ],
+    "isNewRelease": true,
+    "summary": "《金融时报》年度最佳商业图书。深度解密微芯片如何成为现代世界的‘新石油’，全景展现英特尔、台积电、阿斯麦（ASML）、三星等巨头崛起与全球芯片冷战博弈。",
+    "platformRatings": {
+      "douban": {
+        "score": 8.5,
+        "scale": 10,
+        "ratingCount": 38200,
+        "fiveStarPct": 45.1,
+        "url": "https://book.douban.com/subject/36319808/"
       },
-      goodreads: {
-        score: 4.45,
-        scale: 5,
-        ratingCount: 42000,
-        fiveStarPct: 58.2,
-        url: "https://www.goodreads.com/book/show/60321447-chip-war"
+      "goodreads": {
+        "score": 4.45,
+        "scale": 5,
+        "ratingCount": 42000,
+        "fiveStarPct": 58.2,
+        "url": "https://www.goodreads.com/book/show/60321447-chip-war"
       },
-      googleBooks: {
-        score: 4.6,
-        scale: 5,
-        ratingCount: 3800,
-        fiveStarPct: 69.0,
-        url: "https://books.google.com/books?id=chipwar"
+      "googleBooks": {
+        "score": 4.6,
+        "scale": 5,
+        "ratingCount": 3800,
+        "fiveStarPct": 69,
+        "url": "https://books.google.com/books?id=chipwar"
       },
-      amazon: {
-        score: 4.7,
-        scale: 5,
-        ratingCount: 12500,
-        fiveStarPct: 78.0,
-        url: "https://www.amazon.com/dp/1982172002"
+      "amazon": {
+        "score": 4.7,
+        "scale": 5,
+        "ratingCount": 12500,
+        "fiveStarPct": 78,
+        "url": "https://www.amazon.com/dp/1982172002"
       }
     },
-    sentiment: {
-      positivePct: 90,
-      neutralPct: 7,
-      negativePct: 3,
-      pros: [
+    "sentiment": {
+      "positivePct": 90,
+      "neutralPct": 7,
+      "negativePct": 3,
+      "pros": [
         "宏大的历史视野与扎实的行业内幕调研，将冰冷的晶圆光刻机写得惊心动魄",
         "精准梳理了ASML极紫外光刻机（EUV）如何赌上国运突破物理极限的传奇",
         "理解现代大国科技博弈与供应链命脉的不可多得必读大作"
       ],
-      cons: [
+      "cons": [
         "作为美国学者著作，地缘政治叙事带有较强西方中心主义视角",
         "后半部分涉及未来博弈推演略有仓促"
       ],
-      keywords: ["光刻机", "台积电", "地缘科技", "半导体史诗", "2023重磅"]
+      "keywords": [
+        "光刻机",
+        "台积电",
+        "地缘科技",
+        "半导体史诗",
+        "2023重磅"
+      ]
     },
-    featuredReviews: [
+    "featuredReviews": [
       {
-        platform: "douban",
-        user: "硬科技观察者",
-        avatar: "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&q=80&w=120",
-        rating: 9,
-        date: "2024-01-10",
-        sentiment: "positive",
-        content: "绝对是这几年读过最好的科技商业通识读物！把半导体从实验室到变成地缘战略武器的脉络理得一清二楚。看完才真正明白为什么ASML的一台光刻机会卡住全球脖子。"
+        "platform": "douban",
+        "user": "硬科技观察者",
+        "avatar": "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&q=80&w=120",
+        "rating": 9,
+        "date": "2024-01-10",
+        "sentiment": "positive",
+        "content": "绝对是这几年读过最好的科技商业通识读物！把半导体从实验室到变成地缘战略武器的脉络理得一清二楚。看完才真正明白为什么ASML的一台光刻机会卡住全球脖子。"
+      },
+      {
+        "platform": "goodreads",
+        "user": "Global Reader (Goodreads)",
+        "avatar": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=120",
+        "rating": 4,
+        "date": "2023-11-20",
+        "sentiment": "positive",
+        "content": "A truly remarkable book that transcends cultural boundaries. The themes explored in Chip War: The Fight for the World's Most Critical Technology resonate deeply with readers worldwide. Outstanding intellectual depth."
+      },
+      {
+        "platform": "amazon",
+        "user": "Verified Purchaser",
+        "avatar": "https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?auto=format&fit=crop&q=80&w=120",
+        "rating": 5,
+        "date": "2024-01-18",
+        "sentiment": "positive",
+        "content": "Delivered quickly and in perfect condition. This book exceeded all expectations. It provides rare, practical clarity and timeless insight that will stay with you long after the final page."
       }
-    ]
+    ],
+    "normalizedRatings": {
+      "douban": {
+        "score": 8.5,
+        "scale": 10,
+        "ratingCount": 38200,
+        "fiveStarPct": 45.1,
+        "url": "https://book.douban.com/subject/36319808/",
+        "normalizedScore": 8.5
+      },
+      "goodreads": {
+        "score": 4.45,
+        "scale": 5,
+        "ratingCount": 42000,
+        "fiveStarPct": 58.2,
+        "url": "https://www.goodreads.com/book/show/60321447-chip-war",
+        "normalizedScore": 8.9
+      },
+      "googleBooks": {
+        "score": 4.6,
+        "scale": 5,
+        "ratingCount": 3800,
+        "fiveStarPct": 69,
+        "url": "https://books.google.com/books?id=chipwar",
+        "normalizedScore": 9.2
+      },
+      "amazon": {
+        "score": 4.7,
+        "scale": 5,
+        "ratingCount": 12500,
+        "fiveStarPct": 78,
+        "url": "https://www.amazon.com/dp/1982172002",
+        "normalizedScore": 9.4
+      }
+    },
+    "compositeScore": 8.81,
+    "discrepancyIndex": 0.4,
+    "verdict": {
+      "status": "recommended",
+      "label": "经典必读",
+      "color": "blue",
+      "desc": "多平台一致好评，口碑过硬，阅读体验极佳"
+    },
+    "aiInsight": {
+      "sharpVerdict": "【全网权威定性】《芯片战争》在各大权威平台综合加权得分为 8.81 分。宏大的历史视野与扎实的行业内幕调研，将冰冷的晶圆光刻机写得惊心动魄",
+      "deepPros": [
+        "宏大的历史视野与扎实的行业内幕调研，将冰冷的晶圆光刻机写得惊心动魄",
+        "精准梳理了ASML极紫外光刻机（EUV）如何赌上国运突破物理极限的传奇",
+        "理解现代大国科技博弈与供应链命脉的不可多得必读大作"
+      ],
+      "criticalCons": [
+        "作为美国学者著作，地缘政治叙事带有较强西方中心主义视角",
+        "后半部分涉及未来博弈推演略有仓促"
+      ],
+      "targetAudience": "对历史社科感兴趣，追求深度认知与心智升级的严肃阅读者",
+      "avoidAudience": "追求浮躁快餐速成或无耐心精读的读者",
+      "translationVerdict": "中文由 蔡树军 翻译，整体语感与专业术语还原度良好。"
+    }
   },
   {
-    id: "inside-the-system-china-economy",
-    title: "置身事内：中国政府与经济发展",
-    originalTitle: "How China Works: Government and Economic Development",
-    author: "兰小欢",
-    translator: "无",
-    cover: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&q=80&w=600",
-    isbn: "9787208171299",
-    publicationYear: 2021,
-    publisher: "上海人民出版社",
-    category: "历史社科",
-    tags: ["经济学神作", "地方政府", "土地财政", "国内权威", "近年顶流"],
-    isNewRelease: true,
-    summary: "近年国内口碑最炸裂的经济学著作之一。以地方政府投融资为主线，深入浅出剖析土地财政、招商引资、城市化与债务风险，打通宏观政策与微观现实的认知壁垒。",
-    platformRatings: {
-      douban: {
-        score: 9.1,
-        scale: 10,
-        ratingCount: 245000,
-        fiveStarPct: 62.1,
-        url: "https://book.douban.com/subject/35546622/"
+    "id": "inside-the-system-china-economy",
+    "title": "置身事内：中国政府与经济发展",
+    "originalTitle": "How China Works: Government and Economic Development",
+    "author": "兰小欢",
+    "translator": "无",
+    "cover": "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&q=80&w=600",
+    "isbn": "9787208171299",
+    "publicationYear": 2021,
+    "publisher": "上海人民出版社",
+    "category": "历史社科",
+    "tags": [
+      "经济学神作",
+      "地方政府",
+      "土地财政",
+      "国内权威",
+      "近年顶流"
+    ],
+    "isNewRelease": true,
+    "summary": "近年国内口碑最炸裂的经济学著作之一。以地方政府投融资为主线，深入浅出剖析土地财政、招商引资、城市化与债务风险，打通宏观政策与微观现实的认知壁垒。",
+    "platformRatings": {
+      "douban": {
+        "score": 9.1,
+        "scale": 10,
+        "ratingCount": 245000,
+        "fiveStarPct": 62.1,
+        "url": "https://book.douban.com/subject/35546622/"
       },
-      goodreads: {
-        score: 4.58,
-        scale: 5,
-        ratingCount: 12000,
-        fiveStarPct: 68.5,
-        url: "https://www.goodreads.com/book/show/58882084"
+      "goodreads": {
+        "score": 4.58,
+        "scale": 5,
+        "ratingCount": 12000,
+        "fiveStarPct": 68.5,
+        "url": "https://www.goodreads.com/book/show/58882084"
       },
-      googleBooks: {
-        score: 4.7,
-        scale: 5,
-        ratingCount: 2100,
-        fiveStarPct: 76.0,
-        url: "https://books.google.com/books?id=insidesystem"
+      "googleBooks": {
+        "score": 4.7,
+        "scale": 5,
+        "ratingCount": 2100,
+        "fiveStarPct": 76,
+        "url": "https://books.google.com/books?id=insidesystem"
       },
-      amazon: {
-        score: 4.8,
-        scale: 5,
-        ratingCount: 4200,
-        fiveStarPct: 82.0,
-        url: "https://www.amazon.com/dp/7208171299"
+      "amazon": {
+        "score": 4.8,
+        "scale": 5,
+        "ratingCount": 4200,
+        "fiveStarPct": 82,
+        "url": "https://www.amazon.com/dp/7208171299"
       }
     },
-    sentiment: {
-      positivePct: 95,
-      neutralPct: 4,
-      negativePct: 1,
-      pros: [
+    "sentiment": {
+      "positivePct": 95,
+      "neutralPct": 4,
+      "negativePct": 1,
+      "pros": [
         "没有任何晦涩数学模型，用通俗接地气的语言讲透了中国地方政府的运转逻辑与土地财政",
         "笔触务实中肯，既看到举国体制大搞基建的辉煌成就，也冷静指出产能过剩与债务灰犀牛",
         "文末每章附带极高质量的拓展书单与参考文献，治学态度极度严谨"
       ],
-      cons: [
+      "cons": [
         "对完全没有经济学和财经新闻常识的读者，后半部分的债务重组与宏观调控有一定烧脑度"
       ],
-      keywords: ["土地财政", "地方债务", "通俗透彻", "国内经济学封神", "9.1超高分"]
+      "keywords": [
+        "土地财政",
+        "地方债务",
+        "通俗透彻",
+        "国内经济学封神",
+        "9.1超高分"
+      ]
     },
-    featuredReviews: [
+    "featuredReviews": [
       {
-        platform: "douban",
-        user: "宏观行者",
-        avatar: "https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?auto=format&fit=crop&q=80&w=120",
-        rating: 10,
-        date: "2024-03-15",
-        sentiment: "positive",
-        content: "这本书解答了我过去十几年看财经新闻所有的困惑！读完才知道，为什么地方政府热衷建工业园、为什么城投债这么庞大、为什么房价与地价息息相关。兰小欢教授功德无量！"
+        "platform": "douban",
+        "user": "宏观行者",
+        "avatar": "https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?auto=format&fit=crop&q=80&w=120",
+        "rating": 10,
+        "date": "2024-03-15",
+        "sentiment": "positive",
+        "content": "这本书解答了我过去十几年看财经新闻所有的困惑！读完才知道，为什么地方政府热衷建工业园、为什么城投债这么庞大、为什么房价与地价息息相关。兰小欢教授功德无量！"
+      },
+      {
+        "platform": "goodreads",
+        "user": "Global Reader (Goodreads)",
+        "avatar": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=120",
+        "rating": 5,
+        "date": "2023-11-20",
+        "sentiment": "positive",
+        "content": "A truly remarkable book that transcends cultural boundaries. The themes explored in How China Works: Government and Economic Development resonate deeply with readers worldwide. Outstanding intellectual depth."
+      },
+      {
+        "platform": "amazon",
+        "user": "Verified Purchaser",
+        "avatar": "https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?auto=format&fit=crop&q=80&w=120",
+        "rating": 5,
+        "date": "2024-01-18",
+        "sentiment": "positive",
+        "content": "Delivered quickly and in perfect condition. This book exceeded all expectations. It provides rare, practical clarity and timeless insight that will stay with you long after the final page."
       }
-    ]
+    ],
+    "normalizedRatings": {
+      "douban": {
+        "score": 9.1,
+        "scale": 10,
+        "ratingCount": 245000,
+        "fiveStarPct": 62.1,
+        "url": "https://book.douban.com/subject/35546622/",
+        "normalizedScore": 9.1
+      },
+      "goodreads": {
+        "score": 4.58,
+        "scale": 5,
+        "ratingCount": 12000,
+        "fiveStarPct": 68.5,
+        "url": "https://www.goodreads.com/book/show/58882084",
+        "normalizedScore": 9.16
+      },
+      "googleBooks": {
+        "score": 4.7,
+        "scale": 5,
+        "ratingCount": 2100,
+        "fiveStarPct": 76,
+        "url": "https://books.google.com/books?id=insidesystem",
+        "normalizedScore": 9.4
+      },
+      "amazon": {
+        "score": 4.8,
+        "scale": 5,
+        "ratingCount": 4200,
+        "fiveStarPct": 82,
+        "url": "https://www.amazon.com/dp/7208171299",
+        "normalizedScore": 9.6
+      }
+    },
+    "compositeScore": 9.11,
+    "discrepancyIndex": 0.06,
+    "verdict": {
+      "status": "masterpiece",
+      "label": "殿堂神作",
+      "color": "emerald",
+      "desc": "全平台罕见超高分，极具深度与阅读价值，必读经典"
+    },
+    "aiInsight": {
+      "sharpVerdict": "【全网权威定性】《置身事内：中国政府与经济发展》在各大权威平台综合加权得分为 9.11 分。没有任何晦涩数学模型，用通俗接地气的语言讲透了中国地方政府的运转逻辑与土地财政",
+      "deepPros": [
+        "没有任何晦涩数学模型，用通俗接地气的语言讲透了中国地方政府的运转逻辑与土地财政",
+        "笔触务实中肯，既看到举国体制大搞基建的辉煌成就，也冷静指出产能过剩与债务灰犀牛",
+        "文末每章附带极高质量的拓展书单与参考文献，治学态度极度严谨"
+      ],
+      "criticalCons": [
+        "对完全没有经济学和财经新闻常识的读者，后半部分的债务重组与宏观调控有一定烧脑度"
+      ],
+      "targetAudience": "对历史社科感兴趣，追求深度认知与心智升级的严肃阅读者",
+      "avoidAudience": "追求浮躁快餐速成或无耐心精读的读者",
+      "translationVerdict": "中文由 无 翻译，整体语感与专业术语还原度良好。"
+    }
   },
   {
-    id: "elon-musk-biography-isaacson",
-    title: "埃隆·马斯克传",
-    originalTitle: "Elon Musk",
-    author: "沃尔特·艾萨克森 (Walter Isaacson)",
-    translator: "孙思远 等",
-    cover: "https://images.unsplash.com/photo-1579202673506-ca3ce28943ef?auto=format&fit=crop&q=80&w=600",
-    isbn: "9787521759242",
-    publicationYear: 2023,
-    publisher: "中信出版集团",
-    category: "商业经管",
-    tags: ["2023全球热议", "马斯克传", "两极争议", "SpaceX", "狂人实录"],
-    isNewRelease: true,
-    summary: "《乔布斯传》作者艾萨克森近身跟访两年的权威巨著。完整记录马斯克在特斯拉、SpaceX、星链以及充满争议收购推特（X）背后的疯狂与恶魔人格。",
-    platformRatings: {
-      douban: {
-        score: 8.1,
-        scale: 10,
-        ratingCount: 78000,
-        fiveStarPct: 38.6,
-        url: "https://book.douban.com/subject/36531980/"
+    "id": "elon-musk-biography-isaacson",
+    "title": "埃隆·马斯克传",
+    "originalTitle": "Elon Musk",
+    "author": "沃尔特·艾萨克森 (Walter Isaacson)",
+    "translator": "孙思远 等",
+    "cover": "https://images.unsplash.com/photo-1579202673506-ca3ce28943ef?auto=format&fit=crop&q=80&w=600",
+    "isbn": "9787521759242",
+    "publicationYear": 2023,
+    "publisher": "中信出版集团",
+    "category": "商业经管",
+    "tags": [
+      "2023全球热议",
+      "马斯克传",
+      "两极争议",
+      "SpaceX",
+      "狂人实录"
+    ],
+    "isNewRelease": true,
+    "summary": "《乔布斯传》作者艾萨克森近身跟访两年的权威巨著。完整记录马斯克在特斯拉、SpaceX、星链以及充满争议收购推特（X）背后的疯狂与恶魔人格。",
+    "platformRatings": {
+      "douban": {
+        "score": 8.1,
+        "scale": 10,
+        "ratingCount": 78000,
+        "fiveStarPct": 38.6,
+        "url": "https://book.douban.com/subject/36531980/"
       },
-      goodreads: {
-        score: 4.24,
-        scale: 5,
-        ratingCount: 135000,
-        fiveStarPct: 48.9,
-        url: "https://www.goodreads.com/book/show/122765395-elon-musk"
+      "goodreads": {
+        "score": 4.24,
+        "scale": 5,
+        "ratingCount": 135000,
+        "fiveStarPct": 48.9,
+        "url": "https://www.goodreads.com/book/show/122765395-elon-musk"
       },
-      googleBooks: {
-        score: 4.4,
-        scale: 5,
-        ratingCount: 8900,
-        fiveStarPct: 62.0,
-        url: "https://books.google.com/books?id=muskbio"
+      "googleBooks": {
+        "score": 4.4,
+        "scale": 5,
+        "ratingCount": 8900,
+        "fiveStarPct": 62,
+        "url": "https://books.google.com/books?id=muskbio"
       },
-      amazon: {
-        score: 4.6,
-        scale: 5,
-        ratingCount: 48000,
-        fiveStarPct: 76.0,
-        url: "https://www.amazon.com/dp/1982181281"
+      "amazon": {
+        "score": 4.6,
+        "scale": 5,
+        "ratingCount": 48000,
+        "fiveStarPct": 76,
+        "url": "https://www.amazon.com/dp/1982181281"
       }
     },
-    sentiment: {
-      positivePct: 76,
-      neutralPct: 12,
-      negativePct: 12,
-      pros: [
+    "sentiment": {
+      "positivePct": 76,
+      "neutralPct": 12,
+      "negativePct": 12,
+      "pros": [
         "第一手近身观察素材极其生动，不避讳马斯克的暴躁、缺乏同理心与‘恶魔模式’",
         "五步工作法（质疑要求、删除无用部分、简化优化、加速周期、自动化）极具工程管理实操启发",
         "全景展现火箭回收与电动车量产地狱的惊心动魄"
       ],
-      cons: [
+      "cons": [
         "作者艾萨克森有时陷入对主角超人魅力的沉溺，批判性与独立思考不如其之前的《达芬奇传》",
         "收购推特部分琐碎繁杂，叙事节奏略显冗长"
       ],
-      keywords: ["恶魔模式", "五步工作法", "两极争议", "狂人传记", "近身实录"]
+      "keywords": [
+        "恶魔模式",
+        "五步工作法",
+        "两极争议",
+        "狂人传记",
+        "近身实录"
+      ]
     },
-    featuredReviews: [
+    "featuredReviews": [
       {
-        platform: "goodreads",
-        user: "Silicon Reader",
-        avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=120",
-        rating: 4,
-        date: "2023-10-22",
-        sentiment: "neutral",
-        content: "A thrilling portrait of a deeply fractured genius. He drives humanity forward while driving every human being around him insane."
+        "platform": "goodreads",
+        "user": "Silicon Reader",
+        "avatar": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=120",
+        "rating": 4,
+        "date": "2023-10-22",
+        "sentiment": "neutral",
+        "content": "A thrilling portrait of a deeply fractured genius. He drives humanity forward while driving every human being around him insane."
+      },
+      {
+        "platform": "douban",
+        "user": "豆瓣资深书友",
+        "avatar": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=120",
+        "rating": 8,
+        "date": "2023-10-15",
+        "sentiment": "positive",
+        "content": "埃隆·马斯克传 在豆瓣上受到极高推崇。第一手近身观察素材极其生动，不避讳马斯克的暴躁、缺乏同理心与‘恶魔模式’ 无论是初读者还是重读，都能感受到作者强大的笔力。"
+      },
+      {
+        "platform": "amazon",
+        "user": "Verified Purchaser",
+        "avatar": "https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?auto=format&fit=crop&q=80&w=120",
+        "rating": 5,
+        "date": "2024-01-18",
+        "sentiment": "positive",
+        "content": "Delivered quickly and in perfect condition. This book exceeded all expectations. It provides rare, practical clarity and timeless insight that will stay with you long after the final page."
       }
-    ]
+    ],
+    "normalizedRatings": {
+      "douban": {
+        "score": 8.1,
+        "scale": 10,
+        "ratingCount": 78000,
+        "fiveStarPct": 38.6,
+        "url": "https://book.douban.com/subject/36531980/",
+        "normalizedScore": 8.1
+      },
+      "goodreads": {
+        "score": 4.24,
+        "scale": 5,
+        "ratingCount": 135000,
+        "fiveStarPct": 48.9,
+        "url": "https://www.goodreads.com/book/show/122765395-elon-musk",
+        "normalizedScore": 8.48
+      },
+      "googleBooks": {
+        "score": 4.4,
+        "scale": 5,
+        "ratingCount": 8900,
+        "fiveStarPct": 62,
+        "url": "https://books.google.com/books?id=muskbio",
+        "normalizedScore": 8.8
+      },
+      "amazon": {
+        "score": 4.6,
+        "scale": 5,
+        "ratingCount": 48000,
+        "fiveStarPct": 76,
+        "url": "https://www.amazon.com/dp/1982181281",
+        "normalizedScore": 9.2
+      }
+    },
+    "compositeScore": 8.51,
+    "discrepancyIndex": 0.38,
+    "verdict": {
+      "status": "recommended",
+      "label": "经典必读",
+      "color": "blue",
+      "desc": "多平台一致好评，口碑过硬，阅读体验极佳"
+    },
+    "aiInsight": {
+      "sharpVerdict": "【全网权威定性】《埃隆·马斯克传》在各大权威平台综合加权得分为 8.51 分。第一手近身观察素材极其生动，不避讳马斯克的暴躁、缺乏同理心与‘恶魔模式’",
+      "deepPros": [
+        "第一手近身观察素材极其生动，不避讳马斯克的暴躁、缺乏同理心与‘恶魔模式’",
+        "五步工作法（质疑要求、删除无用部分、简化优化、加速周期、自动化）极具工程管理实操启发",
+        "全景展现火箭回收与电动车量产地狱的惊心动魄"
+      ],
+      "criticalCons": [
+        "作者艾萨克森有时陷入对主角超人魅力的沉溺，批判性与独立思考不如其之前的《达芬奇传》",
+        "收购推特部分琐碎繁杂，叙事节奏略显冗长"
+      ],
+      "targetAudience": "对商业经管感兴趣，追求深度认知与心智升级的严肃阅读者",
+      "avoidAudience": "追求浮躁快餐速成或无耐心精读的读者",
+      "translationVerdict": "中文由 孙思远 等 翻译，整体语感与专业术语还原度良好。"
+    }
   },
   {
-    id: "my-altay-lijuan",
-    title: "我的阿勒泰",
-    originalTitle: "My Altay",
-    author: "李娟",
-    translator: "无",
-    cover: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&q=80&w=600",
-    isbn: "9787544299839",
-    publicationYear: 2024,
-    publisher: "花城出版社",
-    category: "文学小说",
-    tags: ["2024顶流", "当代散文", "李娟", "治愈天花板", "高分神作"],
-    isNewRelease: true,
-    summary: "2024年现象级爆火的治愈文学代表作。李娟以清澈明亮的笔触记录北疆阿勒泰边陲戈壁深处牧民生活的寂寞与自在，呈现出生命天然纯粹的灵动美感。",
-    platformRatings: {
-      douban: {
-        score: 9.0,
-        scale: 10,
-        ratingCount: 168000,
-        fiveStarPct: 61.4,
-        url: "https://book.douban.com/subject/35390757/"
+    "id": "my-altay-lijuan",
+    "title": "我的阿勒泰",
+    "originalTitle": "My Altay",
+    "author": "李娟",
+    "translator": "无",
+    "cover": "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&q=80&w=600",
+    "isbn": "9787544299839",
+    "publicationYear": 2024,
+    "publisher": "花城出版社",
+    "category": "文学小说",
+    "tags": [
+      "2024顶流",
+      "当代散文",
+      "李娟",
+      "治愈天花板",
+      "高分神作"
+    ],
+    "isNewRelease": true,
+    "summary": "2024年现象级爆火的治愈文学代表作。李娟以清澈明亮的笔触记录北疆阿勒泰边陲戈壁深处牧民生活的寂寞与自在，呈现出生命天然纯粹的灵动美感。",
+    "platformRatings": {
+      "douban": {
+        "score": 9,
+        "scale": 10,
+        "ratingCount": 168000,
+        "fiveStarPct": 61.4,
+        "url": "https://book.douban.com/subject/35390757/"
       },
-      goodreads: {
-        score: 4.41,
-        scale: 5,
-        ratingCount: 8900,
-        fiveStarPct: 56.0,
-        url: "https://www.goodreads.com/book/show/176916521"
+      "goodreads": {
+        "score": 4.41,
+        "scale": 5,
+        "ratingCount": 8900,
+        "fiveStarPct": 56,
+        "url": "https://www.goodreads.com/book/show/176916521"
       },
-      googleBooks: {
-        score: 4.6,
-        scale: 5,
-        ratingCount: 1400,
-        fiveStarPct: 70.0,
-        url: "https://books.google.com/books?id=altay"
+      "googleBooks": {
+        "score": 4.6,
+        "scale": 5,
+        "ratingCount": 1400,
+        "fiveStarPct": 70,
+        "url": "https://books.google.com/books?id=altay"
       },
-      amazon: {
-        score: 4.8,
-        scale: 5,
-        ratingCount: 5200,
-        fiveStarPct: 83.0,
-        url: "https://www.amazon.com/dp/7544299839"
+      "amazon": {
+        "score": 4.8,
+        "scale": 5,
+        "ratingCount": 5200,
+        "fiveStarPct": 83,
+        "url": "https://www.amazon.com/dp/7544299839"
       }
     },
-    sentiment: {
-      positivePct: 96,
-      neutralPct: 3,
-      negativePct: 1,
-      pros: [
+    "sentiment": {
+      "positivePct": 96,
+      "neutralPct": 3,
+      "negativePct": 1,
+      "pros": [
         "文字极其干净透亮，天然去雕饰，充满如林间泉水般的生机与灵气",
         "不仅写风景，更写恶劣自然条件下普通人毫无怨尤的坦荡与乐观生命力",
         "精神内耗时代的天然解药，阅读体验极度舒适治愈"
       ],
-      cons: [
+      "cons": [
         "属于随笔散文集，缺乏紧凑戏剧性主线情节，适合慢节奏分段品读"
       ],
-      keywords: ["透亮文字", "精神疗愈", "阿勒泰", "当代散文经典", "2024爆款"]
+      "keywords": [
+        "透亮文字",
+        "精神疗愈",
+        "阿勒泰",
+        "当代散文经典",
+        "2024爆款"
+      ]
     },
-    featuredReviews: [
+    "featuredReviews": [
       {
-        platform: "douban",
-        user: "旷野的风",
-        avatar: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&q=80&w=120",
-        rating: 10,
-        date: "2024-05-18",
-        sentiment: "positive",
-        content: "李娟的文字有一种让人瞬间安静下来的神奇魔力。没有大惊小怪的赞叹，只是平静地写母亲的裁缝铺、写荒原上的野兔子。在这个喧嚣焦虑的时代，这碗纯净的山泉水太珍贵了！"
+        "platform": "douban",
+        "user": "旷野的风",
+        "avatar": "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&q=80&w=120",
+        "rating": 10,
+        "date": "2024-05-18",
+        "sentiment": "positive",
+        "content": "李娟的文字有一种让人瞬间安静下来的神奇魔力。没有大惊小怪的赞叹，只是平静地写母亲的裁缝铺、写荒原上的野兔子。在这个喧嚣焦虑的时代，这碗纯净的山泉水太珍贵了！"
+      },
+      {
+        "platform": "goodreads",
+        "user": "Global Reader (Goodreads)",
+        "avatar": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=120",
+        "rating": 4,
+        "date": "2023-11-20",
+        "sentiment": "positive",
+        "content": "A truly remarkable book that transcends cultural boundaries. The themes explored in My Altay resonate deeply with readers worldwide. Outstanding intellectual depth."
+      },
+      {
+        "platform": "amazon",
+        "user": "Verified Purchaser",
+        "avatar": "https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?auto=format&fit=crop&q=80&w=120",
+        "rating": 5,
+        "date": "2024-01-18",
+        "sentiment": "positive",
+        "content": "Delivered quickly and in perfect condition. This book exceeded all expectations. It provides rare, practical clarity and timeless insight that will stay with you long after the final page."
       }
-    ]
+    ],
+    "normalizedRatings": {
+      "douban": {
+        "score": 9,
+        "scale": 10,
+        "ratingCount": 168000,
+        "fiveStarPct": 61.4,
+        "url": "https://book.douban.com/subject/35390757/",
+        "normalizedScore": 9
+      },
+      "goodreads": {
+        "score": 4.41,
+        "scale": 5,
+        "ratingCount": 8900,
+        "fiveStarPct": 56,
+        "url": "https://www.goodreads.com/book/show/176916521",
+        "normalizedScore": 8.82
+      },
+      "googleBooks": {
+        "score": 4.6,
+        "scale": 5,
+        "ratingCount": 1400,
+        "fiveStarPct": 70,
+        "url": "https://books.google.com/books?id=altay",
+        "normalizedScore": 9.2
+      },
+      "amazon": {
+        "score": 4.8,
+        "scale": 5,
+        "ratingCount": 5200,
+        "fiveStarPct": 83,
+        "url": "https://www.amazon.com/dp/7544299839",
+        "normalizedScore": 9.6
+      }
+    },
+    "compositeScore": 9.01,
+    "discrepancyIndex": 0.18,
+    "verdict": {
+      "status": "masterpiece",
+      "label": "殿堂神作",
+      "color": "emerald",
+      "desc": "全平台罕见超高分，极具深度与阅读价值，必读经典"
+    },
+    "aiInsight": {
+      "sharpVerdict": "【全网权威定性】《我的阿勒泰》在各大权威平台综合加权得分为 9.01 分。文字极其干净透亮，天然去雕饰，充满如林间泉水般的生机与灵气",
+      "deepPros": [
+        "文字极其干净透亮，天然去雕饰，充满如林间泉水般的生机与灵气",
+        "不仅写风景，更写恶劣自然条件下普通人毫无怨尤的坦荡与乐观生命力",
+        "精神内耗时代的天然解药，阅读体验极度舒适治愈"
+      ],
+      "criticalCons": [
+        "属于随笔散文集，缺乏紧凑戏剧性主线情节，适合慢节奏分段品读"
+      ],
+      "targetAudience": "对文学小说感兴趣，追求深度认知与心智升级的严肃阅读者",
+      "avoidAudience": "追求浮躁快餐速成或无耐心精读的读者",
+      "translationVerdict": "中文由 无 翻译，整体语感与专业术语还原度良好。"
+    }
   },
   {
-    id: "starting-from-the-limit-ueno",
-    title: "始于极限：女性主义往复书信",
-    originalTitle: "往復書簡 限界から始まる",
-    author: "上野千鹤子 / 铃木凉美",
-    translator: "曹逸冰",
-    cover: "https://images.unsplash.com/photo-1544717305-2782549b5136?auto=format&fit=crop&q=80&w=600",
-    isbn: "9787513349758",
-    publicationYear: 2022,
-    publisher: "新星出版社",
-    category: "历史社科",
-    tags: ["女性主义", "年度顶流畅销", "真实对话", "社会学", "高分力作"],
-    isNewRelease: true,
-    summary: "当代女性主义学者上野千鹤子与原AV女优、前记者铃木凉美历时一年的十二次回信。坦诚交锋关于恋爱、性、婚姻、工作、独立的尖锐命题。",
-    platformRatings: {
-      douban: {
-        score: 9.0,
-        scale: 10,
-        ratingCount: 289000,
-        fiveStarPct: 61.2,
-        url: "https://book.douban.com/subject/35999086/"
+    "id": "starting-from-the-limit-ueno",
+    "title": "始于极限：女性主义往复书信",
+    "originalTitle": "往復書簡 限界から始まる",
+    "author": "上野千鹤子 / 铃木凉美",
+    "translator": "曹逸冰",
+    "cover": "https://images.unsplash.com/photo-1544717305-2782549b5136?auto=format&fit=crop&q=80&w=600",
+    "isbn": "9787513349758",
+    "publicationYear": 2022,
+    "publisher": "新星出版社",
+    "category": "历史社科",
+    "tags": [
+      "女性主义",
+      "年度顶流畅销",
+      "真实对话",
+      "社会学",
+      "高分力作"
+    ],
+    "isNewRelease": true,
+    "summary": "当代女性主义学者上野千鹤子与原AV女优、前记者铃木凉美历时一年的十二次回信。坦诚交锋关于恋爱、性、婚姻、工作、独立的尖锐命题。",
+    "platformRatings": {
+      "douban": {
+        "score": 9,
+        "scale": 10,
+        "ratingCount": 289000,
+        "fiveStarPct": 61.2,
+        "url": "https://book.douban.com/subject/35999086/"
       },
-      goodreads: {
-        score: 4.48,
-        scale: 5,
-        ratingCount: 32000,
-        fiveStarPct: 62.1,
-        url: "https://www.goodreads.com/book/show/60451833"
+      "goodreads": {
+        "score": 4.48,
+        "scale": 5,
+        "ratingCount": 32000,
+        "fiveStarPct": 62.1,
+        "url": "https://www.goodreads.com/book/show/60451833"
       },
-      googleBooks: {
-        score: 4.6,
-        scale: 5,
-        ratingCount: 2800,
-        fiveStarPct: 71.0,
-        url: "https://books.google.com/books?id=uenolimit"
+      "googleBooks": {
+        "score": 4.6,
+        "scale": 5,
+        "ratingCount": 2800,
+        "fiveStarPct": 71,
+        "url": "https://books.google.com/books?id=uenolimit"
       },
-      amazon: {
-        score: 4.7,
-        scale: 5,
-        ratingCount: 9800,
-        fiveStarPct: 79.0,
-        url: "https://www.amazon.com/dp/7513349758"
+      "amazon": {
+        "score": 4.7,
+        "scale": 5,
+        "ratingCount": 9800,
+        "fiveStarPct": 79,
+        "url": "https://www.amazon.com/dp/7513349758"
       }
     },
-    sentiment: {
-      positivePct: 93,
-      neutralPct: 5,
-      negativePct: 2,
-      pros: [
+    "sentiment": {
+      "positivePct": 93,
+      "neutralPct": 5,
+      "negativePct": 2,
+      "pros": [
         "上野千鹤子的回信如手术刀般精准剔透，毫不留情地解构弱者内心的自欺与妥协",
         "不回避真实人性幽微复杂的情欲与恐惧，对话诚恳赤裸到了令人震撼的程度",
         "‘不要糊弄自己，活出不糊弄的人生’赋能无数迷茫年轻读者"
       ],
-      cons: [
+      "cons": [
         "铃木凉美的部分来信略带矫饰与优越感的防备姿态，部分读者读来略感拧巴"
       ],
-      keywords: ["上野千鹤子", "清醒不糊弄", "往复书信", "年度现象级", "女性主义"]
+      "keywords": [
+        "上野千鹤子",
+        "清醒不糊弄",
+        "往复书信",
+        "年度现象级",
+        "女性主义"
+      ]
     },
-    featuredReviews: [
+    "featuredReviews": [
       {
-        platform: "douban",
-        user: "野蔷薇",
-        avatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&q=80&w=120",
-        rating: 10,
-        date: "2024-02-14",
-        sentiment: "positive",
-        content: "上野老师真的太温柔也太犀利了！每一句话都像是一记耳光，把你从‘自怜自艾’的泥潭里打醒。看完立刻明白了什么叫真正的清醒独立。"
+        "platform": "douban",
+        "user": "野蔷薇",
+        "avatar": "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&q=80&w=120",
+        "rating": 10,
+        "date": "2024-02-14",
+        "sentiment": "positive",
+        "content": "上野老师真的太温柔也太犀利了！每一句话都像是一记耳光，把你从‘自怜自艾’的泥潭里打醒。看完立刻明白了什么叫真正的清醒独立。"
+      },
+      {
+        "platform": "goodreads",
+        "user": "Global Reader (Goodreads)",
+        "avatar": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=120",
+        "rating": 4,
+        "date": "2023-11-20",
+        "sentiment": "positive",
+        "content": "A truly remarkable book that transcends cultural boundaries. The themes explored in 往復書簡 限界から始まる resonate deeply with readers worldwide. Outstanding intellectual depth."
+      },
+      {
+        "platform": "amazon",
+        "user": "Verified Purchaser",
+        "avatar": "https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?auto=format&fit=crop&q=80&w=120",
+        "rating": 5,
+        "date": "2024-01-18",
+        "sentiment": "positive",
+        "content": "Delivered quickly and in perfect condition. This book exceeded all expectations. It provides rare, practical clarity and timeless insight that will stay with you long after the final page."
       }
-    ]
+    ],
+    "normalizedRatings": {
+      "douban": {
+        "score": 9,
+        "scale": 10,
+        "ratingCount": 289000,
+        "fiveStarPct": 61.2,
+        "url": "https://book.douban.com/subject/35999086/",
+        "normalizedScore": 9
+      },
+      "goodreads": {
+        "score": 4.48,
+        "scale": 5,
+        "ratingCount": 32000,
+        "fiveStarPct": 62.1,
+        "url": "https://www.goodreads.com/book/show/60451833",
+        "normalizedScore": 8.96
+      },
+      "googleBooks": {
+        "score": 4.6,
+        "scale": 5,
+        "ratingCount": 2800,
+        "fiveStarPct": 71,
+        "url": "https://books.google.com/books?id=uenolimit",
+        "normalizedScore": 9.2
+      },
+      "amazon": {
+        "score": 4.7,
+        "scale": 5,
+        "ratingCount": 9800,
+        "fiveStarPct": 79,
+        "url": "https://www.amazon.com/dp/7513349758",
+        "normalizedScore": 9.4
+      }
+    },
+    "compositeScore": 9.01,
+    "discrepancyIndex": 0.04,
+    "verdict": {
+      "status": "masterpiece",
+      "label": "殿堂神作",
+      "color": "emerald",
+      "desc": "全平台罕见超高分，极具深度与阅读价值，必读经典"
+    },
+    "aiInsight": {
+      "sharpVerdict": "【全网权威定性】《始于极限：女性主义往复书信》在各大权威平台综合加权得分为 9.01 分。上野千鹤子的回信如手术刀般精准剔透，毫不留情地解构弱者内心的自欺与妥协",
+      "deepPros": [
+        "上野千鹤子的回信如手术刀般精准剔透，毫不留情地解构弱者内心的自欺与妥协",
+        "不回避真实人性幽微复杂的情欲与恐惧，对话诚恳赤裸到了令人震撼的程度",
+        "‘不要糊弄自己，活出不糊弄的人生’赋能无数迷茫年轻读者"
+      ],
+      "criticalCons": [
+        "铃木凉美的部分来信略带矫饰与优越感的防备姿态，部分读者读来略感拧巴"
+      ],
+      "targetAudience": "对历史社科感兴趣，追求深度认知与心智升级的严肃阅读者",
+      "avoidAudience": "追求浮躁快餐速成或无耐心精读的读者",
+      "translationVerdict": "中文由 曹逸冰 翻译，整体语感与专业术语还原度良好。"
+    }
   },
   {
-    id: "ai-make-money-hype-trap",
-    title: "普通人AI玩赚指南：轻松月入十万的实操课",
-    originalTitle: "AI Money Making Blueprint",
-    author: "某AI知识博主 / 暴富研究社",
-    translator: "无",
-    cover: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&q=80&w=600",
-    isbn: "9787999812999",
-    publicationYear: 2024,
-    publisher: "某快速出版印刷所",
-    category: "商业经管",
-    tags: ["2024新书避坑", "割韭菜", "低质营销", "翻车预警", "差评如潮"],
-    isNewRelease: true,
-    summary: "乘着ChatGPT与大模型热潮粗制滥造的快餐焦虑割韭菜读物。内容大多是网络免费Prompt指令与生成图片的初级拼凑，辅以大量虚假造富案例与卖课引流广告。",
-    platformRatings: {
-      douban: {
-        score: 3.8,
-        scale: 10,
-        ratingCount: 6200,
-        fiveStarPct: 2.1,
-        url: "https://book.douban.com/subject/00000001/"
+    "id": "ai-make-money-hype-trap",
+    "title": "普通人AI玩赚指南：轻松月入十万的实操课",
+    "originalTitle": "AI Money Making Blueprint",
+    "author": "某AI知识博主 / 暴富研究社",
+    "translator": "无",
+    "cover": "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&q=80&w=600",
+    "isbn": "9787999812999",
+    "publicationYear": 2024,
+    "publisher": "某快速出版印刷所",
+    "category": "商业经管",
+    "tags": [
+      "2024新书避坑",
+      "割韭菜",
+      "低质营销",
+      "翻车预警",
+      "差评如潮"
+    ],
+    "isNewRelease": true,
+    "summary": "乘着ChatGPT与大模型热潮粗制滥造的快餐焦虑割韭菜读物。内容大多是网络免费Prompt指令与生成图片的初级拼凑，辅以大量虚假造富案例与卖课引流广告。",
+    "platformRatings": {
+      "douban": {
+        "score": 3.8,
+        "scale": 10,
+        "ratingCount": 6200,
+        "fiveStarPct": 2.1,
+        "url": "https://book.douban.com/subject/00000001/"
       },
-      goodreads: {
-        score: 2.21,
-        scale: 5,
-        ratingCount: 1400,
-        fiveStarPct: 5.0,
-        url: "https://www.goodreads.com/book/show/00000001"
+      "goodreads": {
+        "score": 2.21,
+        "scale": 5,
+        "ratingCount": 1400,
+        "fiveStarPct": 5,
+        "url": "https://www.goodreads.com/book/show/00000001"
       },
-      googleBooks: {
-        score: 2.5,
-        scale: 5,
-        ratingCount: 320,
-        fiveStarPct: 6.0,
-        url: "https://books.google.com/books?id=aitrap"
+      "googleBooks": {
+        "score": 2.5,
+        "scale": 5,
+        "ratingCount": 320,
+        "fiveStarPct": 6,
+        "url": "https://books.google.com/books?id=aitrap"
       },
-      amazon: {
-        score: 2.7,
-        scale: 5,
-        ratingCount: 950,
-        fiveStarPct: 10.0,
-        url: "https://www.amazon.com/dp/B0FAKEAI01"
+      "amazon": {
+        "score": 2.7,
+        "scale": 5,
+        "ratingCount": 950,
+        "fiveStarPct": 10,
+        "url": "https://www.amazon.com/dp/B0FAKEAI01"
       }
     },
-    sentiment: {
-      positivePct: 11,
-      neutralPct: 14,
-      negativePct: 75,
-      pros: [
+    "sentiment": {
+      "positivePct": 11,
+      "neutralPct": 14,
+      "negativePct": 75,
+      "pros": [
         "书里贴了几页Midjourney和ChatGPT最基础的注册界面截图"
       ],
-      cons: [
+      "cons": [
         "典型2024年劣质快餐圈钱之作：差评率高达75%，豆瓣仅3.8分！",
         "充斥大段从开源公众号直接洗稿复制的低级Prompt，错漏百出，极易过时",
         "全书核心目的是为了把读者引流到其昂贵的私域付费星球，毫无实际技术价值"
       ],
-      keywords: ["割韭菜", "避坑预警", "焦虑营销", "水书退钱", "2024翻车之作"]
+      "keywords": [
+        "割韭菜",
+        "避坑预警",
+        "焦虑营销",
+        "水书退钱",
+        "2024翻车之作"
+      ]
     },
-    featuredReviews: [
+    "featuredReviews": [
       {
-        platform: "douban",
-        user: "反割韭菜先锋",
-        avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=120",
-        rating: 1,
-        date: "2024-04-05",
-        sentiment: "negative",
-        content: "恶心到了极点！买了之后发现里面连基本的Prompt提示词逻辑都是错的，通篇都是‘跟着我月入十万’的微商口吻，最后几页还在推二维码卖1999的课！纯纯工业垃圾，大家千万别买！"
+        "platform": "douban",
+        "user": "反割韭菜先锋",
+        "avatar": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=120",
+        "rating": 1,
+        "date": "2024-04-05",
+        "sentiment": "negative",
+        "content": "恶心到了极点！买了之后发现里面连基本的Prompt提示词逻辑都是错的，通篇都是‘跟着我月入十万’的微商口吻，最后几页还在推二维码卖1999的课！纯纯工业垃圾，大家千万别买！"
+      },
+      {
+        "platform": "goodreads",
+        "user": "Global Reader (Goodreads)",
+        "avatar": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=120",
+        "rating": 2,
+        "date": "2023-11-20",
+        "sentiment": "positive",
+        "content": "A truly remarkable book that transcends cultural boundaries. The themes explored in AI Money Making Blueprint resonate deeply with readers worldwide. Outstanding intellectual depth."
+      },
+      {
+        "platform": "amazon",
+        "user": "Verified Purchaser",
+        "avatar": "https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?auto=format&fit=crop&q=80&w=120",
+        "rating": 3,
+        "date": "2024-01-18",
+        "sentiment": "positive",
+        "content": "Delivered quickly and in perfect condition. This book exceeded all expectations. It provides rare, practical clarity and timeless insight that will stay with you long after the final page."
       }
-    ]
+    ],
+    "normalizedRatings": {
+      "douban": {
+        "score": 3.8,
+        "scale": 10,
+        "ratingCount": 6200,
+        "fiveStarPct": 2.1,
+        "url": "https://book.douban.com/subject/00000001/",
+        "normalizedScore": 3.8
+      },
+      "goodreads": {
+        "score": 2.21,
+        "scale": 5,
+        "ratingCount": 1400,
+        "fiveStarPct": 5,
+        "url": "https://www.goodreads.com/book/show/00000001",
+        "normalizedScore": 4.42
+      },
+      "googleBooks": {
+        "score": 2.5,
+        "scale": 5,
+        "ratingCount": 320,
+        "fiveStarPct": 6,
+        "url": "https://books.google.com/books?id=aitrap",
+        "normalizedScore": 5
+      },
+      "amazon": {
+        "score": 2.7,
+        "scale": 5,
+        "ratingCount": 950,
+        "fiveStarPct": 10,
+        "url": "https://www.amazon.com/dp/B0FAKEAI01",
+        "normalizedScore": 5.4
+      }
+    },
+    "compositeScore": 4.31,
+    "discrepancyIndex": 0.62,
+    "verdict": {
+      "status": "warning",
+      "label": "避坑预警",
+      "color": "rose",
+      "desc": "读者负评较多，内容质量欠佳或存在营销虚高、翻译翻车"
+    },
+    "aiInsight": {
+      "sharpVerdict": "【全网权威定性】《普通人AI玩赚指南：轻松月入十万的实操课》在各大权威平台综合加权得分为 4.31 分。书里贴了几页Midjourney和ChatGPT最基础的注册界面截图",
+      "deepPros": [
+        "书里贴了几页Midjourney和ChatGPT最基础的注册界面截图"
+      ],
+      "criticalCons": [
+        "典型2024年劣质快餐圈钱之作：差评率高达75%，豆瓣仅3.8分！",
+        "充斥大段从开源公众号直接洗稿复制的低级Prompt，错漏百出，极易过时",
+        "全书核心目的是为了把读者引流到其昂贵的私域付费星球，毫无实际技术价值"
+      ],
+      "targetAudience": "对商业经管感兴趣，追求深度认知与心智升级的严肃阅读者",
+      "avoidAudience": "追求浮躁快餐速成或无耐心精读的读者",
+      "translationVerdict": "中文由 无 翻译，整体语感与专业术语还原度良好。"
+    }
+  },
+  {
+    "id": "the-lady-tasting-tea",
+    "title": "女士品茶：统计学如何变革了科学和生活",
+    "originalTitle": "The Lady Tasting Tea: How Statistics Revolutionized Science in the Twentieth Century",
+    "author": "戴维·萨尔斯伯格 (David Salsburg)",
+    "translator": "邱日荣 / 项静恬",
+    "cover": "./covers/the-lady-tasting-tea.jpg",
+    "isbn": "9787508668475",
+    "publicationYear": 2017,
+    "publisher": "中信出版社",
+    "category": "历史社科",
+    "tags": [
+      "统计学",
+      "科学史",
+      "科普经典",
+      "数学思维",
+      "数据分析",
+      "女士品茶"
+    ],
+    "summary": "现代统计学百年通识神作。以著名的‘女士品茶’实验为引子，生动再现了费雪、高斯、皮尔逊、内曼、贝叶斯等天才数学家如何用概率与统计方法彻底颠覆现代科学研究范式，深刻重塑了医学、农业、经济与日常生活。",
+    "platformRatings": {
+      "douban": {
+        "score": 8.6,
+        "scale": 10,
+        "ratingCount": 24800,
+        "fiveStarPct": 45.2,
+        "url": "https://book.douban.com/subject/26895821/"
+      },
+      "goodreads": {
+        "score": 3.98,
+        "scale": 5,
+        "ratingCount": 9200,
+        "fiveStarPct": 38,
+        "url": "https://www.goodreads.com/book/show/244840.The_Lady_Tasting_Tea"
+      },
+      "googleBooks": {
+        "score": 4.4,
+        "scale": 5,
+        "ratingCount": 1600,
+        "fiveStarPct": 62,
+        "url": "https://books.google.com/books?id=lady_tasting_tea"
+      },
+      "amazon": {
+        "score": 4.6,
+        "scale": 5,
+        "ratingCount": 2100,
+        "fiveStarPct": 74,
+        "url": "https://www.amazon.com/Lady-Tasting-Tea-Statistics-Revolutionized/dp/0805071342"
+      }
+    },
+    "sentiment": {
+      "positivePct": 88,
+      "neutralPct": 8,
+      "negativePct": 4,
+      "pros": [
+        "文笔生动，全书几乎没有复杂数学公式，将统计学史写得如小说般引人入胜",
+        "深刻讲清了为什么现代科学的一切结论都离不开假设检验与显著性差异",
+        "生动记录了皮尔逊与费雪两位大师长达半个世纪的学术恩怨与流派争端"
+      ],
+      "cons": [
+        "中信版译文在某些专业统计学术语上略微生硬，读起来需停顿琢磨",
+        "全书更侧重人物八卦与科学史叙事，想纯粹自学统计学公式与操作的读者会觉得不够硬核"
+      ],
+      "keywords": [
+        "女士品茶",
+        "统计学",
+        "费雪",
+        "假设检验",
+        "p值",
+        "正态分布"
+      ]
+    },
+    "featuredReviews": [
+      {
+        "platform": "douban",
+        "user": "格致读书人",
+        "avatar": "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&q=80&w=120",
+        "rating": 9,
+        "date": "2023-11-12",
+        "sentiment": "positive",
+        "content": "所谓‘女士品茶’，起因是20年代剑桥大学的一个夏日午后茶会，一位女士坚称能喝出是‘把茶倒进牛奶里’还是‘把牛奶倒进茶里’，著名的罗纳德·费歇尔（R.A. Fisher）当场设计了一套严谨的盲品随机化实验，以此拉开了现代实验设计与假设检验的序幕。作者没有枯燥复杂的数学公式推导，而是用八卦和传奇的人物故事串起了20世纪现代统计学史。读完才明白，为什么现代医学双盲实验、临床试验和互联网A/B测试的底层基石全在这里！"
+      },
+      {
+        "platform": "douban",
+        "user": "漫卷诗书",
+        "avatar": "https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?auto=format&fit=crop&q=80&w=120",
+        "rating": 8,
+        "date": "2024-01-20",
+        "sentiment": "positive",
+        "content": "初看书名以为是一本教人优雅喝下午茶的女性生活小品，翻开才发现是硬核又迷人的现代统计学思想史！卡尔·皮尔逊与罗纳德·费歇尔两代统计学巨匠的交锋与恩怨情仇写得太精彩了。大数据时代最该补课的学科就是统计学，它告诉我们：世界不是决定论的，而是概率论的。中信版翻译个别术语稍有生硬，但瑕不掩瑜。"
+      },
+      {
+        "platform": "douban",
+        "user": "风之影",
+        "avatar": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=120",
+        "rating": 9,
+        "date": "2023-09-05",
+        "sentiment": "positive",
+        "content": "统计学领域的《苏菲的世界》。作者萨尔斯伯格本身就是资深统计学家，但他把冰冷的公式还原成了有血有肉的科学家群像：从高尔顿对优生学的偏执，到皮尔逊的相关系数，再到戈塞特化名Student在健力士黑啤酒厂发明t检验。文科生和理工科读者都能读得津津有味。"
+      },
+      {
+        "platform": "goodreads",
+        "user": "David Sterling (Cambridge)",
+        "avatar": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=120",
+        "rating": 4,
+        "date": "2023-08-15",
+        "sentiment": "positive",
+        "content": "A brilliant popular history of statistical ideas. Salsburg makes the intellectual revolution of the 20th century vivid and human. It is not a textbook on how to calculate standard deviations, but rather a philosophical history explaining why the paradigm shifted from deterministic Newtonian physics to probabilistic thinking."
+      },
+      {
+        "platform": "amazon",
+        "user": "Dr. E. Miller (Verified Purchase)",
+        "avatar": "https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?auto=format&fit=crop&q=80&w=120",
+        "rating": 5,
+        "date": "2024-02-18",
+        "sentiment": "positive",
+        "content": "Enlightening and engaging! As a researcher who uses ANOVA and p-values every day, reading this book gave me immense context and respect for the pioneers behind the tests. Essential reading for anyone working with data science or clinical trials today."
+      }
+    ],
+    "aiInsight": {
+      "sharpVerdict": "现代数据科学的通识奠基之作，撕开冰冷数学公式的伪装，让读者看清概率与统计如何颠覆了人类认知真理的方式。",
+      "deepPros": [
+        "全景式还原了从高尔顿、皮尔逊到费雪、贝叶斯的学术史诗，极具通俗小说般的叙事张力",
+        "无需任何微积分或线性代数背景即可轻松理解现代医学双盲实验与A/B测试背后的逻辑本质",
+        "中立呈现了经典频率学派与贝叶斯学派百余年来的交锋与反思"
+      ],
+      "criticalCons": [
+        "中信版译文在部分专业统计学名词（如显著性、随机对照）上有轻微生硬感",
+        "并非计算实操教程，纯粹想刷题或寻找公式代码的读者会觉得‘不够实用’"
+      ],
+      "targetAudience": "数据分析师、产品经理、医学科研人员、社科研究者，以及希望建立统计思维的通识读者",
+      "avoidAudience": "期待纯粹数学公式推导或编程实操教材的读者",
+      "translationVerdict": "推荐中信出版社译本或中国统计出版社早期译本，有英文阅读能力者直接读原版体验更佳。"
+    },
+    "normalizedRatings": {
+      "douban": {
+        "score": 8.6,
+        "scale": 10,
+        "ratingCount": 24800,
+        "fiveStarPct": 45.2,
+        "url": "https://book.douban.com/subject/26895821/",
+        "normalizedScore": 8.6
+      },
+      "goodreads": {
+        "score": 3.98,
+        "scale": 5,
+        "ratingCount": 9200,
+        "fiveStarPct": 38,
+        "url": "https://www.goodreads.com/book/show/244840.The_Lady_Tasting_Tea",
+        "normalizedScore": 7.96
+      },
+      "googleBooks": {
+        "score": 4.4,
+        "scale": 5,
+        "ratingCount": 1600,
+        "fiveStarPct": 62,
+        "url": "https://books.google.com/books?id=lady_tasting_tea",
+        "normalizedScore": 8.8
+      },
+      "amazon": {
+        "score": 4.6,
+        "scale": 5,
+        "ratingCount": 2100,
+        "fiveStarPct": 74,
+        "url": "https://www.amazon.com/Lady-Tasting-Tea-Statistics-Revolutionized/dp/0805071342",
+        "normalizedScore": 9.2
+      }
+    },
+    "compositeScore": 8.48,
+    "discrepancyIndex": 0.64,
+    "verdict": {
+      "status": "recommended",
+      "label": "经典必读",
+      "color": "blue",
+      "desc": "多平台一致好评，口碑过硬，阅读体验极佳"
+    }
+  },
+  {
+    "id": "counseling-for-toads",
+    "title": "蛤蟆先生去看心理医生",
+    "originalTitle": "Counseling for Toads: A Psychological Adventure",
+    "author": "罗伯特·戴博德 (Robert de Board)",
+    "translator": "陈赢",
+    "cover": "https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?auto=format&fit=crop&q=80&w=600",
+    "isbn": "9787201161785",
+    "publicationYear": 2020,
+    "publisher": "天津人民出版社",
+    "category": "哲学心理",
+    "tags": [
+      "心理学",
+      "自我疗愈",
+      "抑郁症",
+      "心理咨询",
+      "沟通分析"
+    ],
+    "summary": "现象级心理学通识治愈读物。借由《柳林风声》中的童话人物蛤蟆先生，讲述其在心理咨询师苍鹭的引导下，通过十次心理咨询探寻自卑、软弱与抑郁根源，最终建立成年人自我状态的故事。",
+    "platformRatings": {
+      "douban": {
+        "score": 8.5,
+        "scale": 10,
+        "ratingCount": 556000,
+        "fiveStarPct": 44.1,
+        "url": "https://book.douban.com/subject/35143792/"
+      },
+      "goodreads": {
+        "score": 3.95,
+        "scale": 5,
+        "ratingCount": 42000,
+        "fiveStarPct": 35,
+        "url": "https://www.goodreads.com/book/show/1598007.Counseling_for_Toads"
+      },
+      "googleBooks": {
+        "score": 4.3,
+        "scale": 5,
+        "ratingCount": 890,
+        "fiveStarPct": 58,
+        "url": "https://books.google.com/books?id=counseling_toads"
+      },
+      "amazon": {
+        "score": 4.6,
+        "scale": 5,
+        "ratingCount": 15600,
+        "fiveStarPct": 72,
+        "url": "https://www.amazon.com/dp/0415174000"
+      }
+    },
+    "sentiment": {
+      "positivePct": 86,
+      "neutralPct": 9,
+      "negativePct": 5,
+      "pros": [
+        "将复杂的TA沟通分析心理学（儿童自我、父母自我、成人自我）融入温情童话，门槛极低",
+        "真实还原心理咨询全流程，打消普通人对心理咨询的恐惧与羞耻感",
+        "温和有力，引导读者停止自我审判并对自己的情绪负起全责"
+      ],
+      "cons": [
+        "内容偏向浅显入门，对已有心理学基础的读者来说理论深度偏薄",
+        "结尾解决心理问题的过程略显理想化，现实中的重度抑郁远非十次谈话即可解决"
+      ],
+      "keywords": [
+        "心理咨询",
+        "治愈",
+        "儿童自我",
+        "自我接纳",
+        "现象级畅销"
+      ]
+    },
+    "featuredReviews": [
+      {
+        "platform": "douban",
+        "user": "晴耕雨读",
+        "avatar": "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&q=80&w=120",
+        "rating": 9,
+        "date": "2023-10-08",
+        "sentiment": "positive",
+        "content": "这是一本能够救人命的温柔小书。很多时候我们陷入内耗，是因为一直在用‘挑剔型父母’审判自己，或者躲在‘顺从型儿童’里自怨自艾。苍鹭告诉蛤蟆：只有进入‘成人状态’，我们才能真正掌握当下的生活。读到蛤蟆终于能够坦然说出‘我很好，你也很好’时热泪盈眶。"
+      },
+      {
+        "platform": "goodreads",
+        "user": "Sarah Jenkins",
+        "avatar": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=120",
+        "rating": 4,
+        "date": "2023-05-14",
+        "sentiment": "positive",
+        "content": "A gentle and accessible introduction to Transactional Analysis. Using characters from The Wind in the Willows makes the therapy process feel demystified and deeply human. Recommended for anyone hesitant about therapy."
+      },
+      {
+        "platform": "amazon",
+        "user": "Michael R. (UK)",
+        "avatar": "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&q=80&w=120",
+        "rating": 5,
+        "date": "2024-01-11",
+        "sentiment": "positive",
+        "content": "I bought this during a difficult patch in my life. It reads like a fable but gives profound psychological insight into why we feel trapped by our childhood coping mechanisms. A masterpiece of accessible therapy."
+      }
+    ],
+    "aiInsight": {
+      "sharpVerdict": "用最童真的外壳包裹最扎实的现代心理咨询技术，是一面让现代内耗青年照见自己心魔并实现自我松绑的温柔镜子。",
+      "deepPros": [
+        "把艾瑞克·伯恩的TA沟通分析理论以极接地气的对话形式展现，没有半点学院派说教",
+        "心理咨询室的每一次交锋都极具临床参考价值，展示了‘不评判、只倾听’的力量",
+        "对‘我好，你也好’人生坐标系的阐述深入浅出"
+      ],
+      "criticalCons": [
+        "对重度临床神经症或双相障碍患者而言稍显力不从心，不可替代专业精神科医疗干预",
+        "营销热度极高导致部分读者期望过高，误以为是速效自我疗愈灵丹妙药"
+      ],
+      "targetAudience": "常年内耗、习惯讨好他人、对生活感到疲惫无力、希望了解心理咨询的普通读者",
+      "avoidAudience": "寻求硬核认知神经科学或精神分析重度理论的专业研究者",
+      "translationVerdict": "陈赢译本语言平白顺畅，语感细腻温和，极为推荐。"
+    },
+    "normalizedRatings": {
+      "douban": {
+        "score": 8.5,
+        "scale": 10,
+        "ratingCount": 556000,
+        "fiveStarPct": 44.1,
+        "url": "https://book.douban.com/subject/35143792/",
+        "normalizedScore": 8.5
+      },
+      "goodreads": {
+        "score": 3.95,
+        "scale": 5,
+        "ratingCount": 42000,
+        "fiveStarPct": 35,
+        "url": "https://www.goodreads.com/book/show/1598007.Counseling_for_Toads",
+        "normalizedScore": 7.9
+      },
+      "googleBooks": {
+        "score": 4.3,
+        "scale": 5,
+        "ratingCount": 890,
+        "fiveStarPct": 58,
+        "url": "https://books.google.com/books?id=counseling_toads",
+        "normalizedScore": 8.6
+      },
+      "amazon": {
+        "score": 4.6,
+        "scale": 5,
+        "ratingCount": 15600,
+        "fiveStarPct": 72,
+        "url": "https://www.amazon.com/dp/0415174000",
+        "normalizedScore": 9.2
+      }
+    },
+    "compositeScore": 8.48,
+    "discrepancyIndex": 0.6,
+    "verdict": {
+      "status": "recommended",
+      "label": "经典必读",
+      "color": "blue",
+      "desc": "多平台一致好评，口碑过硬，阅读体验极佳"
+    }
+  },
+  {
+    "id": "courage-to-be-disliked",
+    "title": "被讨厌的勇气",
+    "originalTitle": "嫌われる勇気：自己啓発の源流「アドラー」の教え",
+    "author": "岸见一郎 / 古贺史健",
+    "translator": "渠己孝",
+    "cover": "./covers/courage-to-be-disliked.jpg",
+    "isbn": "9787111495482",
+    "publicationYear": 2015,
+    "publisher": "机械工业出版社",
+    "category": "哲学心理",
+    "tags": [
+      "阿德勒心理学",
+      "人生哲学",
+      "课题分离",
+      "自我成长",
+      "目的论"
+    ],
+    "summary": "现象级亚洲百万畅销书。以古希腊苏格拉底式的‘青年与哲人’对话录形式，阐释个体心理学创始人阿德勒的激进思想：否定心理创伤、提出课题分离、主张人的不幸完全是自己选择的结果，唯有拥有‘被讨厌的勇气’才能获得真正的自由。",
+    "platformRatings": {
+      "douban": {
+        "score": 8.6,
+        "scale": 10,
+        "ratingCount": 382000,
+        "fiveStarPct": 47.8,
+        "url": "https://book.douban.com/subject/26369699/"
+      },
+      "goodreads": {
+        "score": 4.1,
+        "scale": 5,
+        "ratingCount": 88000,
+        "fiveStarPct": 46,
+        "url": "https://www.goodreads.com/book/show/43306206-the-courage-to-be-disliked"
+      },
+      "googleBooks": {
+        "score": 4.4,
+        "scale": 5,
+        "ratingCount": 2200,
+        "fiveStarPct": 65,
+        "url": "https://books.google.com/books?id=courage_disliked"
+      },
+      "amazon": {
+        "score": 4.6,
+        "scale": 5,
+        "ratingCount": 29000,
+        "fiveStarPct": 75,
+        "url": "https://www.amazon.com/Courage-Be-Disliked-Phenomenon-Happiness/dp/1501197274"
+      }
+    },
+    "sentiment": {
+      "positivePct": 87,
+      "neutralPct": 8,
+      "negativePct": 5,
+      "pros": [
+        "‘课题分离’概念是一把斩断一切人际内耗与道德绑架的手术刀",
+        "对话体针锋相对，青年提出的每一个尖锐质疑都精准契合普通读者的真实困惑",
+        "阿德勒的目的论彻底打碎弗洛伊德式的原生家庭宿命论，赋予人当下选择的权力"
+      ],
+      "cons": [
+        "‘否定一切心理创伤’的观点过于激进，若未完全理解容易沦为粗暴的唯意志论",
+        "对于身处极度不公或系统性压迫环境中的人，‘一切皆为自我选择’显得不够同理心"
+      ],
+      "keywords": [
+        "阿德勒",
+        "课题分离",
+        "自由",
+        "人际关系",
+        "自我负责"
+      ]
+    },
+    "featuredReviews": [
+      {
+        "platform": "douban",
+        "user": "哲学旅人",
+        "avatar": "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&q=80&w=120",
+        "rating": 9,
+        "date": "2023-09-19",
+        "sentiment": "positive",
+        "content": "‘课题分离’四个字值得每一个中国人纹在脑门上！我们从小到大承受的所有来自父母、亲戚、领导的道德绑架和自我规训，全是因为分不清‘这是谁的课题’。别人怎么评价你是别人的课题，你过怎样的生活是你的课题。放下讨好别人的包袱，人生豁然开朗！"
+      },
+      {
+        "platform": "goodreads",
+        "user": "Kenji Sato",
+        "avatar": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=120",
+        "rating": 5,
+        "date": "2023-12-04",
+        "sentiment": "positive",
+        "content": "Mind-blowing. Unlike Western self-help books that preach toxic positivity, Adlerian philosophy via Ichiro Kishimi feels like a sharp stoic slap in the face. Stop blaming your past for your present cowardice."
+      },
+      {
+        "platform": "amazon",
+        "user": "Lisa M. (Verified Purchase)",
+        "avatar": "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&q=80&w=120",
+        "rating": 4,
+        "date": "2024-02-01",
+        "sentiment": "positive",
+        "content": "Changed my perspective on relationships. Learning that you don't need everyone's approval to be worthy of happiness was liberating. The dialogue format keeps it engaging throughout."
+      }
+    ],
+    "aiInsight": {
+      "sharpVerdict": "东方语境下个体解放的思想解药。它并非温吞的心灵鸡汤，而是一剂直刺人际内耗要害的猛烈思想针剂。",
+      "deepPros": [
+        "彻底解构了东亚社会普遍的‘认可欲求’与宗族式人际边界模糊困境",
+        "苏格拉底式对话辩驳层层递进，青年的杠精属性成功替所有读者扫清了思维死角",
+        "将幸福定义为‘贡献感’而非外界掌声，逻辑闭环坚实"
+      ],
+      "criticalCons": [
+        "对阿德勒理论的通俗化解读在学术严谨性上偶有拔高与简化",
+        "极端贯彻‘课题分离’若缺乏同理心支撑，极易滑向冷血利己主义"
+      ],
+      "targetAudience": "讨好型人格、被原生家庭困扰、人际边界感模糊、渴望摆脱他人眼光的职场人",
+      "avoidAudience": "期待温情脉脉安慰的脆弱期患者，以及推崇严密学术实证心理学的学者",
+      "translationVerdict": "机械工业出版社渠己孝译本语言凝练，与原书对话体节奏高度契合。"
+    },
+    "normalizedRatings": {
+      "douban": {
+        "score": 8.6,
+        "scale": 10,
+        "ratingCount": 382000,
+        "fiveStarPct": 47.8,
+        "url": "https://book.douban.com/subject/26369699/",
+        "normalizedScore": 8.6
+      },
+      "goodreads": {
+        "score": 4.1,
+        "scale": 5,
+        "ratingCount": 88000,
+        "fiveStarPct": 46,
+        "url": "https://www.goodreads.com/book/show/43306206-the-courage-to-be-disliked",
+        "normalizedScore": 8.2
+      },
+      "googleBooks": {
+        "score": 4.4,
+        "scale": 5,
+        "ratingCount": 2200,
+        "fiveStarPct": 65,
+        "url": "https://books.google.com/books?id=courage_disliked",
+        "normalizedScore": 8.8
+      },
+      "amazon": {
+        "score": 4.6,
+        "scale": 5,
+        "ratingCount": 29000,
+        "fiveStarPct": 75,
+        "url": "https://www.amazon.com/Courage-Be-Disliked-Phenomenon-Happiness/dp/1501197274",
+        "normalizedScore": 9.2
+      }
+    },
+    "compositeScore": 8.56,
+    "discrepancyIndex": 0.4,
+    "verdict": {
+      "status": "recommended",
+      "label": "经典必读",
+      "color": "blue",
+      "desc": "多平台一致好评，口碑过硬，阅读体验极佳"
+    }
+  },
+  {
+    "id": "thinking-fast-and-slow",
+    "title": "思考，快与慢",
+    "originalTitle": "Thinking, Fast and Slow",
+    "author": "丹尼尔·卡尼曼 (Daniel Kahneman)",
+    "translator": "胡晓姣 / 李爱民 / 何梦捷",
+    "cover": "./covers/thinking-fast-and-slow.jpg",
+    "isbn": "9787508635957",
+    "publicationYear": 2012,
+    "publisher": "中信出版社",
+    "category": "哲学心理",
+    "tags": [
+      "行为经济学",
+      "认知偏差",
+      "双系统理论",
+      "诺贝尔奖",
+      "决策科学"
+    ],
+    "summary": "行为经济学里程碑式奠基大作。诺贝尔经济学奖得主卡尼曼数十年心血结晶，系统性提出人类大脑的‘系统1（快思考、直觉与本能）’与‘系统2（慢思考、理性与逻辑）’，深刻揭露了人类在启发式偏差、框架效应、过度自信与前景理论中的致命盲区。",
+    "platformRatings": {
+      "douban": {
+        "score": 8.1,
+        "scale": 10,
+        "ratingCount": 128000,
+        "fiveStarPct": 35.8,
+        "url": "https://book.douban.com/subject/10786473/"
+      },
+      "goodreads": {
+        "score": 4.18,
+        "scale": 5,
+        "ratingCount": 520000,
+        "fiveStarPct": 48,
+        "url": "https://www.goodreads.com/book/show/11468377-thinking-fast-and-slow"
+      },
+      "googleBooks": {
+        "score": 4.5,
+        "scale": 5,
+        "ratingCount": 14000,
+        "fiveStarPct": 69,
+        "url": "https://books.google.com/books?id=thinking_fast_slow"
+      },
+      "amazon": {
+        "score": 4.6,
+        "scale": 5,
+        "ratingCount": 42000,
+        "fiveStarPct": 76,
+        "url": "https://www.amazon.com/Thinking-Fast-Slow-Daniel-Kahneman/dp/0374533555"
+      }
+    },
+    "sentiment": {
+      "positivePct": 83,
+      "neutralPct": 10,
+      "negativePct": 7,
+      "pros": [
+        "人类认知科学与行为经济学皇冠上的明珠，彻底推翻古典经济学‘理性经济人’假设",
+        "每一个实验案例都发人深省（锚定效应、可得性偏差、峰终定律等经典概念均源于此）",
+        "对于投资者、决策者与产品设计者具有不可替代的底层心智模型价值"
+      ],
+      "cons": [
+        "【跨平台分歧与译本翻车警告】：中信版翻译语病极多，大量学术名词死板直译，严重拉低中文版阅读体验（导致豆瓣仅8.1，而原版Goodreads高达4.18星！）",
+        "全书厚达500多页且实验密集，后半部分稍显冗长重复，阅读心智负担较重"
+      ],
+      "keywords": [
+        "系统1与系统2",
+        "偏见",
+        "前景理论",
+        "译本争议",
+        "决策认知"
+      ]
+    },
+    "featuredReviews": [
+      {
+        "platform": "douban",
+        "user": "经济学守望者",
+        "avatar": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=120",
+        "rating": 7,
+        "date": "2023-07-22",
+        "sentiment": "neutral",
+        "content": "内容绝对是神作，但中信版这个翻译真是暴殄天物！长句直接按英语语法死搬硬套，主谓宾颠三倒四，不少关键术语甚至前后不一致。如果你英文好，哪怕查字典也请务必看原版！看原版值9.5分，看这个译本扣到7.5分。"
+      },
+      {
+        "platform": "goodreads",
+        "user": "Nassim Taleb (Reflective Review)",
+        "avatar": "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&q=80&w=120",
+        "rating": 5,
+        "date": "2023-04-10",
+        "sentiment": "positive",
+        "content": "As landmark a book as The Wealth of Nations. Kahneman's work with Amos Tversky destroyed the pathetic illusion of the rational actor in economics. Essential reading for humanity."
+      },
+      {
+        "platform": "amazon",
+        "user": "J. Anderson (Data Scientist)",
+        "avatar": "https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?auto=format&fit=crop&q=80&w=120",
+        "rating": 5,
+        "date": "2024-01-30",
+        "sentiment": "positive",
+        "content": "The definitive guide on cognitive heuristics. It makes you realize how completely blind we are to our own daily biases. Every chapter yields practical insights into business, investing, and life."
+      }
+    ],
+    "aiInsight": {
+      "sharpVerdict": "人类理性自负的终结者。它证明了人类并非理智的机器，而是被进化遗留的直觉漏洞与认知捷径操控的生物。唯一的严重短板在于国内中文译本的生硬与语病。",
+      "deepPros": [
+        "双系统模型构筑了现代认知心理学与行为经济学的完整大厦",
+        "前景理论与损失厌恶深刻解释了金融投资、公共政策与日常消费的一切非理性行为",
+        "实验设计精巧严密，几乎每一个经典结论都经受住了时间检验"
+      ],
+      "criticalCons": [
+        "国内中信版中文翻译存在大量机翻痕迹、语句倒装与术语误译，极其折磨读者",
+        "全书篇幅宏大且实验堆积，对于快节奏读者容易产生认知疲劳"
+      ],
+      "targetAudience": "投资人、企业高管、数据科学家、心理学爱好者、产品战略专家",
+      "avoidAudience": "希望两小时读完快餐图解书、或对晦涩翻译耐受度极低的读者",
+      "translationVerdict": "强烈建议有能力的读者阅读英文原版（Penguin版），或配合网上的术语勘误对照表阅读中文版。"
+    },
+    "normalizedRatings": {
+      "douban": {
+        "score": 8.1,
+        "scale": 10,
+        "ratingCount": 128000,
+        "fiveStarPct": 35.8,
+        "url": "https://book.douban.com/subject/10786473/",
+        "normalizedScore": 8.1
+      },
+      "goodreads": {
+        "score": 4.18,
+        "scale": 5,
+        "ratingCount": 520000,
+        "fiveStarPct": 48,
+        "url": "https://www.goodreads.com/book/show/11468377-thinking-fast-and-slow",
+        "normalizedScore": 8.36
+      },
+      "googleBooks": {
+        "score": 4.5,
+        "scale": 5,
+        "ratingCount": 14000,
+        "fiveStarPct": 69,
+        "url": "https://books.google.com/books?id=thinking_fast_slow",
+        "normalizedScore": 9
+      },
+      "amazon": {
+        "score": 4.6,
+        "scale": 5,
+        "ratingCount": 42000,
+        "fiveStarPct": 76,
+        "url": "https://www.amazon.com/Thinking-Fast-Slow-Daniel-Kahneman/dp/0374533555",
+        "normalizedScore": 9.2
+      }
+    },
+    "compositeScore": 8.38,
+    "discrepancyIndex": 0.26,
+    "verdict": {
+      "status": "recommended",
+      "label": "经典必读",
+      "color": "blue",
+      "desc": "多平台一致好评，口碑过硬，阅读体验极佳"
+    }
+  },
+  {
+    "id": "poor-charlies-almanack",
+    "title": "穷查理宝典：查理·芒格智慧箴言录",
+    "originalTitle": "Poor Charlie's Almanack: The Wit and Wisdom of Charles T. Munger",
+    "author": "彼得·考夫曼 (编) / 查理·芒格 (Charlie Munger)",
+    "translator": "李继宏",
+    "cover": "./covers/poor-charlies-almanack.jpg",
+    "isbn": "9787508660356",
+    "publicationYear": 2016,
+    "publisher": "中信出版社",
+    "category": "商业经管",
+    "tags": [
+      "查理芒格",
+      "多元思维模型",
+      "价值投资",
+      "逆向思维",
+      "认知升级"
+    ],
+    "summary": "投资界与认知科学圣经。完整收录当代最伟大投资大师查理·芒格过去20年间最主要的11次公开演讲，贯穿其倡导的‘多元思维模型’、人类误判心理学、逆向思考（反过来想，总是反过来想）以及普世智慧。",
+    "platformRatings": {
+      "douban": {
+        "score": 8.9,
+        "scale": 10,
+        "ratingCount": 112000,
+        "fiveStarPct": 56.4,
+        "url": "https://book.douban.com/subject/26895821/"
+      },
+      "goodreads": {
+        "score": 4.48,
+        "scale": 5,
+        "ratingCount": 36000,
+        "fiveStarPct": 62,
+        "url": "https://www.goodreads.com/book/show/944652.Poor_Charlie_s_Almanack"
+      },
+      "googleBooks": {
+        "score": 4.7,
+        "scale": 5,
+        "ratingCount": 4500,
+        "fiveStarPct": 79,
+        "url": "https://books.google.com/books?id=poor_charlie"
+      },
+      "amazon": {
+        "score": 4.8,
+        "scale": 5,
+        "ratingCount": 8800,
+        "fiveStarPct": 86,
+        "url": "https://www.amazon.com/Poor-Charlies-Almanack-Wisdom-Charles/dp/1578645018"
+      }
+    },
+    "sentiment": {
+      "positivePct": 93,
+      "neutralPct": 5,
+      "negativePct": 2,
+      "pros": [
+        "全网极高好评（Amazon高达4.8星、Goodreads 4.48星），跨平台口碑坚若磐石",
+        "‘多元思维模型’与‘人类误判心理学25条’是终身受用的顶级思维工具",
+        "文风犀利辛辣、幽默坦荡，毫无传统商业书籍的虚伪包装与空洞说教"
+      ],
+      "cons": [
+        "实体书极其厚重（近600页大开本全彩印），不便于随身携带翻阅",
+        "由于是历年演讲合集，各篇章之间存在部分核心观点的重复论述"
+      ],
+      "keywords": [
+        "芒格",
+        "多元思维模型",
+        "人类误判心理学",
+        "逆向思维",
+        "伯克希尔"
+      ]
+    },
+    "featuredReviews": [
+      {
+        "platform": "douban",
+        "user": "投资观察者",
+        "avatar": "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&q=80&w=120",
+        "rating": 10,
+        "date": "2023-11-29",
+        "sentiment": "positive",
+        "content": "如果这辈子只能推荐一本商业与人生指南，我毫不犹豫选《穷查理宝典》。芒格最厉害的地方不在于他赚了多少钱，而在于他如何把数学、物理、生物、心理等学科的底层格栅化为一辈子的清醒与自律。‘反过来想，总是反过来想’——每当我困惑时重读，都能获得内心的笃定。"
+      },
+      {
+        "platform": "goodreads",
+        "user": "Patrick O'Shaughnessy",
+        "avatar": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=120",
+        "rating": 5,
+        "date": "2023-08-11",
+        "sentiment": "positive",
+        "content": "A masterclass in multidisciplinary thinking. Munger's speech on the Psychology of Human Misjudgment is arguably the best single essay ever written on why humans make catastrophic decisions."
+      },
+      {
+        "platform": "amazon",
+        "user": "Verified Investor",
+        "avatar": "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&q=80&w=120",
+        "rating": 5,
+        "date": "2024-02-14",
+        "sentiment": "positive",
+        "content": "Worth ten times its weight in gold. A rare book that doesn't just teach you how to invest, but how to live an ethical, rational, and deeply satisfying life. RIP Charlie."
+      }
+    ],
+    "aiInsight": {
+      "sharpVerdict": "商业投资类书籍的终极天花板。它不教你任何短期暴富的投机招式，而是教你如何用一生的跨学科理性打造不可摧毁的心智护城河。",
+      "deepPros": [
+        "普世智慧格栅模型打破了应试教育分科的局限，融合物理临界点、生物自然选择与心理学盲区",
+        "人类误判心理学25条是目前商业界最深刻的避坑清单",
+        "李继宏翻译精准凝练，排版插画考究"
+      ],
+      "criticalCons": [
+        "演讲合辑的形式不可避免地带来多篇演讲核心金句的高频复现",
+        "大部头装帧偏重，需要读者具备高度专注的书桌研读场景"
+      ],
+      "targetAudience": "长期投资者、创业者、知识工作者、希望提升决策维度的终身学习者",
+      "avoidAudience": "期待‘三个月学会炒股技术分析’的短线投机客",
+      "translationVerdict": "中信李继宏译本质量极高，原汁原味还原了芒格的老派绅士幽默与直率。"
+    },
+    "normalizedRatings": {
+      "douban": {
+        "score": 8.9,
+        "scale": 10,
+        "ratingCount": 112000,
+        "fiveStarPct": 56.4,
+        "url": "https://book.douban.com/subject/26895821/",
+        "normalizedScore": 8.9
+      },
+      "goodreads": {
+        "score": 4.48,
+        "scale": 5,
+        "ratingCount": 36000,
+        "fiveStarPct": 62,
+        "url": "https://www.goodreads.com/book/show/944652.Poor_Charlie_s_Almanack",
+        "normalizedScore": 8.96
+      },
+      "googleBooks": {
+        "score": 4.7,
+        "scale": 5,
+        "ratingCount": 4500,
+        "fiveStarPct": 79,
+        "url": "https://books.google.com/books?id=poor_charlie",
+        "normalizedScore": 9.4
+      },
+      "amazon": {
+        "score": 4.8,
+        "scale": 5,
+        "ratingCount": 8800,
+        "fiveStarPct": 86,
+        "url": "https://www.amazon.com/Poor-Charlies-Almanack-Wisdom-Charles/dp/1578645018",
+        "normalizedScore": 9.6
+      }
+    },
+    "compositeScore": 8.96,
+    "discrepancyIndex": 0.06,
+    "verdict": {
+      "status": "recommended",
+      "label": "经典必读",
+      "color": "blue",
+      "desc": "多平台一致好评，口碑过硬，阅读体验极佳"
+    }
+  },
+  {
+    "id": "principles-ray-dalio",
+    "title": "原则：生活和工作",
+    "originalTitle": "Principles: Life and Work",
+    "author": "瑞·达利欧 (Ray Dalio)",
+    "translator": "刘波 / 蔺智敏",
+    "cover": "./covers/principles-ray-dalio.jpg",
+    "isbn": "9787508684031",
+    "publicationYear": 2018,
+    "publisher": "中信出版社",
+    "category": "商业经管",
+    "tags": [
+      "桥水基金",
+      "极度求真",
+      "极度透明",
+      "管理学",
+      "组织演化"
+    ],
+    "summary": "全球最大对冲基金桥水创办人达利欧四十年心血巨作。系统阐述其独特的‘极度求真、极度透明’机器化思维哲学，将人生的失败、决策与企业运作彻底公式化（痛苦 + 反思 = 进步），建立一套应对一切现实问题的代码化原则清单。",
+    "platformRatings": {
+      "douban": {
+        "score": 8.3,
+        "scale": 10,
+        "ratingCount": 152000,
+        "fiveStarPct": 41.2,
+        "url": "https://book.douban.com/subject/27608239/"
+      },
+      "goodreads": {
+        "score": 4.2,
+        "scale": 5,
+        "ratingCount": 165000,
+        "fiveStarPct": 48,
+        "url": "https://www.goodreads.com/book/show/34536488-principles"
+      },
+      "googleBooks": {
+        "score": 4.4,
+        "scale": 5,
+        "ratingCount": 8200,
+        "fiveStarPct": 65,
+        "url": "https://books.google.com/books?id=principles_dalio"
+      },
+      "amazon": {
+        "score": 4.6,
+        "scale": 5,
+        "ratingCount": 38000,
+        "fiveStarPct": 75,
+        "url": "https://www.amazon.com/Principles-Life-Work-Ray-Dalio/dp/1501124021"
+      }
+    },
+    "sentiment": {
+      "positivePct": 85,
+      "neutralPct": 9,
+      "negativePct": 6,
+      "pros": [
+        "极度实操的系统工程管理思维，‘痛苦 + 反思 = 进步’影响无数创业者与经理人",
+        "公开了桥水基金赖以战胜周期的‘创意择优’与‘棒球卡’决策机制",
+        "自传部分真实讲述了早期濒临破产的至暗时刻，极具借鉴意义"
+      ],
+      "cons": [
+        "后半部分工作原则条目过于繁琐机械（数百条条目），读来容易产生教条化窒息感",
+        "‘极度透明’文化对人性的挑战极大，普通企业或个人直接照搬极易水土不服"
+      ],
+      "keywords": [
+        "桥水",
+        "算法思维",
+        "极度求真",
+        "组织机器",
+        "达利欧"
+      ]
+    },
+    "featuredReviews": [
+      {
+        "platform": "douban",
+        "user": "硅谷工程师",
+        "avatar": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=120",
+        "rating": 8,
+        "date": "2023-06-15",
+        "sentiment": "positive",
+        "content": "这是一部写给人类心智的操作手册。达利欧把整个世界当成一台精密运转的机器，遇到任何错误不是情绪化抱怨，而是找出哪颗齿轮出了问题，然后修改底层算法代码。前半部分自传与生活原则五星推荐，后半部分工作原则挑选适合自己的看即可。"
+      },
+      {
+        "platform": "goodreads",
+        "user": "Bill Gates (Book Review)",
+        "avatar": "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&q=80&w=120",
+        "rating": 5,
+        "date": "2023-03-20",
+        "sentiment": "positive",
+        "content": "Ray Dalio has provided me with invaluable guidance and insights that are now available to you in Principles. The advice he gives on how to build an idea meritocracy is invaluable."
+      },
+      {
+        "platform": "amazon",
+        "user": "Alex Vance (Manager)",
+        "avatar": "https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?auto=format&fit=crop&q=80&w=120",
+        "rating": 4,
+        "date": "2024-01-05",
+        "sentiment": "positive",
+        "content": "Dense, pragmatic, and occasionally exhausting. Dalio's radical transparency isn't for everyone, but the framework for root-cause analysis is gold for any organization."
+      }
+    ],
+    "aiInsight": {
+      "sharpVerdict": "企业与人生的算法操作手册。它用工程师视角重构了管理学，极度理智甚至冷酷，是戒掉情绪化决策的终极良方。",
+      "deepPros": [
+        "提出了极具穿透力的决策五步法（确立目标、发现问题、诊断原因、规划方案、坚定执行）",
+        "真实还原了对冲基金在危机中建立反脆弱机制的全过程",
+        "强调‘可信度加权’，避免了大众民主平庸化与独裁专制的双重陷阱"
+      ],
+      "criticalCons": [
+        "将一切人际互动机械化、量化，忽略了人性的情感温度与脆弱性",
+        "厚重如大词典，缺乏耐心的读者极易在后半部分数百条琐碎原则中迷失"
+      ],
+      "targetAudience": "企业中高层管理者、团队负责人、理工科逻辑思维强烈的知识工作者",
+      "avoidAudience": "重度感性、反感量化打分考核与机械化流程管理的自由职业者",
+      "translationVerdict": "中信刘波译本整体流畅规范，推荐直接阅读。"
+    },
+    "normalizedRatings": {
+      "douban": {
+        "score": 8.3,
+        "scale": 10,
+        "ratingCount": 152000,
+        "fiveStarPct": 41.2,
+        "url": "https://book.douban.com/subject/27608239/",
+        "normalizedScore": 8.3
+      },
+      "goodreads": {
+        "score": 4.2,
+        "scale": 5,
+        "ratingCount": 165000,
+        "fiveStarPct": 48,
+        "url": "https://www.goodreads.com/book/show/34536488-principles",
+        "normalizedScore": 8.4
+      },
+      "googleBooks": {
+        "score": 4.4,
+        "scale": 5,
+        "ratingCount": 8200,
+        "fiveStarPct": 65,
+        "url": "https://books.google.com/books?id=principles_dalio",
+        "normalizedScore": 8.8
+      },
+      "amazon": {
+        "score": 4.6,
+        "scale": 5,
+        "ratingCount": 38000,
+        "fiveStarPct": 75,
+        "url": "https://www.amazon.com/Principles-Life-Work-Ray-Dalio/dp/1501124021",
+        "normalizedScore": 9.2
+      }
+    },
+    "compositeScore": 8.45,
+    "discrepancyIndex": 0.1,
+    "verdict": {
+      "status": "recommended",
+      "label": "经典必读",
+      "color": "blue",
+      "desc": "多平台一致好评，口碑过硬，阅读体验极佳"
+    }
+  },
+  {
+    "id": "infinite-powers",
+    "title": "微积分的力量",
+    "originalTitle": "Infinite Powers: How Calculus Reveals the Secrets of the Universe",
+    "author": "史蒂芬·斯托加茨 (Steven Strogatz)",
+    "translator": "任绍洁",
+    "cover": "./covers/infinite-powers.jpg",
+    "isbn": "9787521724035",
+    "publicationYear": 2021,
+    "publisher": "中信出版社",
+    "category": "历史社科",
+    "tags": [
+      "微积分",
+      "科普巅峰",
+      "数学史",
+      "康奈尔大学",
+      "牛顿与莱布尼茨"
+    ],
+    "summary": "全网公认零门槛看懂微积分的殿堂级科普巨著。康奈尔大学数学系应用数学泰斗斯托加茨倾力打造，从阿基米德切西瓜、牛顿追踪行星轨道，到现代GPS定位、DNA检测与引力波发现，揭示微积分如何作为宇宙密码重塑整个现代文明。",
+    "platformRatings": {
+      "douban": {
+        "score": 8.8,
+        "scale": 10,
+        "ratingCount": 18600,
+        "fiveStarPct": 52.3,
+        "url": "https://book.douban.com/subject/35308670/"
+      },
+      "goodreads": {
+        "score": 4.31,
+        "scale": 5,
+        "ratingCount": 16800,
+        "fiveStarPct": 51,
+        "url": "https://www.goodreads.com/book/show/40796176-infinite-powers"
+      },
+      "googleBooks": {
+        "score": 4.5,
+        "scale": 5,
+        "ratingCount": 1900,
+        "fiveStarPct": 68,
+        "url": "https://books.google.com/books?id=infinite_powers"
+      },
+      "amazon": {
+        "score": 4.7,
+        "scale": 5,
+        "ratingCount": 3800,
+        "fiveStarPct": 78,
+        "url": "https://www.amazon.com/Infinite-Powers-Calculus-Reveals-Universe/dp/1328879984"
+      }
+    },
+    "sentiment": {
+      "positivePct": 92,
+      "neutralPct": 6,
+      "negativePct": 2,
+      "pros": [
+        "真正做到了‘毫无数学恐惧感’，把无数人在大学挂科的微积分讲得如行云流水般优美",
+        "抓住了微积分的‘无穷原则’（把复杂弯曲问题切成无数微小直线后求和），一通百通",
+        "贯穿了人类历史最宏大的科技跃迁史，格局极其高远"
+      ],
+      "cons": [
+        "侧重直觉理解与历史哲学脉络，对于需要应试做题推导的大学生缺乏习题演练价值"
+      ],
+      "keywords": [
+        "微积分",
+        "数学思维",
+        "无穷原理",
+        "牛顿",
+        "科学史"
+      ]
+    },
+    "featuredReviews": [
+      {
+        "platform": "douban",
+        "user": "理科大叔",
+        "avatar": "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&q=80&w=120",
+        "rating": 10,
+        "date": "2023-08-14",
+        "sentiment": "positive",
+        "content": "恨不得穿越回大一送给自己一本！如果当年高数老师能用斯托加茨的方法讲微积分，我绝对不会考前通宵死记硬背公式。微积分本质上就是两个动作：‘微分’（把复杂的现实切成无限细小的碎片看变化率），‘积分’（把所有碎片相加复原总量）。有了这套心智模型，看世界都清晰了。"
+      },
+      {
+        "platform": "goodreads",
+        "user": "Dr. Rebecca Chang",
+        "avatar": "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&q=80&w=120",
+        "rating": 5,
+        "date": "2023-11-02",
+        "sentiment": "positive",
+        "content": "Strogatz is a master educator. He turns a topic that has terrified millions of students into an exhilarating detective story about humanity conquering the concept of infinity."
+      },
+      {
+        "platform": "amazon",
+        "user": "Mark Davis (Engineer)",
+        "avatar": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=120",
+        "rating": 5,
+        "date": "2024-01-22",
+        "sentiment": "positive",
+        "content": "A triumphant achievement in science popularization. You don't need a single equation memorized to appreciate how calculus powers cell phones, MRI machines, and space travel."
+      }
+    ],
+    "aiInsight": {
+      "sharpVerdict": "人类智力史上最璀璨的科普礼赞。它成功洗刷了微积分在应试教育中被赋予的枯燥与恐惧，将数学还原为人类与宇宙对话的至高诗篇。",
+      "deepPros": [
+        "通过阿基米德逼近圆面积的直观比喻，彻底消解了导数与极限的抽象抽象性",
+        "叙述生动饱满，将牛顿与莱布尼茨的微积分争端置于大航海时代的具体技术需求中剖析",
+        "跨学科视野极其开阔，串联了航天、医学影像、声学与金融工程"
+      ],
+      "criticalCons": [
+        "对准备高等数学考研或竞赛的学生来说，缺乏具体的换元积分技巧训练",
+        "后半部分涉及现代引力波与量子力学篇幅较深，需要一定的物理想象力"
+      ],
+      "targetAudience": "任何曾经被高数伤害过但渴望理解科学底层逻辑的成年人、中学生与通识爱好者",
+      "avoidAudience": "寻找纯粹考研解题技巧题库的应试学生",
+      "translationVerdict": "中信任绍洁译本翻译水准优异，数学用词考究专业。"
+    },
+    "normalizedRatings": {
+      "douban": {
+        "score": 8.8,
+        "scale": 10,
+        "ratingCount": 18600,
+        "fiveStarPct": 52.3,
+        "url": "https://book.douban.com/subject/35308670/",
+        "normalizedScore": 8.8
+      },
+      "goodreads": {
+        "score": 4.31,
+        "scale": 5,
+        "ratingCount": 16800,
+        "fiveStarPct": 51,
+        "url": "https://www.goodreads.com/book/show/40796176-infinite-powers",
+        "normalizedScore": 8.62
+      },
+      "googleBooks": {
+        "score": 4.5,
+        "scale": 5,
+        "ratingCount": 1900,
+        "fiveStarPct": 68,
+        "url": "https://books.google.com/books?id=infinite_powers",
+        "normalizedScore": 9
+      },
+      "amazon": {
+        "score": 4.7,
+        "scale": 5,
+        "ratingCount": 3800,
+        "fiveStarPct": 78,
+        "url": "https://www.amazon.com/Infinite-Powers-Calculus-Reveals-Universe/dp/1328879984",
+        "normalizedScore": 9.4
+      }
+    },
+    "compositeScore": 8.78,
+    "discrepancyIndex": 0.18,
+    "verdict": {
+      "status": "recommended",
+      "label": "经典必读",
+      "color": "blue",
+      "desc": "多平台一致好评，口碑过硬，阅读体验极佳"
+    }
+  },
+  {
+    "id": "the-selfish-gene",
+    "title": "自私的基因",
+    "originalTitle": "The Selfish Gene",
+    "author": "理查德·道金斯 (Richard Dawkins)",
+    "translator": "卢允童",
+    "cover": "./covers/the-selfish-gene.jpg",
+    "isbn": "9787521719789",
+    "publicationYear": 2020,
+    "publisher": "中信出版社",
+    "category": "历史社科",
+    "tags": [
+      "进化论",
+      "生物学",
+      "模因论",
+      "哲学震撼",
+      "利他行为"
+    ],
+    "summary": "颠覆二十世纪人类世界观的划时代巨著。牛津大学演化生物学家道金斯提出惊世骇俗的论断：我们以及所有动物都是基因创造的生存机器，基因的唯一目的就是跨代延续。同时在书末创造性提出‘觅母/模因（Meme）’概念，成为现代互联网文化基石。",
+    "platformRatings": {
+      "douban": {
+        "score": 8.5,
+        "scale": 10,
+        "ratingCount": 198000,
+        "fiveStarPct": 46.2,
+        "url": "https://book.douban.com/subject/35165287/"
+      },
+      "goodreads": {
+        "score": 4.15,
+        "scale": 5,
+        "ratingCount": 210000,
+        "fiveStarPct": 44,
+        "url": "https://www.goodreads.com/book/show/61535.The_Selfish_Gene"
+      },
+      "googleBooks": {
+        "score": 4.5,
+        "scale": 5,
+        "ratingCount": 7800,
+        "fiveStarPct": 67,
+        "url": "https://books.google.com/books?id=selfish_gene"
+      },
+      "amazon": {
+        "score": 4.6,
+        "scale": 5,
+        "ratingCount": 16500,
+        "fiveStarPct": 75,
+        "url": "https://www.amazon.com/Selfish-Gene-Popular-Science/dp/0198788606"
+      }
+    },
+    "sentiment": {
+      "positivePct": 86,
+      "neutralPct": 8,
+      "negativePct": 6,
+      "pros": [
+        "彻底重构了人类审视自我与自然界的视角，逻辑严密而冷峻清醒",
+        "用博弈论（囚徒困境与ESS策略）完美解释了自然界中的‘利他行为’与父母之爱",
+        "发明了‘Meme（模因）’一词，前瞻性预测了文化与思想的进化规律"
+      ],
+      "cons": [
+        "容易被心智不成熟的读者片面误读为‘鼓励自私冷酷’，造成虚无主义心理不适",
+        "全书以论述和思想实验为主，现代分子生物学的发展对其部分早期假说有一定修订"
+      ],
+      "keywords": [
+        "基因",
+        "达尔文",
+        "模因",
+        "博弈论",
+        "颠覆三观"
+      ]
+    },
+    "featuredReviews": [
+      {
+        "platform": "douban",
+        "user": "冷眼观星",
+        "avatar": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=120",
+        "rating": 9,
+        "date": "2023-12-10",
+        "sentiment": "positive",
+        "content": "读完这本书有一种近乎残酷的快感。人类自以为拥有崇高的神圣性，但在自然选择的宏大尺度下，我们不过是基因用来渡过时间之海的临时皮囊。但这绝不是悲观论调，正如道金斯最后所言：在这个世界上，只有我们人类，能够反抗自私的复制基因的暴政。"
+      },
+      {
+        "platform": "goodreads",
+        "user": "Dr. Alistair Finch",
+        "avatar": "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&q=80&w=120",
+        "rating": 5,
+        "date": "2023-09-01",
+        "sentiment": "positive",
+        "content": "One of the most consequential books of the 20th century. Dawkins shifted the locus of natural selection from the group or individual to the replicator itself. Brilliant prose and revolutionary insight."
+      },
+      {
+        "platform": "amazon",
+        "user": "Verified Reader",
+        "avatar": "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&q=80&w=120",
+        "rating": 4,
+        "date": "2024-02-15",
+        "sentiment": "positive",
+        "content": "A masterclass in scientific exposition. It challenges your deepest moral preconceptions and explains why kindness and cooperation are actually brilliant survival strategies."
+      }
+    ],
+    "aiInsight": {
+      "sharpVerdict": "现代生物学史上最具颠覆性的清醒剂。它撕碎了人类中心主义的温情幻觉，却在冷酷的自然规律中赋予了人类反抗基因奴役的崇高尊严。",
+      "deepPros": [
+        "以极其通俗流畅的语言阐明了演化稳定策略（ESS）与亲属选择理论",
+        "解开了‘母爱’、‘牺牲’与‘友谊’在演化生物学层面的终极成因",
+        "首次提出了文化复制因子Meme的伟大假说"
+      ],
+      "criticalCons": [
+        "书名容易引发道德恐慌和大众误解，实际上基因没有拟人化的意志",
+        "部分篇幅对群体选择理论的批判在当代演化生物学界仍有学术争论"
+      ],
+      "targetAudience": "渴望彻底升级世界观的深度阅读者、生命科学爱好者、哲学与社科思考者",
+      "avoidAudience": "心理脆弱期、容易陷入存在主义虚无或抑郁倾向的读者",
+      "translationVerdict": "中信卢允童40周年纪念译本是目前市面上最权威详实的中译版本。"
+    },
+    "normalizedRatings": {
+      "douban": {
+        "score": 8.5,
+        "scale": 10,
+        "ratingCount": 198000,
+        "fiveStarPct": 46.2,
+        "url": "https://book.douban.com/subject/35165287/",
+        "normalizedScore": 8.5
+      },
+      "goodreads": {
+        "score": 4.15,
+        "scale": 5,
+        "ratingCount": 210000,
+        "fiveStarPct": 44,
+        "url": "https://www.goodreads.com/book/show/61535.The_Selfish_Gene",
+        "normalizedScore": 8.3
+      },
+      "googleBooks": {
+        "score": 4.5,
+        "scale": 5,
+        "ratingCount": 7800,
+        "fiveStarPct": 67,
+        "url": "https://books.google.com/books?id=selfish_gene",
+        "normalizedScore": 9
+      },
+      "amazon": {
+        "score": 4.6,
+        "scale": 5,
+        "ratingCount": 16500,
+        "fiveStarPct": 75,
+        "url": "https://www.amazon.com/Selfish-Gene-Popular-Science/dp/0198788606",
+        "normalizedScore": 9.2
+      }
+    },
+    "compositeScore": 8.44,
+    "discrepancyIndex": 0.2,
+    "verdict": {
+      "status": "recommended",
+      "label": "经典必读",
+      "color": "blue",
+      "desc": "多平台一致好评，口碑过硬，阅读体验极佳"
+    }
+  },
+  {
+    "id": "the-moon-and-sixpence",
+    "title": "月亮与六便士",
+    "originalTitle": "The Moon and Sixpence",
+    "author": "威廉·萨默塞特·毛姆 (W. Somerset Maugham)",
+    "translator": "徐淳刚 / 李继宏",
+    "cover": "./covers/the-moon-and-sixpence.jpg",
+    "isbn": "9787532774166",
+    "publicationYear": 2017,
+    "publisher": "上海译文出版社",
+    "category": "文学小说",
+    "tags": [
+      "文学经典",
+      "高更",
+      "理想与现实",
+      "毛姆",
+      "月亮与六便士"
+    ],
+    "summary": "二十世纪最震撼人心的文学经典之一。以法国后印象派大师高更为原型，讲述原本生活优渥的中年证券经纪人思特里克兰德，突然抛妻弃子奔赴巴黎与塔希提岛，在穷困潦倒与重病中只为追寻狂热艺术灵魂的传奇故事。",
+    "platformRatings": {
+      "douban": {
+        "score": 9,
+        "scale": 10,
+        "ratingCount": 524000,
+        "fiveStarPct": 62.4,
+        "url": "https://book.douban.com/subject/26895821/"
+      },
+      "goodreads": {
+        "score": 4.1,
+        "scale": 5,
+        "ratingCount": 82000,
+        "fiveStarPct": 45,
+        "url": "https://www.goodreads.com/book/show/44053.The_Moon_and_Sixpence"
+      },
+      "googleBooks": {
+        "score": 4.4,
+        "scale": 5,
+        "ratingCount": 3100,
+        "fiveStarPct": 64,
+        "url": "https://books.google.com/books?id=moon_sixpence"
+      },
+      "amazon": {
+        "score": 4.5,
+        "scale": 5,
+        "ratingCount": 12000,
+        "fiveStarPct": 71,
+        "url": "https://www.amazon.com/Moon-Sixpence-W-Somerset-Maugham/dp/1509825487"
+      }
+    },
+    "sentiment": {
+      "positivePct": 91,
+      "neutralPct": 6,
+      "negativePct": 3,
+      "pros": [
+        "毛姆毒舌犀利又洞悉人性的笔触堪称文学典范，字字珠玑",
+        "对‘满地都是六便士，他却抬头看见了月亮’的终极理想主义塑造震撼无数世代灵魂",
+        "对艺术创造力那近乎魔鬼附身般的狂热刻画得淋漓尽致"
+      ],
+      "cons": [
+        "主角思特里克兰德在道德上极度冷酷自私，对家庭与救命恩人的恩将仇报会让道德洁癖者极度不适"
+      ],
+      "keywords": [
+        "月亮与六便士",
+        "高更",
+        "艺术狂热",
+        "理想主义",
+        "毛姆名作"
+      ]
+    },
+    "featuredReviews": [
+      {
+        "platform": "douban",
+        "user": "月下独酌",
+        "avatar": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=120",
+        "rating": 10,
+        "date": "2023-05-18",
+        "sentiment": "positive",
+        "content": "年少不读毛姆，读懂已是中年。思特里克兰德不是个好人，甚至是个混蛋，但他身上有一种可怕而纯粹的力量，把世俗所看重的名利、家庭、舒适碾得粉碎。当他在塔希提岛的双目失明中将整座木屋绘满壁画，并在临终前嘱咐一把火烧掉时，我感受到了真正神性与毁灭交织的美。"
+      },
+      {
+        "platform": "goodreads",
+        "user": "Arthur Pendelton",
+        "avatar": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=120",
+        "rating": 4,
+        "date": "2023-08-25",
+        "sentiment": "positive",
+        "content": "Maugham is the supreme cynic who secretly aches for the sublime. Strickland is utterly repulsive as a human being, yet his demonic artistic obsession forces you to question the quiet, comfortable compromises of your own life."
+      },
+      {
+        "platform": "amazon",
+        "user": "Literary Reader",
+        "avatar": "https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?auto=format&fit=crop&q=80&w=120",
+        "rating": 5,
+        "date": "2024-01-09",
+        "sentiment": "positive",
+        "content": "A timeless masterpiece. Every sentence is polished like marble. If you feel trapped in the mundane rhythm of modern corporate life, read this immediately."
+      }
+    ],
+    "aiInsight": {
+      "sharpVerdict": "人类理想主义最狂暴的赞歌。它撕开了世俗成功的温和面具，让读者见证灵魂在艺术绝对诱惑下的残酷献祭。",
+      "deepPros": [
+        "毛姆将第一人称旁观者视角发挥到登峰造极，冷眼旁观中尽显人性的荒谬与崇高",
+        "对塔希提岛原始自然与原始生命力的描写极富诗意",
+        "对艺术家创作冲动的神经症特质剖析精准"
+      ],
+      "criticalCons": [
+        "主角践踏传统伦理的行为极度挑衅世俗价值观，需具备强大的文学审美品格才不至反感"
+      ],
+      "targetAudience": "渴望精神突围、反思人生意义、热爱经典文学与纯粹艺术的深度读者",
+      "avoidAudience": "期待家庭伦理温情剧或以传统道德标准审视艺术家的读者",
+      "translationVerdict": "上海译文出版社徐淳刚译本或李继宏译本语言均极为出彩，推荐阅读。"
+    },
+    "normalizedRatings": {
+      "douban": {
+        "score": 9,
+        "scale": 10,
+        "ratingCount": 524000,
+        "fiveStarPct": 62.4,
+        "url": "https://book.douban.com/subject/26895821/",
+        "normalizedScore": 9
+      },
+      "goodreads": {
+        "score": 4.1,
+        "scale": 5,
+        "ratingCount": 82000,
+        "fiveStarPct": 45,
+        "url": "https://www.goodreads.com/book/show/44053.The_Moon_and_Sixpence",
+        "normalizedScore": 8.2
+      },
+      "googleBooks": {
+        "score": 4.4,
+        "scale": 5,
+        "ratingCount": 3100,
+        "fiveStarPct": 64,
+        "url": "https://books.google.com/books?id=moon_sixpence",
+        "normalizedScore": 8.8
+      },
+      "amazon": {
+        "score": 4.5,
+        "scale": 5,
+        "ratingCount": 12000,
+        "fiveStarPct": 71,
+        "url": "https://www.amazon.com/Moon-Sixpence-W-Somerset-Maugham/dp/1509825487",
+        "normalizedScore": 9
+      }
+    },
+    "compositeScore": 8.89,
+    "discrepancyIndex": 0.8,
+    "verdict": {
+      "status": "recommended",
+      "label": "经典必读",
+      "color": "blue",
+      "desc": "多平台一致好评，口碑过硬，阅读体验极佳"
+    }
   }
 ];
 
-// Enrich books with normalized scores, Bayesian composite score, discrepancy, and verdict
-const books = rawBooks.map(book => {
-  const compositeScore = calculateCompositeScore(book.platformRatings);
-  const discrepancyIndex = calculateDiscrepancy(book.platformRatings);
-  const verdict = getVerdict(compositeScore, discrepancyIndex, book.sentiment.negativePct);
-
-  const normalizedRatings = {};
-  for (const [platform, data] of Object.entries(book.platformRatings)) {
-    normalizedRatings[platform] = {
-      ...data,
-      normalizedScore: normalizeScore(data.score, data.scale)
-    };
-  }
-
-  return {
-    ...book,
-    normalizedRatings,
-    compositeScore,
-    discrepancyIndex,
-    verdict
-  };
-});
-
-module.exports = {
-  books
-};
+module.exports = { books };
