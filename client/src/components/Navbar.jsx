@@ -151,6 +151,33 @@ export default function Navbar({
           </button>
 
         </div>
+
+        {/* Tertiary Row: Quick-Pill Bar (全网热门经典直达胶囊条) */}
+        <div className="flex items-center gap-1.5 overflow-x-auto py-1.5 border-t border-slate-100 scrollbar-none text-[11px]">
+          <span className="text-slate-400 font-bold shrink-0 mr-1 flex items-center gap-1">
+            <Sparkles className="w-3 h-3 text-amber-500" />
+            全网热读书库直达:
+          </span>
+          {[
+            '三体全集', '活着', '红楼梦', '百年孤独', '1984', '置身事内',
+            '人类简史', '围城', '白夜行', '芯片战争', '蛤蟆先生去看心理医生',
+            '被讨厌的勇气', '穷查理宝典', '月亮与六便士', '房思琪的初恋乐园',
+            '追风筝的人', '解忧杂货店', '银河帝国：基地', '海伯利安', '沙丘',
+            '纳瓦尔宝典', '深入理解计算机系统', '代码整洁之道', '自私的基因',
+            '万历十五年', '叫魂', '西西弗神话', '局外人'
+          ].map((title) => (
+            <button
+              key={title}
+              onClick={() => {
+                setSearchQuery(title);
+                setTimeout(() => onSearchSubmit(title), 50);
+              }}
+              className="px-2 py-0.5 rounded-full bg-slate-100 hover:bg-sky-50 text-slate-700 hover:text-sky-600 border border-slate-200/80 hover:border-sky-300 font-medium whitespace-nowrap transition-colors"
+            >
+              + {title}
+            </button>
+          ))}
+        </div>
       </div>
     </header>
   );
