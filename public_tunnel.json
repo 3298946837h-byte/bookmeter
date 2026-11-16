@@ -1,10 +1,10 @@
 {
   "status": "online",
   "active": true,
-  "daemonPid": 32048,
-  "childPid": 30148,
-  "publicUrl": "https://ooo-interior-key-targets.trycloudflare.com",
+  "daemonPid": 12088,
+  "childPid": 8004,
+  "publicUrl": "https://roland-measurements-resolution-simulation.trycloudflare.com",
   "target": "http://localhost:5000",
   "provider": "cloudflare",
-  "updatedAt": "2026-11-15T23:11:13.076Z"
+  "updatedAt": "2026-11-16T00:49:00.742Z"
 }

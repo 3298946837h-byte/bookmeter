@@ -80,13 +80,13 @@ export default function BookCard({ book, onOpenDetail, onOpenDownload, isFavorit
                 e.stopPropagation();
                 onToggleFavorite(book);
               }}
-              className={`p-1 rounded-full transition-colors ${
+              className={`w-11 h-11 sm:w-9 sm:h-9 flex items-center justify-center rounded-full transition-all touch-manipulation cursor-pointer active:scale-90 ${
                 isFavorite 
-                  ? 'text-rose-500 bg-rose-50 hover:bg-rose-100' 
-                  : 'text-slate-400 hover:text-rose-500 hover:bg-slate-200/60'
+                  ? 'text-rose-500 bg-rose-50 hover:bg-rose-100 border border-rose-200' 
+                  : 'text-slate-400 hover:text-rose-500 hover:bg-slate-200/60 border border-transparent'
               }`}
             >
-              <Heart className={`w-3.5 h-3.5 ${isFavorite ? 'fill-rose-500 text-rose-500' : ''}`} />
+              <Heart className={`w-4 h-4 ${isFavorite ? 'fill-rose-500 text-rose-500' : ''}`} />
             </button>
           )}
           {book.discrepancyIndex >= 1.0 && (
@@ -193,7 +193,7 @@ export default function BookCard({ book, onOpenDetail, onOpenDownload, isFavorit
                   e.stopPropagation();
                   if (onOpenDownload) onOpenDownload(book);
                 }}
-                className="px-1.5 py-0.2 rounded font-mono font-extrabold text-[10px] bg-sky-100/90 text-sky-800 border border-sky-200/80 hover:bg-sky-600 hover:text-white transition-colors cursor-pointer"
+                className="px-2.5 py-1 min-h-[30px] inline-flex items-center rounded font-mono font-extrabold text-[10px] bg-sky-100/90 text-sky-800 border border-sky-200/80 hover:bg-sky-600 hover:text-white transition-colors cursor-pointer touch-manipulation active:scale-95"
                 title={`点击下载 ${fmt} 格式`}
               >
                 {fmt}
@@ -239,9 +239,9 @@ export default function BookCard({ book, onOpenDetail, onOpenDownload, isFavorit
               if (onOpenDownload) onOpenDownload(book);
             }}
             title="一键极速下载全本电子书 (EPUB/PDF/TXT)"
-            className="px-2.5 py-1 text-[11px] font-bold text-sky-700 bg-sky-50 hover:bg-sky-600 hover:text-white rounded-lg border border-sky-200 hover:border-sky-600 transition-all flex items-center gap-1 active:scale-95 cursor-pointer shadow-2xs group/dl"
+            className="min-h-[44px] sm:min-h-[38px] px-3.5 sm:px-3 py-2 sm:py-1.5 text-xs font-bold text-sky-700 bg-sky-50 hover:bg-sky-600 hover:text-white rounded-xl border border-sky-200 hover:border-sky-600 transition-all flex items-center gap-1.5 active:scale-95 cursor-pointer shadow-2xs group/dl touch-manipulation"
           >
-            <Download className="w-3 h-3 text-sky-600 group-hover/dl:text-white" />
+            <Download className="w-3.5 h-3.5 text-sky-600 group-hover/dl:text-white" />
             <span>下载全书</span>
           </button>
 
@@ -250,7 +250,7 @@ export default function BookCard({ book, onOpenDetail, onOpenDownload, isFavorit
               e.stopPropagation();
               onOpenDetail(book);
             }}
-            className="text-slate-600 hover:text-sky-600 font-semibold text-xs flex items-center gap-1 group-hover:underline cursor-pointer"
+            className="min-h-[44px] sm:min-h-[38px] px-3 sm:px-2.5 text-slate-600 hover:text-sky-600 font-semibold text-xs flex items-center gap-1 group-hover:underline cursor-pointer touch-manipulation"
           >
             <MessageSquare className="w-3.5 h-3.5" />
             <span className="hidden sm:inline">看书评</span>

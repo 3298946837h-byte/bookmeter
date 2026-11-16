@@ -25,7 +25,7 @@ export default function BookDetailModal({ book, onClose, onOpenDownload, isFavor
     setChatHistory([]);
   }
 
-  // Escape key handler for accessible dialog closing
+  // Escape key handler and body scroll lock for mobile modals
   useEffect(() => {
     const handleKeyDown = (e) => {
       if (e.key === 'Escape' && onClose) {
@@ -33,7 +33,12 @@ export default function BookDetailModal({ book, onClose, onOpenDownload, isFavor
       }
     };
     window.addEventListener('keydown', handleKeyDown);
-    return () => window.removeEventListener('keydown', handleKeyDown);
+    const originalOverflow = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+      document.body.style.overflow = originalOverflow;
+    };
   }, [onClose]);
 
   if (!book) return null;
@@ -202,91 +207,112 @@ ${(book.cons || []).map(item => `- ${item}`).join('\n')}
       role="dialog"
       aria-modal="true"
       aria-label={`《${book.title}》全网口碑详情与AI测评`}
-      className="fixed inset-0 z-50 overflow-y-auto bg-slate-900/60 backdrop-blur-sm flex items-center justify-center p-2 sm:p-6 animate-in fade-in duration-200"
+      className="fixed inset-0 z-50 overflow-hidden bg-slate-900/60 backdrop-blur-sm flex items-end sm:items-center justify-center p-0 sm:p-6 animate-in fade-in duration-200 cursor-pointer"
+      onClick={onClose}
     >
       
       {/* Modal Dialog Card */}
       <div
-        className="bg-white w-full max-w-4xl rounded-2xl sm:rounded-3xl shadow-2xl overflow-hidden border border-slate-200 flex flex-col max-h-[96vh] sm:max-h-[92vh]"
+        className="bg-white w-full max-w-4xl rounded-t-3xl sm:rounded-3xl shadow-2xl overflow-hidden border border-slate-200 flex flex-col h-[94vh] sm:h-auto sm:max-h-[92vh] animate-in slide-in-from-bottom duration-250 sm:slide-in-from-bottom-0 sm:zoom-in-95 cursor-default"
         onClick={(e) => e.stopPropagation()}
       >
         
         {/* Top Header Bar */}
-        <div className="px-4 py-3 sm:px-6 sm:py-4 bg-slate-900 text-white flex items-center justify-between shrink-0">
-          <div className="flex items-center gap-2">
-            <span className={`px-2.5 py-0.5 rounded-full text-xs font-bold ${
-              book.verdict?.status === 'masterpiece' ? 'bg-emerald-500 text-white' :
-              book.verdict?.status === 'warning' ? 'bg-rose-500 text-white' :
-              book.verdict?.status === 'controversial' ? 'bg-amber-500 text-white' :
-              'bg-blue-600 text-white'
-            }`}>
-              {book.verdict?.label}
-            </span>
-            <span className="text-xs text-slate-300 hidden sm:inline">
-              {book.category} · {book.publicationYear} · 全网多源权威对冲报告
-            </span>
-          </div>
+        <div className="px-4 py-2.5 sm:px-6 sm:py-4 bg-slate-900 text-white shrink-0">
+          {/* Mobile Sheet Drag Indicator */}
+          <div className="w-12 h-1.5 bg-slate-700 rounded-full mx-auto mb-2 block sm:hidden shrink-0" />
 
-          <div className="flex items-center gap-1.5 sm:gap-2">
-            {onToggleFavorite && (
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-2 min-w-0 pr-2">
+              <span className={`px-2.5 py-0.5 rounded-full text-xs font-bold shrink-0 ${
+                book.verdict?.status === 'masterpiece' ? 'bg-emerald-500 text-white' :
+                book.verdict?.status === 'warning' ? 'bg-rose-500 text-white' :
+                book.verdict?.status === 'controversial' ? 'bg-amber-500 text-white' :
+                'bg-blue-600 text-white'
+              }`}>
+                {book.verdict?.label}
+              </span>
+              <span className="text-xs text-slate-300 font-medium truncate sm:hidden">
+                《{book.title}》
+              </span>
+              <span className="text-xs text-slate-300 hidden sm:inline truncate">
+                {book.category} · {book.publicationYear} · 全网多源权威对冲报告
+              </span>
+            </div>
+
+            {/* Desktop Actions */}
+            <div className="hidden sm:flex items-center gap-2">
+              {onToggleFavorite && (
+                <button
+                  type="button"
+                  onClick={() => onToggleFavorite(book)}
+                  title={isFavorite ? "已在我的书架 (点击移除)" : "加入我的书架"}
+                  aria-label={isFavorite ? "取消收藏" : "加入书架"}
+                  className={`flex items-center gap-1.5 px-3 py-1.5 text-xs font-bold rounded-lg transition-all cursor-pointer ${
+                    isFavorite
+                      ? 'bg-rose-500/20 text-rose-300 border border-rose-500/40 hover:bg-rose-500/30'
+                      : 'bg-white/10 text-white hover:bg-white/20'
+                  }`}
+                >
+                  <Heart className={`w-3.5 h-3.5 ${isFavorite ? 'fill-rose-400 text-rose-400' : ''}`} />
+                  <span>{isFavorite ? '已收藏' : '加入书架'}</span>
+                </button>
+              )}
+
               <button
-                type="button"
-                onClick={() => onToggleFavorite(book)}
-                title={isFavorite ? "已在我的书架 (点击移除)" : "加入我的书架"}
-                aria-label={isFavorite ? "取消收藏" : "加入书架"}
-                className={`flex items-center gap-1.5 px-2.5 sm:px-3 py-1.5 text-xs font-bold rounded-lg transition-all cursor-pointer ${
-                  isFavorite
-                    ? 'bg-rose-500/20 text-rose-300 border border-rose-500/40 hover:bg-rose-500/30'
-                    : 'bg-white/10 text-white hover:bg-white/20'
-                }`}
+                onClick={() => onOpenDownload && onOpenDownload(book)}
+                title="下载全本电子书 (EPUB/TXT/全网源)"
+                aria-label="下载全本电子书"
+                className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-bold text-white bg-gradient-to-r from-sky-500 to-indigo-600 hover:from-sky-600 hover:to-indigo-700 active:scale-95 rounded-lg shadow-xs transition-all cursor-pointer"
               >
-                <Heart className={`w-3.5 h-3.5 ${isFavorite ? 'fill-rose-400 text-rose-400' : ''}`} />
-                <span>{isFavorite ? '已收藏' : '加入书架'}</span>
+                <Download className="w-3.5 h-3.5" />
+                <span>下载全书</span>
               </button>
-            )}
 
-            <button
-              onClick={() => onOpenDownload && onOpenDownload(book)}
-              title="下载全本电子书 (EPUB/TXT/全网源)"
-              aria-label="下载全本电子书"
-              className="flex items-center gap-1.5 px-2.5 sm:px-3 py-1.5 text-xs font-bold text-white bg-gradient-to-r from-sky-500 to-indigo-600 hover:from-sky-600 hover:to-indigo-700 active:scale-95 rounded-lg shadow-xs transition-all cursor-pointer"
-            >
-              <Download className="w-3.5 h-3.5" />
-              <span>下载全书</span>
-            </button>
+              <button
+                onClick={handleExportSingleBook}
+                title="导出此书 Markdown 详细口碑报告"
+                aria-label="导出此书 Markdown 详细口碑报告"
+                className="flex items-center gap-1.5 px-2.5 py-1.5 text-xs font-medium text-slate-300 hover:text-white bg-slate-800 hover:bg-slate-700 border border-slate-700 rounded-lg transition-colors cursor-pointer"
+              >
+                {copiedSingle ? <Check className="w-3.5 h-3.5 text-emerald-400" /> : <FileText className="w-3.5 h-3.5" />}
+                <span>{copiedSingle ? '已保存' : '报告'}</span>
+              </button>
 
-            <button
-              onClick={handleExportSingleBook}
-              title="导出此书 Markdown 详细口碑报告"
-              aria-label="导出此书 Markdown 详细口碑报告"
-              className="flex items-center gap-1.5 px-2.5 py-1.5 text-xs font-medium text-slate-300 hover:text-white bg-slate-800 hover:bg-slate-700 border border-slate-700 rounded-lg transition-colors cursor-pointer"
-            >
-              {copiedSingle ? <Check className="w-3.5 h-3.5 text-emerald-400" /> : <FileText className="w-3.5 h-3.5" />}
-              <span className="hidden sm:inline">{copiedSingle ? '已保存' : '报告'}</span>
-            </button>
+              <button
+                onClick={handleCopyCard}
+                title="复制口碑速评卡片到剪贴板"
+                aria-label="复制口碑速评卡片到剪贴板"
+                className="flex items-center gap-1.5 px-2.5 py-1.5 text-xs font-medium text-slate-300 hover:text-white bg-slate-800 hover:bg-slate-700 border border-slate-700 rounded-lg transition-colors cursor-pointer"
+              >
+                {copiedCard ? <Check className="w-3.5 h-3.5 text-emerald-400" /> : <Sparkles className="w-3.5 h-3.5 text-amber-400" />}
+                <span>{copiedCard ? '已复制' : '复制速评'}</span>
+              </button>
 
-            <button
-              onClick={handleCopyCard}
-              title="复制口碑速评卡片到剪贴板"
-              aria-label="复制口碑速评卡片到剪贴板"
-              className="hidden sm:flex items-center gap-1.5 px-2.5 py-1.5 text-xs font-medium text-slate-300 hover:text-white bg-slate-800 hover:bg-slate-700 border border-slate-700 rounded-lg transition-colors cursor-pointer"
-            >
-              {copiedCard ? <Check className="w-3.5 h-3.5 text-emerald-400" /> : <Sparkles className="w-3.5 h-3.5 text-amber-400" />}
-              <span>{copiedCard ? '已复制' : '复制速评'}</span>
-            </button>
+              <button
+                onClick={onClose}
+                aria-label="关闭详情窗口"
+                className="p-2 rounded-full text-slate-300 hover:text-white bg-slate-800 active:bg-slate-700 transition-colors touch-manipulation cursor-pointer"
+              >
+                <X className="w-5 h-5" />
+              </button>
+            </div>
 
-            <button
-              onClick={onClose}
-              aria-label="关闭详情窗口"
-              className="p-1.5 sm:p-2 rounded-full text-slate-300 hover:text-white bg-slate-800 active:bg-slate-700 transition-colors touch-manipulation cursor-pointer"
-            >
-              <X className="w-4 h-4 sm:w-5 sm:h-5" />
-            </button>
+            {/* Mobile Close Button */}
+            <div className="flex sm:hidden items-center shrink-0">
+              <button
+                onClick={onClose}
+                aria-label="关闭详情窗口"
+                className="w-11 h-11 flex items-center justify-center rounded-full text-slate-300 hover:text-white bg-slate-800 active:bg-slate-700 transition-colors touch-manipulation cursor-pointer"
+              >
+                <X className="w-5 h-5" />
+              </button>
+            </div>
           </div>
         </div>
 
         {/* Modal Scrollable Body */}
-        <div className="overflow-y-auto p-4 sm:p-6 space-y-5 sm:space-y-6">
+        <div className="overflow-y-auto overscroll-contain smooth-scroll p-4 sm:p-6 space-y-5 sm:space-y-6">
           
           {/* Section 1: Hero Info & Master Score */}
           <div className="flex flex-col sm:flex-row gap-6 items-start pb-6 border-b border-slate-100">
@@ -688,6 +714,9 @@ ${(book.cons || []).map(item => `- ${item}`).join('\n')}
             <form
               onSubmit={(e) => {
                 e.preventDefault();
+                if (typeof document !== 'undefined' && document.activeElement) {
+                  document.activeElement.blur();
+                }
                 handleAskQuestion();
               }}
               className="flex gap-2"
@@ -699,13 +728,13 @@ ${(book.cons || []).map(item => `- ${item}`).join('\n')}
                 placeholder="例如: 中文译本翻译得生硬吗？适合小白读吗？..."
                 style={{ fontSize: '16px' }}
                 aria-label="向 AI 顾问咨询关于本书的问题"
-                className="flex-1 px-3.5 py-2 text-base bg-white rounded-xl border border-slate-300 focus:border-sky-500 focus:ring-1 focus:ring-sky-500 outline-none text-slate-800"
+                className="flex-1 px-3.5 py-2 min-h-[44px] text-base bg-white rounded-xl border border-slate-300 focus:border-sky-500 focus:ring-1 focus:ring-sky-500 outline-none text-slate-800"
               />
               <button
                 type="submit"
                 disabled={askingAi || !question.trim()}
                 aria-label="提交咨询提问"
-                className="px-4 py-2 bg-slate-900 hover:bg-slate-800 disabled:bg-slate-400 text-white rounded-xl text-xs font-bold transition-all flex items-center gap-1 shrink-0"
+                className="px-4 py-2 min-h-[44px] bg-slate-900 hover:bg-slate-800 disabled:bg-slate-400 text-white rounded-xl text-xs font-bold transition-all flex items-center justify-center gap-1 shrink-0 touch-manipulation active:scale-95 cursor-pointer"
               >
                 {askingAi ? (
                   <span>分析中...</span>
@@ -721,13 +750,52 @@ ${(book.cons || []).map(item => `- ${item}`).join('\n')}
 
         </div>
 
-        {/* Modal Footer */}
-        <div className="px-6 py-4 bg-slate-50 border-t border-slate-200 flex items-center justify-between shrink-0 text-xs text-slate-500">
+        {/* Mobile Sticky Bottom Action Bar */}
+        <div className="sm:hidden px-4 py-2.5 pb-safe-card bg-white/95 backdrop-blur border-t border-slate-200 flex items-center gap-2 shrink-0 shadow-lg">
+          {onToggleFavorite && (
+            <button
+              type="button"
+              onClick={() => onToggleFavorite(book)}
+              aria-label={isFavorite ? "取消收藏" : "加入书架"}
+              className={`min-h-[44px] px-3.5 rounded-xl font-bold text-xs flex items-center justify-center gap-1.5 border transition-all touch-manipulation active:scale-95 shrink-0 ${
+                isFavorite
+                  ? 'bg-rose-50 text-rose-600 border-rose-200'
+                  : 'bg-slate-100 text-slate-700 border-slate-200'
+              }`}
+            >
+              <Heart className={`w-4 h-4 ${isFavorite ? 'fill-rose-500 text-rose-500' : ''}`} />
+              <span>{isFavorite ? '已收藏' : '收藏'}</span>
+            </button>
+          )}
+
+          <button
+            type="button"
+            onClick={handleExportSingleBook}
+            aria-label="导出此书口碑报告"
+            className="min-h-[44px] px-3 rounded-xl font-bold text-xs flex items-center justify-center gap-1 text-slate-700 bg-slate-100 border border-slate-200 active:scale-95 touch-manipulation shrink-0"
+          >
+            {copiedSingle ? <Check className="w-4 h-4 text-emerald-600" /> : <FileText className="w-4 h-4 text-slate-600" />}
+            <span>{copiedSingle ? '已保存' : '报告'}</span>
+          </button>
+
+          <button
+            type="button"
+            onClick={() => onOpenDownload && onOpenDownload(book)}
+            aria-label="下载全本电子书"
+            className="min-h-[44px] flex-1 px-4 py-2 text-xs font-black text-white bg-gradient-to-r from-sky-500 to-indigo-600 active:scale-95 rounded-xl shadow-md flex items-center justify-center gap-1.5 touch-manipulation"
+          >
+            <Download className="w-4 h-4" />
+            <span>下载全本电子书</span>
+          </button>
+        </div>
+
+        {/* Desktop Modal Footer */}
+        <div className="hidden sm:flex px-6 py-4 bg-slate-50 border-t border-slate-200 items-center justify-between shrink-0 text-xs text-slate-500">
           <span>跨平台数据持续监测 · 避免阅读信息茧房</span>
           <button
             onClick={onClose}
             aria-label="关闭详情窗口"
-            className="px-5 py-2 bg-slate-900 hover:bg-slate-800 text-white font-semibold rounded-xl transition-all cursor-pointer"
+            className="px-5 py-2 bg-slate-900 hover:bg-slate-800 text-white font-semibold rounded-xl transition-all cursor-pointer touch-manipulation active:scale-95"
           >
             关闭详情
           </button>

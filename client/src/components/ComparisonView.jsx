@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
-import { Award, AlertTriangle, Scale, ThumbsUp, ThumbsDown, ArrowRight, Swords, Sparkles, CheckCircle2, ChevronRight } from 'lucide-react';
-import PlatformRatingBadge from './PlatformRatingBadge';
+import { Award, AlertTriangle, Scale, ThumbsUp, ThumbsDown, ArrowRight, Swords, ChevronRight } from 'lucide-react';
 
 export default function ComparisonView({ books = [], onOpenDetail }) {
   const masterpieces = books.filter(b => b.verdict?.status === 'masterpiece').slice(0, 6);
@@ -13,11 +12,6 @@ export default function ComparisonView({ books = [], onOpenDetail }) {
 
   const bookA = books.find(b => b.id === bookAId) || books[0];
   const bookB = books.find(b => b.id === bookBId) || books[1] || books[0];
-
-  const getScoreLeader = (valA, valB) => {
-    if (valA === valB) return 'tie';
-    return valA > valB ? 'A' : 'B';
-  };
 
   return (
     <div className="space-y-8 animate-in fade-in duration-300">
@@ -74,7 +68,9 @@ export default function ComparisonView({ books = [], onOpenDetail }) {
               <select
                 value={bookAId}
                 onChange={(e) => setBookAId(e.target.value)}
-                className="w-full text-xs font-medium p-2.5 bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:ring-2 focus:ring-sky-500 outline-none transition-all cursor-pointer"
+                style={{ fontSize: '16px' }}
+                aria-label="选择擂主 A"
+                className="w-full text-base font-medium p-2.5 bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:ring-2 focus:ring-sky-500 outline-none transition-all cursor-pointer touch-manipulation min-h-[44px]"
               >
                 {books.map(b => (
                   <option key={`a-${b.id}`} value={b.id}>
@@ -92,7 +88,9 @@ export default function ComparisonView({ books = [], onOpenDetail }) {
               <select
                 value={bookBId}
                 onChange={(e) => setBookBId(e.target.value)}
-                className="w-full text-xs font-medium p-2.5 bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:ring-2 focus:ring-indigo-500 outline-none transition-all cursor-pointer"
+                style={{ fontSize: '16px' }}
+                aria-label="选择对决方 B"
+                className="w-full text-base font-medium p-2.5 bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:ring-2 focus:ring-indigo-500 outline-none transition-all cursor-pointer touch-manipulation min-h-[44px]"
               >
                 {books.map(b => (
                   <option key={`b-${b.id}`} value={b.id}>
@@ -145,7 +143,7 @@ export default function ComparisonView({ books = [], onOpenDetail }) {
 
               <button
                 onClick={() => onOpenDetail(bookA)}
-                className="w-full py-2 bg-sky-50 hover:bg-sky-100 text-sky-700 font-bold text-xs rounded-xl border border-sky-200 transition-all flex items-center justify-center gap-1 cursor-pointer"
+                className="w-full min-h-[44px] py-2.5 bg-sky-50 hover:bg-sky-100 text-sky-700 font-bold text-xs rounded-xl border border-sky-200 transition-all flex items-center justify-center gap-1 cursor-pointer touch-manipulation active:scale-95"
               >
                 <span>查看《{bookA.title}》全网深度研报</span>
                 <ChevronRight className="w-3.5 h-3.5" />
@@ -192,7 +190,7 @@ export default function ComparisonView({ books = [], onOpenDetail }) {
 
               <button
                 onClick={() => onOpenDetail(bookB)}
-                className="w-full py-2 bg-indigo-50 hover:bg-indigo-100 text-indigo-700 font-bold text-xs rounded-xl border border-indigo-200 transition-all flex items-center justify-center gap-1 cursor-pointer"
+                className="w-full min-h-[44px] py-2.5 bg-indigo-50 hover:bg-indigo-100 text-indigo-700 font-bold text-xs rounded-xl border border-indigo-200 transition-all flex items-center justify-center gap-1 cursor-pointer touch-manipulation active:scale-95"
               >
                 <span>查看《{bookB.title}》全网深度研报</span>
                 <ChevronRight className="w-3.5 h-3.5" />

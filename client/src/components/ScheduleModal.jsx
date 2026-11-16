@@ -26,7 +26,7 @@ export default function ScheduleModal({ isOpen, onClose, onRefreshData }) {
     }
   }, [isOpen]);
 
-  // Escape key handler for accessible dialog closing
+  // Escape key handler and body scroll lock for mobile modals
   useEffect(() => {
     if (!isOpen) return;
     const handleKeyDown = (e) => {
@@ -35,7 +35,12 @@ export default function ScheduleModal({ isOpen, onClose, onRefreshData }) {
       }
     };
     window.addEventListener('keydown', handleKeyDown);
-    return () => window.removeEventListener('keydown', handleKeyDown);
+    const originalOverflow = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+      document.body.style.overflow = originalOverflow;
+    };
   }, [isOpen, onClose]);
 
   const handleSaveToken = async (e) => {
@@ -61,7 +66,7 @@ export default function ScheduleModal({ isOpen, onClose, onRefreshData }) {
         }));
         setTimeout(() => setTokenSaved(false), 3000);
       }
-    } catch (err) {
+    } catch {
       alert('保存 GitHub Token 失败');
     }
   };
@@ -90,29 +95,35 @@ export default function ScheduleModal({ isOpen, onClose, onRefreshData }) {
       role="dialog"
       aria-modal="true"
       aria-label="自动抓取与定时排程管理"
-      className="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-sm flex items-center justify-center p-4"
+      className="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-sm flex items-end sm:items-center justify-center p-0 sm:p-4 animate-in fade-in duration-200"
+      onClick={onClose}
     >
       <div
-        className="bg-white w-full max-w-2xl rounded-3xl shadow-2xl border border-slate-200 overflow-hidden flex flex-col"
+        className="bg-white w-full max-w-2xl rounded-t-3xl sm:rounded-3xl shadow-2xl border border-slate-200 overflow-hidden flex flex-col h-[90vh] sm:h-auto sm:max-h-[90vh] animate-in slide-in-from-bottom duration-250 sm:slide-in-from-bottom-0 sm:zoom-in-95"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header */}
-        <div className="px-6 py-4 bg-slate-900 text-white flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            <Clock className="w-5 h-5 text-sky-400" />
-            <h3 className="font-bold text-base">自动抓取与定时排程管理 (Schedule Pipeline)</h3>
+        <div className="px-4 py-3 sm:px-6 sm:py-4 bg-slate-900 text-white shrink-0">
+          {/* Mobile Sheet Drag Indicator */}
+          <div className="w-12 h-1.5 bg-slate-700 rounded-full mx-auto mb-2 block sm:hidden shrink-0" />
+
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-2">
+              <Clock className="w-5 h-5 text-sky-400 shrink-0" />
+              <h3 className="font-bold text-sm sm:text-base">自动抓取与定时排程 (Schedule Pipeline)</h3>
+            </div>
+            <button
+              onClick={onClose}
+              aria-label="关闭排程管理窗口"
+              className="w-11 h-11 flex items-center justify-center rounded-full text-slate-300 hover:text-white bg-slate-800 active:bg-slate-700 transition-colors touch-manipulation cursor-pointer shrink-0"
+            >
+              <X className="w-5 h-5" />
+            </button>
           </div>
-          <button
-            onClick={onClose}
-            aria-label="关闭排程管理窗口"
-            className="p-1 rounded-full text-slate-400 hover:text-white hover:bg-slate-800 transition-colors cursor-pointer"
-          >
-            <X className="w-5 h-5" />
-          </button>
         </div>
 
         {/* Content */}
-        <div className="p-6 space-y-5">
+        <div className="p-4 sm:p-6 overflow-y-auto overscroll-contain smooth-scroll space-y-5">
           <div className="p-4 rounded-2xl bg-sky-50 border border-sky-200 text-xs text-sky-900 leading-relaxed flex items-start gap-3">
             <Calendar className="w-5 h-5 text-sky-600 shrink-0 mt-0.5" />
             <div>
@@ -154,7 +165,7 @@ export default function ScheduleModal({ isOpen, onClose, onRefreshData }) {
               </div>
               <button
                 type="submit"
-                className="px-3 py-1.5 bg-sky-600 hover:bg-sky-500 text-white text-xs font-bold rounded-xl transition-all flex items-center gap-1 shrink-0"
+                className="px-3 py-2 min-h-[44px] bg-sky-600 hover:bg-sky-500 active:bg-sky-700 text-white text-xs font-bold rounded-xl transition-all flex items-center justify-center gap-1 shrink-0 touch-manipulation active:scale-95 cursor-pointer"
               >
                 {tokenSaved ? (
                   <>
@@ -162,25 +173,25 @@ export default function ScheduleModal({ isOpen, onClose, onRefreshData }) {
                     <span>已保存生效</span>
                   </>
                 ) : (
-                  <span>保存启用免费配额</span>
+                  <span>保存启用</span>
                 )}
               </button>
             </form>
           </div>
 
           {/* Quick Stats Grid */}
-          <div className="grid grid-cols-3 gap-3 text-center">
-            <div className="p-3 rounded-xl bg-slate-50 border border-slate-200">
-              <span className="text-[11px] text-slate-500">排程周期</span>
-              <div className="font-bold text-sm text-slate-800 mt-0.5">每日 00:00</div>
+          <div className="grid grid-cols-3 gap-2 sm:gap-3 text-center">
+            <div className="p-2.5 sm:p-3 rounded-xl bg-slate-50 border border-slate-200">
+              <span className="text-[10px] sm:text-[11px] text-slate-500">排程周期</span>
+              <div className="font-bold text-xs sm:text-sm text-slate-800 mt-0.5">每日 00:00</div>
             </div>
-            <div className="p-3 rounded-xl bg-slate-50 border border-slate-200">
-              <span className="text-[11px] text-slate-500">上次自动同步</span>
-              <div className="font-bold text-sm text-emerald-600 mt-0.5">{lastSyncTime}</div>
+            <div className="p-2.5 sm:p-3 rounded-xl bg-slate-50 border border-slate-200">
+              <span className="text-[10px] sm:text-[11px] text-slate-500">上次自动同步</span>
+              <div className="font-bold text-xs sm:text-sm text-emerald-600 mt-0.5 truncate">{lastSyncTime}</div>
             </div>
-            <div className="p-3 rounded-xl bg-slate-50 border border-slate-200">
-              <span className="text-[11px] text-slate-500">对冲引擎状态</span>
-              <div className="font-bold text-sm text-sky-600 mt-0.5">活跃 · 实时就绪</div>
+            <div className="p-2.5 sm:p-3 rounded-xl bg-slate-50 border border-slate-200">
+              <span className="text-[10px] sm:text-[11px] text-slate-500">对冲引擎状态</span>
+              <div className="font-bold text-xs sm:text-sm text-sky-600 mt-0.5">活跃 · 就绪</div>
             </div>
           </div>
 
@@ -194,7 +205,7 @@ export default function ScheduleModal({ isOpen, onClose, onRefreshData }) {
               <span className="text-[11px] text-slate-400 font-normal">自动滚动</span>
             </div>
 
-            <div className="bg-slate-950 text-slate-200 font-mono text-[11px] p-3.5 rounded-xl h-44 overflow-y-auto space-y-1">
+            <div className="bg-slate-950 text-slate-200 font-mono text-[11px] p-3.5 rounded-xl h-40 sm:h-44 overflow-y-auto overscroll-contain smooth-scroll space-y-1">
               {logs.map((log, idx) => (
                 <div key={idx} className="leading-relaxed opacity-90">
                   {log}
@@ -204,7 +215,7 @@ export default function ScheduleModal({ isOpen, onClose, onRefreshData }) {
           </div>
 
           {/* Action trigger */}
-          <div className="flex items-center justify-between pt-2">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pt-2">
             <span className="text-xs text-slate-500">
               提示: 点击右侧按钮可立即强制触发一次全网对冲重算
             </span>
@@ -212,7 +223,7 @@ export default function ScheduleModal({ isOpen, onClose, onRefreshData }) {
             <button
               onClick={handleManualRun}
               disabled={isRunning}
-              className="flex items-center gap-2 px-4 py-2 bg-sky-600 hover:bg-sky-700 disabled:bg-slate-400 text-white rounded-xl text-xs font-bold transition-all shadow-sm"
+              className="flex items-center justify-center gap-2 px-5 py-2.5 min-h-[44px] bg-sky-600 hover:bg-sky-700 disabled:bg-slate-400 active:bg-sky-800 text-white rounded-xl text-xs font-bold transition-all shadow-sm touch-manipulation active:scale-95 cursor-pointer shrink-0"
             >
               {isRunning ? (
                 <>
@@ -230,10 +241,11 @@ export default function ScheduleModal({ isOpen, onClose, onRefreshData }) {
         </div>
 
         {/* Footer */}
-        <div className="px-6 py-3 bg-slate-50 border-t border-slate-200 flex justify-end">
+        <div className="px-4 sm:px-6 py-3 pb-safe-card bg-slate-50 border-t border-slate-200 flex justify-end shrink-0">
           <button
             onClick={onClose}
-            className="px-4 py-1.5 bg-slate-200 hover:bg-slate-300 text-slate-700 text-xs font-semibold rounded-lg"
+            aria-label="完成并关闭"
+            className="min-h-[44px] px-5 py-2 bg-slate-200 hover:bg-slate-300 active:bg-slate-400 text-slate-800 text-xs font-bold rounded-xl transition-all touch-manipulation active:scale-95 cursor-pointer"
           >
             完成并关闭
           </button>

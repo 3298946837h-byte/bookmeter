@@ -13,7 +13,7 @@ import DownloadModal from './components/DownloadModal';
 import BookDownloadModal from './components/BookDownloadModal';
 import fallbackBooks from './data/staticBooks.json';
 import { searchOpenLibraryLive, fetchInfiniteBooks, getGuaranteedStreamBooks, generateUniversalBookProfile } from './services/clientCrawler';
-import { Search, BookOpen, Sparkles, RefreshCw, Flame, ArrowLeft, CheckCircle2, Award, ArrowRight } from 'lucide-react';
+import { Search, BookOpen, Sparkles, RefreshCw, Flame, ArrowLeft, CheckCircle2, Award, ArrowRight, ArrowUp, Scale, Heart, Download } from 'lucide-react';
 
 export default function App() {
   const [books, setBooks] = useState([]);
@@ -37,6 +37,7 @@ export default function App() {
   const [isDownloadOpen, setIsDownloadOpen] = useState(false);
   const [downloadingBook, setDownloadingBook] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [showBackToTop, setShowBackToTop] = useState(false);
 
   // Favorites / Personal Bookshelf State
   const [favorites, setFavorites] = useState(() => {
@@ -109,8 +110,10 @@ export default function App() {
 
   useEffect(() => {
     const handleScroll = () => {
-      if (activeTab !== 'explore' || activeSearchTerm || isLoadingMore) return;
       const scrollY = window.scrollY || window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
+      setShowBackToTop(scrollY > 350);
+
+      if (activeTab !== 'explore' || activeSearchTerm || isLoadingMore) return;
       const windowHeight = window.innerHeight || document.documentElement.clientHeight;
       const docHeight = Math.max(
         document.body.scrollHeight,
@@ -130,14 +133,29 @@ export default function App() {
     };
   }, [activeTab, activeSearchTerm, isLoadingMore, loadMoreBooks]);
 
-  // Fetch initial books & data (with static fallback for GitHub Pages / Vercel)
-  const loadData = async () => {
+  // Fetch initial books & data (with fast timeout fallback for GitHub Pages / Vercel / Mobile)
+  const loadData = useCallback(async () => {
     try {
       setIsLoading(true);
+
+      const fetchWithTimeout = (url, ms = 2000) => {
+        const controller = new AbortController();
+        const timer = setTimeout(() => controller.abort(), ms);
+        return fetch(url, { signal: controller.signal })
+          .then(res => {
+            clearTimeout(timer);
+            return res;
+          })
+          .catch(() => {
+            clearTimeout(timer);
+            return null;
+          });
+      };
+
       const [booksRes, statsRes, catRes] = await Promise.all([
-        fetch('/api/books').catch(() => null),
-        fetch('/api/stats').catch(() => null),
-        fetch('/api/categories').catch(() => null)
+        fetchWithTimeout('/api/books'),
+        fetchWithTimeout('/api/stats'),
+        fetchWithTimeout('/api/categories')
       ]);
 
       if (booksRes && booksRes.ok) {
@@ -179,11 +197,11 @@ export default function App() {
     } finally {
       setIsLoading(false);
     }
-  };
+  }, []);
 
   useEffect(() => {
     loadData();
-  }, []);
+  }, [loadData]);
 
   // When activeTab changes, adjust relevant verdict filters
   useEffect(() => {
@@ -245,16 +263,19 @@ export default function App() {
       });
       local = localMatches;
 
-      // 2. Try backend API if available
+      // 2. Try backend API if available (with 1.5s timeout for fast mobile response)
       try {
-        const res = await fetch(`/api/search?q=${encodeURIComponent(query)}`);
+        const controller = new AbortController();
+        const timer = setTimeout(() => controller.abort(), 1500);
+        const res = await fetch(`/api/search?q=${encodeURIComponent(query)}`, { signal: controller.signal });
+        clearTimeout(timer);
         if (res.ok) {
           const searchData = await res.json();
           if (searchData.local) local = [...local, ...searchData.local];
           if (searchData.live) live = searchData.live;
         }
-      } catch (e) {
-        // Fallback for static GitHub Pages deployment
+      } catch {
+        // Fallback for static GitHub Pages deployment or network timeout
       }
 
       // 3. If local matches are sparse (<= 1), check if non-Chinese query for Open Library
@@ -362,7 +383,7 @@ export default function App() {
       />
 
       {/* Main Content Area */}
-      <main className="flex-1 max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 py-4 sm:py-8 w-full">
+      <main className="flex-1 max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 py-4 sm:py-8 pb-28 sm:pb-8 w-full">
         
         {/* Global Search Banner when user searched */}
         {activeSearchTerm && (
@@ -661,7 +682,7 @@ export default function App() {
       </main>
 
       {/* Footer */}
-      <footer className="bg-white border-t border-slate-200 py-8 text-xs text-slate-500 mt-12">
+      <footer className="bg-white border-t border-slate-200 py-8 pb-28 sm:pb-8 text-xs text-slate-500 mt-12">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4">
           <div className="flex items-center gap-2">
             <span className="font-bold text-slate-800">BookMeter · 全网书评权威聚合</span>
@@ -676,6 +697,109 @@ export default function App() {
           </div>
         </div>
       </footer>
+
+      {/* Floating Back-to-Top Button */}
+      {showBackToTop && (
+        <button
+          type="button"
+          onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+          aria-label="返回页面顶部"
+          className="fixed bottom-[calc(4.5rem+env(safe-area-inset-bottom,0px))] right-4 sm:bottom-8 sm:right-8 z-30 w-12 h-12 rounded-full bg-slate-900/90 hover:bg-slate-900 active:scale-90 text-white shadow-xl flex items-center justify-center border border-white/20 backdrop-blur-xs transition-all duration-200 touch-manipulation cursor-pointer group"
+        >
+          <ArrowUp className="w-5 h-5 group-hover:-translate-y-0.5 transition-transform" />
+        </button>
+      )}
+
+      {/* Mobile Fixed Bottom Navigation Bar (手机端底部快捷导航) */}
+      <nav
+        aria-label="手机端底部快捷导航"
+        className="fixed bottom-0 inset-x-0 z-40 bg-white/95 backdrop-blur-md border-t border-slate-200/90 shadow-lg sm:hidden pb-safe"
+      >
+        <div className="grid grid-cols-5 h-14 items-center">
+          {/* Tab 1: 全部书库 */}
+          <button
+            type="button"
+            onClick={() => {
+              if (activeTab === 'explore' && !activeSearchTerm) {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+              } else {
+                setActiveTab('explore');
+                if (activeSearchTerm) handleClearSearch();
+              }
+            }}
+            className={`flex flex-col items-center justify-center h-full touch-manipulation active:scale-95 transition-colors cursor-pointer ${
+              activeTab === 'explore' ? 'text-sky-600 font-bold' : 'text-slate-500 hover:text-slate-800'
+            }`}
+          >
+            <BookOpen className={`w-5 h-5 ${activeTab === 'explore' ? 'stroke-[2.5]' : ''}`} />
+            <span className="text-[10px] mt-0.5">书库</span>
+          </button>
+
+          {/* Tab 2: 权威榜单 */}
+          <button
+            type="button"
+            onClick={() => {
+              setActiveTab('leaderboards');
+              window.scrollTo({ top: 0, behavior: 'smooth' });
+            }}
+            className={`flex flex-col items-center justify-center h-full touch-manipulation active:scale-95 transition-colors cursor-pointer ${
+              activeTab === 'leaderboards' ? 'text-amber-600 font-bold' : 'text-slate-500 hover:text-slate-800'
+            }`}
+          >
+            <Award className={`w-5 h-5 ${activeTab === 'leaderboards' ? 'stroke-[2.5]' : ''}`} />
+            <span className="text-[10px] mt-0.5">榜单</span>
+          </button>
+
+          {/* Tab 3: 双书对决 */}
+          <button
+            type="button"
+            onClick={() => {
+              setActiveTab('comparison');
+              window.scrollTo({ top: 0, behavior: 'smooth' });
+            }}
+            className={`flex flex-col items-center justify-center h-full touch-manipulation active:scale-95 transition-colors cursor-pointer ${
+              activeTab === 'comparison' ? 'text-sky-600 font-bold' : 'text-slate-500 hover:text-slate-800'
+            }`}
+          >
+            <Scale className={`w-5 h-5 ${activeTab === 'comparison' ? 'stroke-[2.5]' : ''}`} />
+            <span className="text-[10px] mt-0.5">对决</span>
+          </button>
+
+          {/* Tab 4: 我的书架 */}
+          <button
+            type="button"
+            onClick={() => {
+              setActiveTab('favorites');
+              window.scrollTo({ top: 0, behavior: 'smooth' });
+            }}
+            className={`flex flex-col items-center justify-center h-full touch-manipulation active:scale-95 transition-colors cursor-pointer relative ${
+              activeTab === 'favorites' ? 'text-rose-600 font-bold' : 'text-slate-500 hover:text-slate-800'
+            }`}
+          >
+            <div className="relative">
+              <Heart className={`w-5 h-5 ${activeTab === 'favorites' ? 'fill-rose-500 text-rose-500 stroke-[2.5]' : ''}`} />
+              {favorites.length > 0 && (
+                <span className="absolute -top-1 -right-2 px-1 min-w-[14px] h-[14px] bg-rose-500 text-white rounded-full text-[9px] font-mono font-bold flex items-center justify-center">
+                  {favorites.length > 99 ? '99+' : favorites.length}
+                </span>
+              )}
+            </div>
+            <span className="text-[10px] mt-0.5">书架</span>
+          </button>
+
+          {/* Tab 5: 一键下载 */}
+          <button
+            type="button"
+            onClick={() => setIsDownloadOpen(true)}
+            className={`flex flex-col items-center justify-center h-full touch-manipulation active:scale-95 transition-colors cursor-pointer ${
+              isDownloadOpen ? 'text-indigo-600 font-bold' : 'text-slate-500 hover:text-indigo-600 active:text-indigo-600'
+            }`}
+          >
+            <Download className={`w-5 h-5 ${isDownloadOpen ? 'stroke-[2.5]' : ''}`} />
+            <span className="text-[10px] mt-0.5">下载</span>
+          </button>
+        </div>
+      </nav>
 
       {/* Detailed Book Modal */}
       {selectedBook && (

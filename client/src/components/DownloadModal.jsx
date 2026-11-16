@@ -6,7 +6,7 @@ export default function DownloadModal({ isOpen, onClose, currentBooks = [], allB
   const [copiedFormat, setCopiedFormat] = useState(null);
   const [downloadSuccess, setDownloadSuccess] = useState(null);
 
-  // Escape key handler for accessible dialog closing
+  // Escape key handler and body scroll lock for mobile modals
   useEffect(() => {
     if (!isOpen) return;
     const handleKeyDown = (e) => {
@@ -15,7 +15,12 @@ export default function DownloadModal({ isOpen, onClose, currentBooks = [], allB
       }
     };
     window.addEventListener('keydown', handleKeyDown);
-    return () => window.removeEventListener('keydown', handleKeyDown);
+    const originalOverflow = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+      document.body.style.overflow = originalOverflow;
+    };
   }, [isOpen, onClose]);
 
   if (!isOpen) return null;
@@ -291,42 +296,48 @@ export default function DownloadModal({ isOpen, onClose, currentBooks = [], allB
       role="dialog"
       aria-modal="true"
       aria-label="全内容一键直接下载中心"
-      className="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-xs flex items-center justify-center p-3 sm:p-4"
+      className="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-xs flex items-end sm:items-center justify-center p-0 sm:p-4 animate-in fade-in duration-200"
+      onClick={onClose}
     >
       <div
-        className="bg-white w-full max-w-4xl rounded-3xl shadow-2xl border border-slate-200 overflow-hidden flex flex-col max-h-[92vh] animate-in fade-in zoom-in-95 duration-200"
+        className="bg-white w-full max-w-4xl rounded-t-3xl sm:rounded-3xl shadow-2xl border border-slate-200 overflow-hidden flex flex-col h-[92vh] sm:h-auto sm:max-h-[92vh] animate-in slide-in-from-bottom duration-250 sm:slide-in-from-bottom-0 sm:zoom-in-95"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header */}
-        <div className="px-5 py-4 bg-gradient-to-r from-slate-900 via-slate-800 to-indigo-950 text-white flex items-center justify-between">
-          <div className="flex items-center gap-2.5">
-            <div className="w-9 h-9 rounded-xl bg-gradient-to-tr from-sky-500 to-indigo-500 flex items-center justify-center shadow-md">
-              <Download className="w-5 h-5 text-white" />
-            </div>
-            <div>
-              <h3 className="font-extrabold text-base sm:text-lg flex items-center gap-2">
-                全内容一键直接下载中心
-                <span className="text-[11px] font-normal px-2 py-0.5 rounded-full bg-sky-500/30 text-sky-200 border border-sky-400/30">
-                  即时生成 · 免等待
-                </span>
-              </h3>
-              <p className="text-xs text-slate-300">
-                可下载当前屏幕可见内容或整站全库数据，好友也可直接下载
-              </p>
-            </div>
-          </div>
+        <div className="px-4 py-3 sm:px-5 sm:py-4 bg-gradient-to-r from-slate-900 via-slate-800 to-indigo-950 text-white shrink-0">
+          {/* Mobile Sheet Drag Indicator */}
+          <div className="w-12 h-1.5 bg-slate-700 rounded-full mx-auto mb-2 block sm:hidden shrink-0" />
 
-          <button
-            onClick={onClose}
-            aria-label="关闭导出窗口"
-            className="p-1.5 rounded-full text-slate-400 hover:text-white bg-slate-800/80 active:bg-slate-700 transition-colors cursor-pointer"
-          >
-            <X className="w-5 h-5" />
-          </button>
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-2.5">
+              <div className="w-9 h-9 rounded-xl bg-gradient-to-tr from-sky-500 to-indigo-500 flex items-center justify-center shadow-md shrink-0">
+                <Download className="w-5 h-5 text-white" />
+              </div>
+              <div>
+                <h3 className="font-extrabold text-base sm:text-lg flex items-center gap-2">
+                  全内容一键直接下载中心
+                  <span className="text-[11px] font-normal px-2 py-0.5 rounded-full bg-sky-500/30 text-sky-200 border border-sky-400/30 hidden sm:inline-block">
+                    即时生成 · 免等待
+                  </span>
+                </h3>
+                <p className="text-xs text-slate-300">
+                  可下载当前屏幕可见内容或整站全库数据，好友也可直接下载
+                </p>
+              </div>
+            </div>
+
+            <button
+              onClick={onClose}
+              aria-label="关闭导出窗口"
+              className="w-11 h-11 flex items-center justify-center rounded-full text-slate-300 hover:text-white bg-slate-800/80 active:bg-slate-700 transition-colors touch-manipulation cursor-pointer shrink-0"
+            >
+              <X className="w-5 h-5" />
+            </button>
+          </div>
         </div>
 
         {/* Content Body */}
-        <div className="p-5 sm:p-6 overflow-y-auto space-y-6">
+        <div className="p-4 sm:p-6 overflow-y-auto overscroll-contain smooth-scroll space-y-5 sm:space-y-6">
           
           {/* 1. Scope Selection */}
           <div className="space-y-2">
@@ -521,14 +532,15 @@ export default function DownloadModal({ isOpen, onClose, currentBooks = [], allB
         </div>
 
         {/* Footer */}
-        <div className="px-6 py-3.5 bg-slate-50 border-t border-slate-100 flex items-center justify-between text-xs text-slate-400">
-          <div className="flex items-center gap-1.5">
-            <BookOpen className="w-3.5 h-3.5" />
-            <span>准备导出 <b>{targetBooks.length}</b> 本图书的所有多源口碑数据</span>
+        <div className="px-4 sm:px-6 py-3 sm:py-3.5 pb-safe-card bg-slate-50 border-t border-slate-100 flex items-center justify-between text-xs text-slate-400 shrink-0">
+          <div className="flex items-center gap-1.5 min-w-0 pr-2">
+            <BookOpen className="w-3.5 h-3.5 shrink-0" />
+            <span className="truncate">准备导出 <b>{targetBooks.length}</b> 本图书的所有多源口碑数据</span>
           </div>
           <button
             onClick={onClose}
-            className="px-4 py-1.5 text-xs font-bold bg-slate-200 hover:bg-slate-300 text-slate-700 rounded-xl transition-colors"
+            aria-label="关闭窗口"
+            className="min-h-[44px] px-5 py-2 text-xs font-bold bg-slate-200 hover:bg-slate-300 active:bg-slate-400 text-slate-800 rounded-xl transition-all touch-manipulation active:scale-95 shrink-0"
           >
             关闭
           </button>

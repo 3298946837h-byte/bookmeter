@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
-import { Bookmark, Heart, BookOpen, Trash2, Download, CheckCircle, Clock, Star, Sparkles, ExternalLink, ArrowRight } from 'lucide-react';
-import PlatformRatingBadge from './PlatformRatingBadge';
+import { Heart, BookOpen, Download, ArrowRight } from 'lucide-react';
 
 export default function FavoritesView({ favorites = [], onToggleFavorite, onOpenDetail, onExploreBooks }) {
   const [readingFilter, setReadingFilter] = useState('all'); // 'all' | 'want' | 'reading' | 'done'
@@ -91,10 +90,10 @@ export default function FavoritesView({ favorites = [], onToggleFavorite, onOpen
       {/* Progress & Stat Pill Bar */}
       {favorites.length > 0 && (
         <div className="bg-white rounded-2xl p-4 sm:p-5 border border-slate-200 shadow-sm flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-2 overflow-x-auto pb-1 sm:pb-0 scrollbar-none touch-pan-x smooth-scroll -mx-1 px-1">
             <button
               onClick={() => setReadingFilter('all')}
-              className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all ${
+              className={`px-4 py-2 min-h-[44px] rounded-xl text-xs font-bold transition-all touch-manipulation active:scale-95 shrink-0 ${
                 readingFilter === 'all'
                   ? 'bg-slate-900 text-white shadow-xs'
                   : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
@@ -104,7 +103,7 @@ export default function FavoritesView({ favorites = [], onToggleFavorite, onOpen
             </button>
             <button
               onClick={() => setReadingFilter('want')}
-              className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all ${
+              className={`px-4 py-2 min-h-[44px] rounded-xl text-xs font-bold transition-all touch-manipulation active:scale-95 shrink-0 ${
                 readingFilter === 'want'
                   ? 'bg-amber-600 text-white shadow-xs'
                   : 'bg-amber-50 text-amber-700 hover:bg-amber-100'
@@ -114,7 +113,7 @@ export default function FavoritesView({ favorites = [], onToggleFavorite, onOpen
             </button>
             <button
               onClick={() => setReadingFilter('reading')}
-              className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all ${
+              className={`px-4 py-2 min-h-[44px] rounded-xl text-xs font-bold transition-all touch-manipulation active:scale-95 shrink-0 ${
                 readingFilter === 'reading'
                   ? 'bg-sky-600 text-white shadow-xs'
                   : 'bg-sky-50 text-sky-700 hover:bg-sky-100'
@@ -124,7 +123,7 @@ export default function FavoritesView({ favorites = [], onToggleFavorite, onOpen
             </button>
             <button
               onClick={() => setReadingFilter('done')}
-              className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all ${
+              className={`px-4 py-2 min-h-[44px] rounded-xl text-xs font-bold transition-all touch-manipulation active:scale-95 shrink-0 ${
                 readingFilter === 'done'
                   ? 'bg-emerald-600 text-white shadow-xs'
                   : 'bg-emerald-50 text-emerald-700 hover:bg-emerald-100'
@@ -188,11 +187,11 @@ export default function FavoritesView({ favorites = [], onToggleFavorite, onOpen
                   <span className="font-semibold text-slate-500">{book.category} · {book.publicationYear}</span>
                   <div className="flex items-center gap-1.5">
                     {/* Status Pill Dropdown / Toggle */}
-                    <div className="flex items-center bg-white border border-slate-200 rounded-lg p-0.5 text-[11px] font-bold">
+                    <div className="flex items-center bg-white border border-slate-200 rounded-lg p-0.5 text-xs font-bold">
                       <button
                         type="button"
                         onClick={(e) => updateStatus(book.id, 'want', e)}
-                        className={`px-1.5 py-0.5 rounded transition-all ${
+                        className={`min-h-[34px] px-2.5 py-1 rounded transition-all touch-manipulation active:scale-95 ${
                           currentStatus === 'want' ? 'bg-amber-100 text-amber-800' : 'text-slate-400 hover:text-slate-600'
                         }`}
                         title="标记为 想读"
@@ -202,7 +201,7 @@ export default function FavoritesView({ favorites = [], onToggleFavorite, onOpen
                       <button
                         type="button"
                         onClick={(e) => updateStatus(book.id, 'reading', e)}
-                        className={`px-1.5 py-0.5 rounded transition-all ${
+                        className={`min-h-[34px] px-2.5 py-1 rounded transition-all touch-manipulation active:scale-95 ${
                           currentStatus === 'reading' ? 'bg-sky-100 text-sky-800' : 'text-slate-400 hover:text-slate-600'
                         }`}
                         title="标记为 正在读"
@@ -212,7 +211,7 @@ export default function FavoritesView({ favorites = [], onToggleFavorite, onOpen
                       <button
                         type="button"
                         onClick={(e) => updateStatus(book.id, 'done', e)}
-                        className={`px-1.5 py-0.5 rounded transition-all ${
+                        className={`min-h-[34px] px-2.5 py-1 rounded transition-all touch-manipulation active:scale-95 ${
                           currentStatus === 'done' ? 'bg-emerald-100 text-emerald-800' : 'text-slate-400 hover:text-slate-600'
                         }`}
                         title="标记为 已读完"
@@ -230,9 +229,9 @@ export default function FavoritesView({ favorites = [], onToggleFavorite, onOpen
                         e.stopPropagation();
                         onToggleFavorite(book);
                       }}
-                      className="p-1 rounded-full text-rose-500 hover:bg-rose-50 transition-colors"
+                      className="w-11 h-11 flex items-center justify-center rounded-full text-rose-500 hover:bg-rose-50 transition-all touch-manipulation active:scale-90"
                     >
-                      <Heart className="w-3.5 h-3.5 fill-rose-500" />
+                      <Heart className="w-4 h-4 fill-rose-500" />
                     </button>
                   </div>
                 </div>

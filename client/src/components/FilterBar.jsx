@@ -45,7 +45,7 @@ export default function FilterBar({
                 key={option.id}
                 onClick={() => setSelectedVerdict(option.id)}
                 aria-label={`筛选口碑评级: ${option.label}`}
-                className={`text-xs min-h-[36px] sm:min-h-[32px] inline-flex items-center justify-center px-3.5 py-1.5 rounded-full font-semibold border transition-all touch-manipulation cursor-pointer ${
+                className={`text-xs min-h-[44px] sm:min-h-[36px] inline-flex items-center justify-center px-4 py-2 sm:px-3.5 sm:py-1.5 rounded-full font-semibold border transition-all touch-manipulation cursor-pointer active:scale-95 ${
                   isActive
                     ? 'bg-slate-900 text-white border-slate-900 shadow-sm'
                     : 'bg-slate-50 text-slate-600 border-slate-200 hover:bg-slate-100'
@@ -62,7 +62,7 @@ export default function FilterBar({
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
         
         {/* Category Pills */}
-        <div className="flex items-center gap-1.5 overflow-x-auto pb-1 sm:pb-0 scrollbar-none">
+        <div className="flex items-center gap-1.5 overflow-x-auto pb-1.5 sm:pb-0 scrollbar-none touch-pan-x smooth-scroll -mx-1 px-1">
           {categories.map(cat => {
             const isActive = selectedCategory === cat.name;
             return (
@@ -70,7 +70,7 @@ export default function FilterBar({
                 key={cat.name}
                 onClick={() => setSelectedCategory(cat.name)}
                 aria-label={`选择图书分类: ${cat.name}`}
-                className={`whitespace-nowrap text-xs min-h-[36px] sm:min-h-[32px] inline-flex items-center justify-center px-3.5 py-1.5 rounded-lg font-medium transition-all touch-manipulation cursor-pointer ${
+                className={`whitespace-nowrap text-xs min-h-[44px] sm:min-h-[36px] inline-flex items-center justify-center px-4 py-2 sm:px-3.5 sm:py-1.5 rounded-xl font-medium transition-all touch-manipulation cursor-pointer active:scale-95 ${
                   isActive
                     ? 'bg-sky-600 text-white shadow-sm'
                     : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
@@ -88,14 +88,14 @@ export default function FilterBar({
             共找到 <b className="text-slate-800">{totalResults}</b> 部作品
           </div>
 
-          <div className="flex items-center gap-1.5 bg-slate-50 border border-slate-200 rounded-xl px-2.5 py-1.5">
-            <ArrowUpDown className="w-3.5 h-3.5 text-slate-400" />
+          <div className="flex items-center gap-1.5 bg-slate-50 border border-slate-200 rounded-xl px-3 py-1.5 min-h-[44px]">
+            <ArrowUpDown className="w-3.5 h-3.5 text-slate-400 shrink-0" />
             <select
               value={sortBy}
               onChange={(e) => setSortBy(e.target.value)}
               style={{ fontSize: '16px' }}
               aria-label="书籍排序方式"
-              className="bg-transparent text-base font-semibold text-slate-700 outline-none cursor-pointer"
+              className="bg-transparent text-base font-semibold text-slate-700 outline-none cursor-pointer py-1"
             >
               {sortOptions.map(opt => (
                 <option key={opt.id} value={opt.id}>

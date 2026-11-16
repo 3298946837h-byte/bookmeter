@@ -3,8 +3,23 @@
 @tailwind utilities;
 
 @layer base {
+  html {
+    -webkit-tap-highlight-color: transparent;
+    scroll-behavior: smooth;
+  }
+
   body {
     @apply bg-slate-50 text-slate-900 font-sans antialiased min-h-screen selection:bg-sky-500 selection:text-white;
+  }
+
+  /* Global touch-manipulation on interactive elements to prevent 300ms tap delay and accidental double-tap zoom */
+  button,
+  [role="button"],
+  a,
+  input,
+  select,
+  textarea {
+    touch-action: manipulation;
   }
 }
 
@@ -23,3 +38,33 @@
 ::-webkit-scrollbar-thumb:hover {
   background: #94a3b8;
 }
+
+/* Hide scrollbar utility for mobile touch-scroll pill lists */
+.scrollbar-none::-webkit-scrollbar {
+  display: none;
+}
+.scrollbar-none {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Momentum scrolling for iOS & Android */
+.smooth-scroll {
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior: contain;
+}
+
+/* Safe area padding utilities for modern mobile devices (iOS & Android) */
+.pb-safe {
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+.pb-safe-card {
+  padding-bottom: calc(0.75rem + env(safe-area-inset-bottom, 0px));
+}
+.pt-safe {
+  padding-top: env(safe-area-inset-top, 0px);
+}
+.mb-safe {
+  margin-bottom: env(safe-area-inset-bottom, 0px);
+}
+

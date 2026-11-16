@@ -423,8 +423,8 @@ async function seedCuratedEbooks() {
       fullText = generateRichLiteratureText(cfg.title, cfg.author, cfg.minTxtSize || 60 * 1024);
     }
 
-    // Write TXT
-    const txtBuffer = Buffer.from(fullText, 'utf8');
+    // Write TXT (with UTF-8 BOM for flawless Windows Notepad compatibility)
+    const txtBuffer = Buffer.from('\uFEFF' + fullText, 'utf8');
     fs.writeFileSync(txtPath, txtBuffer);
     console.log(`    [Saved TXT]  ${txtPath} (${(txtBuffer.length / 1024).toFixed(1)} KB)`);
 
