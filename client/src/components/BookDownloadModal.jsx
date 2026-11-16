@@ -20,6 +20,7 @@ export default function BookDownloadModal({ book, onClose }) {
   const [downloadSuccess, setDownloadSuccess] = useState(null);
   const [downloadError, setDownloadError] = useState(null);
   const [copiedKeyword, setCopiedKeyword] = useState(false);
+  const [copiedQuark, setCopiedQuark] = useState(false);
 
   // Escape key handler and body scroll lock for mobile modals
   useEffect(() => {
@@ -215,6 +216,16 @@ export default function BookDownloadModal({ book, onClose }) {
     setCopiedKeyword(true);
     setTimeout(() => setCopiedKeyword(false), 2500);
     window.open('https://www.jiumodiary.com/', '_blank');
+  };
+
+  // Helper to copy book name and open Quark Drive search
+  const handleOpenQuark = () => {
+    if (navigator.clipboard) {
+      navigator.clipboard.writeText(book.title);
+    }
+    setCopiedQuark(true);
+    setTimeout(() => setCopiedQuark(false), 2500);
+    window.open(`https://www.alipansou.com/search?k=${encodeURIComponent(book.title)}&type=quark`, '_blank');
   };
 
   const weReadUrl = `https://weread.qq.com/web/search/books?keyword=${encodeURIComponent(book.title)}`;
@@ -435,6 +446,35 @@ export default function BookDownloadModal({ book, onClose }) {
 
             <div className="space-y-2">
               
+              {/* Quark Drive (夸克网盘) */}
+              <div className="p-3.5 rounded-2xl border border-rose-200/80 bg-rose-50/40 hover:bg-rose-50/70 flex items-center justify-between gap-3 transition-colors shadow-2xs">
+                <div className="flex items-center gap-3">
+                  <div className="w-9 h-9 rounded-xl bg-gradient-to-tr from-rose-500 via-red-500 to-amber-500 text-white flex items-center justify-center font-black text-xs shrink-0 shadow-xs">
+                    夸克
+                  </div>
+                  <div>
+                    <div className="font-bold text-xs sm:text-sm text-slate-900 flex items-center gap-2">
+                      夸克网盘 (Quark Drive)
+                      <span className="text-[10px] font-semibold px-1.5 py-0.2 rounded bg-rose-100 text-rose-800 border border-rose-200/60">
+                        免会员极速秒存
+                      </span>
+                    </div>
+                    <div className="text-[11px] text-slate-600 mt-0.5">
+                      国内热门网盘资源聚合，一键秒存完整原版 EPUB / PDF / TXT，手机/iPad/电脑原画直读
+                    </div>
+                  </div>
+                </div>
+
+                <button
+                  type="button"
+                  onClick={handleOpenQuark}
+                  className="px-3 py-1.5 text-xs font-bold bg-gradient-to-r from-rose-500 to-red-600 hover:from-rose-600 hover:to-red-700 active:scale-95 text-white rounded-xl shadow-xs shrink-0 flex items-center gap-1 transition-all cursor-pointer"
+                >
+                  <span>{copiedQuark ? '已复制书名' : '夸克转存'}</span>
+                  <ExternalLink className="w-3.5 h-3.5" />
+                </button>
+              </div>
+
               {/* Jiumo Search (鸠摩搜书) */}
               <div className="p-3.5 rounded-2xl border border-slate-200 bg-slate-50/60 hover:bg-slate-50 flex items-center justify-between gap-3 transition-colors">
                 <div className="flex items-center gap-3">

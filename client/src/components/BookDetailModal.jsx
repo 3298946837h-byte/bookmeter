@@ -358,11 +358,17 @@ ${(book.cons || []).map(item => `- ${item}`).join('\n')}
 
               {/* Tags */}
               <div className="flex flex-wrap gap-1.5 pt-2">
-                {book.tags?.map((t, idx) => (
-                  <span key={idx} className="text-[11px] px-2.5 py-0.5 rounded-full bg-slate-100 text-slate-600 font-medium">
-                    #{t}
+                {Array.isArray(book.tags) ? (
+                  book.tags.map((t, idx) => (
+                    <span key={idx} className="text-[11px] px-2.5 py-0.5 rounded-full bg-slate-100 text-slate-600 font-medium">
+                      #{t}
+                    </span>
+                  ))
+                ) : typeof book.tags === 'string' && book.tags ? (
+                  <span className="text-[11px] px-2.5 py-0.5 rounded-full bg-slate-100 text-slate-600 font-medium">
+                    #{book.tags}
                   </span>
-                ))}
+                ) : null}
               </div>
 
               <p className="text-xs text-slate-600 leading-relaxed pt-2 line-clamp-3">

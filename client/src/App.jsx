@@ -253,7 +253,7 @@ export default function App() {
           b.translator || '',
           b.originalTitle || '',
           b.category || '',
-          ...(b.tags || []),
+          ...(Array.isArray(b.tags) ? b.tags : typeof b.tags === 'string' ? [b.tags] : []),
           b.isbn || '',
           b.publisher || '',
           b.summary || ''
