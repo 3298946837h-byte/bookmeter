@@ -220,7 +220,7 @@ ${(book.cons || []).map(item => `- ${item}`).join('\n')}
         {/* Top Header Bar */}
         <div className="px-4 py-3 sm:px-6 sm:py-4 bg-slate-950 text-white shrink-0 border-b border-slate-800">
           {/* Mobile Sheet Drag Indicator */}
-          <div className="w-12 h-1.5 bg-slate-700/80 rounded-full mx-auto mb-3 block sm:hidden shrink-0" />
+          <div className="bottom-sheet-grabber block sm:hidden shrink-0" />
 
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2 min-w-0 pr-2">
@@ -315,9 +315,12 @@ ${(book.cons || []).map(item => `- ${item}`).join('\n')}
         <div className="overflow-y-auto overscroll-contain smooth-scroll p-4 sm:p-6 space-y-5 sm:space-y-6">
           
           {/* Section 1: Hero Info & Master Score */}
-          <div className="flex flex-col sm:flex-row gap-6 items-start pb-6 border-b border-slate-100">
+          <div className="relative flex flex-col sm:flex-row gap-6 items-start pb-6 border-b border-slate-100">
+            {/* Ambient Glow Backdrop behind cover */}
+            <div className="ambient-glow-backdrop" />
+
             {/* Book Cover with 3D spine */}
-            <div className="w-32 h-44 shrink-0 rounded-2xl overflow-hidden book-cover-3d shadow-xl border border-slate-200 bg-slate-100">
+            <div className="relative z-10 w-32 h-44 shrink-0 rounded-2xl overflow-hidden book-cover-3d shadow-xl border border-slate-200 bg-slate-100">
               <img
                 src={book.cover}
                 alt={book.title}

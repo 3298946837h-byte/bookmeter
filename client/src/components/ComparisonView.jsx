@@ -2,13 +2,40 @@ import React, { useState } from 'react';
 import { Award, AlertTriangle, Scale, ThumbsUp, ThumbsDown, ArrowRight, Swords, ChevronRight } from 'lucide-react';
 
 export default function ComparisonView({ books = [], onOpenDetail }) {
-  const masterpieces = books.filter(b => b.verdict?.status === 'masterpiece').slice(0, 6);
-  const warnings = books.filter(b => b.verdict?.status === 'warning').slice(0, 6);
-  const controversial = books.filter(b => b.verdict?.status === 'controversial' || b.discrepancyIndex >= 1.0).slice(0, 6);
+  const masterpieces = books.filter(b => b.verdict?.status === 'masterpiece').slice(0, 16);
+  const warnings = books.filter(b => b.verdict?.status === 'warning').slice(0, 16);
+  const controversial = books.filter(b => b.verdict?.status === 'controversial' || b.discrepancyIndex >= 1.0).slice(0, 15);
+
+  // Curated contrasting and classic duel presets (16 pairs)
+  const DUEL_PRESETS = [
+    { label: '科幻神作 vs 毁原著续作', aId: 'three-body-problem', bId: 'three-body-x-baoshu', tag: '神作 vs 翻车' },
+    { label: '代码典范 vs 贴代码水书', aId: 'clean-code', bId: 'java-water-book', tag: '技术对决' },
+    { label: '人类通史 vs 阴谋论炒作', aId: 'sapiens-brief-history', bId: 'currency-wars', tag: '历史社科' },
+    { label: '心理自愈 vs 伪科学骗局', aId: 'courage-to-be-disliked', bId: 'speed-reading-scam', tag: '心理认知' },
+    { label: '对冲准则 vs 盲从PUA', aId: 'principles-ray-dalio', bId: 'fake-garcia', tag: '职场思维' },
+    { label: '系统架构 vs 速成灌水', aId: 'csapp-computer-systems', bId: 'bad-c-plus-21-days', tag: 'CS神作 vs 水书' },
+    { label: '双系统论 vs 伪心理学', aId: 'thinking-fast-and-slow', bId: 'pyramid-scam-mind', tag: '思维反差' },
+    { label: '演化生物 vs 世纪骗局', aId: 'the-selfish-gene', bId: 'water-knows-answer-scam', tag: '科普 vs 伪科学' },
+    { label: '苦难史诗 vs 空洞情绪鸡汤', aId: 'to-live', bId: 'toxic-morning-alarm', tag: '文学 vs 毒鸡汤' },
+    { label: '艺术通史 vs 电影艺术通识', aId: 'the-story-of-art-gombrich', bId: 'art-understandingmovies', tag: '美学鉴赏' },
+    { label: '中国政经 vs 破产争议', aId: 'inside-the-system-china-economy', bId: 'rich-dad-poor-dad', tag: '经济 vs 争议' },
+    { label: '算法圣经 vs 软件工匠修养', aId: 'tech-clrs-algorithms', bId: 'book-1794733860645-48', tag: '理论 vs 实践' },
+    { label: '群体心理 vs 算命套路操控', aId: 'book-1794733860645-38', bId: 'mind-reading-pua-trap', tag: '心理学洞察' },
+    { label: '罗尔斯 vs 诺齐克 (正义之辩)', aId: 'theory-of-justice-rawls', bId: 'anarchy-state-utopia', tag: '世纪哲学大对决' },
+    { label: '波伏娃 vs 弗里丹 (女性主义双璧)', aId: 'the-second-sex-beauvoir', bId: 'feminine-mystique-friedan', tag: '女性思想' },
+    { label: '乔伊斯 vs 普鲁斯特 (意识流之巅)', aId: 'ulysses-joyce', bId: 'in-search-of-lost-time', tag: '文学天花板' }
+  ];
 
   // Interactive 2-Book Duel State
   const [bookAId, setBookAId] = useState(books[0]?.id || '');
   const [bookBId, setBookBId] = useState(books[1]?.id || '');
+
+  const handleSelectPreset = (preset) => {
+    const foundA = books.find(b => b.id === preset.aId);
+    const foundB = books.find(b => b.id === preset.bId);
+    if (foundA) setBookAId(foundA.id);
+    if (foundB) setBookBId(foundB.id);
+  };
 
   const bookA = books.find(b => b.id === bookAId) || books[0];
   const bookB = books.find(b => b.id === bookBId) || books[1] || books[0];
@@ -56,6 +83,40 @@ export default function ComparisonView({ books = [], onOpenDetail }) {
             <span className="text-xs font-bold text-indigo-700 bg-indigo-50 px-3 py-1 rounded-full border border-indigo-200 self-start sm:self-auto">
               多平台横向透视
             </span>
+          </div>
+
+          {/* Curated Presets Bar (16 Curated Duel Matchups) */}
+          <div className="space-y-2">
+            <div className="flex items-center justify-between">
+              <span className="text-xs font-bold text-slate-600 flex items-center gap-1.5">
+                <span>🔥 精选对决预设速选：</span>
+                <span className="text-[11px] font-normal text-slate-400">点击一键装载对比</span>
+              </span>
+            </div>
+            <div className="flex flex-wrap gap-2 max-h-36 overflow-y-auto p-1 scrollbar-thin">
+              {DUEL_PRESETS.map((preset, idx) => {
+                const isActive = (bookAId === preset.aId && bookBId === preset.bId) ||
+                                 (bookAId === preset.bId && bookBId === preset.aId);
+                return (
+                  <button
+                    key={`preset-${idx}`}
+                    onClick={() => handleSelectPreset(preset)}
+                    className={`text-xs px-3 py-1.5 rounded-xl font-medium border transition-all cursor-pointer touch-manipulation min-h-[36px] flex items-center gap-1.5 active:scale-95 ${
+                      isActive
+                        ? 'bg-indigo-600 text-white border-indigo-600 shadow-sm'
+                        : 'bg-slate-50 text-slate-700 border-slate-200 hover:bg-indigo-50 hover:border-indigo-300'
+                    }`}
+                  >
+                    <span className="font-bold">{preset.label}</span>
+                    <span className={`text-[10px] px-1.5 py-0.2 rounded ${
+                      isActive ? 'bg-indigo-700 text-indigo-100' : 'bg-slate-200 text-slate-600'
+                    }`}>
+                      {preset.tag}
+                    </span>
+                  </button>
+                );
+              })}
+            </div>
           </div>
 
           {/* Book Selectors */}

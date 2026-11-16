@@ -3,6 +3,12 @@ import { Award, ArrowRight } from 'lucide-react';
 
 export default function LeaderboardsView({ books = [], onOpenDetail }) {
   const [activeBoard, setActiveBoard] = useState('douban'); // 'douban' | 'goodreads' | 'amazon' | 'discrepancy'
+  const [displayCount, setDisplayCount] = useState(50);
+
+  const handleSwitchBoard = (boardId) => {
+    setActiveBoard(boardId);
+    setDisplayCount(50);
+  };
 
   // Sort lists
   const doubanTop = [...books].sort((a, b) => (b.platformRatings?.douban?.score ?? 0) - (a.platformRatings?.douban?.score ?? 0));
@@ -57,7 +63,7 @@ export default function LeaderboardsView({ books = [], onOpenDetail }) {
             return (
               <button
                 key={b.id}
-                onClick={() => setActiveBoard(b.id)}
+                onClick={() => handleSwitchBoard(b.id)}
                 className={`flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs font-bold transition-all ${
                   isActive
                     ? 'bg-white text-slate-900 shadow-lg scale-105'
@@ -77,12 +83,12 @@ export default function LeaderboardsView({ books = [], onOpenDetail }) {
         <div>
           当前榜单：<b className="text-slate-800">{currentBoard.name}</b> · {currentBoard.desc}
         </div>
-        <div>共收录 {currentBoard.list.length} 本代表作品</div>
+        <div>展示前 {Math.min(displayCount, currentBoard.list.length)} / 共 {currentBoard.list.length} 部作品</div>
       </div>
 
       {/* Board Books List */}
       <div className="space-y-3">
-        {currentBoard.list.map((book, idx) => {
+        {currentBoard.list.slice(0, displayCount).map((book, idx) => {
           const rank = idx + 1;
           const isTop3 = rank <= 3;
 
@@ -168,6 +174,24 @@ export default function LeaderboardsView({ books = [], onOpenDetail }) {
           );
         })}
       </div>
+
+      {/* Pagination / Load More for Smooth Performance */}
+      {displayCount < currentBoard.list.length && (
+        <div className="pt-4 pb-8 flex flex-col sm:flex-row items-center justify-center gap-3">
+          <button
+            onClick={() => setDisplayCount(prev => Math.min(prev + 50, currentBoard.list.length))}
+            className="w-full sm:w-auto px-6 py-2.5 bg-white hover:bg-slate-100 text-slate-800 border border-slate-300 rounded-full font-bold text-xs shadow-sm transition-all active:scale-95 cursor-pointer touch-manipulation min-h-[44px] flex items-center justify-center gap-2"
+          >
+            <span>加载更多榜单作品 (还有 {currentBoard.list.length - displayCount} 部)</span>
+          </button>
+          <button
+            onClick={() => setDisplayCount(currentBoard.list.length)}
+            className="w-full sm:w-auto px-5 py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-600 rounded-full font-medium text-xs transition-all active:scale-95 cursor-pointer touch-manipulation min-h-[44px]"
+          >
+            显示全部 {currentBoard.list.length} 部
+          </button>
+        </div>
+      )}
 
     </div>
   );

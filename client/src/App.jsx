@@ -704,18 +704,18 @@ export default function App() {
           type="button"
           onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
           aria-label="返回页面顶部"
-          className="fixed bottom-[calc(4.5rem+env(safe-area-inset-bottom,0px))] right-4 sm:bottom-8 sm:right-8 z-30 w-12 h-12 rounded-full bg-slate-900/90 hover:bg-slate-900 active:scale-90 text-white shadow-xl flex items-center justify-center border border-white/20 backdrop-blur-xs transition-all duration-200 touch-manipulation cursor-pointer group"
+          className="fixed bottom-[calc(5.5rem+env(safe-area-inset-bottom,0px))] right-4 sm:bottom-8 sm:right-8 z-30 w-11 h-11 rounded-full bg-slate-900/90 hover:bg-slate-900 active:scale-90 text-white shadow-xl flex items-center justify-center border border-white/20 backdrop-blur-xs transition-all duration-200 touch-manipulation cursor-pointer group"
         >
           <ArrowUp className="w-5 h-5 group-hover:-translate-y-0.5 transition-transform" />
         </button>
       )}
 
-      {/* Mobile Fixed Bottom Navigation Bar (手机端底部快捷导航) */}
+      {/* Mobile Floating Capsule Navigation Dock (手机端悬浮毛玻璃胶囊导航) */}
       <nav
         aria-label="手机端底部快捷导航"
-        className="fixed bottom-0 inset-x-0 z-40 glass-dock border-t border-slate-200/80 shadow-[0_-4px_24px_rgba(15,23,42,0.08)] sm:hidden pb-safe"
+        className="mobile-floating-dock glass-dock sm:hidden"
       >
-        <div className="grid grid-cols-5 h-14 items-center">
+        <div className="grid grid-cols-5 h-full items-center px-1">
           {/* Tab 1: 全部书库 */}
           <button
             type="button"

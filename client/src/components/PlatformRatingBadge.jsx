@@ -60,7 +60,7 @@ export default function PlatformRatingBadge({ platform, data, compact = false })
           <span className="w-1.5 h-1.5 rounded-full bg-current"></span>
           <span className="font-semibold text-xs">{meta.name}</span>
         </div>
-        <div className="flex items-center gap-1">
+        <div className="flex items-center gap-1 font-mono tabular-nums">
           <Star className="w-3 h-3 fill-current text-amber-500" />
           <span className="font-black">{data.score}</span>
           <span className="text-[10px] opacity-75">{meta.scaleText}</span>
@@ -110,7 +110,7 @@ export default function PlatformRatingBadge({ platform, data, compact = false })
 
       {/* Main Score & Normalization */}
       <div className="flex items-baseline gap-1 my-1">
-        <span className="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight">{data.score}</span>
+        <span className="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight font-mono tabular-nums">{data.score}</span>
         <span className="text-xs font-bold text-slate-500">{meta.scaleText}</span>
         {data.normalizedScore && data.scale !== 10 && (
           <span className="text-[11px] ml-auto px-2 py-0.5 rounded-lg bg-slate-900 text-white font-medium shadow-2xs">
