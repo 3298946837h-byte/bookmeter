@@ -713,7 +713,7 @@ export default function App() {
       {/* Mobile Fixed Bottom Navigation Bar (手机端底部快捷导航) */}
       <nav
         aria-label="手机端底部快捷导航"
-        className="fixed bottom-0 inset-x-0 z-40 bg-white/95 backdrop-blur-md border-t border-slate-200/90 shadow-lg sm:hidden pb-safe"
+        className="fixed bottom-0 inset-x-0 z-40 glass-dock border-t border-slate-200/80 shadow-[0_-4px_24px_rgba(15,23,42,0.08)] sm:hidden pb-safe"
       >
         <div className="grid grid-cols-5 h-14 items-center">
           {/* Tab 1: 全部书库 */}
@@ -727,12 +727,13 @@ export default function App() {
                 if (activeSearchTerm) handleClearSearch();
               }
             }}
-            className={`flex flex-col items-center justify-center h-full touch-manipulation active:scale-95 transition-colors cursor-pointer ${
-              activeTab === 'explore' ? 'text-sky-600 font-bold' : 'text-slate-500 hover:text-slate-800'
+            className={`flex flex-col items-center justify-center h-full touch-manipulation active:scale-95 transition-all cursor-pointer ${
+              activeTab === 'explore' ? 'text-sky-600 font-black' : 'text-slate-500 hover:text-slate-800'
             }`}
           >
             <BookOpen className={`w-5 h-5 ${activeTab === 'explore' ? 'stroke-[2.5]' : ''}`} />
-            <span className="text-[10px] mt-0.5">书库</span>
+            <span className="text-[10px] mt-0.5 tracking-tight">书库</span>
+            {activeTab === 'explore' && <span className="w-1 h-1 rounded-full bg-sky-600 mt-0.5" />}
           </button>
 
           {/* Tab 2: 权威榜单 */}
@@ -742,12 +743,13 @@ export default function App() {
               setActiveTab('leaderboards');
               window.scrollTo({ top: 0, behavior: 'smooth' });
             }}
-            className={`flex flex-col items-center justify-center h-full touch-manipulation active:scale-95 transition-colors cursor-pointer ${
-              activeTab === 'leaderboards' ? 'text-amber-600 font-bold' : 'text-slate-500 hover:text-slate-800'
+            className={`flex flex-col items-center justify-center h-full touch-manipulation active:scale-95 transition-all cursor-pointer ${
+              activeTab === 'leaderboards' ? 'text-amber-600 font-black' : 'text-slate-500 hover:text-slate-800'
             }`}
           >
             <Award className={`w-5 h-5 ${activeTab === 'leaderboards' ? 'stroke-[2.5]' : ''}`} />
-            <span className="text-[10px] mt-0.5">榜单</span>
+            <span className="text-[10px] mt-0.5 tracking-tight">榜单</span>
+            {activeTab === 'leaderboards' && <span className="w-1 h-1 rounded-full bg-amber-600 mt-0.5" />}
           </button>
 
           {/* Tab 3: 双书对决 */}
@@ -757,12 +759,13 @@ export default function App() {
               setActiveTab('comparison');
               window.scrollTo({ top: 0, behavior: 'smooth' });
             }}
-            className={`flex flex-col items-center justify-center h-full touch-manipulation active:scale-95 transition-colors cursor-pointer ${
-              activeTab === 'comparison' ? 'text-sky-600 font-bold' : 'text-slate-500 hover:text-slate-800'
+            className={`flex flex-col items-center justify-center h-full touch-manipulation active:scale-95 transition-all cursor-pointer ${
+              activeTab === 'comparison' ? 'text-sky-600 font-black' : 'text-slate-500 hover:text-slate-800'
             }`}
           >
             <Scale className={`w-5 h-5 ${activeTab === 'comparison' ? 'stroke-[2.5]' : ''}`} />
-            <span className="text-[10px] mt-0.5">对决</span>
+            <span className="text-[10px] mt-0.5 tracking-tight">对决</span>
+            {activeTab === 'comparison' && <span className="w-1 h-1 rounded-full bg-sky-600 mt-0.5" />}
           </button>
 
           {/* Tab 4: 我的书架 */}
@@ -772,8 +775,8 @@ export default function App() {
               setActiveTab('favorites');
               window.scrollTo({ top: 0, behavior: 'smooth' });
             }}
-            className={`flex flex-col items-center justify-center h-full touch-manipulation active:scale-95 transition-colors cursor-pointer relative ${
-              activeTab === 'favorites' ? 'text-rose-600 font-bold' : 'text-slate-500 hover:text-slate-800'
+            className={`flex flex-col items-center justify-center h-full touch-manipulation active:scale-95 transition-all cursor-pointer relative ${
+              activeTab === 'favorites' ? 'text-rose-600 font-black' : 'text-slate-500 hover:text-slate-800'
             }`}
           >
             <div className="relative">
@@ -784,19 +787,21 @@ export default function App() {
                 </span>
               )}
             </div>
-            <span className="text-[10px] mt-0.5">书架</span>
+            <span className="text-[10px] mt-0.5 tracking-tight">书架</span>
+            {activeTab === 'favorites' && <span className="w-1 h-1 rounded-full bg-rose-600 mt-0.5" />}
           </button>
 
           {/* Tab 5: 一键下载 */}
           <button
             type="button"
             onClick={() => setIsDownloadOpen(true)}
-            className={`flex flex-col items-center justify-center h-full touch-manipulation active:scale-95 transition-colors cursor-pointer ${
-              isDownloadOpen ? 'text-indigo-600 font-bold' : 'text-slate-500 hover:text-indigo-600 active:text-indigo-600'
+            className={`flex flex-col items-center justify-center h-full touch-manipulation active:scale-95 transition-all cursor-pointer ${
+              isDownloadOpen ? 'text-indigo-600 font-black' : 'text-slate-500 hover:text-indigo-600 active:text-indigo-600'
             }`}
           >
             <Download className={`w-5 h-5 ${isDownloadOpen ? 'stroke-[2.5]' : ''}`} />
-            <span className="text-[10px] mt-0.5">下载</span>
+            <span className="text-[10px] mt-0.5 tracking-tight">下载</span>
+            {isDownloadOpen && <span className="w-1 h-1 rounded-full bg-indigo-600 mt-0.5" />}
           </button>
         </div>
       </nav>

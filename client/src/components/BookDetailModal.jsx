@@ -213,18 +213,18 @@ ${(book.cons || []).map(item => `- ${item}`).join('\n')}
       
       {/* Modal Dialog Card */}
       <div
-        className="bg-white w-full max-w-4xl rounded-t-3xl sm:rounded-3xl shadow-2xl overflow-hidden border border-slate-200 flex flex-col h-[94vh] sm:h-auto sm:max-h-[92vh] animate-in slide-in-from-bottom duration-250 sm:slide-in-from-bottom-0 sm:zoom-in-95 cursor-default"
+        className="bg-white w-full max-w-4xl rounded-t-[32px] sm:rounded-3xl shadow-2xl overflow-hidden border border-slate-200/80 flex flex-col h-[94vh] sm:h-auto sm:max-h-[92vh] animate-in slide-in-from-bottom duration-250 sm:slide-in-from-bottom-0 sm:zoom-in-95 cursor-default"
         onClick={(e) => e.stopPropagation()}
       >
         
         {/* Top Header Bar */}
-        <div className="px-4 py-2.5 sm:px-6 sm:py-4 bg-slate-900 text-white shrink-0">
+        <div className="px-4 py-3 sm:px-6 sm:py-4 bg-slate-950 text-white shrink-0 border-b border-slate-800">
           {/* Mobile Sheet Drag Indicator */}
-          <div className="w-12 h-1.5 bg-slate-700 rounded-full mx-auto mb-2 block sm:hidden shrink-0" />
+          <div className="w-12 h-1.5 bg-slate-700/80 rounded-full mx-auto mb-3 block sm:hidden shrink-0" />
 
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2 min-w-0 pr-2">
-              <span className={`px-2.5 py-0.5 rounded-full text-xs font-bold shrink-0 ${
+              <span className={`px-2.5 py-0.5 rounded-full text-xs font-bold shrink-0 shadow-2xs ${
                 book.verdict?.status === 'masterpiece' ? 'bg-emerald-500 text-white' :
                 book.verdict?.status === 'warning' ? 'bg-rose-500 text-white' :
                 book.verdict?.status === 'controversial' ? 'bg-amber-500 text-white' :
@@ -232,10 +232,10 @@ ${(book.cons || []).map(item => `- ${item}`).join('\n')}
               }`}>
                 {book.verdict?.label}
               </span>
-              <span className="text-xs text-slate-300 font-medium truncate sm:hidden">
+              <span className="text-xs text-slate-300 font-bold truncate sm:hidden">
                 《{book.title}》
               </span>
-              <span className="text-xs text-slate-300 hidden sm:inline truncate">
+              <span className="text-xs text-slate-300 hidden sm:inline truncate font-medium">
                 {book.category} · {book.publicationYear} · 全网多源权威对冲报告
               </span>
             </div>
@@ -316,11 +316,12 @@ ${(book.cons || []).map(item => `- ${item}`).join('\n')}
           
           {/* Section 1: Hero Info & Master Score */}
           <div className="flex flex-col sm:flex-row gap-6 items-start pb-6 border-b border-slate-100">
-            {/* Book Cover */}
-            <div className="w-32 h-44 shrink-0 rounded-2xl overflow-hidden shadow-lg border border-slate-200 bg-slate-100">
+            {/* Book Cover with 3D spine */}
+            <div className="w-32 h-44 shrink-0 rounded-2xl overflow-hidden book-cover-3d shadow-xl border border-slate-200 bg-slate-100">
               <img
                 src={book.cover}
                 alt={book.title}
+                referrerPolicy="no-referrer"
                 className="w-full h-full object-cover"
                 onError={(e) => {
                   e.target.src = 'https://images.unsplash.com/photo-1544947950-fa07a98d237f?auto=format&fit=crop&q=80&w=300';
@@ -423,9 +424,9 @@ ${(book.cons || []).map(item => `- ${item}`).join('\n')}
                 </div>
                 <div>
                   <div className="flex items-center gap-2">
-                    <span className="font-extrabold text-sm sm:text-base text-white">DeepSeek AI 深度对冲与避坑雷达</span>
-                    <span className="text-[10px] px-2 py-0.5 rounded-full bg-sky-500/20 text-sky-300 border border-sky-400/30">
-                      Powered by DeepSeek-V3
+                    <span className="font-extrabold text-sm sm:text-base text-white">AI 深度对冲与避坑雷达</span>
+                    <span className="text-[10px] px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-400/30">
+                      {aiInsight?._provider || '智谱 GLM-4 永久免费驱动'}
                     </span>
                   </div>
                   <p className="text-[11px] text-slate-300">
@@ -448,7 +449,7 @@ ${(book.cons || []).map(item => `- ${item}`).join('\n')}
             {loadingAi && (
               <div className="py-8 text-center text-xs text-sky-300 space-y-2">
                 <div className="inline-block w-6 h-6 border-2 border-sky-400 border-t-transparent rounded-full animate-spin mb-1"></div>
-                <p>DeepSeek 正在对冲四大权威书评库并生成犀利定性与避坑指南...</p>
+                <p>AI 正在对冲四大权威书评库并生成犀利定性与避坑指南...</p>
               </div>
             )}
 
@@ -472,7 +473,7 @@ ${(book.cons || []).map(item => `- ${item}`).join('\n')}
                   <div className="p-3.5 rounded-2xl bg-emerald-950/60 border border-emerald-500/30 space-y-2">
                     <div className="font-bold text-emerald-300 flex items-center gap-1.5">
                       <ThumbsUp className="w-3.5 h-3.5" />
-                      <span>DeepSeek 提炼价值亮点</span>
+                      <span>{aiInsight?._provider ? aiInsight._provider.split(' ')[0] : 'AI'} 提炼价值亮点</span>
                     </div>
                     <ul className="space-y-1.5 text-slate-200">
                       {aiInsight.deepPros?.map((p, idx) => (
@@ -487,7 +488,7 @@ ${(book.cons || []).map(item => `- ${item}`).join('\n')}
                   <div className="p-3.5 rounded-2xl bg-rose-950/60 border border-rose-500/30 space-y-2">
                     <div className="font-bold text-rose-300 flex items-center gap-1.5">
                       <ThumbsDown className="w-3.5 h-3.5" />
-                      <span>DeepSeek 深度硬伤与槽点</span>
+                      <span>{aiInsight?._provider ? aiInsight._provider.split(' ')[0] : 'AI'} 深度硬伤与槽点</span>
                     </div>
                     <ul className="space-y-1.5 text-slate-200">
                       {aiInsight.criticalCons?.map((c, idx) => (
@@ -667,7 +668,7 @@ ${(book.cons || []).map(item => `- ${item}`).join('\n')}
             <div className="flex items-center justify-between">
               <h3 className="text-sm font-bold text-slate-900 flex items-center gap-2">
                 <Bot className="w-4 h-4 text-sky-600" />
-                <span>向 DeepSeek 智能书评顾问提问 (实时解惑)</span>
+                <span>向 AI 智能书评顾问提问 (实时解惑)</span>
               </h3>
               <span className="text-[11px] text-slate-400">基于全网读者口碑与文本模型</span>
             </div>
@@ -702,7 +703,7 @@ ${(book.cons || []).map(item => `- ${item}`).join('\n')}
                     }`}
                   >
                     <div className="font-bold text-[10px] mb-1 opacity-70">
-                      {msg.role === 'user' ? '我的提问' : 'DeepSeek 顾问分析:'}
+                      {msg.role === 'user' ? '我的提问' : `${aiInsight?._provider ? aiInsight._provider.split(' ')[0] : 'AI'} 顾问分析:`}
                     </div>
                     <div className="whitespace-pre-wrap">{msg.text}</div>
                   </div>
@@ -751,7 +752,7 @@ ${(book.cons || []).map(item => `- ${item}`).join('\n')}
         </div>
 
         {/* Mobile Sticky Bottom Action Bar */}
-        <div className="sm:hidden px-4 py-2.5 pb-safe-card bg-white/95 backdrop-blur border-t border-slate-200 flex items-center gap-2 shrink-0 shadow-lg">
+        <div className="sm:hidden px-4 py-3 pb-safe-card glass-dock border-t border-slate-200/80 flex items-center gap-2 shrink-0 shadow-lg">
           {onToggleFavorite && (
             <button
               type="button"
